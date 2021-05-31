@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Metrics} from '@utils';
@@ -41,13 +41,19 @@ export default function LoginLayout({
   return (
     <LinearGradient style={styles.container} colors={linearColors}>
       {_renderHeader()}
-      {children}
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.childContainer}>{children}</View>
+      </TouchableWithoutFeedback>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+
+  childContainer: {
     flex: 1,
   },
 
