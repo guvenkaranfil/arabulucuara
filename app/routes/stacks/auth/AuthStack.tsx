@@ -15,6 +15,12 @@ export type LoginNavigationProp = {
   navigation: LoginScreenNavigationProp;
 };
 
+type ForgotPasswordScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'login'>;
+
+export type ForgotPasswordNavigationProp = {
+  navigation: ForgotPasswordScreenNavigationProp;
+};
+
 const Stack = createStackNavigator<AuthStackParamList>();
 function AuthStack() {
   return (
