@@ -23,6 +23,12 @@ export type ForgotPasswordNavigationProp = {
   navigation: ForgotPasswordScreenNavigationProp;
 };
 
+type RegisterIdentitiesScreenNavigationProp = StackNavigationProp<AuthStackParamList, 'login'>;
+
+export type RegisterIdentitiesNavigationProp = {
+  navigation: RegisterIdentitiesScreenNavigationProp;
+};
+
 const Stack = createStackNavigator<AuthStackParamList>();
 function AuthStack() {
   return (
