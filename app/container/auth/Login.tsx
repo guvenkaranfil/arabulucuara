@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
-import {Metrics} from 'utils';
+import styles from './styles/LoginStyles';
 
 export default function Login() {
   const [email, setemail] = useState('');
@@ -58,41 +58,3 @@ export default function Login() {
 }
 
 const dashedLine = ' - - - - - ';
-const styles = StyleSheet.create({
-  inputs: {
-    alignItems: 'center',
-  },
-
-  forgotPassword: {
-    paddingRight: 25,
-    alignItems: 'flex-end',
-  },
-
-  forgotPasswordText: {
-    fontSize: 14,
-    fontFamily: 'Roboto-Regular',
-    color: '#fff',
-  },
-
-  signIn: {
-    paddingTop: Metrics.hp(67),
-    alignItems: 'center',
-  },
-
-  footer: {
-    paddingTop: Metrics.hp(100),
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-
-  footerLabel: {
-    paddingBottom: Metrics.hp(28),
-    flexDirection: 'row',
-  },
-
-  footerLabelText: {
-    fontSize: 15,
-    fontFamily: 'Roboto-Regular',
-    color: '#CBC9D9',
-  },
-});
