@@ -3,6 +3,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
+import FilledButton from 'components/buttons/FilledButton';
+import {Metrics} from 'utils';
 
 export default function Login() {
   const [email, setemail] = useState('');
@@ -36,6 +38,10 @@ export default function Login() {
             <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.signIn}>
+          <FilledButton label="Giriş Yap" onPress={() => console.log('onPress..')} />
+        </View>
       </>
     </LoginLayout>
   );
@@ -55,5 +61,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Roboto-Regular',
     color: '#fff',
+  },
+
+  signIn: {
+    paddingTop: Metrics.hp(67),
+    alignItems: 'center',
   },
 });
