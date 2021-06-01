@@ -7,7 +7,9 @@ import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
 import styles from './styles/LoginStyles';
 
-export default function Login() {
+import {LoginNavigationProp} from '../../routes/stacks/auth/AuthStack';
+
+export default function Login({navigation}: LoginNavigationProp) {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [hidePassword, sethidePassword] = useState(true);
@@ -35,7 +37,7 @@ export default function Login() {
         </View>
 
         <View style={styles.forgotPassword}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('forgotPassword')}>
             <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
           </TouchableOpacity>
         </View>
