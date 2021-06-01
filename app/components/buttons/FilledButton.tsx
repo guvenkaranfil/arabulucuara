@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, Pressable} from 'react-native';
-import {Metrics} from '@utils';
+import {Fonts, Metrics} from '@utils';
 
 type Props = {
   label: string;
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 16,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: Fonts.robotoBold,
     color: '#fff',
   },
 });

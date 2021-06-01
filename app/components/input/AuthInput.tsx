@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View, TextInput, KeyboardType, TouchableOpacity} from 'react-native';
 
-import {Metrics} from '@utils';
+import {Fonts, Metrics} from '@utils';
 // import {SecureIcon} from '@icons';
 
 export default function AuthInput({
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     width: Metrics.DEVICE_WIDTH - 56,
     height: 44,
     fontSize: 16,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Fonts.robotoRegular,
     color: '#0F0A39',
   },
 

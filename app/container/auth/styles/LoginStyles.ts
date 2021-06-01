@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {Metrics} from '@utils';
+import {Fonts, Metrics} from '@utils';
 
 export default StyleSheet.create({
   inputs: {
@@ -14,7 +14,7 @@ export default StyleSheet.create({
 
   forgotPasswordText: {
     fontSize: 14,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Fonts.robotoRegular,
     color: '#fff',
   },
 
@@ -36,7 +36,7 @@ export default StyleSheet.create({
 
   footerLabelText: {
     fontSize: 15,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: Fonts.robotoRegular,
     color: '#CBC9D9',
   },
 });

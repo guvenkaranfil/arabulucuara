@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {Metrics} from '@utils';
+import {Fonts, Metrics} from '@utils';
 import {TextLogo} from '@icons';
 
 type Props = {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 26,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: Fonts.robotoBold,
     color: '#fff',
   },
 });
