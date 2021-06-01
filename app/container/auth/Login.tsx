@@ -52,7 +52,7 @@ export default function Login({navigation}: LoginNavigationProp) {
             <Text style={styles.footerLabelText}>veya</Text>
             <Text style={styles.footerLabelText}>{dashedLine}</Text>
           </View>
-          <OutlineButton label="Üye Ol" onPress={() => console.log('onPress..')} />
+          <OutlineButton label="Üye Ol" onPress={() => navigation.navigate('registerIdentities')} />
         </View>
       </ScrollView>
     </LoginLayout>
