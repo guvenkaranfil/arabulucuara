@@ -15,34 +15,32 @@ export default function Login() {
     <LoginLayout showBackButton={true}>
       <Header screenTitle="Üye Girişi" dynamicHeight={200} />
 
-      <>
-        <View style={styles.inputs}>
-          <AuthInput
-            value={email}
-            onChangeText={setemail}
-            placeholder="E-Posta"
-            keyboardType="email-address"
-          />
-          <AuthInput
-            value={password}
-            onChangeText={setpassword}
-            placeholder="Şifre"
-            isPassowordInput={true}
-            secureTextEntry={hidePassword}
-            onPressSecure={() => sethidePassword(prev => !prev)}
-          />
-        </View>
+      <View style={styles.inputs}>
+        <AuthInput
+          value={email}
+          onChangeText={setemail}
+          placeholder="E-Posta"
+          keyboardType="email-address"
+        />
+        <AuthInput
+          value={password}
+          onChangeText={setpassword}
+          placeholder="Şifre"
+          isPassowordInput={true}
+          secureTextEntry={hidePassword}
+          onPressSecure={() => sethidePassword(prev => !prev)}
+        />
+      </View>
 
-        <View style={styles.forgotPassword}>
-          <TouchableOpacity>
-            <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.forgotPassword}>
+        <TouchableOpacity>
+          <Text style={styles.forgotPasswordText}>Şifremi unuttum</Text>
+        </TouchableOpacity>
+      </View>
 
-        <View style={styles.signIn}>
-          <FilledButton label="Giriş Yap" onPress={() => console.log('onPress..')} />
-        </View>
-      </>
+      <View style={styles.signIn}>
+        <FilledButton label="Giriş Yap" onPress={() => console.log('onPress..')} />
+      </View>
     </LoginLayout>
   );
 }
