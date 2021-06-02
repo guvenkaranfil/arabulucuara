@@ -13,15 +13,23 @@ export default function RegisterIdentities({navigation}: RegisterIdentitiesNavig
       <Header screenTitle="Üye Ol" dynamicHeight={200} />
 
       <View style={styles.identities}>
-        <FilledButton label="Arabulucu" bgColor="#790F3E" onPress={() => console.log('onPress.')} />
+        <FilledButton
+          label="Arabulucu"
+          bgColor="#790F3E"
+          onPress={() => navigation.navigate('register')}
+        />
 
         <FilledButton
           label="Arabulucuk Merkezi"
           bgColor="#790F3E"
-          onPress={() => console.log('onPress.')}
+          onPress={() => navigation.navigate('register')}
         />
 
-        <FilledButton label="Uzman" bgColor="#790F3E" onPress={() => console.log('onPress.')} />
+        <FilledButton
+          label="Uzman"
+          bgColor="#790F3E"
+          onPress={() => navigation.navigate('register')}
+        />
       </View>
 
       <View style={styles.footer}>
