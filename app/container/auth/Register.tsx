@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
@@ -8,7 +11,11 @@ import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import {Metrics} from 'utils';
 
-export default function Register() {
+interface RegisterProps {
+  navigation: StackNavigationProp<AuthNavigatorParamList, 'register'>;
+}
+
+export default function Register({navigation}: RegisterProps) {
   const [name, setname] = useState('');
   const [surname, setsurname] = useState('');
   const [email, setemail] = useState('');
@@ -21,7 +28,7 @@ export default function Register() {
   const [eCommunication, seteCommunication] = useState(false);
 
   return (
-    <LoginLayout showBackButton={true}>
+    <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <Header screenTitle="Arabulucu Üye Ol" dynamicHeight={200} />
 

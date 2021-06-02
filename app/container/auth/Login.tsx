@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
@@ -7,9 +10,11 @@ import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
 import styles from './styles/LoginStyles';
 
-import {LoginNavigationProp} from '../../routes/stacks/auth/AuthStack';
+export interface LoginProps {
+  navigation: StackNavigationProp<AuthNavigatorParamList, 'login'>;
+}
 
-export default function Login({navigation}: LoginNavigationProp) {
+export default function Login({navigation}: LoginProps) {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [hidePassword, sethidePassword] = useState(true);

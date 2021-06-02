@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -7,9 +9,12 @@ import AuthInput from '@components/input/AuthInput';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import {Metrics} from '@utils';
-import {ForgotPasswordNavigationProp} from '../../routes/stacks/auth/AuthStack';
 
-export default function ForgotPassword({navigation}: ForgotPasswordNavigationProp) {
+export interface ForgotPasswordProps {
+  navigation: StackNavigationProp<AuthNavigatorParamList, 'forgotPassword'>;
+}
+
+export default function ForgotPassword({navigation}: ForgotPasswordProps) {
   const [email, setemail] = useState('');
   return (
     <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>

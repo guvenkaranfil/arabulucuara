@@ -1,0 +1,6 @@
+export type AuthNavigatorParamList = {
+  login: undefined;
+  forgotPassword: undefined;
+  registerIdentities: undefined;
+  register: undefined;
+};

@@ -60,6 +60,7 @@
       "*": ["app/*"],
       "@auth/*": ["./app/container/auth/*"],
       "@components/*": ["./app/components/*"],
+      "@routes/*": ["./app/routes/*"],
       "@utils": ["./app/utils/index"],
       "@icons": ["./app/icons/index"]
     }

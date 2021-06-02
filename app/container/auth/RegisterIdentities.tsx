@@ -1,13 +1,19 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
 import {Metrics} from 'utils';
-import {RegisterIdentitiesNavigationProp} from '../../routes/stacks/auth/AuthStack';
 
-export default function RegisterIdentities({navigation}: RegisterIdentitiesNavigationProp) {
+export interface RegisterIdentitiesProps {
+  navigation: StackNavigationProp<AuthNavigatorParamList, 'registerIdentities'>;
+}
+
+export default function RegisterIdentities({navigation}: RegisterIdentitiesProps) {
   return (
     <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
       <Header screenTitle="Üye Ol" dynamicHeight={200} />
