@@ -3,4 +3,5 @@ export type AuthNavigatorParamList = {
   forgotPassword: undefined;
   registerIdentities: undefined;
   register: undefined;
+  welcome: {name: string};
 };

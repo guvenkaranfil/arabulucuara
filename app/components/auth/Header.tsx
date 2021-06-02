@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    textAlign: 'center',
     fontSize: 26,
     fontFamily: Fonts.robotoBold,
     color: '#fff',
