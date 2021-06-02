@@ -83,7 +83,7 @@ export default function Register({navigation}: RegisterProps) {
 
         <View style={styles.footer}>
           <FilledButton label="Üye Ol" onPress={() => console.log('onPress..')} />
-          <OutlineButton label="Zaten Üyeyim" onPress={() => console.log('onPress..')} />
+          <OutlineButton label="Zaten Üyeyim" onPress={() => navigation.navigate('login')} />
         </View>
       </ScrollView>
     </LoginLayout>
