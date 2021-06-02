@@ -38,24 +38,24 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* ArabulucuAraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArabulucuAraTests.m; sourceTree = "<group>"; };
 		04506DF561B4F1C569C40B2A /* Pods-ArabulucuAra-ArabulucuAraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArabulucuAra-ArabulucuAraTests.debug.xcconfig"; path = "Target Support Files/Pods-ArabulucuAra-ArabulucuAraTests/Pods-ArabulucuAra-ArabulucuAraTests.debug.xcconfig"; sourceTree = "<group>"; };
-		068BD055873C4A70AA2E30A8 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../app/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		068BD055873C4A70AA2E30A8 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../app/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* ArabulucuAra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArabulucuAra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ArabulucuAra/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ArabulucuAra/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ArabulucuAra/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ArabulucuAra/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ArabulucuAra/main.m; sourceTree = "<group>"; };
-		194FC77B847248EFB819A816 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../app/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
-		3C64894B159E4DF38B60BB5F /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../app/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		194FC77B847248EFB819A816 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../app/assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		3C64894B159E4DF38B60BB5F /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../app/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		74DB260B7961197BCA8677E5 /* Pods-ArabulucuAra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArabulucuAra.debug.xcconfig"; path = "Target Support Files/Pods-ArabulucuAra/Pods-ArabulucuAra.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ArabulucuAra/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A06BF60EDD9D4D1B8FACD13D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		A06BF60EDD9D4D1B8FACD13D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../app/assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		A6E66BB3BCE7D97217A8D156 /* libPods-ArabulucuAra.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArabulucuAra.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D22062DBEE884C64E9D9BC /* libPods-ArabulucuAra-ArabulucuAraTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArabulucuAra-ArabulucuAraTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B93AF33B364646F9BCD566FC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../app/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		CCEF6634557B45639103F05A /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../app/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		B93AF33B364646F9BCD566FC /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../app/assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		CCEF6634557B45639103F05A /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../app/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		DC33920F60300D2684A83893 /* Pods-ArabulucuAra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArabulucuAra.release.xcconfig"; path = "Target Support Files/Pods-ArabulucuAra/Pods-ArabulucuAra.release.xcconfig"; sourceTree = "<group>"; };
-		DDC51FF649244F1AA67468C2 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../app/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		DDC51FF649244F1AA67468C2 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../app/assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		DFA386EC3F6762F785CA1F36 /* Pods-ArabulucuAra-ArabulucuAraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArabulucuAra-ArabulucuAraTests.release.xcconfig"; path = "Target Support Files/Pods-ArabulucuAra-ArabulucuAraTests/Pods-ArabulucuAra-ArabulucuAraTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -164,7 +164,6 @@
 				068BD055873C4A70AA2E30A8 /* Roboto-Thin.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		CDD1F28A24684E77DA5D7082 /* Pods */ = {
@@ -175,7 +174,6 @@
 				04506DF561B4F1C569C40B2A /* Pods-ArabulucuAra-ArabulucuAraTests.debug.xcconfig */,
 				DFA386EC3F6762F785CA1F36 /* Pods-ArabulucuAra-ArabulucuAraTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
