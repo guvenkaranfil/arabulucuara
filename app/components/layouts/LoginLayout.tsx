@@ -25,11 +25,9 @@ export default function LoginLayout({
 
   const _renderHeader = () => (
     <View style={styles.header}>
-      {showBackButton && (
-        <TouchableOpacity onPress={onPressBack} hitSlop={hitSlopArea}>
-          <BackIcon height={16} />
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity onPress={onPressBack} hitSlop={hitSlopArea} disabled={!showBackButton}>
+        {showBackButton && <BackIcon height={16} />}
+      </TouchableOpacity>
       {showHomeButton && (
         <TouchableOpacity onPress={onPressHouse} hitSlop={hitSlopArea}>
           <HouseIcon />
