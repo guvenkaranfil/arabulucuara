@@ -4,6 +4,9 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
 import RoundCheckBox from '@components/checkbox/RoundCheckBox';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
+import {Metrics} from 'utils';
 
 export default function Register() {
   const [name, setname] = useState('');
@@ -19,7 +22,7 @@ export default function Register() {
 
   return (
     <LoginLayout showBackButton={true}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <Header screenTitle="Arabulucu Üye Ol" dynamicHeight={200} />
 
         <View style={styles.inputs}>
@@ -70,17 +73,33 @@ export default function Register() {
             onPress={() => seteCommunication(prev => !prev)}
           />
         </View>
+
+        <View style={styles.footer}>
+          <FilledButton label="Üye Ol" onPress={() => console.log('onPress..')} />
+          <OutlineButton label="Zaten Üyeyim" onPress={() => console.log('onPress..')} />
+        </View>
       </ScrollView>
     </LoginLayout>
   );
 }
 
 const styles = StyleSheet.create({
+  contentContainerStyle: {
+    paddingBottom: 28,
+  },
+
   inputs: {
     alignItems: 'center',
   },
 
   conditions: {
     paddingHorizontal: 25,
+  },
+
+  footer: {
+    marginTop: Metrics.hp(20),
+    height: Metrics.hp(125),
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
