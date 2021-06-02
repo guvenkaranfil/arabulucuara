@@ -53,7 +53,10 @@ export default function Welcome({navigation}: WelcomeProps) {
           <StartsIcon width={250} height={90} />
         </Animatable.View>
 
-        <FilledButton label="Hadi Başlayalım" onPress={() => console.log('onPress...')} />
+        <FilledButton
+          label="Hadi Başlayalım"
+          onPress={() => navigation.navigate('completions/address')}
+        />
       </View>
     </LoginLayout>
   );

@@ -4,4 +4,5 @@ export type AuthNavigatorParamList = {
   registerIdentities: undefined;
   register: undefined;
   welcome: {name: string};
+  'completions/address': undefined;
 };

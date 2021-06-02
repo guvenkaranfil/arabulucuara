@@ -1,0 +1,52 @@
+import React, {useState} from 'react';
+import {StyleSheet, Pressable, Text, ViewStyle} from 'react-native';
+import {Fonts, Metrics} from 'utils';
+import {BottomIcon, UpIcon} from '@icons';
+
+type Props = {
+  style?: ViewStyle;
+  value?: string;
+  placeholder: string;
+};
+
+export default function DropDownPicker({style, value, placeholder}: Props) {
+  const [modalVisible, setmodalVisible] = useState(false);
+
+  return (
+    <>
+      <Pressable style={[styles.container, style]} onPress={() => setmodalVisible(true)}>
+        <Text style={[styles.label, value ? styles.value : styles.placeholder]}>
+          {value ?? placeholder}
+        </Text>
+        {modalVisible ? <UpIcon width={20} height={14} /> : <BottomIcon width={18} height={18} />}
+      </Pressable>
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+    paddingHorizontal: 17,
+    flexDirection: 'row',
+    width: Metrics.DEVICE_WIDTH - 56,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 10,
+    backgroundColor: '#F5F6FA',
+  },
+
+  label: {
+    fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#CBC9D9',
+  },
+
+  placeholder: {},
+
+  value: {
+    fontFamily: Fonts.robotoMedium,
+    color: '#0F0A39',
+  },
+});
