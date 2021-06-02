@@ -3,6 +3,7 @@ import {ScrollView, View, StyleSheet} from 'react-native';
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import AuthInput from '@components/input/AuthInput';
+import RoundCheckBox from '@components/checkbox/RoundCheckBox';
 
 export default function Register() {
   const [name, setname] = useState('');
@@ -12,6 +13,9 @@ export default function Register() {
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
   const [hidePassword, sethidePassword] = useState(true);
+  const [membershipContract, setmembershipContract] = useState(false);
+  const [communicationText, setcommunicationText] = useState(false);
+  const [eCommunication, seteCommunication] = useState(false);
 
   return (
     <LoginLayout showBackButton={true}>
@@ -46,6 +50,26 @@ export default function Register() {
             onPressSecure={() => sethidePassword(prev => !prev)}
           />
         </View>
+
+        <View style={styles.conditions}>
+          <RoundCheckBox
+            label={`Üyelik sözleşmesini ve eklerini${'\n'}kabul ediyorum.`}
+            isVisible={membershipContract}
+            onPress={() => setmembershipContract(prev => !prev)}
+          />
+
+          <RoundCheckBox
+            label={'Elektronik ticari iletişim metnini okudum, anladım ve kabul ediyorum.'}
+            isVisible={communicationText}
+            onPress={() => setcommunicationText(prev => !prev)}
+          />
+
+          <RoundCheckBox
+            label={'İletişim bilgilerime e-ileti ve anında bildirim gönderilmesine izin veriyorum.'}
+            isVisible={eCommunication}
+            onPress={() => seteCommunication(prev => !prev)}
+          />
+        </View>
       </ScrollView>
     </LoginLayout>
   );
@@ -54,6 +78,9 @@ export default function Register() {
 const styles = StyleSheet.create({
   inputs: {
     alignItems: 'center',
-    backgroundColor: 'red',
+  },
+
+  conditions: {
+    paddingHorizontal: 25,
   },
 });
