@@ -1,19 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, ReactElement} from 'react';
 import {StyleSheet, Pressable, Text, ViewStyle} from 'react-native';
 import {Fonts, Metrics} from 'utils';
 import {BottomIcon, UpIcon} from '@icons';
+import Modal from './Modal';
 
 type Props = {
   style?: ViewStyle;
   value?: string;
   placeholder: string;
+  items: Array<Object>;
+  renderItem: (item: any) => ReactElement;
+  onPress: (item: any) => void;
 };
 
-export default function DropDownPicker({style, value, placeholder}: Props) {
+export default function DropDownPicker({
+  style,
+  value,
+  placeholder,
+  items,
+  renderItem,
+  onPress,
+}: Props) {
   const [modalVisible, setmodalVisible] = useState(false);
 
   return (
     <>
+      {modalVisible && (
+        <Modal
+          items={items}
+          renderItem={renderItem}
+          onPress={item => {
+            setmodalVisible(false);
+            onPress(item);
+          }}
+          closeModal={() => setmodalVisible(false)}
+        />
+      )}
       <Pressable style={[styles.container, style]} onPress={() => setmodalVisible(true)}>
         <Text style={[styles.label, value ? styles.value : styles.placeholder]}>
           {value ?? placeholder}

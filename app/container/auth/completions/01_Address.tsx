@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
@@ -14,6 +14,13 @@ export interface AddressProps {
 }
 
 export default function Address({navigation}: AddressProps) {
+  const [cities, setcities] = useState(cityItems);
+  const [selectedCity, setselectedCity] = useState({id: undefined, name: undefined});
+  const [towns, settowns] = useState(cityItems);
+  const [selectedTown, setselectedTown] = useState({id: undefined, name: undefined});
+  const [districts, setdistricts] = useState(cityItems);
+  const [selectedDistrict, setselectedDistrict] = useState({id: undefined, name: undefined});
+
   return (
     <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
       <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
@@ -26,9 +33,29 @@ export default function Address({navigation}: AddressProps) {
       </View>
 
       <View style={styles.form}>
-        <DropDownPicker placeholder="İl Seçiniz" />
-        <DropDownPicker placeholder="İlçe Seçiniz" />
-        <DropDownPicker placeholder="Semt Seçiniz" />
+        <DropDownPicker
+          value={selectedCity?.name}
+          placeholder="İl Seçiniz"
+          items={cities}
+          renderItem={item => item.name}
+          onPress={setselectedCity}
+        />
+
+        <DropDownPicker
+          value={selectedTown?.name}
+          placeholder="İlçe Seçiniz"
+          items={towns}
+          renderItem={item => item.name}
+          onPress={setselectedTown}
+        />
+
+        <DropDownPicker
+          value={selectedDistrict?.name}
+          placeholder="Semt Seçiniz"
+          items={districts}
+          renderItem={item => item.name}
+          onPress={setselectedDistrict}
+        />
       </View>
     </LoginLayout>
   );
@@ -52,3 +79,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const cityItems = [
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+  {
+    id: 1,
+    name: 'Adana',
+  },
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+];
