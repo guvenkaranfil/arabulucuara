@@ -10,11 +10,12 @@ import Welcome from '@auth/Welcome';
 
 import Address from '@auth/completions/01_Address';
 import Personal from '@auth/completions/02_Personal';
+import ProfessionType from '@auth/completions/03_ProfessionType';
 
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
   return (
-    <Stack.Navigator headerMode="none" initialRouteName="completions/personal">
+    <Stack.Navigator headerMode="none" initialRouteName="completions/professionType">
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="registerIdentities" component={RegisterIdentities} />
@@ -23,6 +24,7 @@ function AuthStack() {
 
       <Stack.Screen name="completions/address" component={Address} />
       <Stack.Screen name="completions/personal" component={Personal} />
+      <Stack.Screen name="completions/professionType" component={ProfessionType} />
     </Stack.Navigator>
   );
 }

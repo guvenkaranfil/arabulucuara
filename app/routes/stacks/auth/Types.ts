@@ -6,4 +6,5 @@ export type AuthNavigatorParamList = {
   welcome: {name: string};
   'completions/address': undefined;
   'completions/personal': undefined;
+  'completions/professionType': undefined;
 };
