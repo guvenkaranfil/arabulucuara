@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
@@ -9,6 +9,7 @@ import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import AuthInput from '@components/input/AuthInput';
 import {Fonts, Metrics} from 'utils';
+import FilledButton from 'components/buttons/FilledButton';
 
 export interface AddressProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/address'>;
@@ -25,54 +26,64 @@ export default function Address({navigation}: AddressProps) {
 
   return (
     <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
-      <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
+      <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}>
+        <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
 
-      <View style={styles.step}>
-        <Pedometer activeStep={1} totalCount={7} />
-        <Text style={styles.stepInfo}>
-          Aşağıda yer alan bilgileri girdiğinizde{'\n'}üyelik işleminiz tamamlanacaktır.
-        </Text>
-      </View>
+        <View style={styles.step}>
+          <Pedometer activeStep={1} totalCount={7} />
+          <Text style={styles.stepInfo}>
+            Aşağıda yer alan bilgileri girdiğinizde{'\n'}üyelik işleminiz tamamlanacaktır.
+          </Text>
+        </View>
 
-      <View style={styles.form}>
-        <DropDownPicker
-          value={selectedCity?.name}
-          placeholder="İl Seçiniz"
-          items={cities}
-          renderItem={item => item.name}
-          onPress={setselectedCity}
-        />
+        <View style={styles.form}>
+          <DropDownPicker
+            value={selectedCity?.name}
+            placeholder="İl Seçiniz"
+            items={cities}
+            renderItem={item => item.name}
+            onPress={setselectedCity}
+          />
 
-        <DropDownPicker
-          value={selectedTown?.name}
-          placeholder="İlçe Seçiniz"
-          items={towns}
-          renderItem={item => item.name}
-          onPress={setselectedTown}
-        />
+          <DropDownPicker
+            value={selectedTown?.name}
+            placeholder="İlçe Seçiniz"
+            items={towns}
+            renderItem={item => item.name}
+            onPress={setselectedTown}
+          />
 
-        <DropDownPicker
-          value={selectedDistrict?.name}
-          placeholder="Semt Seçiniz"
-          items={districts}
-          renderItem={item => item.name}
-          onPress={setselectedDistrict}
-        />
+          <DropDownPicker
+            value={selectedDistrict?.name}
+            placeholder="Semt Seçiniz"
+            items={districts}
+            renderItem={item => item.name}
+            onPress={setselectedDistrict}
+          />
 
-        <AuthInput
-          height={100}
-          value={address}
-          onChangeText={setaddress}
-          placeholder="E-Posta"
-          keyboardType="email-address"
-          isMultiLine={true}
-        />
-      </View>
+          <AuthInput
+            height={100}
+            value={address}
+            onChangeText={setaddress}
+            placeholder="E-Posta"
+            keyboardType="email-address"
+            isMultiLine={true}
+          />
+        </View>
+
+        <View style={styles.footer}>
+          <FilledButton label="Devam Et" onPress={() => console.log('onPress..')} />
+        </View>
+      </ScrollView>
     </LoginLayout>
   );
 }
 
 const styles = StyleSheet.create({
+  contentContainerStyle: {
+    paddingBottom: 28,
+  },
+
   step: {
     alignItems: 'center',
   },
@@ -87,6 +98,11 @@ const styles = StyleSheet.create({
 
   form: {
     marginTop: Metrics.hp(29),
+    alignItems: 'center',
+  },
+
+  footer: {
+    marginTop: Metrics.hp(38),
     alignItems: 'center',
   },
 });
