@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Pressable} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from 'moment';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
@@ -19,6 +21,13 @@ export interface PersonalProps {
 export default function Personal({navigation}: PersonalProps) {
   const [gender, setgender] = useState({id: undefined, name: undefined});
   const [phoneNumber, setphoneNumber] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [showDateTimePicker, setshowDateTimePicker] = useState(false);
+
+  const handleConfirm = (pickedDate: Date) => {
+    setDate(pickedDate);
+    setshowDateTimePicker(false);
+  };
 
   return (
     <LoginLayout showHomeButton={true}>
@@ -33,6 +42,20 @@ export default function Personal({navigation}: PersonalProps) {
         </View>
 
         <View style={styles.form}>
+          <Pressable style={styles.dateTime} onPress={() => setshowDateTimePicker(true)}>
+            <Text style={styles.dateLabel}>{moment(date).format('DD-MM-YYYY')}</Text>
+          </Pressable>
+          {showDateTimePicker && (
+            <DateTimePickerModal
+              isVisible={true}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={() => setshowDateTimePicker(false)}
+              cancelTextIOS="Vazgeç"
+              confirmTextIOS="Onayla"
+            />
+          )}
+
           <DropDownPicker
             value={gender?.name}
             placeholder="Cinsiyet"
@@ -81,6 +104,22 @@ const styles = StyleSheet.create({
   form: {
     marginTop: Metrics.hp(29),
     alignItems: 'center',
+  },
+
+  dateTime: {
+    marginBottom: 20,
+    paddingLeft: Metrics.wp(20),
+    width: Metrics.DEVICE_WIDTH - 56,
+    height: 44,
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#fff',
+  },
+
+  dateLabel: {
+    fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#0F0A39',
   },
 
   footer: {
