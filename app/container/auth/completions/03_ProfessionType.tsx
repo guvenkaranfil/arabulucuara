@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -7,8 +7,8 @@ import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
-import {Fonts, Metrics} from 'utils';
 import RoundCheckBox from 'components/checkbox/RoundCheckBox';
+import styles from './styles/ProfessionStyle';
 
 export default function ProfessionType() {
   const [registrationYear, setregistrationYear] = useState({id: undefined, year: undefined});
@@ -91,46 +91,3 @@ export default function ProfessionType() {
     </LoginLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  step: {
-    alignItems: 'center',
-  },
-
-  stepInfo: {
-    paddingTop: Metrics.hp(20),
-    textAlign: 'center',
-    fontSize: 12,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  form: {
-    marginTop: Metrics.hp(29),
-    alignItems: 'center',
-  },
-
-  formQuestion: {
-    paddingLeft: 28,
-    marginBottom: 20,
-  },
-
-  formQuestionRow: {
-    marginTop: Metrics.hp(10),
-    flexDirection: 'row',
-    width: 180,
-    justifyContent: 'space-between',
-  },
-
-  questionLabel: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  footer: {
-    height: Metrics.hp(125),
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-});
