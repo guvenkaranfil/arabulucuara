@@ -5,6 +5,7 @@ import {Fonts, Metrics} from '@utils';
 // import {SecureIcon} from '@icons';
 
 export default function AuthInput({
+  height,
   value,
   onChangeText,
   placeholder,
@@ -12,11 +13,12 @@ export default function AuthInput({
   autoCapitalize = 'none',
   isPassowordInput = false,
   secureTextEntry = false,
+  isMultiLine = false,
   onPressSecure,
 }: Props) {
   const hitSlopArea = {top: 15, right: 15, bottom: 15, left: 15};
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isMultiLine && {height: height}]}>
       <TextInput
         style={styles.input}
         value={value}
@@ -26,6 +28,7 @@ export default function AuthInput({
         autoCapitalize={autoCapitalize}
         secureTextEntry={secureTextEntry}
         placeholderTextColor="#CBC9D9"
+        multiline={isMultiLine}
       />
       {isPassowordInput && (
         <View style={styles.secureIconContainer}>
@@ -71,6 +74,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
+  height?: number;
   value: string;
   onChangeText: (value: string) => void;
   placeholder?: string;
@@ -78,5 +82,6 @@ type Props = {
   autoCapitalize?: 'none' | 'sentences';
   secureTextEntry?: boolean;
   isPassowordInput?: boolean;
+  isMultiLine?: boolean;
   onPressSecure?: () => void;
 };

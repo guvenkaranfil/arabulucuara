@@ -7,6 +7,7 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
+import AuthInput from '@components/input/AuthInput';
 import {Fonts, Metrics} from 'utils';
 
 export interface AddressProps {
@@ -20,6 +21,7 @@ export default function Address({navigation}: AddressProps) {
   const [selectedTown, setselectedTown] = useState({id: undefined, name: undefined});
   const [districts, setdistricts] = useState(cityItems);
   const [selectedDistrict, setselectedDistrict] = useState({id: undefined, name: undefined});
+  const [address, setaddress] = useState('');
 
   return (
     <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
@@ -55,6 +57,15 @@ export default function Address({navigation}: AddressProps) {
           items={districts}
           renderItem={item => item.name}
           onPress={setselectedDistrict}
+        />
+
+        <AuthInput
+          height={100}
+          value={address}
+          onChangeText={setaddress}
+          placeholder="E-Posta"
+          keyboardType="email-address"
+          isMultiLine={true}
         />
       </View>
     </LoginLayout>
