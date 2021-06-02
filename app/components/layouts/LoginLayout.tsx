@@ -9,6 +9,7 @@ type Props = {
   children: React.ReactNode;
   showBackButton?: boolean;
   showHomeButton?: boolean;
+  enableKeyboardDismiss?: boolean;
   onPressBack?: () => void;
   onPressHouse?: () => void;
 };
@@ -17,6 +18,7 @@ export default function LoginLayout({
   children,
   showBackButton,
   showHomeButton,
+  enableKeyboardDismiss = true,
   onPressBack,
   onPressHouse,
 }: Props) {
@@ -39,9 +41,13 @@ export default function LoginLayout({
   return (
     <LinearGradient style={styles.container} colors={linearColors}>
       {_renderHeader()}
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.childContainer}>{children}</View>
-      </TouchableWithoutFeedback>
+      {enableKeyboardDismiss ? (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.childContainer}>{children}</View>
+        </TouchableWithoutFeedback>
+      ) : (
+        children
+      )}
     </LinearGradient>
   );
 }

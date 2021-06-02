@@ -17,7 +17,7 @@ export default function ProfessionType() {
   const [isMemberOfMeditationCenter, setisMemberOfMeditationCenter] = useState(true);
 
   return (
-    <LoginLayout showHomeButton={true}>
+    <LoginLayout enableKeyboardDismiss={false} showHomeButton={true}>
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
 
