@@ -5,11 +5,12 @@ import {Metrics} from 'utils';
 import Banner from './components/Banner';
 import NewsShowecase from './components/NewsShowecase';
 import RoutingButtons from './components/RoutingButtons';
+import Attendees from './components/Attendees';
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.cotentContainerStyle}>
         <View style={styles.bannerArea}>
           <Banner />
         </View>
@@ -27,6 +28,10 @@ export default function Home() {
             openCalculator={() => console.log('onPress..')}
           />
         </View>
+
+        <View style={styles.attendees}>
+          <Attendees attendees={attendees} />
+        </View>
       </ScrollView>
     </View>
   );
@@ -35,11 +40,15 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: '#fff'},
 
+  cotentContainerStyle: {paddingBottom: 28},
+
   bannerArea: {marginTop: Metrics.hp(20), alignItems: 'center'},
 
   newsShowCase: {marginTop: Metrics.hp(20), alignItems: 'center'},
 
   routingButtons: {alignItems: 'center'},
+
+  attendees: {marginTop: Metrics.hp(35), alignItems: 'center'},
 });
 
 const news = [
@@ -72,5 +81,64 @@ const news = [
     date: 26,
     month: 'Ağustos',
     title: 'Her Anlaşma Bir Fidan - Arabulucular Ormanı',
+  },
+];
+
+const attendees = [
+  {
+    id: 'ademgul',
+    nameSurname: 'Adem Gül',
+    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
+    time: '22:46',
+  },
+
+  {
+    id: 'serkanAricanl',
+    nameSurname: 'Serkan ARICAN',
+    profilePhotoUrl:
+      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
+    time: '22:46',
+  },
+  {
+    id: 'ademgul',
+    nameSurname: 'Adem Gül',
+    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
+    time: '22:46',
+  },
+
+  {
+    id: 'serkanAricanl',
+    nameSurname: 'Serkan ARICAN',
+    profilePhotoUrl:
+      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
+    time: '22:46',
+  },
+  {
+    id: 'ademgul',
+    nameSurname: 'Adem Gül',
+    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
+    time: '22:46',
+  },
+
+  {
+    id: 'serkanAricanl',
+    nameSurname: 'Serkan ARICAN',
+    profilePhotoUrl:
+      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
+    time: '22:46',
+  },
+  {
+    id: 'ademgul',
+    nameSurname: 'Adem Gül',
+    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
+    time: '22:46',
+  },
+
+  {
+    id: 'serkanAricanl',
+    nameSurname: 'Serkan ARICAN',
+    profilePhotoUrl:
+      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
+    time: '22:46',
   },
 ];
