@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Pressable, Image, StyleSheet, Text, View, Alert} from 'react-native';
+import {Pressable, Image, Text, View, Alert} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
 import LoginLayout from '@components/layouts/LoginLayout';
@@ -7,8 +7,8 @@ import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
-import {Fonts, Metrics} from 'utils';
 import {UserIcon} from '@icons';
+import styles from './styles/ProfilePhotoStyle';
 
 export default function ProfilePhoto() {
   const [profilePhoto, setprofilePhoto] = useState('');
@@ -80,50 +80,3 @@ export default function ProfilePhoto() {
     </LoginLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  step: {
-    alignItems: 'center',
-  },
-
-  stepInfo: {
-    paddingTop: Metrics.hp(20),
-    textAlign: 'center',
-    fontSize: 12,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  photoPicker: {
-    alignItems: 'center',
-    marginVertical: Metrics.hp(20),
-  },
-
-  photoLabel: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  photoReview: {
-    marginTop: Metrics.hp(17),
-    width: Metrics.wp(200),
-    height: Metrics.wp(200),
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-  },
-
-  profilePhoto: {
-    width: 150,
-    height: 150,
-  },
-
-  footer: {
-    height: Metrics.hp(125),
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-});
