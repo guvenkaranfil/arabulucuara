@@ -12,11 +12,12 @@ import Address from '@auth/completions/01_Address';
 import Personal from '@auth/completions/02_Personal';
 import ProfessionType from '@auth/completions/03_ProfessionType';
 import ProfilePhoto from '@auth/completions/04_ProfilePhoto';
+import AboutMe from '@auth/completions/05_AboutMe';
 
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
   return (
-    <Stack.Navigator headerMode="none" initialRouteName="completions/profilePhoto">
+    <Stack.Navigator headerMode="none" initialRouteName="completions/aboutMe">
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="registerIdentities" component={RegisterIdentities} />
@@ -27,6 +28,7 @@ function AuthStack() {
       <Stack.Screen name="completions/personal" component={Personal} />
       <Stack.Screen name="completions/professionType" component={ProfessionType} />
       <Stack.Screen name="completions/profilePhoto" component={ProfilePhoto} />
+      <Stack.Screen name="completions/aboutMe" component={AboutMe} />
     </Stack.Navigator>
   );
 }
