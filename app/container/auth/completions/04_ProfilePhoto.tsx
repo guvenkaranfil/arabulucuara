@@ -1,5 +1,6 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Pressable, Image, StyleSheet, Text, View, Alert} from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -10,6 +11,44 @@ import {Fonts, Metrics} from 'utils';
 import {UserIcon} from '@icons';
 
 export default function ProfilePhoto() {
+  const [profilePhoto, setprofilePhoto] = useState('');
+
+  const choseFromLibrary = async () => {
+    ImagePicker.openPicker({
+      mediaType: 'photo',
+      width: 150,
+      height: 150,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+      setprofilePhoto(image.path);
+    });
+  };
+
+  const chooseFromCamera = async () => {
+    ImagePicker.openPicker({
+      mediaType: 'photo',
+      width: 150,
+      height: 150,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+      setprofilePhoto(image.path);
+    });
+  };
+
+  const askForProfilePhotoPick = () => {
+    return Alert.alert(
+      'Profil fotoğrafını seç',
+      'Aşağıdan fotoğrafınızı seçmek istediğiniz seçeneği seçiniz',
+      [
+        {text: 'Galeriden Seç', onPress: choseFromLibrary},
+        {text: 'Kamerayı Aç', onPress: chooseFromCamera},
+        {text: 'Vazgeç'},
+      ],
+    );
+  };
+
   return (
     <LoginLayout showHomeButton={true} enableKeyboardDismiss={false}>
       <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
@@ -24,9 +63,13 @@ export default function ProfilePhoto() {
       <View style={styles.photoPicker}>
         <Text style={styles.photoLabel}>Profil fotoğrafı seçiniz</Text>
 
-        <View style={styles.photoReview}>
-          <UserIcon width={80} height={90} />
-        </View>
+        <Pressable style={styles.photoReview} onPress={askForProfilePhotoPick}>
+          {profilePhoto?.length > 0 ? (
+            <Image source={{uri: profilePhoto}} style={styles.profilePhoto} />
+          ) : (
+            <UserIcon width={80} height={90} />
+          )}
+        </Pressable>
       </View>
 
       <View style={styles.footer}>
@@ -71,6 +114,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: '#fff',
+  },
+
+  profilePhoto: {
+    width: 150,
+    height: 150,
   },
 
   footer: {
