@@ -59,6 +59,7 @@
     "paths": {
       "*": ["app/*"],
       "@auth/*": ["./app/container/auth/*"],
+      "@home/*": ["./app/container/home/*"],
       "@components/*": ["./app/components/*"],
       "@routes/*": ["./app/routes/*"],
       "@utils": ["./app/utils/index"],
