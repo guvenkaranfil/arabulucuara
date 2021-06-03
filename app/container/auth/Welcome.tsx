@@ -45,7 +45,6 @@ export default function Welcome({navigation}: WelcomeProps) {
             from: {translateY: 0, scaleY: 0, scaleX: 0},
             to: {translateY: -80, scaleY: 1, scaleX: 1},
           }}
-          // transition={}
           duration={3000}
           easing="ease-out-circ"
           useNativeDriver
