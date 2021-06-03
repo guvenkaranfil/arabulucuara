@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -7,7 +7,7 @@ import Pedometer from '@components/auth/Pedometer';
 import RoundCheckBox from '@components/checkbox/RoundCheckBox';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
-import {Fonts, Metrics} from 'utils';
+import styles from './styles/ExpertiesAreaStyle';
 
 export default function ExpertiesArea() {
   const [expertiesArea, setexpertiesArea] = useState(exptertiesArea);
@@ -57,57 +57,6 @@ export default function ExpertiesArea() {
     </LoginLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  step: {
-    alignItems: 'center',
-  },
-
-  stepInfo: {
-    paddingTop: Metrics.hp(20),
-    textAlign: 'center',
-    fontSize: 12,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  form: {
-    marginLeft: 28,
-    marginTop: Metrics.hp(26),
-  },
-
-  expertiesLabel: {
-    paddingBottom: 16,
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  expertiesItem: {
-    marginBottom: 16,
-  },
-
-  expertiesName: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
-  },
-
-  expertiesInfo: {
-    paddingTop: Metrics.hp(8),
-    textAlign: 'center',
-    fontSize: 12,
-    fontFamily: Fonts.robotoRegular,
-    color: '#CBC9D9',
-  },
-
-  footer: {
-    marginTop: Metrics.hp(20),
-    height: Metrics.hp(125),
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-});
 
 const exptertiesArea = [
   {
