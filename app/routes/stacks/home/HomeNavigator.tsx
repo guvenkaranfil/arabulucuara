@@ -2,7 +2,7 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeNavigatorParamList} from './Types';
 
-import Home from '@home/Home';
+import Home from '@home/index';
 
 const Stack = createStackNavigator<HomeNavigatorParamList>();
 function HomeNavigator() {
