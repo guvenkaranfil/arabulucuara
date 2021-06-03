@@ -1,14 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Image, View} from 'react-native';
+import {Metrics} from 'utils';
 
 export default function Banner() {
   return (
-    <View>
-      <Text></Text>
+    <View style={styles.container}>
+      <Image source={require('../../../assets/images/Banner.png')} style={styles.banner} />
     </View>
   );
 }
 
-const MediatorCenter = ({}) => {};
+const styles = StyleSheet.create({
+  container: {
+    width: Metrics.DEVICE_WIDTH - 40,
+    height: Metrics.wp(164),
+  },
 
-const styles = StyleSheet.create({});
+  banner: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+  },
+});
