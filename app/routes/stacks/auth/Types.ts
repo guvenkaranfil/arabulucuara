@@ -10,4 +10,5 @@ export type AuthNavigatorParamList = {
   'completions/profilePhoto': undefined;
   'completions/aboutMe': undefined;
   'completions/expertiesArea': undefined;
+  'completions/meditationCenter': undefined;
 };
