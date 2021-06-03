@@ -7,11 +7,19 @@ import NewsShowecase from './components/NewsShowecase';
 import RoutingButtons from './components/RoutingButtons';
 import Attendees from './components/Attendees';
 import LastMoves from './components/LastMoves';
+import FeaturedArticles from './components/FeaturedArticles';
 
 export default function Home() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.cotentContainerStyle}>
+        <View style={styles.bannerArea}>
+          <FeaturedArticles
+            articles={articles}
+            openArticle={article => console.log('pressed article + ', article)}
+          />
+        </View>
+
         <View style={styles.bannerArea}>
           <Banner />
         </View>
@@ -198,5 +206,34 @@ const lastMoves = [
     time: '22:35',
     nameSurname: 'Emre GEDİKLİ',
     action: 'Profil Bilgilerini Güncelledi.',
+  },
+];
+
+const articles = [
+  {
+    id: 1,
+    title: 'ARABULUCULUK',
+    publisher: 'Hanife Tuba SAĞCAN',
+  },
+  {
+    id: 1,
+    title: 'ARABULUCULUK MERKEZLERİ KALİTE STANDARTLARI',
+    publisher: 'Hanife Tuba SAĞCAN',
+  },
+  {
+    id: 1,
+    title: 'UYUŞMAZLIKLARIN ÇÖZÜMÜNDE ARABULUCULUK',
+    publisher: 'Hanife Tuba SAĞCAN',
+  },
+  {
+    id: 1,
+    title: 'AİLE HUKUKUNDAN KAYNAKLI NİTELİKLİ BİLİRKİŞİ RAPORU ÖRNEĞİ',
+    publisher: 'Hanife Tuba SAĞCAN',
+  },
+  {
+    id: 1,
+    title:
+      'YARGITAY ve BÖLGE ADLİYE MAHKEMELERİ KARARLARI EŞLİĞİNDE ARABULUCULUK TUTANAKLARININ İPTAL SEBEPLERİ, YARGIYA KONU OLMA GEREKÇELERİ VE ÇÖZÜM ÖNERİLERİ',
+    publisher: 'Hanife Tuba SAĞCAN',
   },
 ];
