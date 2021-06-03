@@ -4,14 +4,15 @@ import {Fonts, Metrics} from 'utils';
 import {TickIcon} from '@icons';
 
 type Props = {
+  id?: number;
   isVisible: boolean;
   label: string;
-  onPress: () => void;
+  onPress: (id: number) => void;
 };
 
-export default function RoundCheckBox({isVisible, label, onPress}: Props) {
+export default function RoundCheckBox({id, isVisible, label, onPress}: Props) {
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable onPress={() => onPress(id ?? -1)} style={styles.container}>
       <View style={[styles.roundBox, isVisible ? styles.checkedRound : styles.unCheckedRound]}>
         {isVisible && <TickIcon width={10} height={10} />}
       </View>
