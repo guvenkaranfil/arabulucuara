@@ -6,6 +6,7 @@ import Banner from './components/Banner';
 import NewsShowecase from './components/NewsShowecase';
 import RoutingButtons from './components/RoutingButtons';
 import Attendees from './components/Attendees';
+import LastMoves from './components/LastMoves';
 
 export default function Home() {
   return (
@@ -13,6 +14,10 @@ export default function Home() {
       <ScrollView contentContainerStyle={styles.cotentContainerStyle}>
         <View style={styles.bannerArea}>
           <Banner />
+        </View>
+
+        <View style={styles.lastMoves}>
+          <LastMoves actions={lastMoves} onPress={item => console.log('pressed item:', item)} />
         </View>
 
         <View style={styles.routingButtons}>
@@ -43,6 +48,8 @@ const styles = StyleSheet.create({
   cotentContainerStyle: {paddingBottom: 28},
 
   bannerArea: {marginTop: Metrics.hp(20), alignItems: 'center'},
+
+  lastMoves: {marginTop: Metrics.hp(20), alignItems: 'center'},
 
   newsShowCase: {marginTop: Metrics.hp(20), alignItems: 'center'},
 
@@ -140,5 +147,56 @@ const attendees = [
     profilePhotoUrl:
       'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
     time: '22:46',
+  },
+];
+
+const lastMoves = [
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
+  },
+  {
+    id: 1,
+    time: '22:35',
+    nameSurname: 'Emre GEDİKLİ',
+    action: 'Profil Bilgilerini Güncelledi.',
   },
 ];
