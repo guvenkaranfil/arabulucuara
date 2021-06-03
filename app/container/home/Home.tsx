@@ -155,7 +155,7 @@ const lastMoves = [
     id: 1,
     time: '22:35',
     nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
+    action: 'Profil Bilgilerini Güncelledi.Profil Bilgilerini Güncelledi.',
   },
   {
     id: 1,

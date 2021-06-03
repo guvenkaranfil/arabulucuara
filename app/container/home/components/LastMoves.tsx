@@ -23,7 +23,7 @@ export default function LastMoves({actions, onPress}: Props) {
               <View style={styles.actionBorder} />
             </View>
           )}
-          <Text style={styles.name}>
+          <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
             {move.nameSurname} <Text style={styles.welcomeMessage}>{move.action}</Text>
           </Text>
         </Pressable>
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   },
 
   name: {
+    maxWidth: Metrics.DEVICE_WIDTH - 50 - 70,
     fontSize: 14,
     fontFamily: Fonts.robotoBold,
     color: '#7E0736',
