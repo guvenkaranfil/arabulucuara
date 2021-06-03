@@ -10,6 +10,7 @@ type Props = {
 export default function NewsShowecase({news, openNew}: Props) {
   return (
     <View>
+      <Text style={styles.title}>Arabulucuara'dan Haberler</Text>
       {news.map((item, index) => (
         <Pressable key={index} onPress={() => openNew(item.id)}>
           <View style={[styles.new, styles.shadow]}>
@@ -30,8 +31,6 @@ export default function NewsShowecase({news, openNew}: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {},
-
   title: {
     fontSize: 16,
     fontFamily: Fonts.robotoBold,
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   new: {
-    marginBottom: 15,
+    marginTop: 15,
     flexDirection: 'row',
     width: Metrics.DEVICE_WIDTH - 50,
     height: 76,

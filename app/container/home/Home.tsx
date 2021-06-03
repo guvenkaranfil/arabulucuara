@@ -15,10 +15,6 @@ export default function Home() {
           <Banner />
         </View>
 
-        <View style={styles.newsShowCase}>
-          <NewsShowecase news={news} openNew={(id: number) => console.log('open new id:', id)} />
-        </View>
-
         <View style={styles.routingButtons}>
           <RoutingButtons
             searchMediator={() => console.log('onPress..')}
@@ -27,6 +23,10 @@ export default function Home() {
             searchPro={() => console.log('onPress..')}
             openCalculator={() => console.log('onPress..')}
           />
+        </View>
+
+        <View style={styles.newsShowCase}>
+          <NewsShowecase news={news} openNew={(id: number) => console.log('open new id:', id)} />
         </View>
 
         <View style={styles.attendees}>
