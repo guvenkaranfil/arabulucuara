@@ -9,4 +9,5 @@ export type AuthNavigatorParamList = {
   'completions/professionType': undefined;
   'completions/profilePhoto': undefined;
   'completions/aboutMe': undefined;
+  'completions/expertiesArea': undefined;
 };
