@@ -1,6 +1,8 @@
 export { default as BackIcon } from './BackIcon'
 export { default as BottomIcon } from './BottomIcon'
+export { default as CalculatorIcon } from './CalculatorIcon'
 export { default as HouseIcon } from './HouseIcon'
+export { default as SearchPersonIcon } from './SearchPersonIcon'
 export { default as SecureIcon } from './SecureIcon'
 export { default as StarParticles } from './StarParticles'
 export { default as StartsIcon } from './StartsIcon'
