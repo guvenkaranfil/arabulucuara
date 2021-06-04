@@ -1,5 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
+
 import {Metrics} from 'utils';
 import {
   ForumIcon,
@@ -14,14 +17,18 @@ import {
 
 import PortalRoute from './components/PortalRoute';
 
-export default function Portal() {
+export interface Props {
+  navigation: StackNavigationProp<PortalNavigatorParamList, 'portal'>;
+}
+
+export default function Portal({navigation}: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.routes}>
         <PortalRoute
           icon={<ForumIcon width={40} hieght={40} />}
           label="Forum"
-          onPress={() => console.log('onPress...')}
+          onPress={() => navigation.navigate('forum')}
         />
         <PortalRoute
           icon={<ArticleIcon width={29} hieght={34} />}
