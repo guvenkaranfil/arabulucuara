@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Fonts, Metrics} from 'utils';
 
 interface Category {
@@ -9,6 +9,7 @@ interface Category {
 
 type Props = {
   categories: Array<Category>;
+  onPress: (item: Category) => void;
 };
 
 export default function Categories({categories}: Props) {
@@ -20,9 +21,9 @@ export default function Categories({categories}: Props) {
 
       <View style={styles.categories}>
         {categories.map((category, index) => (
-          <View key={index} style={styles.category}>
+          <Pressable key={index} style={styles.category}>
             <Text style={styles.categoryLabel}>{category.label}</Text>
-          </View>
+          </Pressable>
         ))}
       </View>
     </View>
