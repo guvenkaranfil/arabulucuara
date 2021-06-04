@@ -1,14 +1,23 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
 
-import Categories from './components/Categories';
+import Categories, {Category} from './components/Categories';
 import UpdatedTopics from './components/UpdatedTopics';
 
-export default function Forum() {
+export interface Props {
+  navigation: StackNavigationProp<PortalNavigatorParamList, 'forum'>;
+}
+
+export default function Forum({navigation}: Props) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        <Categories categories={categoriesSample} />
+        <Categories
+          categories={categoriesSample}
+          onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
+        />
         <UpdatedTopics topics={topicSample} />
       </ScrollView>
     </View>
