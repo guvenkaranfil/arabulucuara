@@ -1,5 +1,5 @@
 import React, {ReactElement} from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text} from 'react-native';
 import {Fonts, Metrics} from 'utils';
 
 type Props = {
