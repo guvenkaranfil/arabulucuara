@@ -2,15 +2,15 @@ import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
-import AuthStack from './app/routes/stacks/auth/AuthStack';
-import HomeNavigator from './app/routes/stacks/home/HomeNavigator';
+import AppNavigator from 'routes/AppNavigator';
 
-const showLoginFlow = false;
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
-      <NavigationContainer>{showLoginFlow ? <AuthStack /> : <HomeNavigator />}</NavigationContainer>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
     </SafeAreaView>
   );
 };

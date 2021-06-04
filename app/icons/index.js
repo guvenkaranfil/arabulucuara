@@ -1,6 +1,7 @@
 export { default as BackIcon } from './BackIcon'
 export { default as BottomIcon } from './BottomIcon'
 export { default as CalculatorIcon } from './CalculatorIcon'
+export { default as HomeIcon } from './HomeIcon'
 export { default as HouseIcon } from './HouseIcon'
 export { default as OnlyPersonIcon } from './OnlyPersonIcon'
 export { default as PersonIcon } from './PersonIcon'

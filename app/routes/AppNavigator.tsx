@@ -1,0 +1,21 @@
+import * as React from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import AuthStack from './stacks/auth/AuthStack';
+import HomeNavigator from './stacks/home/HomeNavigator';
+
+import TabBar from './components/TabBar';
+import {tabBarOptions, homeOptions} from './Config';
+
+const Tab = createBottomTabNavigator();
+export default function AppNavigator() {
+  const showLoginFlow = false;
+
+  return showLoginFlow ? (
+    <AuthStack />
+  ) : (
+    <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar}>
+      <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
+    </Tab.Navigator>
+  );
+}
