@@ -4,7 +4,7 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
 import {Fonts, Metrics} from 'utils';
-import Topic from './components/Topic';
+import Topic, {TopicType} from './components/Topic';
 import FilledButton from 'components/buttons/FilledButton';
 
 export interface Props {
@@ -31,7 +31,12 @@ export default function CategoryDetail({route, navigation}: Props) {
         contentContainerStyle={styles.topics}
         data={topicSample}
         ListHeaderComponent={_renderHeader}
-        renderItem={({item}) => <Topic topic={item} />}
+        renderItem={({item}) => (
+          <Topic
+            topic={item}
+            onPress={(topic: TopicType) => navigation.navigate('TopicDetail', {...topic})}
+          />
+        )}
         ListFooterComponent={_renderAddNewTopicButton}
         ListFooterComponentStyle={styles.footer}
         keyExtractor={(_, index) => String(index)}

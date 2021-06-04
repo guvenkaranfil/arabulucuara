@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {Fonts, Metrics} from 'utils';
 import {OnlyPersonIcon, ViewsIcon} from '@icons';
@@ -14,13 +14,14 @@ export interface TopicType {
 
 type Props = {
   topic: TopicType;
+  onPress: (item: TopicType) => void;
 };
 
-export default function Topic({topic}: Props) {
+export default function Topic({topic, onPress}: Props) {
   const {date, label, nameSurname, views} = topic;
 
   return (
-    <View style={styles.activity}>
+    <Pressable style={styles.activity} onPress={() => onPress(topic)}>
       <View style={styles.row}>
         <View style={styles.border} />
         <Text style={styles.dateLabel}>{date}</Text>
@@ -36,7 +37,7 @@ export default function Topic({topic}: Props) {
           <Text style={styles.labelForIcon}>{views}</Text>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
