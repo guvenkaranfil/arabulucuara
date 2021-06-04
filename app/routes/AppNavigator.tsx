@@ -3,9 +3,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import AuthStack from './stacks/auth/AuthStack';
 import HomeNavigator from './stacks/home/HomeNavigator';
+import PortalNavigator from './stacks/portal/PortalNavigator';
 
 import TabBar from './components/TabBar';
-import {tabBarOptions, homeOptions} from './Config';
+import {tabBarOptions, homeOptions, portalOptions} from './Config';
 
 const Tab = createBottomTabNavigator();
 export default function AppNavigator() {
@@ -16,6 +17,7 @@ export default function AppNavigator() {
   ) : (
     <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar}>
       <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
+      <Tab.Screen name="portal" component={PortalNavigator} options={portalOptions} />
     </Tab.Navigator>
   );
 }

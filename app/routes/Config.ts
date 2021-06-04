@@ -11,4 +11,8 @@ const homeOptions: BottomTabNavigationOptions = {
   tabBarLabel: 'Anasayfa',
 };
 
-export {tabBarOptions, homeOptions};
+const portalOptions: BottomTabNavigationOptions = {
+  tabBarLabel: 'Portal',
+};
+
+export {tabBarOptions, homeOptions, portalOptions};
