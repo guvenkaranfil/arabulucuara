@@ -5,6 +5,7 @@ import {Fonts, Metrics} from '@utils';
 // import {SecureIcon} from '@icons';
 
 export default function AuthInput({
+  width,
   height,
   value,
   onChangeText,
@@ -17,10 +18,13 @@ export default function AuthInput({
   onPressSecure,
 }: Props) {
   const hitSlopArea = {top: 15, right: 15, bottom: 15, left: 15};
+
+  const CONTAINER_WIDTH = {width: width ? width : Metrics.DEVICE_WIDTH - 56};
+
   return (
-    <View style={[styles.container, isMultiLine && {height: height}]}>
+    <View style={[styles.container, isMultiLine && {height}, CONTAINER_WIDTH]}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, CONTAINER_WIDTH]}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -44,7 +48,6 @@ export default function AuthInput({
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    width: Metrics.DEVICE_WIDTH - 56,
     height: 44,
     borderRadius: 10,
     backgroundColor: '#F5F6FA',
@@ -52,7 +55,6 @@ const styles = StyleSheet.create({
 
   input: {
     paddingHorizontal: 20,
-    width: Metrics.DEVICE_WIDTH - 56,
     height: 44,
     fontSize: 16,
     fontFamily: Fonts.robotoRegular,
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
+  width?: number;
   height?: number;
   value: string;
   onChangeText: (value: string) => void;
