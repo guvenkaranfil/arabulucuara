@@ -1,21 +1,30 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, Pressable} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, Pressable, ViewStyle, TextStyle} from 'react-native';
 import {Fonts, Metrics} from '@utils';
 
 type Props = {
+  style?: ViewStyle;
+  labelStyle?: TextStyle;
   label: string;
   bgColor?: string;
   isLoading?: boolean;
   onPress: () => void;
 };
 
-export default function FilledButton({label, bgColor = '#7C37FA', isLoading, onPress}: Props) {
+export default function FilledButton({
+  style,
+  labelStyle,
+  label,
+  bgColor = '#7C37FA',
+  isLoading,
+  onPress,
+}: Props) {
   return (
-    <Pressable style={[styles.container, {backgroundColor: bgColor}]} onPress={onPress}>
+    <Pressable style={[styles.container, {backgroundColor: bgColor}, style]} onPress={onPress}>
       {isLoading ? (
         <ActivityIndicator size="small" color="#fff" />
       ) : (
-        <Text style={styles.label}>{label}</Text>
+        <Text style={[styles.label, labelStyle]}>{label}</Text>
       )}
     </Pressable>
   );
