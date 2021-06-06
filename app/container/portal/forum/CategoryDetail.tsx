@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
+import {topicSample} from './mocks';
 import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
 import {Fonts, Metrics} from 'utils';
 import Topic, {TopicType} from './components/Topic';
@@ -90,62 +91,3 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
-
-const topicSample = [
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-];
