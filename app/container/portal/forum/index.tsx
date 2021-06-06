@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 
-  contentContainerStyle: {paddingBottom: 30},
+  contentContainerStyle: {paddingVertical: 30},
 });
 
 const categoriesSample = [
