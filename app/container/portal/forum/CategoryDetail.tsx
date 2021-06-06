@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
+
 import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
 import {Fonts, Metrics} from 'utils';
 import Topic, {TopicType} from './components/Topic';
 import FilledButton from 'components/buttons/FilledButton';
+import NewTopicModal from './components/NewTopicModal';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'categoryDetail'>;
@@ -15,6 +17,8 @@ export interface Props {
 export default function CategoryDetail({route, navigation}: Props) {
   const {label} = route.params;
 
+  const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
+
   const _renderHeader = () => (
     <View style={styles.header}>
       <Text style={styles.title}>{label}</Text>
@@ -22,11 +26,21 @@ export default function CategoryDetail({route, navigation}: Props) {
   );
 
   const _renderAddNewTopicButton = () => (
-    <FilledButton label="Yeni Konu" bgColor="#7E0736" onPress={() => console.log('onPress..')} />
+    <FilledButton
+      label="Yeni Konu"
+      bgColor="#7E0736"
+      onPress={() => setisTopicAdditionModalOpen(true)}
+    />
   );
 
   return (
     <View style={styles.container}>
+      {isTopicAdditionModalOpen && (
+        <NewTopicModal
+          onPressCancel={() => setisTopicAdditionModalOpen(false)}
+          onPressApprove={topic => console.log('onPress create topic:', topic)}
+        />
+      )}
       <FlatList
         contentContainerStyle={styles.topics}
         data={topicSample}
