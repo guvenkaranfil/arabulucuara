@@ -78,3 +78,15 @@ export const topicSample = [
     views: 152,
   },
 ];
+
+export const topics = [
+  {
+    id: 1,
+    topicName: 'Topic 1',
+  },
+
+  {
+    id: 2,
+    topicName: 'Topic 2',
+  },
+];
