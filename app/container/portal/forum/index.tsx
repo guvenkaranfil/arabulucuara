@@ -3,6 +3,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
 
+import {categoriesSample, topicSample} from './mocks';
 import Categories, {Category} from './components/Categories';
 import UpdatedTopics from './components/UpdatedTopics';
 
@@ -32,84 +33,3 @@ const styles = StyleSheet.create({
 
   contentContainerStyle: {paddingVertical: 30},
 });
-
-const categoriesSample = [
-  {
-    id: 1,
-    label: 'SON ETKİLEŞİM ALAN KONULAR',
-  },
-
-  {
-    id: 1,
-    label: 'ARABULUCULUK HAKKINDA GENEL KONULAR',
-  },
-
-  {
-    id: 1,
-    label: 'ARABULUCULUK UYGULAMALARINDA AKLIMIZA TAKILANLAR',
-  },
-
-  {
-    id: 1,
-    label: 'ARABULUCUARA’YA BİR ÖNERİM VAR!',
-  },
-];
-
-const topicSample = [
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-];
