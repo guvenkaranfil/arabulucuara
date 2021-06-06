@@ -20,11 +20,12 @@ export default function AuthInput({
   const hitSlopArea = {top: 15, right: 15, bottom: 15, left: 15};
 
   const CONTAINER_WIDTH = {width: width ? width : Metrics.DEVICE_WIDTH - 56};
+  const CONTAINER_HEIGHT = {height: height ? height : 44};
 
   return (
-    <View style={[styles.container, isMultiLine && {height}, CONTAINER_WIDTH]}>
+    <View style={[styles.container, CONTAINER_WIDTH, CONTAINER_HEIGHT]}>
       <TextInput
-        style={[styles.input, CONTAINER_WIDTH]}
+        style={[styles.input, CONTAINER_WIDTH, CONTAINER_HEIGHT]}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -48,14 +49,12 @@ export default function AuthInput({
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    height: 44,
     borderRadius: 10,
     backgroundColor: '#F5F6FA',
   },
 
   input: {
     paddingHorizontal: 20,
-    height: 44,
     fontSize: 16,
     fontFamily: Fonts.robotoRegular,
     color: '#0F0A39',
