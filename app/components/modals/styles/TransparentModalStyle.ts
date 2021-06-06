@@ -32,6 +32,7 @@ export default StyleSheet.create({
   },
 
   content: {
+    maxHeight: Metrics.hp(550),
     paddingBottom: 28,
     paddingHorizontal: 21,
   },
