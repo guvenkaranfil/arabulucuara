@@ -9,7 +9,7 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
 import styles from './styles/PersonalStyles';
@@ -67,7 +67,7 @@ export default function Personal({navigation}: PersonalProps) {
             onPress={setgender}
           />
 
-          <AuthInput
+          <Input
             value={phoneNumber}
             onChangeText={setphoneNumber}
             placeholder="Telefon Numarası"

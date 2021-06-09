@@ -5,7 +5,7 @@ import {topics} from '../mocks';
 import TransparentModal from '@components/modals/TransparentModal';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import {Fonts, Metrics} from 'utils';
-import AuthInput from 'components/input/AuthInput';
+import Input from 'components/input/Input';
 
 interface NewTopicModel {
   category: {topicName: string};
@@ -45,10 +45,10 @@ export default function NewTopicModal({onPressCancel, onPressApprove}: NewTopicM
         />
 
         <Text style={styles.newTopicFormTitle}>Konu Başlığı</Text>
-        <AuthInput value={topicTitle} onChangeText={settopicTitle} width={Metrics.wp(278)} />
+        <Input value={topicTitle} onChangeText={settopicTitle} width={Metrics.wp(278)} />
 
         <Text style={styles.newTopicFormTitle}>İçerik</Text>
-        <AuthInput
+        <Input
           value={content}
           onChangeText={setcontent}
           width={Metrics.wp(278)}

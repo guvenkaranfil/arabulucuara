@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import TransparentModal from '@components/modals/TransparentModal';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import {Fonts, Metrics} from 'utils';
 
 interface NewCommentModalProps {
@@ -21,7 +21,7 @@ export default function NewComment({onPressCancel, onPressApprove}: NewCommentMo
       onPressApprove={() => onPressApprove(comment)}>
       <>
         <Text style={styles.newTopicFormTitle}>Yorumunuz</Text>
-        <AuthInput
+        <Input
           value={comment}
           onChangeText={setcomment}
           width={Metrics.wp(278)}

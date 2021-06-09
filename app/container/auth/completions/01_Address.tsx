@@ -7,7 +7,7 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import {Fonts, Metrics} from 'utils';
 import FilledButton from 'components/buttons/FilledButton';
 
@@ -61,7 +61,7 @@ export default function Address({navigation}: AddressProps) {
             onPress={setselectedDistrict}
           />
 
-          <AuthInput
+          <Input
             height={100}
             value={address}
             onChangeText={setaddress}

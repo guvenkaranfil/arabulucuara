@@ -4,7 +4,7 @@ import {Image, StyleSheet, View, TextInput, KeyboardType, TouchableOpacity} from
 import {Fonts, Metrics} from '@utils';
 // import {SecureIcon} from '@icons';
 
-export default function AuthInput({
+export default function Input({
   width,
   height,
   value,

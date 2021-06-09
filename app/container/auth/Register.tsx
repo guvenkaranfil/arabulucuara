@@ -5,7 +5,7 @@ import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import RoundCheckBox from '@components/checkbox/RoundCheckBox';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
@@ -33,25 +33,25 @@ export default function Register({navigation}: RegisterProps) {
         <Header screenTitle="Arabulucu Üye Ol" dynamicHeight={200} />
 
         <View style={styles.inputs}>
-          <AuthInput value={name} onChangeText={setname} placeholder="İsim" />
-          <AuthInput value={surname} onChangeText={setsurname} placeholder="Soyisim" />
+          <Input value={name} onChangeText={setname} placeholder="İsim" />
+          <Input value={surname} onChangeText={setsurname} placeholder="Soyisim" />
 
-          <AuthInput
+          <Input
             value={email}
             onChangeText={setemail}
             placeholder="E-Posta"
             keyboardType="email-address"
           />
 
-          <AuthInput
+          <Input
             value={registrationNumber}
             onChangeText={setregistrationNumber}
             placeholder="Arabulucu Sicil No"
           />
 
-          <AuthInput value={username} onChangeText={setusername} placeholder="Kullanıcı Adı" />
+          <Input value={username} onChangeText={setusername} placeholder="Kullanıcı Adı" />
 
-          <AuthInput
+          <Input
             value={password}
             onChangeText={setpassword}
             placeholder="Şifre"

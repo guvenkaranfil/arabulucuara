@@ -4,7 +4,7 @@ import {ScrollView, Text, View} from 'react-native';
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/MeditationCenterStyle';
@@ -28,17 +28,17 @@ export default function MeditationCenter() {
         </View>
 
         <View style={styles.form}>
-          <AuthInput
+          <Input
             value={meditationCenter}
             onChangeText={setmeditationCenter}
             placeholder="Arabuluculuk Merkezi"
           />
-          <AuthInput
+          <Input
             value={meditationAssociation}
             onChangeText={setmeditationAssociation}
             placeholder="Üye Olduğunuz Dernek"
           />
-          <AuthInput
+          <Input
             value={memberOfUnion}
             onChangeText={setmemberOfUnion}
             placeholder="Üye Olduğunuz Oda - Birlik"

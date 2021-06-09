@@ -5,7 +5,7 @@ import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import FilledButton from 'components/buttons/FilledButton';
 import OutlineButton from 'components/buttons/OutlineButton';
 import styles from './styles/LoginStyles';
@@ -25,13 +25,13 @@ export default function Login({navigation}: LoginProps) {
         <Header screenTitle="Üye Girişi" dynamicHeight={200} />
 
         <View style={styles.inputs}>
-          <AuthInput
+          <Input
             value={email}
             onChangeText={setemail}
             placeholder="E-Posta"
             keyboardType="email-address"
           />
-          <AuthInput
+          <Input
             value={password}
             onChangeText={setpassword}
             placeholder="Şifre"

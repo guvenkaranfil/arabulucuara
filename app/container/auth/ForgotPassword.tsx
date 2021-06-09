@@ -5,7 +5,7 @@ import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
-import AuthInput from '@components/input/AuthInput';
+import Input from '@components/input/Input';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import {Metrics} from '@utils';
@@ -21,7 +21,7 @@ export default function ForgotPassword({navigation}: ForgotPasswordProps) {
       <Header screenTitle="Şifremi Unuttum" dynamicHeight={200} />
 
       <View style={styles.form}>
-        <AuthInput
+        <Input
           value={email}
           onChangeText={setemail}
           placeholder="E-Posta"
