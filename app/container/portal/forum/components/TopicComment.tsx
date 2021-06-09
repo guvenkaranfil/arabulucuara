@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable curly */
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import HTML from 'react-native-render-html';
 import {LikeIcon, DislikeIcon} from '@icons';
@@ -17,6 +18,12 @@ interface TopicComment {
 }
 
 export default function TopicComment({comment}: TopicComment) {
+  const [likedCount, setlikedCount] = useState(comment.likedCount);
+  const [dislikeCount, setdislikeCount] = useState(comment.dislikeCount);
+  const [lastEditedType, setlastEditedType] = useState<'plus' | 'minus' | undefined>();
+
+  const updateCount = (type: 'plus' | 'minus') => {};
+
   return (
     <View style={styles.comment}>
       <View style={styles.commentHeader}>
@@ -32,14 +39,14 @@ export default function TopicComment({comment}: TopicComment) {
       </View>
 
       <View style={styles.commentFooter}>
-        <Pressable style={styles.commentAction}>
+        <Pressable style={styles.commentAction} onPress={() => updateCount('plus')}>
           <LikeIcon width={16} height={16} />
-          <Text style={styles.commentCount}>{comment.likedCount}</Text>
+          <Text style={styles.commentCount}>{likedCount}</Text>
         </Pressable>
 
-        <Pressable style={styles.commentAction}>
+        <Pressable style={styles.commentAction} onPress={() => updateCount('minus')}>
           <DislikeIcon width={16} height={16} />
-          <Text style={styles.commentCount}>{comment.dislikeCount}</Text>
+          <Text style={styles.commentCount}>{dislikeCount}</Text>
         </Pressable>
       </View>
     </View>
