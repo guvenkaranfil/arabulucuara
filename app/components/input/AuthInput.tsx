@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    textAlignVertical: 'top',
     paddingHorizontal: 20,
     fontSize: 16,
     fontFamily: Fonts.robotoRegular,

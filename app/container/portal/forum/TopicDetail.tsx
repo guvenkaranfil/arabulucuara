@@ -1,16 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
+import HTML from 'react-native-render-html';
 
 import {content, comments} from './mocks';
-import HTML from 'react-native-render-html';
+import NewCommentModal from './components/NewCommentModal';
 import FilledButton from 'components/buttons/FilledButton';
 import TopicComment from './components/TopicComment';
 import styles from './styles/TopicDetailStyle';
 import {OnlyPersonIcon, ViewsIcon} from '@icons';
 
 export default function TopicDetail() {
+  const [showNewCommentModal, setshowNewCommentModal] = useState(false);
+
+  const approveComment = (comment: string) => {
+    console.log('comment:', comment);
+    setshowNewCommentModal(false);
+  };
+
   return (
     <View style={styles.container}>
+      {showNewCommentModal && (
+        <NewCommentModal
+          onPressCancel={() => setshowNewCommentModal(false)}
+          onPressApprove={approveComment}
+        />
+      )}
+
       <ScrollView
         contentContainerStyle={styles.contentContainerStyle}
         showsVerticalScrollIndicator={false}>
@@ -28,14 +43,14 @@ export default function TopicDetail() {
           </View>
         </View>
 
-        {comments.map(comment => (
-          <TopicComment comment={comment} />
+        {comments.map((comment, index) => (
+          <TopicComment key={index} comment={comment} />
         ))}
 
         <FilledButton
           label="Yorum Yap"
           bgColor="#7E0736"
-          onPress={() => console.log('Add comment...')}
+          onPress={() => setshowNewCommentModal(true)}
         />
       </ScrollView>
     </View>
