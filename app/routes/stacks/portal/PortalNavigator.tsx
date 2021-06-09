@@ -16,7 +16,7 @@ function PortalNavigator() {
       <Stack.Screen name="portal" component={Portal} options={{title: 'Portal'}} />
       <Stack.Screen name="forum" component={Forum} options={{title: 'Forum'}} />
       <Stack.Screen name="categoryDetail" component={CategoryDetail} options={{title: 'Forum'}} />
-      <Stack.Screen name="TopicDetail" component={TopicDetail} />
+      <Stack.Screen name="TopicDetail" component={TopicDetail} options={{title: 'Forum'}} />
     </Stack.Navigator>
   );
 }
