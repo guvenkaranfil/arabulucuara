@@ -1,12 +1,12 @@
 import React from 'react';
-import {StyleSheet, ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 
 import {content, comments} from './mocks';
 import HTML from 'react-native-render-html';
 import FilledButton from 'components/buttons/FilledButton';
-import {Fonts} from 'utils';
-import {OnlyPersonIcon, ViewsIcon} from '@icons';
 import TopicComment from './components/TopicComment';
+import styles from './styles/TopicDetailStyle';
+import {OnlyPersonIcon, ViewsIcon} from '@icons';
 
 export default function TopicDetail() {
   return (
@@ -41,47 +41,3 @@ export default function TopicDetail() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 28,
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-
-  contentContainerStyle: {paddingBottom: 25},
-
-  title: {
-    paddingTop: 33,
-    paddingBottom: 25,
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#181C32',
-  },
-
-  topicOwner: {
-    marginTop: 16,
-    marginBottom: 25,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-
-  publisher: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  views: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  aboutTopicLabels: {
-    paddingLeft: 10,
-    fontSize: 13,
-    fontFamily: Fonts.robotoRegular,
-    color: '#B3B3B3',
-  },
-});
