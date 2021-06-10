@@ -9,14 +9,17 @@ export interface Props {
   navigation: StackNavigationProp<PortalNavigatorParamList, 'dataBank'>;
 }
 
-export default function DataBank() {
+export default function DataBank({navigation}: Props) {
   return (
     <View style={CommonStyles.container}>
       <FlatList
         contentContainerStyle={CommonStyles.paddingForScroll}
         data={DATA_BANKS}
         renderItem={({item, index}) => (
-          <Pressable key={index} style={styles.category}>
+          <Pressable
+            key={index}
+            style={styles.category}
+            onPress={() => navigation.navigate('dataBankList', {dataBank: item})}>
             <Text style={styles.categoryTitle}>{item.name}</Text>
           </Pressable>
         )}
