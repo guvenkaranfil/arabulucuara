@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {HomeIcon, PortalIcon} from 'icons';
+import {HomeIcon, SearchIcon, PortalIcon} from '@icons';
 
 import styles from './styles/TabBarStyle';
-import {Metrics} from 'utils';
+import {Metrics} from '@utils';
 
 export default function MyTabBar({state, descriptors, navigation}) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -66,6 +66,14 @@ function TabIcon(index: number, isFocused: boolean) {
       />
     );
   } else if (index === 1) {
+    return (
+      <SearchIcon
+        width={Metrics.hp(27)}
+        height={Metrics.hp(26)}
+        stroke={isFocused ? '#7E0736' : '#B3B3B3'}
+      />
+    );
+  } else if (index === 2) {
     return (
       <PortalIcon
         width={Metrics.hp(26)}

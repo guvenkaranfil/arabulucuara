@@ -11,8 +11,12 @@ const homeOptions: BottomTabNavigationOptions = {
   tabBarLabel: 'Anasayfa',
 };
 
+const searchOptions: BottomTabNavigationOptions = {
+  tabBarLabel: 'Arama',
+};
+
 const portalOptions: BottomTabNavigationOptions = {
   tabBarLabel: 'Portal',
 };
 
-export {tabBarOptions, homeOptions, portalOptions};
+export {tabBarOptions, homeOptions, searchOptions, portalOptions};

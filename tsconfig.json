@@ -60,6 +60,7 @@
       "*": ["/*"],
       "@auth/*": ["container/auth/*"],
       "@home/*": ["container/home/*"],
+      "@search/*": ["container/search/*"],
       "@portal/*": ["container/portal/*"],
       "@components/*": ["components/*"],
       "@routes/*": ["routes/*"],

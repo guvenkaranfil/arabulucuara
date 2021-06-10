@@ -9,6 +9,7 @@ module.exports = {
         alias: {
           '@auth': './app/container/auth',
           '@home': './app/container/home',
+          '@search': './app/container/search',
           '@portal': './app/container/portal',
           '@components': './app/components',
           '@routes': './app/routes',
