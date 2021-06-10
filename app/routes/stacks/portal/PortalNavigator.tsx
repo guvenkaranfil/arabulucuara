@@ -10,6 +10,7 @@ import ArticleDetail from '@portal/articles/ArticleDetail';
 
 import DataBank from '@portal/dataBank';
 import DataBankList from '@portal/dataBank/DataBankList';
+import DataBankDetail from '@portal/dataBank/DataBankDetail';
 
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -28,6 +29,11 @@ function PortalNavigator() {
       <Stack.Screen
         name="dataBankList"
         component={DataBankList}
+        options={{title: 'Bilgi Bankası'}}
+      />
+      <Stack.Screen
+        name="dataBankDetail"
+        component={DataBankDetail}
         options={{title: 'Bilgi Bankası'}}
       />
     </Stack.Navigator>

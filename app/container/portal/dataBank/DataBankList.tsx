@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
@@ -13,9 +13,10 @@ export interface Props {
 export interface DataBank {
   id: number;
   name: string;
+  content: string;
 }
 
-export default function DataBankList({route}: Props) {
+export default function DataBankList({route, navigation}: Props) {
   const {dataBank} = route.params;
 
   const _renderHeader = () => (
@@ -31,9 +32,12 @@ export default function DataBankList({route}: Props) {
         data={SAMPLES_BANKS}
         ListHeaderComponent={_renderHeader}
         renderItem={({item, index}) => (
-          <View key={index} style={styles.dataBank}>
+          <Pressable
+            key={index}
+            style={styles.dataBank}
+            onPress={() => navigation.navigate('dataBankDetail', {dataBankDetail: item})}>
             <Text style={styles.dataBankTitle}>{item.name}</Text>
-          </View>
+          </Pressable>
         )}
         keyExtractor={(_, index) => String(index)}
       />
@@ -79,17 +83,21 @@ const SAMPLES_BANKS = [
   {
     id: 1,
     name: 'Hukuk Uyuşmazlıklarında Arabuluculuk Kanunu Yönetmeliği',
+    content: '<b>Line1</b>',
   },
   {
     id: 2,
     name: 'İş Mahkemeleri Kanunu',
+    content: '<b>Line1</b>',
   },
   {
     id: 3,
     name: 'Hukuk Muhakemeleri Kanunu İle Bazı Kanunlarda Değişiklik Yapılması Hakkında Kanun',
+    content: '<b>Line1</b>',
   },
   {
     id: 4,
     name: 'Hukuk Muhakemeleri Kanunu İle Bazı Kanunlarda Değişiklik Yapılması Hakkında Kanun',
+    content: '<b>Line1</b>',
   },
 ];

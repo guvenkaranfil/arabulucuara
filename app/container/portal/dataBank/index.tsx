@@ -49,17 +49,21 @@ const DATA_BANKS = [
   {
     id: 1,
     name: 'MEVZUAT',
+    content: '',
   },
   {
     id: 2,
     name: 'TÜM İÇTİHATLAR',
+    content: '',
   },
   {
     id: 3,
     name: 'YARGITAY KARARLARI',
+    content: '',
   },
   {
     id: 4,
     name: 'BÖLGE ADLİYE MAHKEME KARARLARI',
+    content: '',
   },
 ];
