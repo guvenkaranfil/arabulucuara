@@ -12,6 +12,8 @@ import DataBank from '@portal/dataBank';
 import DataBankList from '@portal/dataBank/DataBankList';
 import DataBankDetail from '@portal/dataBank/DataBankDetail';
 
+import MinistryAnnouncements from '@portal/ministryAnnouncements';
+
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
 
@@ -35,6 +37,11 @@ function PortalNavigator() {
         name="dataBankDetail"
         component={DataBankDetail}
         options={{title: 'Bilgi Bankası'}}
+      />
+      <Stack.Screen
+        name="ministryAnnouncements"
+        component={MinistryAnnouncements}
+        options={{title: 'Bakanlık Duyuruları'}}
       />
     </Stack.Navigator>
   );

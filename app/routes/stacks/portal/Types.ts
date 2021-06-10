@@ -14,4 +14,5 @@ export type PortalNavigatorParamList = {
   dataBank: undefined;
   dataBankList: {dataBank: DataBank};
   dataBankDetail: {dataBankDetail: DataBankDetail};
+  ministryAnnouncements: undefined;
 };

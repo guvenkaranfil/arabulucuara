@@ -53,7 +53,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<MegaphoneIcon width={39} hieght={37} />}
           label="Bakanlık Duyuruları"
-          onPress={() => console.log('onPress...')}
+          onPress={() => navigation.navigate('ministryAnnouncements')}
         />
         <PortalRoute
           icon={<ZoomEventIcon width={39} hieght={39} />}
