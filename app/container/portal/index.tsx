@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
+import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-import {Metrics} from 'utils';
+import {Metrics} from '@utils';
 import {
   ForumIcon,
   ArticleIcon,
@@ -33,7 +33,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<ArticleIcon width={29} hieght={34} />}
           label="Makaleler"
-          onPress={() => console.log('onPress...')}
+          onPress={() => navigation.navigate('articles')}
         />
         <PortalRoute
           icon={<InvitationDocumentIcon width={26} hieght={35} />}

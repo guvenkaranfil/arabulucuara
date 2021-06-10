@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 import {OnlyPersonIcon, ViewsIcon} from '@icons';
 
 export interface TopicType {

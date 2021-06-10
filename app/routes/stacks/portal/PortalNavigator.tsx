@@ -5,6 +5,7 @@ import Portal from '@portal/index';
 import Forum from '@portal/forum/index';
 import CategoryDetail from '@portal/forum/CategoryDetail';
 import TopicDetail from '@portal/forum/TopicDetail';
+import Articles from '@portal/articles';
 
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -17,6 +18,7 @@ function PortalNavigator() {
       <Stack.Screen name="forum" component={Forum} options={{title: 'Forum'}} />
       <Stack.Screen name="categoryDetail" component={CategoryDetail} options={{title: 'Forum'}} />
       <Stack.Screen name="TopicDetail" component={TopicDetail} options={{title: 'Forum'}} />
+      <Stack.Screen name="articles" component={Articles} options={{title: 'Makaleler'}} />
     </Stack.Navigator>
   );
 }
