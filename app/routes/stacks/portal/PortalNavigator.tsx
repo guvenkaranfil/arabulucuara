@@ -13,6 +13,7 @@ import DataBankList from '@portal/dataBank/DataBankList';
 import DataBankDetail from '@portal/dataBank/DataBankDetail';
 
 import MinistryAnnouncements from '@portal/ministryAnnouncements';
+import MinistryAnnouncement from '@portal/ministryAnnouncements/MinistryAnnouncement';
 
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -41,6 +42,11 @@ function PortalNavigator() {
       <Stack.Screen
         name="ministryAnnouncements"
         component={MinistryAnnouncements}
+        options={{title: 'Bakanlık Duyuruları'}}
+      />
+      <Stack.Screen
+        name="ministryAnnouncement"
+        component={MinistryAnnouncement}
         options={{title: 'Bakanlık Duyuruları'}}
       />
     </Stack.Navigator>

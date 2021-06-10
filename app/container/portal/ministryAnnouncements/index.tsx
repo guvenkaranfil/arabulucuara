@@ -1,22 +1,33 @@
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import React from 'react';
-import {StyleSheet, FlatList, Text, View} from 'react-native';
+import {StyleSheet, FlatList, Text, View, Pressable} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-export default function MinistryAnnouncements() {
+export interface Props {
+  navigation: StackNavigationProp<PortalNavigatorParamList, 'ministryAnnouncements'>;
+}
+
+export default function MinistryAnnouncements({navigation}: Props) {
   return (
     <View style={CommonStyles.container}>
       <FlatList
         contentContainerStyle={styles.content}
         data={SAMPLE_ANNOUNCEMENTS}
         renderItem={({item, index}) => (
-          <View key={index} style={[styles.announcement, styles.shadow]}>
+          <Pressable
+            key={index}
+            style={[styles.announcement, styles.shadow]}
+            onPress={() =>
+              navigation.navigate('ministryAnnouncement', {id: item.id, title: item.title})
+            }>
             <View style={styles.date}>
               <Text style={styles.day}>{item.date.day}</Text>
               <Text style={styles.month}>{item.date.month}</Text>
             </View>
 
             <Text style={styles.title}>{item.title}</Text>
-          </View>
+          </Pressable>
         )}
         keyExtractor={(_, index) => String(index)}
       />
