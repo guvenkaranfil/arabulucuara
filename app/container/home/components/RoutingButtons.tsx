@@ -9,6 +9,7 @@ type RoutingButtonsTypes = {
   searchExpertMediator: () => void;
   searchMediatorCenter: () => void;
   searchPro: () => void;
+  showCalculator?: boolean;
   openCalculator: () => void;
 };
 
@@ -22,6 +23,7 @@ export default function RoutingButtons({
   searchExpertMediator,
   searchMediatorCenter,
   searchPro,
+  showCalculator = true,
   openCalculator,
 }: RoutingButtonsTypes) {
   return (
@@ -31,10 +33,12 @@ export default function RoutingButtons({
       <RoutingButton label="Arabuluculuk Merkezi Ara" onPress={searchMediatorCenter} />
       <RoutingButton label="Uzman Ara" onPress={searchPro} />
 
-      <Pressable style={styles.calculator} onPress={openCalculator}>
-        <CalculatorIcon width={Metrics.hp(75)} height={Metrics.hp(80)} />
-        <Text style={styles.calculatorLabel}>Arabuluculuk Ücreti Hesapla</Text>
-      </Pressable>
+      {showCalculator && (
+        <Pressable style={styles.calculator} onPress={openCalculator}>
+          <CalculatorIcon width={Metrics.hp(75)} height={Metrics.hp(80)} />
+          <Text style={styles.calculatorLabel}>Arabuluculuk Ücreti Hesapla</Text>
+        </Pressable>
+      )}
     </View>
   );
 }

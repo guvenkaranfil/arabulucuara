@@ -16,7 +16,7 @@ export default function AppNavigator() {
   return showLoginFlow ? (
     <AuthStack />
   ) : (
-    <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar} initialRouteName="portal">
+    <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar} initialRouteName="search">
       <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
       <Tab.Screen name="search" component={SearchNavigator} options={searchOptions} />
       <Tab.Screen name="portal" component={PortalNavigator} options={portalOptions} />

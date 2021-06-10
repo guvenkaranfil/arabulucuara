@@ -1,29 +1,30 @@
-export { default as ArticleIcon } from './ArticleIcon'
-export { default as BackIcon } from './BackIcon'
-export { default as BottomIcon } from './BottomIcon'
-export { default as CalculatorIcon } from './CalculatorIcon'
-export { default as CalculatorMachineIcon } from './CalculatorMachineIcon'
-export { default as DataBaseIcon } from './DataBaseIcon'
-export { default as EventsIcon } from './EventsIcon'
-export { default as ForumIcon } from './ForumIcon'
-export { default as HomeIcon } from './HomeIcon'
-export { default as HouseIcon } from './HouseIcon'
-export { default as InvitationDocumentIcon } from './InvitationDocumentIcon'
-export { default as LetterIcon } from './LetterIcon'
-export { default as MegaphoneIcon } from './MegaphoneIcon'
-export { default as OnlyPersonIcon } from './OnlyPersonIcon'
-export { default as PersonIcon } from './PersonIcon'
-export { default as PortalIcon } from './PortalIcon'
-export { default as SearchIcon } from './SearchIcon'
-export { default as SearchPersonIcon } from './SearchPersonIcon'
-export { default as SecureIcon } from './SecureIcon'
-export { default as StarParticles } from './StarParticles'
-export { default as StartsIcon } from './StartsIcon'
-export { default as TextLogo } from './TextLogo'
-export { default as TickIcon } from './TickIcon'
-export { default as UpIcon } from './UpIcon'
-export { default as UserIcon } from './UserIcon'
-export { default as ViewsIcon } from './ViewsIcon'
-export { default as ZoomEventIcon } from './ZoomEventIcon'
-export { default as DislikeIcon } from './DislikeIcon'
-export { default as LikeIcon } from './LikeIcon'
+export {default as ArticleIcon} from './ArticleIcon';
+export {default as BackIcon} from './BackIcon';
+export {default as BottomIcon} from './BottomIcon';
+export {default as CalculatorIcon} from './CalculatorIcon';
+export {default as CalculatorMachineIcon} from './CalculatorMachineIcon';
+export {default as DataBaseIcon} from './DataBaseIcon';
+export {default as EventsIcon} from './EventsIcon';
+export {default as ForumIcon} from './ForumIcon';
+export {default as HomeIcon} from './HomeIcon';
+export {default as HouseIcon} from './HouseIcon';
+export {default as InvitationDocumentIcon} from './InvitationDocumentIcon';
+export {default as LetterIcon} from './LetterIcon';
+export {default as MegaphoneIcon} from './MegaphoneIcon';
+export {default as OnlyPersonIcon} from './OnlyPersonIcon';
+export {default as PersonIcon} from './PersonIcon';
+export {default as PortalIcon} from './PortalIcon';
+export {default as SearchIcon} from './SearchIcon';
+export {default as SearchPath} from './SearchPath';
+export {default as SearchPersonIcon} from './SearchPersonIcon';
+export {default as SecureIcon} from './SecureIcon';
+export {default as StarParticles} from './StarParticles';
+export {default as StartsIcon} from './StartsIcon';
+export {default as TextLogo} from './TextLogo';
+export {default as TickIcon} from './TickIcon';
+export {default as UpIcon} from './UpIcon';
+export {default as UserIcon} from './UserIcon';
+export {default as ViewsIcon} from './ViewsIcon';
+export {default as ZoomEventIcon} from './ZoomEventIcon';
+export {default as DislikeIcon} from './DislikeIcon';
+export {default as LikeIcon} from './LikeIcon';
