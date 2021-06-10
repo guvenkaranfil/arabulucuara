@@ -8,6 +8,8 @@ import TopicDetail from '@portal/forum/TopicDetail';
 import Articles from '@portal/articles';
 import ArticleDetail from '@portal/articles/ArticleDetail';
 
+import DataBank from '@portal/dataBank';
+
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
 
@@ -21,6 +23,7 @@ function PortalNavigator() {
       <Stack.Screen name="TopicDetail" component={TopicDetail} options={{title: 'Forum'}} />
       <Stack.Screen name="articles" component={Articles} options={{title: 'Makaleler'}} />
       <Stack.Screen name="articleDetail" component={ArticleDetail} options={{title: 'Makaleler'}} />
+      <Stack.Screen name="dataBank" component={DataBank} options={{title: 'Bilgi Bankası'}} />
     </Stack.Navigator>
   );
 }

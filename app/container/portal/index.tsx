@@ -48,7 +48,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<DataBaseIcon width={37} hieght={37} />}
           label="Bilgi Bankası"
-          onPress={() => console.log('onPress...')}
+          onPress={() => navigation.navigate('dataBank')}
         />
         <PortalRoute
           icon={<MegaphoneIcon width={39} hieght={37} />}

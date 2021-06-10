@@ -9,4 +9,5 @@ export type PortalNavigatorParamList = {
   TopicDetail: TopicType;
   articles: undefined;
   articleDetail: {article: Article};
+  dataBank: undefined;
 };
