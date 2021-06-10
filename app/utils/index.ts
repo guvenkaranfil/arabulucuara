@@ -1,4 +1,5 @@
+import CommonStyles from './CommonStyles';
 import Fonts from './Fonts';
 import Metrics from './Metrics';
 
-export {Fonts, Metrics};
+export {CommonStyles, Fonts, Metrics};

@@ -15,6 +15,9 @@ export default {
   DEVICE_WIDTH: width,
   DEVICE_HEIGHT: height,
 
+  CONTAINER_WIDTH: width - 25 * 2,
+  horizontalContainerPadding: 25,
+
   wp: widthPercentageCalculator,
   hp: heightPercentageCalculator,
 };
