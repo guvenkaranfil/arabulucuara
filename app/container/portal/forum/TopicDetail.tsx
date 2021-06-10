@@ -4,7 +4,7 @@ import HTML from 'react-native-render-html';
 
 import {content, comments} from './mocks';
 import NewCommentModal from './components/NewCommentModal';
-import FilledButton from 'components/buttons/FilledButton';
+import FilledButton from '@components/buttons/FilledButton';
 import TopicComment from './components/TopicComment';
 import styles from './styles/TopicDetailStyle';
 import {OnlyPersonIcon, ViewsIcon} from '@icons';
