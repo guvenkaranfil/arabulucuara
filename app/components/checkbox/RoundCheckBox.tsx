@@ -5,7 +5,7 @@ import {TickIcon} from '@icons';
 
 type Props = {
   id?: number;
-  roundStyle: ViewStyle;
+  roundStyle?: ViewStyle;
   isVisible: boolean;
   label: string;
   labelStyle?: TextStyle;
