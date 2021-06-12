@@ -6,6 +6,7 @@ import SearchResult from '@search/SearchResult';
 import SeekMediator from '@search/SeekMediator';
 import SearchExpertMediator from '@search/SearchExpertMediator';
 import SearchMediationCenter from '@search/SearchMediationCenter';
+import SearchForExpert from '@search/SearchForExpert';
 
 import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -33,6 +34,7 @@ function PortalNavigator() {
         component={SearchMediationCenter}
         options={{title: 'Arabuluculuk Merkezi Ara'}}
       />
+      <Stack.Screen name="forExpert" component={SearchForExpert} options={{title: 'Uzman Ara'}} />
     </Stack.Navigator>
   );
 }

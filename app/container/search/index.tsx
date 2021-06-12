@@ -42,7 +42,7 @@ export default function Search({navigation}: Props) {
             searchMediator={() => navigation.navigate('seekMediator')}
             searchExpertMediator={() => navigation.navigate('expertMediator')}
             searchMediatorCenter={() => navigation.navigate('mediationCenter')}
-            searchPro={() => console.log('onPress..')}
+            searchPro={() => navigation.navigate('forExpert')}
             showCalculator={false}
             openCalculator={() => console.log('onPress..')}
           />

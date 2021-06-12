@@ -4,4 +4,5 @@ export type SearchNavigatorParamList = {
   seekMediator: undefined;
   expertMediator: undefined;
   mediationCenter: undefined;
+  forExpert: undefined;
 };
