@@ -1,12 +1,15 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {StackHeaderProps} from '@react-navigation/stack';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Fonts, Metrics} from '@utils';
 import {TextLogo} from '@icons';
 
-export default function Header({navigation, scene}: StackHeaderProps) {
+interface ScreenProps {
+  onPressSignIn: () => void;
+}
+
+export default function NotLoggedUserHeader({onPressSignIn}: ScreenProps) {
   const linearColors = ['#790633', '#BA1858'];
 
   return (
@@ -15,12 +18,8 @@ export default function Header({navigation, scene}: StackHeaderProps) {
         <TextLogo width={183} height={33} />
       </View>
 
-      <View style={styles.center}>
-        <Text style={styles.screenTitle}>{scene.descriptor.options.title}</Text>
-      </View>
-
       <View style={styles.right}>
-        <Pressable style={styles.signIn}>
+        <Pressable style={styles.signIn} onPress={onPressSignIn}>
           <Text style={styles.signInLabel}>Üye Girişi</Text>
         </Pressable>
       </View>
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: Metrics.DEVICE_WIDTH,
     height: Metrics.hp(74),
+    justifyContent: 'space-between',
   },
 
   left: {

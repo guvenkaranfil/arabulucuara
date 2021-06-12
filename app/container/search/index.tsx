@@ -1,13 +1,27 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
+import {SearchNavigatorParamList} from '@routes/stacks/search/types';
+import NotLoggedUserHeader from '@components/header/NotLoggedUserHeader';
 import RoutingButtons from '@home/components/RoutingButtons';
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {SearchPath} from '@icons';
 
-export default function Search() {
+export interface Props {
+  navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
+}
+
+export default function Search({navigation}: Props) {
+  const isUserLoggedIn = false;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({headerShown: false});
+  }, [navigation]);
+
   return (
     <View style={CommonStyles.container}>
+      {!isUserLoggedIn && <NotLoggedUserHeader onPressSignIn={() => console.log('sign in...')} />}
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>
         <View style={styles.inputArea}>
           <View style={styles.inputLabel}>
@@ -16,7 +30,9 @@ export default function Search() {
 
           <SearchPath width={170} height={40} />
 
-          <Pressable style={styles.searchButton}>
+          <Pressable
+            style={styles.searchButton}
+            onPress={() => navigation.navigate('searchResult')}>
             <Text style={styles.searchButtonLabel}>Arabulucuara'da Ara</Text>
           </Pressable>
         </View>
@@ -58,6 +74,8 @@ const styles = StyleSheet.create({
   },
 
   searchButton: {
+    top: 39,
+    position: 'absolute',
     paddingLeft: 28,
     width: Metrics.CONTAINER_WIDTH,
     height: 44,
