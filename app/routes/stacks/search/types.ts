@@ -1,3 +1,5 @@
+import {Profile} from '@search/components/SearchProfile';
+
 export type SearchNavigatorParamList = {
   search: undefined;
   searchResult: undefined;
@@ -5,4 +7,5 @@ export type SearchNavigatorParamList = {
   expertMediator: undefined;
   mediationCenter: undefined;
   forExpert: undefined;
+  profileDetail: {profile: Profile};
 };

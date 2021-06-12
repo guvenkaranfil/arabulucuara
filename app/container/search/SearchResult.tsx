@@ -21,6 +21,7 @@ export default function SearchResult({navigation}: Props) {
 
   const onPressProfile = (profile: Profile) => {
     console.log('pressedProfile:', profile);
+    navigation.navigate('profileDetail', {profile});
   };
 
   return (
