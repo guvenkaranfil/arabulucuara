@@ -238,3 +238,33 @@ export const EXPERTISES = [
     label: 'Uzmanlık Alanı',
   },
 ];
+
+export const NUMBER_OF_ROOMS = [
+  {
+    id: 1,
+    name: '0 -5 arası',
+  },
+  {
+    id: 2,
+    name: '5 ve üzeri',
+  },
+];
+
+export const NUMBER_OF_MEMBERS = [
+  {
+    id: 1,
+    name: '0 - 10 arası',
+  },
+  {
+    id: 1,
+    name: '10 - 20 arası',
+  },
+  {
+    id: 1,
+    name: '20 - 30 arası',
+  },
+  {
+    id: 1,
+    name: '30 - 40 arası',
+  },
+];
