@@ -6,14 +6,21 @@ import SearchResult from '@search/SearchResult';
 import SeekMediator from '@search/SeekMediator';
 
 import {SearchNavigatorParamList} from './types';
+import LoggedUserHeader from '../../components/LoggedUserHeader';
 
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
+  const isUserLoggedIn = true;
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{header: isUserLoggedIn && LoggedUserHeader}}>
       <Stack.Screen name="search" component={Search} />
       <Stack.Screen name="searchResult" component={SearchResult} />
-      <Stack.Screen name="seekMediator" component={SeekMediator} />
+      <Stack.Screen
+        name="seekMediator"
+        component={SeekMediator}
+        options={{title: 'Arabulucu Ara'}}
+      />
     </Stack.Navigator>
   );
 }

@@ -100,3 +100,114 @@ export const SEARCH_RESULT = [
     rate: 5,
   },
 ];
+
+export const CITIES = [
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+  {
+    id: 1,
+    name: 'Adana',
+  },
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+  {
+    id: 1,
+    name: 'Sakarya',
+  },
+];
+
+export const SUBJECT_OF_DISPUTE = [
+  {
+    id: 1,
+    name: 'Tümü',
+  },
+  {
+    id: 2,
+    name: 'İşçi Alacağı',
+  },
+
+  {
+    id: 3,
+    name: 'Miras',
+  },
+  {
+    id: 4,
+    name: 'Gayrimenkul',
+  },
+];
+
+export const GENDERS = [
+  {
+    id: 1,
+    name: 'Erkek',
+  },
+  {
+    id: 2,
+    name: 'Kadın',
+  },
+];
+
+export const AGE_RANGE = [
+  {
+    id: 1,
+    name: '20 - 25 Yaş aralığı',
+  },
+  {
+    id: 1,
+    name: '25 - 30 Yaş aralığı',
+  },
+  {
+    id: 1,
+    name: '30 - 35 Yaş aralığı',
+  },
+  {
+    id: 1,
+    name: '35 - 40 Yaş aralığı',
+  },
+];
+
+export const SENIORITY_RANGE = [
+  {
+    id: 1,
+    name: '0 - 5 yıl',
+  },
+  {
+    id: 2,
+    name: '10 - 15 yıl',
+  },
+  {
+    id: 1,
+    name: '15 - 20 yıl',
+  },
+  {
+    id: 1,
+    name: '25 - 30 yıl',
+  },
+];
+
+export const ALTERNATIVE_PROFFESSION = [
+  {
+    id: 1,
+    name: 'Farketmez',
+  },
+  {
+    id: 2,
+    name: 'Avukat',
+  },
+  {
+    id: 3,
+    name: 'Polis',
+  },
+  {
+    id: 4,
+    name: 'Doktor',
+  },
+  {
+    id: 5,
+    name: 'Yazılım Mühendisi',
+  },
+];

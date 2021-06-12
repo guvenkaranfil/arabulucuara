@@ -1,5 +1,5 @@
 export default {
   container: {flex: 1, backgroundColor: '#fff'},
-  paddingForScroll: {paddingTop: 25, paddingLeft: 25},
+  paddingForScroll: {paddingVertical: 25, paddingLeft: 25},
   scrollContentStyle: {paddingBottom: 25},
 };
