@@ -39,7 +39,7 @@ export default function Search({navigation}: Props) {
 
         <View style={styles.routingButtons}>
           <RoutingButtons
-            searchMediator={() => console.log('onPress..')}
+            searchMediator={() => navigation.navigate('seekMediator')}
             searchExpertMediator={() => console.log('onPress..')}
             searchMediatorCenter={() => console.log('onPress..')}
             searchPro={() => console.log('onPress..')}

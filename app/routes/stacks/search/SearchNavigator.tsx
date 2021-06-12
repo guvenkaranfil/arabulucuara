@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Search from '@search/index';
 import SearchResult from '@search/SearchResult';
+import SeekMediator from '@search/SeekMediator';
 
 import {SearchNavigatorParamList} from './types';
 
@@ -12,6 +13,7 @@ function PortalNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="search" component={Search} />
       <Stack.Screen name="searchResult" component={SearchResult} />
+      <Stack.Screen name="seekMediator" component={SeekMediator} />
     </Stack.Navigator>
   );
 }
