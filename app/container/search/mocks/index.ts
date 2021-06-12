@@ -211,3 +211,30 @@ export const ALTERNATIVE_PROFFESSION = [
     name: 'Yazılım Mühendisi',
   },
 ];
+
+export const EXPERTISES = [
+  {
+    id: 1,
+    label: 'Genel Arabuluculuk',
+  },
+  {
+    id: 2,
+    label: 'Ticaret Hukuku Genel Uzmanlık Alanı',
+  },
+  {
+    id: 3,
+    label: 'Tüketici Hukuku Genel Uzmanlık Alanı',
+  },
+  {
+    id: 4,
+    label: 'Banka ve Finans Hukuku Özel Uzmanlık Alanı',
+  },
+  {
+    id: 5,
+    label: 'Sigorta Hukuku Özel Uzmanlık Alanı',
+  },
+  {
+    id: 6,
+    label: 'Uzmanlık Alanı',
+  },
+];
