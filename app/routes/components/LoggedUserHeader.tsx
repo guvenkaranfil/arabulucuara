@@ -12,7 +12,7 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
   return (
     <LinearGradient style={styles.container} colors={linearColors}>
       <Pressable style={styles.left} disabled={!navigation.canGoBack()} onPress={navigation.goBack}>
-        {previous && <BackIcon width={17} height={12} />}
+        {previous && <BackIcon width={17} height={12} stroke="#fff" />}
       </Pressable>
 
       <View style={styles.center}>
