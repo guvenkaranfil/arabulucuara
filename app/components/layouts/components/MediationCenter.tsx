@@ -23,6 +23,7 @@ export default function MediationCenter({profilePhoto, nameSurname, userType, ra
             defaultRating={rate}
             showRating={false}
             isDisabled={true}
+            unSelectedColor="#fff"
           />
         </View>
       </View>

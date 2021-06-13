@@ -30,6 +30,7 @@ export default function IndividualMediator({
             defaultRating={rate}
             showRating={false}
             isDisabled={true}
+            reviewColor="#fff"
           />
         </View>
       </View>
