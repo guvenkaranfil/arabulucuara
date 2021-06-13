@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
@@ -15,14 +14,13 @@ interface Mediation {
 type ScreenProps = {
   mediationExpertises: Array<Mediation>;
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
-  navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
 };
 
-export default function MediationExpertises({navigation, route}: ScreenProps) {
+export default function MediationExpertises({route}: ScreenProps) {
   const {profile} = route.params;
 
   return (
-    <ProfileLayout navigation={navigation} user={profile}>
+    <ProfileLayout user={profile}>
       <View style={styles.screenContainer}>
         <Text style={styles.screenTitle}>Arabuluculuk Uzmanlık Alanları</Text>
 

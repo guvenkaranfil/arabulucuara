@@ -1,8 +1,7 @@
 import React, {useRef, ReactElement} from 'react';
 import {View, Animated, Pressable} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import {CommonStyles} from '@utils';
 import styles from './styles/ProfileLayoutStyle';
@@ -13,12 +12,13 @@ import {BackIcon, LetterIcon} from '@icons';
 import {Profile} from '@search/components/SearchProfile';
 
 interface ScreenProps {
-  navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
   children: ReactElement;
   user: Profile;
 }
 
-export default function ProfileLayout({navigation, children, user}: ScreenProps) {
+export default function ProfileLayout({children, user}: ScreenProps) {
+  const navigation = useNavigation();
+
   const linearColors = ['#790633', '#BA1858'];
   const scrollY = useRef(new Animated.Value(0)).current;
 

@@ -38,7 +38,7 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
   };
 
   return (
-    <ProfileLayout navigation={navigation} user={profile}>
+    <ProfileLayout user={profile}>
       <>
         <View style={styles.actionButtons}>
           <Pressable

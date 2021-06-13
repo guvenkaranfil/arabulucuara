@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
@@ -10,14 +9,13 @@ import {Fonts, Metrics} from '@utils';
 
 type ScreenProps = {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
-  navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
 };
 
-export default function MediatorCertificates({route, navigation}: ScreenProps) {
+export default function MediatorCertificates({route}: ScreenProps) {
   const {profile} = route.params;
 
   return (
-    <ProfileLayout navigation={navigation} user={profile}>
+    <ProfileLayout user={profile}>
       <View style={styles.screenContainer}>
         <Text style={styles.screenTitle}>Makaleler</Text>
 
