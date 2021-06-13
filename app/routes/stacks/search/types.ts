@@ -11,4 +11,5 @@ export type SearchNavigatorParamList = {
   aboutProfile: {profile: Profile};
   mediationExpertises: {profile: Profile};
   mediatorSubscriptions: {profile: Profile};
+  mediatorArticles: {profile: Profile};
 };

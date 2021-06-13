@@ -20,7 +20,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Makaleler',
-    stackName: '',
+    stackName: 'mediatorArticles',
   },
   {
     label: 'Seminer & Eğitim ve Sertifikalar',
@@ -51,7 +51,7 @@ export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Makaleler',
-    stackName: '',
+    stackName: 'mediatorArticles',
   },
   {
     label: 'Galeri',
