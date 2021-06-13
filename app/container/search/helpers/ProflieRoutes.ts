@@ -12,7 +12,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Arabuluculuk Uzmanlık Alanları',
-    stackName: '',
+    stackName: 'mediationExpertises',
   },
   {
     label: 'Üyelikler',
@@ -43,7 +43,7 @@ export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Arabuluculuk Uzmanlık Alanları',
-    stackName: '',
+    stackName: 'mediationExpertises',
   },
   {
     label: 'İşbirliği ve Çözüm Ortakları',
