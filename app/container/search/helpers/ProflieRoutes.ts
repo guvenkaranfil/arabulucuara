@@ -28,7 +28,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Galeri',
-    stackName: '',
+    stackName: 'mediatorGallery',
   },
 ];
 
@@ -55,6 +55,6 @@ export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Galeri',
-    stackName: '',
+    stackName: 'mediatorGallery',
   },
 ];
