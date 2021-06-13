@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   gallery: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: Metrics.DEVICE_WIDTH - 40,
+    width: Metrics.DEVICE_WIDTH - 30,
     justifyContent: 'center',
   },
 
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: 10,
     width: (Metrics.CONTAINER_WIDTH - 20) / 3,
-    height: 100,
+    height: Metrics.wp(100),
   },
 
   photo: {
