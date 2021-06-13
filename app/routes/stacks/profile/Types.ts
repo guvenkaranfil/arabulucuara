@@ -4,6 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type ProfileNavigatorParamList = {
   profile: undefined;
   profileInformation: undefined;
+  aboutUser: undefined;
 };
 
 export interface ProfileScreenNavigationProps {
