@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Metrics} from 'utils';
+import {Metrics} from '@utils';
 
 import Banner from './components/Banner';
 import NewsShowecase from './components/NewsShowecase';

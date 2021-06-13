@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 
 type Props = {
   actions: Array<{id: number; time: string; nameSurname: string; action: string}>;
