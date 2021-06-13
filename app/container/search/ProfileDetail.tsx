@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
@@ -21,11 +23,27 @@ interface ScreenProps {
 export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;
 
+  const [showContactInformations, setshowContactInformations] = useState(false);
+
+  const _renderContactInformations = () => {
+    if (showContactInformations) {
+      return (
+        <Animatable.View style={styles.contactInformations} animation="fadeIn">
+          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.mail}</Text>
+          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.phone}</Text>
+          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.location}</Text>
+        </Animatable.View>
+      );
+    }
+  };
+
   return (
     <ProfileLayout navigation={navigation} user={profile}>
       <>
         <View style={styles.actionButtons}>
-          <Pressable style={styles.actionButton}>
+          <Pressable
+            style={styles.actionButton}
+            onPress={() => setshowContactInformations(prev => !prev)}>
             <Text style={styles.actionLabel}>İletişim Bilgileri</Text>
           </Pressable>
 
@@ -33,6 +51,8 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
             <Text style={styles.actionLabel}>Mesaj Gönder</Text>
           </Pressable>
         </View>
+
+        {_renderContactInformations()}
 
         <ProfileRouteButtons
           routeButtons={
@@ -70,4 +90,24 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.robotoLight,
     color: '#fff',
   },
+
+  contactInformations: {
+    marginTop: 15,
+    marginLeft: Metrics.horizontalContainerPadding,
+    width: Metrics.CONTAINER_WIDTH,
+    justifyContent: 'center',
+  },
+
+  contactLabel: {
+    paddingTop: 8,
+    fontSize: 14,
+    fontFamily: Fonts.robotoMedium,
+    color: '#181C32',
+  },
 });
+
+const CONTACT_INFORMATIONS = {
+  mail: 'info@arabuluculukmerkezi.com',
+  phone: '(312) 473 3960',
+  location: 'Ankara / Çankaya',
+};
