@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   expertiseArea: {
     flexDirection: 'row',
     width: '100%',
+    minHeight: 50,
   },
 
   areaLabel: {
@@ -97,7 +98,7 @@ const EXPERTISE_AREAS = [
   },
   {
     id: 1,
-    name: 'İş Hukuku Genel Uzmanlık Alanı',
+    name: 'İş Hukuku Genel Uzmanlık Alanıİş Hukuku Genel Uzmanlık Alanı',
   },
   {
     id: 1,

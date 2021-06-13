@@ -16,7 +16,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Üyelikler',
-    stackName: '',
+    stackName: 'mediatorSubscriptions',
   },
   {
     label: 'Makaleler',

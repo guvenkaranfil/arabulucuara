@@ -10,6 +10,7 @@ import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
 import AboutProfile from '@search/AboutProfile';
 import MediationExpertises from '@search/MediationExpertises';
+import MediatorSubscriptions from '@search/MediatorSubscriptions';
 
 import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -43,6 +44,11 @@ function PortalNavigator() {
       <Stack.Screen
         name="mediationExpertises"
         component={MediationExpertises}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="mediatorSubscriptions"
+        component={MediatorSubscriptions}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
