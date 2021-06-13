@@ -12,4 +12,5 @@ export type SearchNavigatorParamList = {
   mediationExpertises: {profile: Profile};
   mediatorSubscriptions: {profile: Profile};
   mediatorArticles: {profile: Profile};
+  mediatorCertificates: {profile: Profile};
 };

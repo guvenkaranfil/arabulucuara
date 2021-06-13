@@ -24,7 +24,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Seminer & Eğitim ve Sertifikalar',
-    stackName: '',
+    stackName: 'mediatorCertificates',
   },
   {
     label: 'Galeri',
