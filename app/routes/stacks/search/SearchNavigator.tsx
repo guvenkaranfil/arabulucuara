@@ -11,6 +11,7 @@ import ProfileDetail from '@search/ProfileDetail';
 import AboutProfile from '@search/searchedProfileRoutes/AboutProfile';
 import MediationCenterMembers from '@search/searchedProfileRoutes/MediationCenterMembers';
 import MediationExpertises from '@search/searchedProfileRoutes/MediationExpertises';
+import CooperationAndSolutionPartners from '@search/searchedProfileRoutes/CooperationAndSolutionPartners';
 import MediatorSubscriptions from '@search/searchedProfileRoutes/MediatorSubscriptions';
 import MediatorArticles from '@search/searchedProfileRoutes/MediatorArticles';
 import MediatorCertificates from '@search/searchedProfileRoutes/MediatorCertificates';
@@ -53,6 +54,11 @@ function PortalNavigator() {
       <Stack.Screen
         name="mediationExpertises"
         component={MediationExpertises}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="cooperationAndSolutionPartners"
+        component={CooperationAndSolutionPartners}
         options={{headerShown: false}}
       />
       <Stack.Screen

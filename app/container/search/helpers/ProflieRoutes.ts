@@ -47,7 +47,7 @@ export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'İşbirliği ve Çözüm Ortakları',
-    stackName: '',
+    stackName: 'cooperationAndSolutionPartners',
   },
   {
     label: 'Makaleler',
