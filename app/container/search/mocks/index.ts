@@ -5,6 +5,7 @@ export const SEARCH_RESULT = [
     profilePhoto:
       'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
     nameSurname: 'BURSA KOZA ARABULUCULUK MERKEZİ',
+    profession: undefined,
     userType: 'MERKEZ',
     location: 'Çankaya - Ankara',
     rate: 2,

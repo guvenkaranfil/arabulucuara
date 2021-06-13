@@ -10,20 +10,12 @@ import MediationCenter from './components/MediationCenter';
 import IndividualMediator from './components/IndividualMediator';
 
 import {BackIcon, LetterIcon} from '@icons';
-
-export interface ProfileUser {
-  id: number;
-  profilePhoto: string;
-  nameSurname: string;
-  userType: string;
-  profession: string;
-  rate: number;
-}
+import {Profile} from '@search/components/SearchProfile';
 
 interface ScreenProps {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
   children: ReactElement;
-  user: ProfileUser;
+  user: Profile;
 }
 
 export default function ProfileLayout({navigation, children, user}: ScreenProps) {

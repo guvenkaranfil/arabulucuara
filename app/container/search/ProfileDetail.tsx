@@ -20,24 +20,26 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
 
   return (
     <ProfileLayout navigation={navigation} user={profile}>
-      <View style={styles.actionButtons}>
-        <Pressable style={styles.actionButton}>
-          <Text style={styles.actionLabel}>İletişim Bilgileri</Text>
-        </Pressable>
+      <>
+        <View style={styles.actionButtons}>
+          <Pressable style={styles.actionButton}>
+            <Text style={styles.actionLabel}>İletişim Bilgileri</Text>
+          </Pressable>
 
-        <Pressable style={styles.actionButton}>
-          <Text style={styles.actionLabel}>Mesaj Gönder</Text>
-        </Pressable>
-      </View>
+          <Pressable style={styles.actionButton}>
+            <Text style={styles.actionLabel}>Mesaj Gönder</Text>
+          </Pressable>
+        </View>
 
-      <ProfileRouteButtons
-        navigation={navigation}
-        routeButtons={
-          profile.accountType === 'individualCenter'
-            ? INDIVIDUAL_MEDIATOR_ROUTES
-            : MEDIATOR_CENTER_ROUTES
-        }
-      />
+        <ProfileRouteButtons
+          navigation={navigation}
+          routeButtons={
+            profile.accountType === 'individualCenter'
+              ? INDIVIDUAL_MEDIATOR_ROUTES
+              : MEDIATOR_CENTER_ROUTES
+          }
+        />
+      </>
     </ProfileLayout>
   );
 }
