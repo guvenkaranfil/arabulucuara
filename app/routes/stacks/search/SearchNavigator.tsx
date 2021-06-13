@@ -8,9 +8,9 @@ import SearchExpertMediator from '@search/SearchExpertMediator';
 import SearchMediationCenter from '@search/SearchMediationCenter';
 import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
-import AboutProfile from '@search/AboutProfile';
-import MediationExpertises from '@search/MediationExpertises';
-import MediatorSubscriptions from '@search/MediatorSubscriptions';
+import AboutProfile from '@search/searchedProfileRoutes/AboutProfile';
+import MediationExpertises from '@search/searchedProfileRoutes/MediationExpertises';
+import MediatorSubscriptions from '@search/searchedProfileRoutes/MediatorSubscriptions';
 
 import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
