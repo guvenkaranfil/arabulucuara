@@ -7,5 +7,5 @@ export type SearchNavigatorParamList = {
   expertMediator: undefined;
   mediationCenter: undefined;
   forExpert: undefined;
-  profileDetail: {profile: Profile};
+  profileDetail: {navigation: any; profile: Profile};
 };
