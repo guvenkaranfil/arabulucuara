@@ -1,18 +1,16 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import FilledButton from '@components/buttons/FilledButton';
 import {Fonts, Metrics} from '@utils';
 import {ProfileRoute} from '@search/helpers/ProflieRoutes';
 
 interface Props {
-  navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
   routeButtons: Array<ProfileRoute>;
+  onPressRoute: (stackName: ProfileRoute) => void;
 }
 
-export default function ProfileRouteButtons({navigation, routeButtons}: Props) {
+export default function ProfileRouteButtons({routeButtons, onPressRoute}: Props) {
   return (
     <View style={styles.routeButtons}>
       {routeButtons.map((routeButton, index) => (
@@ -21,7 +19,7 @@ export default function ProfileRouteButtons({navigation, routeButtons}: Props) {
           style={styles.routeButton}
           label={routeButton.label}
           labelStyle={styles.routeLabel}
-          onPress={() => console.log('navigation to ' + routeButton.stackName + ' ....')}
+          onPress={() => onPressRoute(routeButton)}
         />
       ))}
     </View>

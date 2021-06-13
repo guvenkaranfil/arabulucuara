@@ -8,6 +8,7 @@ import SearchExpertMediator from '@search/SearchExpertMediator';
 import SearchMediationCenter from '@search/SearchMediationCenter';
 import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
+import AboutProfile from '@search/AboutProfile';
 
 import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../../components/LoggedUserHeader';
@@ -37,6 +38,7 @@ function PortalNavigator() {
       />
       <Stack.Screen name="forExpert" component={SearchForExpert} options={{title: 'Uzman Ara'}} />
       <Stack.Screen name="profileDetail" component={ProfileDetail} options={{headerShown: false}} />
+      <Stack.Screen name="aboutProfile" component={AboutProfile} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 }

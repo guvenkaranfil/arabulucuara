@@ -1,12 +1,14 @@
+import {SearchNavigatorParamList} from '@routes/stacks/search/types';
+
 export interface ProfileRoute {
   label: string;
-  stackName: string | object;
+  stackName: keyof SearchNavigatorParamList;
 }
 
 export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
   {
     label: 'Hakkımda',
-    stackName: 'aboutMe',
+    stackName: 'aboutProfile',
   },
   {
     label: 'Arabuluculuk Uzmanlık Alanları',
@@ -33,7 +35,7 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
 export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   {
     label: 'Hakkımda',
-    stackName: 'aboutMe',
+    stackName: 'aboutProfile',
   },
   {
     label: 'Merkez Üyeleri',

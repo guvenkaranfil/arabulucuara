@@ -7,7 +7,11 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import {Fonts, Metrics} from '@utils';
 import ProfileRouteButtons from './components/ProfileRouteButtons';
-import {INDIVIDUAL_MEDIATOR_ROUTES, MEDIATOR_CENTER_ROUTES} from './helpers/ProflieRoutes';
+import {
+  INDIVIDUAL_MEDIATOR_ROUTES,
+  MEDIATOR_CENTER_ROUTES,
+  ProfileRoute,
+} from './helpers/ProflieRoutes';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
@@ -16,7 +20,6 @@ interface ScreenProps {
 
 export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;
-  console.log('profile:', profile);
 
   return (
     <ProfileLayout navigation={navigation} user={profile}>
@@ -32,11 +35,13 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
         </View>
 
         <ProfileRouteButtons
-          navigation={navigation}
           routeButtons={
             profile.accountType === 'individualCenter'
               ? INDIVIDUAL_MEDIATOR_ROUTES
               : MEDIATOR_CENTER_ROUTES
+          }
+          onPressRoute={(pressedRoute: ProfileRoute) =>
+            navigation.navigate(pressedRoute.stackName, {profile})
           }
         />
       </>
