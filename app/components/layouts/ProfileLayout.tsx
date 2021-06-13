@@ -56,13 +56,15 @@ export default function ProfileLayout({navigation, children, user}: ScreenProps)
           useNativeDriver: true,
         })}
         scrollEventThrottle={16}>
-        <LinearGradient style={styles.container} colors={linearColors}>
-          {user.userType === 'Arabulucu' ? (
-            <IndividualMediator {...user} />
-          ) : (
-            <MediationCenter {...user} />
-          )}
-        </LinearGradient>
+        <View style={styles.shadow}>
+          <LinearGradient style={styles.container} colors={linearColors}>
+            {user.userType === 'Arabulucu' ? (
+              <IndividualMediator {...user} />
+            ) : (
+              <MediationCenter {...user} />
+            )}
+          </LinearGradient>
+        </View>
         {children}
       </Animated.ScrollView>
     </View>

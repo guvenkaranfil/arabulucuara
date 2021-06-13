@@ -2,6 +2,20 @@ import {StyleSheet} from 'react-native';
 import {Fonts, Metrics} from '@utils';
 
 export default StyleSheet.create({
+  shadow: {
+    borderRadius: 30,
+    backgroundColor: '#fff',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.16,
+    shadowRadius: 15,
+
+    elevation: 5,
+  },
+
   container: {
     width: Metrics.DEVICE_WIDTH,
     height: 180,
