@@ -13,7 +13,7 @@ export default function MyTabBar({state, descriptors, navigation}) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, styles.shadow]}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
