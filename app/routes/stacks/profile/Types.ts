@@ -3,9 +3,15 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 export type ProfileNavigatorParamList = {
   profile: undefined;
+  profileInformation: undefined;
 };
 
 export interface ProfileScreenNavigationProps {
   route: RouteProp<ProfileNavigatorParamList, 'profile'>;
   navigation: StackNavigationProp<ProfileNavigatorParamList, 'profile'>;
+}
+
+export interface UserProfileRoute {
+  label: string;
+  stackName: keyof ProfileNavigatorParamList;
 }

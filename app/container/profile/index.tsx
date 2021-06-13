@@ -1,18 +1,21 @@
-import {ProfileScreenNavigationProps} from '@routes/stacks/profile/Types';
+import {ProfileScreenNavigationProps, UserProfileRoute} from '@routes/stacks/profile/Types';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
+import ProfileRouteButtons from './components/UserProfileButtons';
 
 export default function Profile({navigation}: ProfileScreenNavigationProps) {
   return (
     <ProfileLayout user={user}>
-      <Text>asdfsa</Text>
+      <ProfileRouteButtons
+        routeButtons={userProfileRoutes}
+        onPressRoute={(pressedRoute: UserProfileRoute) =>
+          navigation.navigate(pressedRoute.stackName)
+        }
+      />
     </ProfileLayout>
   );
 }
-
-const styles = StyleSheet.create({});
 
 const user = {
   id: 1,
@@ -25,3 +28,10 @@ const user = {
   profession: 'Avukat',
   rate: 5,
 };
+
+const userProfileRoutes: Array<UserProfileRoute> = [
+  {
+    label: 'Profile Bilgileri',
+    stackName: 'profileInformation',
+  },
+];
