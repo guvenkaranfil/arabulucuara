@@ -34,4 +34,8 @@ const userProfileRoutes: Array<UserProfileRoute> = [
     label: 'Profile Bilgileri',
     stackName: 'profileInformation',
   },
+  {
+    label: 'Hakkımda',
+    stackName: 'aboutUser',
+  },
 ];
