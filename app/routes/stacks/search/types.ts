@@ -9,6 +9,7 @@ export type SearchNavigatorParamList = {
   forExpert: undefined;
   profileDetail: {profile: Profile};
   aboutProfile: {profile: Profile};
+  mediationCenterMembers: {profile: Profile};
   mediationExpertises: {profile: Profile};
   mediatorSubscriptions: {profile: Profile};
   mediatorArticles: {profile: Profile};

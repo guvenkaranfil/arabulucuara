@@ -9,6 +9,7 @@ import SearchMediationCenter from '@search/SearchMediationCenter';
 import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
 import AboutProfile from '@search/searchedProfileRoutes/AboutProfile';
+import MediationCenterMembers from '@search/searchedProfileRoutes/MediationCenterMembers';
 import MediationExpertises from '@search/searchedProfileRoutes/MediationExpertises';
 import MediatorSubscriptions from '@search/searchedProfileRoutes/MediatorSubscriptions';
 import MediatorArticles from '@search/searchedProfileRoutes/MediatorArticles';
@@ -44,6 +45,11 @@ function PortalNavigator() {
       <Stack.Screen name="forExpert" component={SearchForExpert} options={{title: 'Uzman Ara'}} />
       <Stack.Screen name="profileDetail" component={ProfileDetail} options={{headerShown: false}} />
       <Stack.Screen name="aboutProfile" component={AboutProfile} options={{headerShown: false}} />
+      <Stack.Screen
+        name="mediationCenterMembers"
+        component={MediationCenterMembers}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="mediationExpertises"
         component={MediationExpertises}

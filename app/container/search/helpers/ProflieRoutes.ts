@@ -39,7 +39,7 @@ export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   },
   {
     label: 'Merkez Üyeleri',
-    stackName: '',
+    stackName: 'mediationCenterMembers',
   },
   {
     label: 'Arabuluculuk Uzmanlık Alanları',
