@@ -6,6 +6,8 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import {Fonts, Metrics} from '@utils';
+import ProfileRouteButtons from './components/ProfileRouteButtons';
+import {INDIVIDUAL_MEDIATOR_ROUTES} from './helpers/ProflieRoutes';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
@@ -27,6 +29,8 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
           <Text style={styles.actionLabel}>Mesaj Gönder</Text>
         </Pressable>
       </View>
+
+      <ProfileRouteButtons navigation={navigation} routeButtons={INDIVIDUAL_MEDIATOR_ROUTES} />
     </ProfileLayout>
   );
 }
