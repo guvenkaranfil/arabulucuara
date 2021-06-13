@@ -11,6 +11,7 @@ module.exports = {
           '@home': './app/container/home',
           '@search': './app/container/search',
           '@portal': './app/container/portal',
+          '@profile': './app/container/profile',
           '@components': './app/components',
           '@routes': './app/routes',
           '@utils': './app/utils',

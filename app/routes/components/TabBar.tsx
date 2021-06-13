@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {HomeIcon, SearchIcon, PortalIcon} from '@icons';
+import {HomeIcon, SearchIcon, PortalIcon, ActiveProfileIcon, InActiveProfileIcon} from '@icons';
 
 import styles from './styles/TabBarStyle';
 import {Metrics} from '@utils';
@@ -81,5 +81,10 @@ function TabIcon(index: number, isFocused: boolean) {
         stroke={isFocused ? '#7E0736' : '#B3B3B3'}
       />
     );
+  } else if (index === 3) {
+    if (isFocused) {
+      return <ActiveProfileIcon width={Metrics.hp(26)} height={Metrics.hp(26)} />;
+    }
+    return <InActiveProfileIcon width={Metrics.hp(26)} height={Metrics.hp(26)} />;
   }
 }

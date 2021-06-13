@@ -62,6 +62,7 @@
       "@home/*": ["container/home/*"],
       "@search/*": ["container/search/*"],
       "@portal/*": ["container/portal/*"],
+      "@profile/*": ["container/profile/*"],
       "@components/*": ["components/*"],
       "@routes/*": ["routes/*"],
       "@utils": ["utils/index"],

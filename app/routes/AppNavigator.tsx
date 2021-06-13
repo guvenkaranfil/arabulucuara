@@ -5,9 +5,10 @@ import AuthStack from './stacks/auth/AuthStack';
 import HomeNavigator from './stacks/home/HomeNavigator';
 import SearchNavigator from './stacks/search/SearchNavigator';
 import PortalNavigator from './stacks/portal/PortalNavigator';
+import ProfileNavigator from './stacks/profile/ProfileNavigator';
 
 import TabBar from './components/TabBar';
-import {tabBarOptions, homeOptions, portalOptions, searchOptions} from './Config';
+import {tabBarOptions, homeOptions, portalOptions, searchOptions, profileOptions} from './Config';
 
 const Tab = createBottomTabNavigator();
 export default function AppNavigator() {
@@ -20,6 +21,7 @@ export default function AppNavigator() {
       <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
       <Tab.Screen name="search" component={SearchNavigator} options={searchOptions} />
       <Tab.Screen name="portal" component={PortalNavigator} options={portalOptions} />
+      <Tab.Screen name="profile" component={ProfileNavigator} options={profileOptions} />
     </Tab.Navigator>
   );
 }

@@ -16,5 +16,8 @@ const searchOptions: BottomTabNavigationOptions = {
 const portalOptions: BottomTabNavigationOptions = {
   tabBarLabel: 'Portal',
 };
+const profileOptions: BottomTabNavigationOptions = {
+  tabBarLabel: 'Profil',
+};
 
-export {tabBarOptions, homeOptions, searchOptions, portalOptions};
+export {tabBarOptions, homeOptions, searchOptions, portalOptions, profileOptions};
