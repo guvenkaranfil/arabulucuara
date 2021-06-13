@@ -29,3 +29,30 @@ export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
     stackName: '',
   },
 ];
+
+export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
+  {
+    label: 'Hakkımda',
+    stackName: 'aboutMe',
+  },
+  {
+    label: 'Merkez Üyeleri',
+    stackName: '',
+  },
+  {
+    label: 'Arabuluculuk Uzmanlık Alanları',
+    stackName: '',
+  },
+  {
+    label: 'İşbirliği ve Çözüm Ortakları',
+    stackName: '',
+  },
+  {
+    label: 'Makaleler',
+    stackName: '',
+  },
+  {
+    label: 'Galeri',
+    stackName: '',
+  },
+];

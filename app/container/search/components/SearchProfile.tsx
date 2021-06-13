@@ -6,6 +6,7 @@ import styles from './styles/SearchProfileStyle';
 
 export interface Profile {
   id: number;
+  accountType: string;
   profilePhoto?: string;
   nameSurname: string;
   userType: string;
