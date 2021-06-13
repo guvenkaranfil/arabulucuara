@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Alert} from 'react-native';
 
 import AuthStack from './stacks/auth/AuthStack';
 import HomeNavigator from './stacks/home/HomeNavigator';
@@ -13,6 +14,7 @@ import {tabBarOptions, homeOptions, portalOptions, searchOptions, profileOptions
 const Tab = createBottomTabNavigator();
 export default function AppNavigator() {
   const showLoginFlow = false;
+  const isUserLoggedIn = true;
 
   return showLoginFlow ? (
     <AuthStack />
@@ -21,7 +23,27 @@ export default function AppNavigator() {
       <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
       <Tab.Screen name="search" component={SearchNavigator} options={searchOptions} />
       <Tab.Screen name="portal" component={PortalNavigator} options={portalOptions} />
-      <Tab.Screen name="profile" component={ProfileNavigator} options={profileOptions} />
+      <Tab.Screen
+        name="profile"
+        component={ProfileNavigator}
+        options={profileOptions}
+        listeners={({navigation, route}) => ({
+          tabPress: e => {
+            if (!isUserLoggedIn) {
+              // Prevent default action
+              e.preventDefault();
+              return Alert.alert(
+                'Lütfen Dikkat',
+                'Profil Sayfasını açmak için giriş yapmalısınız!',
+                [{text: 'Vazgeç'}, {text: 'Giriş Yap'}, {text: 'Kayıt Ol'}],
+              );
+            }
+
+            // Do something with the `navigation` object
+            navigation.navigate(route.name);
+          },
+        })}
+      />
     </Tab.Navigator>
   );
 }
