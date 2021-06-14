@@ -46,4 +46,8 @@ const userProfileRoutes: Array<UserProfileRoute> = [
     label: 'Makaleler',
     stackName: 'userArticles',
   },
+  {
+    label: 'Galeri',
+    stackName: 'userGallery',
+  },
 ];

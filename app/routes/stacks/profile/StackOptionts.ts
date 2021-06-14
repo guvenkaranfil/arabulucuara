@@ -15,3 +15,7 @@ export const userCertificates: StackNavigationOptions = {
 export const userArticles: StackNavigationOptions = {
   title: 'Makaleler',
 };
+
+export const userGallery: StackNavigationOptions = {
+  title: 'Galeri',
+};

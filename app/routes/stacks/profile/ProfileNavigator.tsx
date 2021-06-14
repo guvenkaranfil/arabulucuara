@@ -7,9 +7,16 @@ import ProfileInformation from '@profile/ProfileInformation';
 import AboutUser from '@profile/AboutUser';
 import UserCertificates from '@profile/UserCertificates';
 import UserArticles from '@profile/UserArticles';
+import UserGallery from '@profile/UserGallery';
 
 import LoggedUserHeader from '../../components/LoggedUserHeader';
-import {aboutUser, profileInformation, userArticles, userCertificates} from './StackOptionts';
+import {
+  aboutUser,
+  profileInformation,
+  userArticles,
+  userCertificates,
+  userGallery,
+} from './StackOptionts';
 
 const Stack = createStackNavigator<ProfileNavigatorParamList>();
 function ProfileNavigator() {
@@ -28,6 +35,7 @@ function ProfileNavigator() {
         options={userCertificates}
       />
       <Stack.Screen name="userArticles" component={UserArticles} options={userArticles} />
+      <Stack.Screen name="userGallery" component={UserGallery} options={userGallery} />
     </Stack.Navigator>
   );
 }
