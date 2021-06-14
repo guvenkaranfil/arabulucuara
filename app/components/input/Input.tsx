@@ -2,9 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, View, TextInput, KeyboardType, TouchableOpacity} from 'react-native';
 
 import {Fonts, Metrics} from '@utils';
+import {ViewStyle} from 'react-native';
 // import {SecureIcon} from '@icons';
 
 export default function Input({
+  viewStyle,
   width,
   height,
   value,
@@ -23,7 +25,7 @@ export default function Input({
   const CONTAINER_HEIGHT = {height: height ? height : 44};
 
   return (
-    <View style={[styles.container, CONTAINER_WIDTH, CONTAINER_HEIGHT]}>
+    <View style={[styles.container, CONTAINER_WIDTH, CONTAINER_HEIGHT, viewStyle]}>
       <TextInput
         style={[styles.input, CONTAINER_WIDTH, CONTAINER_HEIGHT]}
         value={value}
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
 });
 
 type Props = {
+  viewStyle?: ViewStyle;
   width?: number;
   height?: number;
   value: string;
