@@ -6,6 +6,7 @@ export type ProfileNavigatorParamList = {
   profileInformation: undefined;
   aboutUser: undefined;
   userCertificates: undefined;
+  userArticles: undefined;
 };
 
 export interface ProfileScreenNavigationProps {

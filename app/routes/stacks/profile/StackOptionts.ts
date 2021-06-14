@@ -11,3 +11,7 @@ export const aboutUser: StackNavigationOptions = {
 export const userCertificates: StackNavigationOptions = {
   title: 'Seminer & Eğitim ve Sertifikalar',
 };
+
+export const userArticles: StackNavigationOptions = {
+  title: 'Makaleler',
+};
