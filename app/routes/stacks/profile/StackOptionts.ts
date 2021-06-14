@@ -7,3 +7,7 @@ export const profileInformation: StackNavigationOptions = {
 export const aboutUser: StackNavigationOptions = {
   title: 'Hakkımzda',
 };
+
+export const userCertificates: StackNavigationOptions = {
+  title: 'Seminer & Eğitim ve Sertifikalar',
+};

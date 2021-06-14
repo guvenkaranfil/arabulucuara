@@ -38,4 +38,8 @@ const userProfileRoutes: Array<UserProfileRoute> = [
     label: 'Hakkımda',
     stackName: 'aboutUser',
   },
+  {
+    label: 'Seminer & Eğitim ve Sertifikalar',
+    stackName: 'userCertificates',
+  },
 ];
