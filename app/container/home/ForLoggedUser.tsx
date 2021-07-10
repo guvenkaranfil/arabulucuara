@@ -1,5 +1,12 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import {Metrics} from '@utils';
 
 import Banner from './components/Banner';
@@ -7,10 +14,87 @@ import NewsShowecase from './components/NewsShowecase';
 import Attendees from './components/Attendees';
 import LastMoves from './components/LastMoves';
 import FeaturedArticles from './components/FeaturedArticles';
+import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {changeToken, logIn} from '../../stores/features/user/UserSlice';
+import {fetchHomeData} from '../../stores/features/home/HomeSlice';
+import {useGetHomeDatasQuery} from '../../stores/rtkApi';
+import {RootState} from '../../stores/RootStore';
 
 export default function ForLoggedUser() {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.arabulucuara);
+  console.log('arabulucuara:', user);
+
+  const {data, error, isLoading} = useGetHomeDatasQuery();
+
+  console.log('data:', data);
+  console.log('error:', error);
+
+  console.log('isLoading:', isLoading);
+
+  const fetchArticles = async () => {
+    try {
+      dispatch(fetchHomeData());
+      const res = await axios.get('https://api.arabulucuara.com/Portal/GetArticles');
+      console.log('res:', res.status);
+      // alert('We got the articles');
+    } catch (error) {
+      console.log('error on getArticles:', error.response);
+      if (error.response.status !== 401) {
+        // alert('error on articlesƒ');
+      }
+    }
+  };
+
+  const logInUser = async () => {
+    try {
+      const res = await axios.post('https://api.arabulucuara.com/Account/login', {
+        username: 'uzman123',
+        password: '123123',
+      });
+
+      // console.log('res of login:', res.data);
+      dispatch(logIn({token: res.data.token.token, refreshToken: res.data.refreshToken}));
+    } catch (error) {
+      console.log('error of login:', error);
+    }
+  };
+
+  const logUser = () => {
+    console.log('log user:', user);
+  };
+
+  const changeOnlyToken = () => {
+    dispatch(changeToken('token'));
+  };
+
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        onPress={() => {
+          fetchArticles();
+          fetchArticles();
+        }}>
+        <Text>Fetch articles</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logInUser}>
+        <Text>Log in</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={logUser}>
+        <Text>Log user</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={changeOnlyToken}>
+        <Text>reset token</Text>
+      </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.cotentContainerStyle}>
         <View style={styles.bannerArea}>
           <Banner />
@@ -30,7 +114,7 @@ export default function ForLoggedUser() {
 
         <View style={styles.featuredArticles}>
           <FeaturedArticles
-            articles={articles}
+            articles={data?.articles}
             openArticle={article => console.log('pressed article + ', article)}
           />
         </View>

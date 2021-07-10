@@ -11,7 +11,7 @@ interface Article {
 }
 
 type Props = {
-  articles: Array<Article>;
+  articles?: Array<Article>;
   openArticle: (item: Article) => void;
 };
 
@@ -20,7 +20,7 @@ export default function FeaturedArticles({articles, openArticle}: Props) {
     <View style={styles.container}>
       <Text style={styles.title}>Öne Çıkan Makaleler</Text>
 
-      {articles.map((article, index) => (
+      {articles?.map((article, index) => (
         <Pressable key={index} style={styles.item} onPress={() => openArticle(article)}>
           <Text style={styles.articleTitle}>{article.title}</Text>
           <View style={styles.publisher}>
