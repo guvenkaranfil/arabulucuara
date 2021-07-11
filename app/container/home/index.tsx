@@ -1,4 +1,6 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
+import {isUserLoggedIn} from '@selectors';
 import {useGetHomeQuery} from './HomeApi';
 
 import FullScreenLoader from '@components/loader/FullScreenLoader';
@@ -11,15 +13,15 @@ export interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamList, 'home'>;
 }
 
-const isUserLoggedIn = false;
 export default function Index({navigation}: Props) {
+  const haveUser = useSelector(isUserLoggedIn);
   const {data, isLoading, isFetching, refetch} = useGetHomeQuery();
 
   if (isLoading) {
     return <FullScreenLoader />;
   }
 
-  return isUserLoggedIn ? (
+  return haveUser ? (
     <ForLoggedUser
       banners={data?.banners}
       operations={data?.operations}
