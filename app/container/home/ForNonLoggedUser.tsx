@@ -7,6 +7,7 @@ import NewsShowecase from './components/NewsShowecase';
 import RoutingButtons from './components/RoutingButtons';
 import Attendees from './components/Attendees';
 import {GetHomeResponse} from './HomeApi';
+import NotLoggedUserHeader from '@components/header/NotLoggedUserHeader';
 
 export default function Home({
   banners,
@@ -17,6 +18,7 @@ export default function Home({
 }: GetHomeResponse & {refetch: () => void; isRefreshing: boolean}) {
   return (
     <View style={styles.container}>
+      <NotLoggedUserHeader onPressSignIn={() => console.log('onPress Sign in')} />
       <ScrollView
         contentContainerStyle={styles.cotentContainerStyle}
         refreshControl={<RefreshControl onRefresh={refetch} refreshing={isRefreshing} />}>
