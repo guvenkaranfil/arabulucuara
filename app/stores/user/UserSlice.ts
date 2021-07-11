@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 interface Token {
   token: string;
   username: string;
-  expired: Date;
+  expires: Date;
 }
 
 interface UserState {
@@ -31,7 +31,9 @@ export const userSlice = createSlice({
     },
 
     updateToken: (state, action) => {
+      console.log('action for updateToken:', action.payload);
       state.refreshToken = action.payload.refreshToken;
+      state.token = action.payload.token;
     },
 
     changeToken: (state, action) => {
