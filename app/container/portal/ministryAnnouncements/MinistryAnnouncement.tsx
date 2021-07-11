@@ -24,7 +24,11 @@ export default function MinistryAnnouncement({route}: Props) {
 
   if (data?.path || data?.body) {
     return (
-      <ContentViewer title={title} body={data?.body} path={data?.path ?? WEB_PATH + data?.path} />
+      <ContentViewer
+        title={title}
+        body={data?.body}
+        path={data?.path ? WEB_PATH + data?.path : undefined}
+      />
     );
   }
 }
