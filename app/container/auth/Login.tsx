@@ -23,7 +23,7 @@ export default function Login({navigation}: LoginProps) {
   const [signIn, {isLoading}] = useSignInMutation();
 
   return (
-    <LoginLayout showBackButton={true}>
+    <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
       <ScrollView bounces={false}>
         <Header screenTitle="Üye Girişi" dynamicHeight={200} />
 

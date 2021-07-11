@@ -1,4 +1,4 @@
-export type AuthNavigatorParamList = {
+export interface AuthNavigatorParamList {
   login: undefined;
   forgotPassword: undefined;
   registerIdentities: undefined;
@@ -11,4 +11,4 @@ export type AuthNavigatorParamList = {
   'completions/aboutMe': undefined;
   'completions/expertiesArea': undefined;
   'completions/meditationCenter': undefined;
-};
+}

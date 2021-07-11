@@ -16,7 +16,7 @@ import MinistryAnnouncements from '@portal/ministryAnnouncements';
 import MinistryAnnouncement from '@portal/ministryAnnouncements/MinistryAnnouncement';
 
 import {PortalNavigatorParamList} from './Types';
-import LoggedUserHeader from '../../components/LoggedUserHeader';
+import LoggedUserHeader from '../components/LoggedUserHeader';
 
 const Stack = createStackNavigator<PortalNavigatorParamList>();
 function PortalNavigator() {

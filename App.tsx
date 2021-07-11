@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import AppNavigator from '@routes/AppNavigator';
 
 import {Provider} from 'react-redux';
@@ -13,9 +12,7 @@ const App = () => {
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
         <StatusBar barStyle="dark-content" />
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
+        <AppNavigator />
       </SafeAreaView>
     </Provider>
   );

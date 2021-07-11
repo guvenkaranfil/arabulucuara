@@ -4,9 +4,15 @@ import {useGetHomeQuery} from './HomeApi';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
 import ForLoggedUser from './ForLoggedUser';
 import ForNonLoggedUser from './ForNonLoggedUser';
+import {HomeNavigatorParamList} from '@routes/stacks/home/Types';
+import {StackNavigationProp} from '@react-navigation/stack';
+
+export interface Props {
+  navigation: StackNavigationProp<HomeNavigatorParamList, 'home'>;
+}
 
 const isUserLoggedIn = false;
-export default function Index() {
+export default function Index({navigation}: Props) {
   const {data, isLoading, isFetching, refetch} = useGetHomeQuery();
 
   if (isLoading) {
@@ -30,6 +36,7 @@ export default function Index() {
       users={data?.users}
       refetch={refetch}
       isRefreshing={isFetching}
+      onPressLogin={() => navigation.navigate('auth', {screen: 'login'})}
     />
   );
 }

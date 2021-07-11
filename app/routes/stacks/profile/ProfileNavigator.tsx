@@ -9,7 +9,7 @@ import UserCertificates from '@profile/UserCertificates';
 import UserArticles from '@profile/UserArticles';
 import UserGallery from '@profile/UserGallery';
 
-import LoggedUserHeader from '../../components/LoggedUserHeader';
+import LoggedUserHeader from '../components/LoggedUserHeader';
 import {
   aboutUser,
   profileInformation,

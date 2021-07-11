@@ -15,10 +15,11 @@ export default function Home({
   users,
   isRefreshing,
   refetch,
-}: GetHomeResponse & {refetch: () => void; isRefreshing: boolean}) {
+  onPressLogin,
+}: GetHomeResponse & {refetch: () => void; isRefreshing: boolean; onPressLogin: () => void}) {
   return (
     <View style={styles.container}>
-      <NotLoggedUserHeader onPressSignIn={() => console.log('onPress Sign in')} />
+      <NotLoggedUserHeader onPressSignIn={onPressLogin} />
       <ScrollView
         contentContainerStyle={styles.cotentContainerStyle}
         refreshControl={<RefreshControl onRefresh={refetch} refreshing={isRefreshing} />}>

@@ -18,7 +18,7 @@ import MediatorCertificates from '@search/searchedProfileRoutes/MediatorCertific
 import MediatorGallery from '@search/searchedProfileRoutes/MediatorGallery';
 
 import {SearchNavigatorParamList} from './types';
-import LoggedUserHeader from '../../components/LoggedUserHeader';
+import LoggedUserHeader from '../components/LoggedUserHeader';
 
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
