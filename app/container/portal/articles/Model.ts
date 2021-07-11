@@ -1,7 +1,7 @@
 export interface Article {
   id: number;
   title: string;
-  body?: HTMLAreaElement;
+  body?: string;
   path?: string;
   createdOn: Date;
   createdBy: string;

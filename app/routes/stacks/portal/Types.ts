@@ -1,6 +1,6 @@
 import {Category} from '@portal/forum/components/Categories';
 import {TopicType} from '@container/portal/forum/components/Topic';
-import {Article} from '@portal/articles/ArticleDetail';
+import {Article} from '@portal/articles/Model';
 import {DataBank} from '@portal/dataBank/DataBankList';
 import {DataBankDetail} from '@portal/dataBank/DataBankDetail';
 
