@@ -2,6 +2,8 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
+import {useSelector} from 'react-redux';
+import {isUserLoggedIn} from '@selectors';
 
 import {Metrics} from '@utils';
 import {
@@ -14,6 +16,7 @@ import {
   ZoomEventIcon,
   CalculatorMachineIcon,
 } from '@icons';
+import {mustSignDialog} from '@components/alert';
 
 import PortalRoute from './components/PortalRoute';
 
@@ -22,6 +25,16 @@ export interface Props {
 }
 
 export default function Portal({navigation}: Props) {
+  const isUserSigned = useSelector(isUserLoggedIn);
+
+  const onPressRoute = (routeName: keyof PortalNavigatorParamList, mustSigned: boolean) => {
+    if (mustSigned && !isUserSigned) {
+      return mustSignDialog(navigation);
+    }
+
+    return navigation.navigate(routeName);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.routes}>
@@ -33,7 +46,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<ArticleIcon width={29} hieght={34} />}
           label="Makaleler"
-          onPress={() => navigation.navigate('articles')}
+          onPress={() => onPressRoute('articles', true)}
         />
         <PortalRoute
           icon={<InvitationDocumentIcon width={26} hieght={35} />}
