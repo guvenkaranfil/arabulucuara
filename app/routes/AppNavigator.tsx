@@ -10,13 +10,14 @@ import ProfileNavigator from './stacks/profile/ProfileNavigator';
 
 import TabBar from './components/TabBar';
 import {tabBarOptions, homeOptions, portalOptions, searchOptions, profileOptions} from './Config';
+import {useSelector} from 'react-redux';
+import {isUserLoggedIn} from '@selectors';
 
 const Tab = createBottomTabNavigator();
 export default function AppNavigator() {
-  const showLoginFlow = false;
-  const isUserLoggedIn = true;
+  const haveUser = useSelector(isUserLoggedIn);
 
-  return showLoginFlow ? (
+  return !haveUser ? (
     <AuthStack />
   ) : (
     <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar}>
@@ -29,7 +30,7 @@ export default function AppNavigator() {
         options={profileOptions}
         listeners={({navigation, route}) => ({
           tabPress: e => {
-            if (!isUserLoggedIn) {
+            if (!haveUser) {
               // Prevent default action
               e.preventDefault();
               return Alert.alert(

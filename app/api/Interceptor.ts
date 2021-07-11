@@ -1,5 +1,5 @@
 import axios, {AxiosError} from 'axios';
-import {changeToken} from '../stores/features/user/UserSlice';
+import {changeToken} from '../stores/user/UserSlice';
 import globalStore from '../stores/RootStore';
 
 let isRefreshing = false;

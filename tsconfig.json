@@ -68,7 +68,8 @@
       "@routes/*": ["routes/*"],
       "@utils": ["utils/index"],
       "@helpers/*": ["helpers/*"],
-      "@icons": ["icons/index"]
+      "@icons": ["icons/index"],
+      "@selectors": ["redux/selectors/index"]
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]

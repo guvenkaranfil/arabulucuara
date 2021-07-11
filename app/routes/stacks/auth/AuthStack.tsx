@@ -19,7 +19,7 @@ import MeditationCenter from '@auth/completions/07_MeditationCenter';
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
   return (
-    <Stack.Navigator headerMode="none" initialRouteName="completions/meditationCenter">
+    <Stack.Navigator headerMode="none" initialRouteName="login">
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="registerIdentities" component={RegisterIdentities} />

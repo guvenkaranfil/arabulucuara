@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Input from '@components/input/Input';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/LoginStyles';
+import {useSignInMutation} from '../../stores/user/UserApi';
 
 export interface LoginProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'login'>;
@@ -18,6 +19,8 @@ export default function Login({navigation}: LoginProps) {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   const [hidePassword, sethidePassword] = useState(true);
+
+  const [signIn, {isLoading}] = useSignInMutation();
 
   return (
     <LoginLayout showBackButton={true}>
@@ -48,7 +51,11 @@ export default function Login({navigation}: LoginProps) {
         </View>
 
         <View style={styles.signIn}>
-          <FilledButton label="Giriş Yap" onPress={() => console.log('onPress..')} />
+          <FilledButton
+            isLoading={isLoading}
+            label="Giriş Yap"
+            onPress={() => signIn({username: email, password: password})}
+          />
         </View>
 
         <View style={styles.footer}>

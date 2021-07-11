@@ -1,13 +1,13 @@
-import {configureStore} from '@reduxjs/toolkit';
-// import thunk from 'redux-thunk';
-import RootReducer from './features';
-import Client from '@api/Client';
+import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 
-// const middleware = [thunk].filter(Boolean);
+import Client from '@api/Client';
+import RootReducer from './RootReducer';
+import ErrorMiddleware from '../redux/slicers/error';
+
 const store = configureStore({
   reducer: RootReducer,
-  // middleware: getDefaultMiddleware => getDefaultMiddleware().concat(...middleware),
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(Client.middleware),
+
+  middleware: [...getDefaultMiddleware(), Client.middleware, ErrorMiddleware],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

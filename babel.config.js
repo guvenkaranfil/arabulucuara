@@ -18,6 +18,7 @@ module.exports = {
           '@utils': './app/utils',
           '@helpers': './app/helpers',
           '@icons': './app/icons',
+          '@selectors': './app/redux/selectors',
         },
       },
     ],

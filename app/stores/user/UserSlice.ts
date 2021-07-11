@@ -1,13 +1,21 @@
 import {createSlice} from '@reduxjs/toolkit';
 
+interface Token {
+  token: string;
+  username: string;
+  expired: Date;
+}
+
 interface UserState {
   refreshToken?: string;
-  token?: string;
+  token?: Token;
+  userLastStep?: number;
 }
 
 const initialState: UserState = {
   refreshToken: undefined,
   token: undefined,
+  userLastStep: undefined,
 };
 
 export const userSlice = createSlice({
@@ -16,12 +24,13 @@ export const userSlice = createSlice({
 
   reducers: {
     logIn: (state, action) => {
+      console.log('action.payload:', action.payload);
       state.refreshToken = action.payload.refreshToken;
       state.token = action.payload.token;
+      state.userLastStep = action.payload.userLastStep;
     },
 
     updateToken: (state, action) => {
-      state.token = action.payload.token;
       state.refreshToken = action.payload.refreshToken;
     },
 
