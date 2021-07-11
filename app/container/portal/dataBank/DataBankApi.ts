@@ -1,17 +1,20 @@
 import Client from '@api/Client';
 
-import {DataBankCategory} from './Model';
-
-export interface ArticlesResponse {
-  articles: Array<DataBankCategory>;
-}
+import {DataBankCategory, DataBankSubCategory} from './Model';
 
 const articlesApi = Client.injectEndpoints({
   endpoints: build => ({
-    getDataBankCategories: build.query<ArticlesResponse, void>({
+    getDataBankCategories: build.query<Array<DataBankCategory>, void>({
       query: () => '/Portal/GetDataBankCategories',
+    }),
+    getDataBankSubCategories: build.query<Array<DataBankSubCategory>, {id: string}>({
+      query: ({id}) => ({
+        url: '/Portal/GetDataBank',
+        method: 'GET',
+        headers: {id},
+      }),
     }),
   }),
 });
 
-export const {useGetDataBankCategoriesQuery} = articlesApi;
+export const {useGetDataBankCategoriesQuery, useGetDataBankSubCategoriesQuery} = articlesApi;

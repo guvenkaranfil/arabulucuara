@@ -4,20 +4,18 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 import {CommonStyles, Fonts, Metrics} from '@utils';
+import {useGetDataBankSubCategoriesQuery} from './DataBankApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'dataBankList'>;
   navigation: StackNavigationProp<PortalNavigatorParamList, 'dataBankList'>;
 }
 
-export interface DataBank {
-  id: number;
-  name: string;
-  content: string;
-}
-
 export default function DataBankList({route, navigation}: Props) {
   const {dataBank} = route.params;
+
+  const {data: bankData, isLoading} = useGetDataBankSubCategoriesQuery({id: String(dataBank?.id)});
 
   const _renderHeader = () => (
     <View style={styles.header}>
@@ -25,18 +23,22 @@ export default function DataBankList({route, navigation}: Props) {
     </View>
   );
 
+  if (isLoading) {
+    return <FullScreenLoader />;
+  }
+
   return (
     <View style={CommonStyles.container}>
       <FlatList
         contentContainerStyle={CommonStyles.scrollContentStyle}
-        data={SAMPLES_BANKS}
+        data={bankData}
         ListHeaderComponent={_renderHeader}
         renderItem={({item, index}) => (
           <Pressable
             key={index}
             style={styles.dataBank}
             onPress={() => navigation.navigate('dataBankDetail', {dataBankDetail: item})}>
-            <Text style={styles.dataBankTitle}>{item.name}</Text>
+            <Text style={styles.dataBankTitle}>{item?.title}</Text>
           </Pressable>
         )}
         keyExtractor={(_, index) => String(index)}
@@ -78,26 +80,3 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 });
-
-const SAMPLES_BANKS = [
-  {
-    id: 1,
-    name: 'Hukuk Uyuşmazlıklarında Arabuluculuk Kanunu Yönetmeliği',
-    content: '<b>Line1</b>',
-  },
-  {
-    id: 2,
-    name: 'İş Mahkemeleri Kanunu',
-    content: '<b>Line1</b>',
-  },
-  {
-    id: 3,
-    name: 'Hukuk Muhakemeleri Kanunu İle Bazı Kanunlarda Değişiklik Yapılması Hakkında Kanun',
-    content: '<b>Line1</b>',
-  },
-  {
-    id: 4,
-    name: 'Hukuk Muhakemeleri Kanunu İle Bazı Kanunlarda Değişiklik Yapılması Hakkında Kanun',
-    content: '<b>Line1</b>',
-  },
-];
