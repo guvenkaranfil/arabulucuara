@@ -11,6 +11,7 @@
     "svgr": "svgr ./app/assets/svgs -d ./app/icons --ignore-existing --native --icon --svg-props 'width=24,height=24'"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/datetimepicker": "^3.5.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^5.11.11",
