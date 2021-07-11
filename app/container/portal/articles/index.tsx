@@ -5,37 +5,51 @@ import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {OnlyPersonIcon} from '@icons';
+import {useGetArticlesQuery} from './ArticleApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 
 export interface Props {
   navigation: StackNavigationProp<PortalNavigatorParamList, 'articles'>;
 }
 
 export default function Articles({navigation}: Props) {
-  return (
-    <View style={CommonStyles.container}>
-      <FlatList
-        contentContainerStyle={styles.screenMarginTop}
-        data={ARTICLES}
-        renderItem={({item, index}) => (
-          <Pressable
-            key={index}
-            style={styles.article}
-            onPress={() => navigation.navigate('articleDetail', {article: item})}>
-            <Text style={styles.articleTitle}>{item.title}</Text>
-            <View style={styles.aritcleOwner}>
-              <OnlyPersonIcon width={15} height={15} />
-              <Text style={styles.publisher}>{item.publisher}</Text>
-            </View>
-          </Pressable>
-        )}
-        keyExtractor={(_, index) => String(index)}
-      />
-    </View>
-  );
+  const {data, isLoading, isError} = useGetArticlesQuery();
+
+  if (isLoading) {
+    return <FullScreenLoader />;
+  } else if (isError) {
+    return (
+      <View>
+        <Text>Bir sorun Olutşu</Text>
+      </View>
+    );
+  } else if (data && Array.isArray(data)) {
+    return (
+      <View style={CommonStyles.container}>
+        <FlatList
+          contentContainerStyle={styles.screenMarginTop}
+          data={data}
+          renderItem={({item, index}) => (
+            <Pressable
+              key={index}
+              style={styles.article}
+              onPress={() => navigation.navigate('articleDetail', {article: item})}>
+              <Text style={styles.articleTitle}>{item.title}</Text>
+              <View style={styles.aritcleOwner}>
+                <OnlyPersonIcon width={15} height={15} fill="#B3B3B3" />
+                <Text style={styles.publisher}>{item.createdBy}</Text>
+              </View>
+            </Pressable>
+          )}
+          keyExtractor={(_, index) => String(index)}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  screenMarginTop: {marginTop: 24},
+  screenMarginTop: {marginVertical: 24},
 
   articleTitle: {
     fontSize: 16,
@@ -66,32 +80,3 @@ const styles = StyleSheet.create({
     color: '#B3B3B3',
   },
 });
-
-const ARTICLES = [
-  {
-    id: 1,
-    title: 'ARABULUCULUK',
-    publisher: 'Just & Fair Arabuluculuk Merkezi',
-  },
-  {
-    id: 2,
-    title: 'ARABULUCULUK MERKEZLERİ KALİTE STANDARTLARI',
-    publisher: 'Just & Fair Arabuluculuk Merkezi',
-  },
-  {
-    id: 3,
-    title: 'UYUŞMAZLIKLARIN ÇÖZÜMÜNDE ARABULUCULUK',
-    publisher: 'Just & Fair Arabuluculuk Merkezi',
-  },
-  {
-    id: 4,
-    title: 'AİLE HUKUKUNDAN KAYNAKLI NİTELİKLİ BİLİRKİŞİ RAPORU ÖRNEĞİ',
-    publisher: 'Just & Fair Arabuluculuk Merkezi',
-  },
-  {
-    id: 5,
-    title:
-      'YARGITAY ve BÖLGE ADLİYE MAHKEMELERİ KARARLARI EŞLİĞİNDE ARABULUCULUK TUTANAKLARININ İPTAL SEBEPLERİ, YARGIYA KONU OLMA GEREKÇELERİ VE ÇÖZÜM ÖNERİLERİ',
-    publisher: 'Just & Fair Arabuluculuk Merkezi',
-  },
-];
