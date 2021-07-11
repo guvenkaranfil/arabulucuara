@@ -16,7 +16,9 @@ export default function ContentViewer({title, body, path, children}: Props) {
   if (body) {
     return (
       <View style={CommonStyles.container}>
-        <ScrollView style={CommonStyles.paddingForScroll}>
+        <ScrollView
+          style={CommonStyles.paddingForScroll}
+          contentContainerStyle={styles.contentStyle}>
           <Text style={styles.title}>{title}</Text>
 
           <HTML source={{html: body}} containerStyle={styles.articleContent} />
@@ -44,4 +46,8 @@ const styles = StyleSheet.create({
   },
 
   articleContent: {marginVertical: 25},
+
+  contentStyle: {
+    paddingBottom: 40,
+  },
 });
