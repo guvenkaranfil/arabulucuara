@@ -5,7 +5,7 @@ import FullScreenLoader from '@components/loader/FullScreenLoader';
 import ForLoggedUser from './ForLoggedUser';
 import ForNonLoggedUser from './ForNonLoggedUser';
 
-const isUserLoggedIn = true;
+const isUserLoggedIn = false;
 export default function Index() {
   const {data, isLoading, isFetching, refetch} = useGetHomeQuery();
 
@@ -24,6 +24,12 @@ export default function Index() {
       refetch={refetch}
     />
   ) : (
-    <ForNonLoggedUser />
+    <ForNonLoggedUser
+      banners={data?.banners}
+      siteNews={data?.siteNews}
+      users={data?.users}
+      refetch={refetch}
+      isRefreshing={isFetching}
+    />
   );
 }

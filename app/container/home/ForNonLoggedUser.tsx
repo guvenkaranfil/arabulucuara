@@ -1,18 +1,27 @@
 import React from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {Metrics} from 'utils';
+import {ScrollView, StyleSheet, View, RefreshControl} from 'react-native';
+import {Metrics} from '@utils';
 
 import Banner from './components/Banner';
 import NewsShowecase from './components/NewsShowecase';
 import RoutingButtons from './components/RoutingButtons';
 import Attendees from './components/Attendees';
+import {GetHomeResponse} from './HomeApi';
 
-export default function Home() {
+export default function Home({
+  banners,
+  siteNews,
+  users,
+  isRefreshing,
+  refetch,
+}: GetHomeResponse & {refetch: () => void; isRefreshing: boolean}) {
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.cotentContainerStyle}>
+      <ScrollView
+        contentContainerStyle={styles.cotentContainerStyle}
+        refreshControl={<RefreshControl onRefresh={refetch} refreshing={isRefreshing} />}>
         <View style={styles.bannerArea}>
-          <Banner />
+          <Banner banners={banners ?? []} />
         </View>
 
         <View style={styles.routingButtons}>
@@ -26,11 +35,14 @@ export default function Home() {
         </View>
 
         <View style={styles.newsShowCase}>
-          <NewsShowecase news={news} openNew={(id: number) => console.log('open new id:', id)} />
+          <NewsShowecase
+            news={siteNews ?? []}
+            openNew={(id: number) => console.log('open new id:', id)}
+          />
         </View>
 
         <View style={styles.attendees}>
-          <Attendees attendees={attendees} />
+          <Attendees attendees={users ?? []} />
         </View>
       </ScrollView>
     </View>
@@ -52,175 +64,3 @@ const styles = StyleSheet.create({
 
   attendees: {marginTop: Metrics.hp(35), alignItems: 'center'},
 });
-
-const news = [
-  {
-    id: 1,
-    date: 26,
-    month: 'Ağustos',
-    title: 'YILDIZLARINIZ PARLASIN',
-  },
-  {
-    id: 2,
-    date: 26,
-    month: 'Ağustos',
-    title: 'Arabulucuara ana sayfasında yerinizi aldınız mı? 3. satır demesi 3. satır demesi',
-  },
-  {
-    id: 3,
-    date: 26,
-    month: 'Ağustos',
-    title: 'Arabulucuara Forum yayında',
-  },
-  {
-    id: 4,
-    date: 26,
-    month: 'Ağustos',
-    title: '2021 yılı Arabuluculuk aidatlarınızı ödediniz mi?',
-  },
-  {
-    id: 5,
-    date: 26,
-    month: 'Ağustos',
-    title: 'Her Anlaşma Bir Fidan - Arabulucular Ormanı',
-  },
-];
-
-const attendees = [
-  {
-    id: 'ademgul',
-    nameSurname: 'Adem Gül',
-    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
-    time: '22:46',
-  },
-
-  {
-    id: 'serkanAricanl',
-    nameSurname: 'Serkan ARICAN',
-    profilePhotoUrl:
-      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
-    time: '22:46',
-  },
-  {
-    id: 'ademgul',
-    nameSurname: 'Adem Gül',
-    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
-    time: '22:46',
-  },
-
-  {
-    id: 'serkanAricanl',
-    nameSurname: 'Serkan ARICAN',
-    profilePhotoUrl:
-      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
-    time: '22:46',
-  },
-  {
-    id: 'ademgul',
-    nameSurname: 'Adem Gül',
-    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
-    time: '22:46',
-  },
-
-  {
-    id: 'serkanAricanl',
-    nameSurname: 'Serkan ARICAN',
-    profilePhotoUrl:
-      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
-    time: '22:46',
-  },
-  {
-    id: 'ademgul',
-    nameSurname: 'Adem Gül',
-    profilePhotoUrl: 'https://arabulucuara.com/uploaded/userimage/blank.png',
-    time: '22:46',
-  },
-
-  {
-    id: 'serkanAricanl',
-    nameSurname: 'Serkan ARICAN',
-    profilePhotoUrl:
-      'https://arabulucuara.com/uploaded/userimage/55168eff-df91-430c-ac6b-aaf782db5572.jpg',
-    time: '22:46',
-  },
-];
-
-const lastMoves = [
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-  {
-    id: 1,
-    time: '22:35',
-    nameSurname: 'Emre GEDİKLİ',
-    action: 'Profil Bilgilerini Güncelledi.',
-  },
-];
-
-const articles = [
-  {
-    id: 1,
-    title: 'ARABULUCULUK',
-    publisher: 'Hanife Tuba SAĞCAN',
-  },
-  {
-    id: 1,
-    title: 'ARABULUCULUK MERKEZLERİ KALİTE STANDARTLARI',
-    publisher: 'Hanife Tuba SAĞCAN',
-  },
-  {
-    id: 1,
-    title: 'UYUŞMAZLIKLARIN ÇÖZÜMÜNDE ARABULUCULUK',
-    publisher: 'Hanife Tuba SAĞCAN',
-  },
-  {
-    id: 1,
-    title: 'AİLE HUKUKUNDAN KAYNAKLI NİTELİKLİ BİLİRKİŞİ RAPORU ÖRNEĞİ',
-    publisher: 'Hanife Tuba SAĞCAN',
-  },
-  {
-    id: 1,
-    title:
-      'YARGITAY ve BÖLGE ADLİYE MAHKEMELERİ KARARLARI EŞLİĞİNDE ARABULUCULUK TUTANAKLARININ İPTAL SEBEPLERİ, YARGIYA KONU OLMA GEREKÇELERİ VE ÇÖZÜM ÖNERİLERİ',
-    publisher: 'Hanife Tuba SAĞCAN',
-  },
-];
