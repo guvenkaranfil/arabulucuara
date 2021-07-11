@@ -3,17 +3,26 @@ import React from 'react';
 import {StyleSheet, FlatList, Text, View, Pressable} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
+import {useGetMinistryAnnouncementsQuery} from './MinistryAnnouncementApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
+import {getMonthAndDayName} from '@helpers/DateFormatter';
 
 export interface Props {
   navigation: StackNavigationProp<PortalNavigatorParamList, 'ministryAnnouncements'>;
 }
 
 export default function MinistryAnnouncements({navigation}: Props) {
+  const {data, isLoading} = useGetMinistryAnnouncementsQuery();
+
+  if (isLoading) {
+    return <FullScreenLoader />;
+  }
+
   return (
     <View style={CommonStyles.container}>
       <FlatList
         contentContainerStyle={styles.content}
-        data={SAMPLE_ANNOUNCEMENTS}
+        data={data}
         renderItem={({item, index}) => (
           <Pressable
             key={index}
@@ -22,11 +31,13 @@ export default function MinistryAnnouncements({navigation}: Props) {
               navigation.navigate('ministryAnnouncement', {id: item.id, title: item.title})
             }>
             <View style={styles.date}>
-              <Text style={styles.day}>{item.date.day}</Text>
-              <Text style={styles.month}>{item.date.month}</Text>
+              <Text style={styles.day}>{getMonthAndDayName(item.createdDate).day}</Text>
+              <Text style={styles.month}>{getMonthAndDayName(item.createdDate).month}</Text>
             </View>
 
-            <Text style={styles.title}>{item.title}</Text>
+            <Text numberOfLines={3} style={styles.title}>
+              {item.title}
+            </Text>
           </Pressable>
         )}
         keyExtractor={(_, index) => String(index)}
