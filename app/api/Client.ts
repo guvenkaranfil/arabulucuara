@@ -1,7 +1,6 @@
-import axios from 'axios';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
-const client = axios.create({
-  baseURL: 'https://api.arabulucuara.com',
+export default createApi({
+  baseQuery: fetchBaseQuery({baseUrl: 'https://api.arabulucuara.com'}),
+  endpoints: () => ({}),
 });
-
-export default client;

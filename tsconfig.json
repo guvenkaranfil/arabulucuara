@@ -58,6 +58,7 @@
 
     "paths": {
       "*": ["/*"],
+      "@api/*": ["api/*"],
       "@auth/*": ["container/auth/*"],
       "@home/*": ["container/home/*"],
       "@search/*": ["container/search/*"],
@@ -66,6 +67,7 @@
       "@components/*": ["components/*"],
       "@routes/*": ["routes/*"],
       "@utils": ["utils/index"],
+      "@helpers/*": ["helpers/*"],
       "@icons": ["icons/index"]
     }
   },

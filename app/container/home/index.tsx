@@ -1,17 +1,29 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
-import {fetchHomeData} from '../../stores/features/home/HomeSlice';
+import {useGetHomeQuery} from './HomeApi';
 
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 import ForLoggedUser from './ForLoggedUser';
 import ForNonLoggedUser from './ForNonLoggedUser';
 
 const isUserLoggedIn = true;
 export default function Index() {
-  const dispatch = useDispatch();
+  const {data, isLoading, isFetching, refetch} = useGetHomeQuery();
 
-  React.useEffect(() => {
-    dispatch(fetchHomeData());
-  }, [dispatch]);
+  if (isLoading) {
+    return <FullScreenLoader />;
+  }
 
-  return isUserLoggedIn ? <ForLoggedUser /> : <ForNonLoggedUser />;
+  return isUserLoggedIn ? (
+    <ForLoggedUser
+      banners={data?.banners}
+      operations={data?.operations}
+      siteNews={data?.siteNews}
+      articles={data?.articles}
+      users={data?.users}
+      isRefreshing={isFetching}
+      refetch={refetch}
+    />
+  ) : (
+    <ForNonLoggedUser />
+  );
 }

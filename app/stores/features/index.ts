@@ -1,9 +1,8 @@
 import User from './user/UserSlice';
-import Home from './home/HomeSlice';
-import {arabulucuara} from '../../stores/rtkApi';
+
+import Client from '@api/Client';
 
 export default {
-  [arabulucuara.reducerPath]: arabulucuara.reducer,
+  [Client.reducerPath]: Client.reducer,
   user: User,
-  home: Home,
 };

@@ -1,9 +1,11 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
+import {getMonthAndDayName} from '@helpers/DateFormatter';
+import {SiteNew} from '@home/Models';
 
 type Props = {
-  news: Array<{id: number; date: number; month: string; title: string}>;
+  news: Array<SiteNew>;
   openNew: (id: number) => void;
 };
 
@@ -12,11 +14,17 @@ export default function NewsShowecase({news, openNew}: Props) {
     <View>
       <Text style={styles.title}>Arabulucuara'dan Haberler</Text>
       {news.map((item, index) => (
-        <Pressable key={index} onPress={() => openNew(item.id)}>
+        <Pressable key={index} onPress={() => openNew(item?.id)}>
           <View style={[styles.new, styles.shadow]}>
             <View style={styles.date}>
-              <Text style={styles.dateLabel}>{item.date}</Text>
-              <Text style={styles.monthLabel}>{item.month}</Text>
+              {item?.createdOn && (
+                <>
+                  <Text style={styles.dateLabel}>{getMonthAndDayName(item?.createdOn)?.day}</Text>
+                  <Text style={styles.monthLabel}>
+                    {getMonthAndDayName(item?.createdOn)?.month}
+                  </Text>
+                </>
+              )}
             </View>
             <View style={styles.labelContainer}>
               <Text numberOfLines={3} ellipsizeMode="tail" style={styles.newTitle}>

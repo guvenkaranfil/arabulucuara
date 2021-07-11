@@ -1,10 +1,12 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Fonts, Metrics} from '@utils';
+import {NewlyOperation} from '@home/Models';
+import {getHourAndMinute} from '@helpers/DateFormatter';
 
 type Props = {
-  actions: Array<{id: number; time: string; nameSurname: string; action: string}>;
-  onPress: (item: {id: number; time: string; nameSurname: string; action: string}) => void;
+  actions: Array<NewlyOperation>;
+  onPress: (item: NewlyOperation) => void;
 };
 
 export default function LastMoves({actions, onPress}: Props) {
@@ -13,7 +15,7 @@ export default function LastMoves({actions, onPress}: Props) {
       <Text style={styles.title}>Son Hareketler</Text>
       {actions.map((move, index) => (
         <Pressable key={index} style={styles.moveAction} onPress={() => onPress(move)}>
-          <Text>{move.time}</Text>
+          <Text>{getHourAndMinute(move.time)}</Text>
           {index + 1 !== actions.length ? (
             <View style={styles.stripe}>
               <View style={styles.actionBorder} />
@@ -24,7 +26,7 @@ export default function LastMoves({actions, onPress}: Props) {
             </View>
           )}
           <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
-            {move.nameSurname} <Text style={styles.welcomeMessage}>{move.action}</Text>
+            {move.user} <Text style={styles.welcomeMessage}>{move.operationName}</Text>
           </Text>
         </Pressable>
       ))}

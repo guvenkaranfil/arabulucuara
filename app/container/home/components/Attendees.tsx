@@ -1,9 +1,11 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
+import {NewlyJoinedUser} from '@home/Models';
+import {getHourAndMinute} from '@helpers/DateFormatter';
 
 type Props = {
-  attendees: Array<{id: string; nameSurname: string; profilePhotoUrl: string; time: string}>;
+  attendees: Array<NewlyJoinedUser>;
 };
 
 export default function Attendees({attendees}: Props) {
@@ -13,12 +15,12 @@ export default function Attendees({attendees}: Props) {
       {attendees.map((attendee, index) => (
         <Pressable key={index}>
           <View style={styles.attendee}>
-            <Image style={styles.profilePhoto} source={{uri: attendee.profilePhotoUrl}} />
+            <Image style={styles.profilePhoto} source={{uri: attendee.image}} />
             <View style={styles.userInfo}>
               <Text style={styles.name}>
-                {attendee.nameSurname} <Text style={styles.welcomeMessage}>aramıza hoşgedin!</Text>
+                {attendee.name} <Text style={styles.welcomeMessage}>aramıza hoşgedin!</Text>
               </Text>
-              <Text style={styles.time}>{attendee.time}</Text>
+              <Text style={styles.time}>{getHourAndMinute(attendee.createdOn)}</Text>
             </View>
           </View>
         </Pressable>

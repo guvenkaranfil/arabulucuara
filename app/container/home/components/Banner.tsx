@@ -1,11 +1,12 @@
+import {Banner} from '@home/Models';
 import React from 'react';
 import {StyleSheet, Image, View} from 'react-native';
-import {Metrics} from 'utils';
+import {Metrics} from '@utils';
 
-export default function Banner() {
+export default function BannerArea({banners}: {banners: Array<Banner>}) {
   return (
     <View style={styles.container}>
-      <Image source={require('../../../assets/images/Banner.png')} style={styles.banner} />
+      <Image source={{uri: banners[1]?.image}} style={styles.banner} />
     </View>
   );
 }
