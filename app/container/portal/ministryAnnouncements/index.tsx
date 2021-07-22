@@ -1,6 +1,6 @@
-import {CommonStyles, Fonts, Metrics} from '@utils';
 import React from 'react';
 import {StyleSheet, FlatList, Text, View, Pressable} from 'react-native';
+import {CommonStyles, Fonts, Labels, Metrics} from '@utils';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 import {useGetMinistryAnnouncementsQuery} from './MinistryAnnouncementApi';
@@ -31,7 +31,9 @@ export default function MinistryAnnouncements({navigation}: Props) {
               navigation.navigate('ministryAnnouncement', {id: item.id, title: item.title})
             }>
             <View style={styles.date}>
-              <Text style={styles.day}>{getMonthAndDayName(item.createdDate).day}</Text>
+              <Text style={Labels.label18BoldWhite}>
+                {getMonthAndDayName(item.createdDate).day}
+              </Text>
               <Text style={styles.month}>{getMonthAndDayName(item.createdDate).month}</Text>
             </View>
 
@@ -82,12 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#7E0736',
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
-  },
-
-  day: {
-    fontSize: 18,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
   },
 
   month: {

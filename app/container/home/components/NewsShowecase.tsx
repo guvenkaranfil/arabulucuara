@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from '@utils';
+import {Fonts, Labels, Metrics} from '@utils';
 import {getMonthAndDayName} from '@helpers/DateFormatter';
 import {SiteNew} from '@home/Models';
 
@@ -19,7 +19,9 @@ export default function NewsShowecase({news, openNew}: Props) {
             <View style={styles.date}>
               {item?.createdOn && (
                 <>
-                  <Text style={styles.dateLabel}>{getMonthAndDayName(item?.createdOn)?.day}</Text>
+                  <Text style={Labels.label18BoldWhite}>
+                    {getMonthAndDayName(item?.createdOn)?.day}
+                  </Text>
                   <Text style={styles.monthLabel}>
                     {getMonthAndDayName(item?.createdOn)?.month}
                   </Text>
@@ -75,12 +77,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     backgroundColor: '#7E0736',
-  },
-
-  dateLabel: {
-    fontSize: 18,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
   },
 
   monthLabel: {

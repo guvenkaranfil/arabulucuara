@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Labels, Metrics} from '@utils';
 
 type PedometerProps = {
   totalCount: number;
@@ -14,7 +14,7 @@ export default function Pedometer({totalCount, activeStep}: PedometerProps) {
       <View
         key={index}
         style={[styles.step, step <= activeStep ? styles.activeStep : styles.inActiveStep]}>
-        <Text style={styles.label}>{step}</Text>
+        <Text style={Labels.label18BoldWhite}>{step}</Text>
       </View>
     ));
   };
@@ -58,12 +58,6 @@ const styles = StyleSheet.create({
 
   inActiveStep: {
     backgroundColor: '#501336',
-  },
-
-  label: {
-    fontSize: 18,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
   },
 
   activeLabel: {

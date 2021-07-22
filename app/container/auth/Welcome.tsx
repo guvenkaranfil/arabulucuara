@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import FilledButton from '@components/buttons/FilledButton';
 import {StartsIcon, StarParticles} from '@icons';
-import {Fonts, Metrics} from 'utils';
+import {Labels, Metrics} from '@utils';
 
 export interface WelcomeProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'welcome'>;
@@ -71,9 +71,7 @@ const styles = StyleSheet.create({
   info: {
     paddingTop: Metrics.hp(30),
     textAlign: 'center',
-    fontSize: 18,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
+    ...Labels.label18RegularWhite,
   },
 
   footer: {
