@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-import {Fonts, Metrics} from '@utils';
+import {Labels, Metrics} from '@utils';
 import {TextLogo} from '@icons';
 
 type Props = {
@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
 
   title: {
     textAlign: 'center',
-    fontSize: 26,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
+    ...Labels.label26BoldWhite,
   },
 });
