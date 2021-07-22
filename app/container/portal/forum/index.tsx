@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
+import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
 import {categoriesSample, topicSample} from './mocks';
 import NewTopicModal from './components/NewTopicModal';
