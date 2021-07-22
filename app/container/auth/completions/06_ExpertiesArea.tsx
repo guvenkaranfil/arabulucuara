@@ -5,8 +5,8 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import RoundCheckBox from '@components/checkbox/RoundCheckBox';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/ExpertiesAreaStyle';
 
 export default function ExpertiesArea() {

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Labels, Metrics} from '@utils';
 
 export default StyleSheet.create({
   step: {
@@ -21,19 +21,11 @@ export default StyleSheet.create({
 
   expertiesLabel: {
     paddingBottom: 16,
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
+    ...Labels.label16RegularWhite,
   },
 
   expertiesItem: {
     marginBottom: 16,
-  },
-
-  expertiesName: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
   },
 
   expertiesInfo: {

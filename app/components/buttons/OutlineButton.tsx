@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, Pressable} from 'react-native';
-import {Fonts, Metrics} from '@utils';
+import {Labels, Metrics} from '@utils';
 
 type Props = {
   label: string;
@@ -10,7 +10,7 @@ type Props = {
 export default function FilledButton({label, onPress}: Props) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={Labels.label16BoldWhite}>{label}</Text>
     </Pressable>
   );
 }
@@ -24,11 +24,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: '#fff',
-  },
-
-  label: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
   },
 });

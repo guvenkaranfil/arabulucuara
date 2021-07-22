@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, Metrics} from '@utils';
+import {Metrics} from '@utils';
 
 export default StyleSheet.create({
   container: {
@@ -23,12 +23,6 @@ export default StyleSheet.create({
     height: 57,
     borderBottomWidth: 1,
     borderBottomColor: '#707070',
-  },
-
-  title: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoLight,
-    color: '#181C32',
   },
 
   content: {

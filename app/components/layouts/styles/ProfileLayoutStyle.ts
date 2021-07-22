@@ -51,12 +51,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
 
-  screenTitle: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
-  },
-
   right: {
     width: 50,
     height: '100%',

@@ -54,12 +54,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  screenTitle: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
-  },
-
   right: {
     height: '100%',
     justifyContent: 'center',

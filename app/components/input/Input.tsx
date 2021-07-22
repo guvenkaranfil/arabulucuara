@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, View, TextInput, KeyboardType, TouchableOpacity} from 'react-native';
 
-import {Fonts, Metrics} from '@utils';
+import {Labels, Metrics} from '@utils';
 import {ViewStyle} from 'react-native';
 // import {SecureIcon} from '@icons';
 
@@ -58,9 +58,7 @@ const styles = StyleSheet.create({
   input: {
     textAlignVertical: 'top',
     paddingHorizontal: 20,
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#0F0A39',
+    ...Labels.label16RegularViolet,
   },
 
   secureIconContainer: {

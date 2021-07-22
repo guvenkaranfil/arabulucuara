@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 
 export default StyleSheet.create({
   contentContainerStyle: {
@@ -31,12 +31,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     backgroundColor: '#fff',
-  },
-
-  dateLabel: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#0F0A39',
   },
 
   footer: {

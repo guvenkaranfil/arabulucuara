@@ -1,6 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, Pressable, ViewStyle, TextStyle} from 'react-native';
-import {Fonts, Metrics} from '@utils';
+import {Labels, Metrics} from '@utils';
 
 type Props = {
   style?: ViewStyle;
@@ -24,7 +24,7 @@ export default function FilledButton({
       {isLoading ? (
         <ActivityIndicator size="small" color="#fff" />
       ) : (
-        <Text style={[styles.label, labelStyle]}>{label}</Text>
+        <Text style={[Labels.label16BoldWhite, labelStyle]}>{label}</Text>
       )}
     </Pressable>
   );
@@ -37,11 +37,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-  },
-
-  label: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#fff',
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, Pressable, ViewStyle, TextStyle} from 'react-native';
-import {Fonts, Metrics} from '@utils';
+import {Labels, Metrics} from '@utils';
 import {TickIcon} from '@icons';
 
 type Props = {
@@ -61,9 +61,7 @@ const styles = StyleSheet.create({
 
   label: {
     paddingLeft: Metrics.hp(9),
-    fontSize: 16,
-    fontFamily: Fonts.robotoRegular,
-    color: '#fff',
     lineHeight: 24,
+    ...Labels.label16RegularWhite,
   },
 });

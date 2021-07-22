@@ -3,7 +3,7 @@ import {View, Animated, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {CommonStyles} from '@utils';
+import {CommonStyles, Labels} from '@utils';
 import styles from './styles/ProfileLayoutStyle';
 import MediationCenter from './components/MediationCenter';
 import IndividualMediator from './components/IndividualMediator';
@@ -36,7 +36,7 @@ export default function ProfileLayout({children, user}: ScreenProps) {
       <View style={styles.screenHeaderCenter}>
         <Animated.Text
           numberOfLines={1}
-          style={[styles.screenTitle, {opacity: opacityNameSurname}]}>
+          style={[Labels.label16BoldWhite, {opacity: opacityNameSurname}]}>
           {user.nameSurname}
         </Animated.Text>
       </View>

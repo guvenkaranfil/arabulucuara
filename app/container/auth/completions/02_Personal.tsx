@@ -3,16 +3,17 @@ import {View, Text, ScrollView, Pressable} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import Input from '@components/input/Input';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/PersonalStyles';
+import {Labels} from '@utils';
 
 export interface PersonalProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/personal'>;
@@ -43,7 +44,7 @@ export default function Personal({navigation}: PersonalProps) {
 
         <View style={styles.form}>
           <Pressable style={styles.dateTime} onPress={() => setshowDateTimePicker(true)}>
-            <Text style={styles.dateLabel}>{moment(date).format('DD-MM-YYYY')}</Text>
+            <Text style={Labels.label16RegularViolet}>{moment(date).format('DD-MM-YYYY')}</Text>
           </Pressable>
           {showDateTimePicker && (
             <DateTimePickerModal

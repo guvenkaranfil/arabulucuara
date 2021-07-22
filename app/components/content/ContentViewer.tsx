@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import HTML from 'react-native-render-html';
 import WebView from 'react-native-webview';
 
-import {CommonStyles, Fonts} from '@utils';
+import {CommonStyles, Labels} from '@utils';
 
 interface Props {
   title?: string;
@@ -19,7 +19,7 @@ export default function ContentViewer({title, body, path, children}: Props) {
         <ScrollView
           style={CommonStyles.paddingForScroll}
           contentContainerStyle={styles.contentStyle}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={Labels.label16BoldMirage}>{title}</Text>
 
           <HTML source={{html: body}} containerStyle={styles.articleContent} />
 
@@ -39,12 +39,6 @@ export default function ContentViewer({title, body, path, children}: Props) {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 16,
-    fontFamily: Fonts.robotoBold,
-    color: '#181C32',
-  },
-
   articleContent: {marginVertical: 25},
 
   contentStyle: {

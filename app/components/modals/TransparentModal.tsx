@@ -2,6 +2,7 @@ import React, {ReactElement} from 'react';
 import {ScrollView, Modal, View, Text} from 'react-native';
 import FilledButton from '../buttons/FilledButton';
 import styles from './styles/TransparentModalStyle';
+import {Labels} from '@utils';
 
 interface TransparentModalProps {
   children: ReactElement;
@@ -27,7 +28,7 @@ export default function TransparentModal({
       <View style={styles.container}>
         <View style={styles.centeredContainer}>
           <View style={styles.modalHeader}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={Labels.label16LightMirage}>{title}</Text>
           </View>
           <View style={styles.content}>
             <ScrollView bounces={false}>{children}</ScrollView>
