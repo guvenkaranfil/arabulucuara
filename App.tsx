@@ -4,8 +4,6 @@ import AppNavigator from '@routes/AppNavigator';
 
 import {Provider} from 'react-redux';
 import store from './app/stores/RootStore';
-import {Interceptor} from './app/api/Interceptor';
-Interceptor();
 
 const App = () => {
   return (
