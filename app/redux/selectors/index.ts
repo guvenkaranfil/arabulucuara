@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {RootState} from '../../stores/RootStore';
+import {RootState} from '@store/RootStore';
 
 export const isUserLoggedIn = createSelector(
   (state: RootState) => state.user,

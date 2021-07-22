@@ -9,7 +9,7 @@ import Input from '@components/input/Input';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/LoginStyles';
-import {useSignInMutation} from '../../stores/user/UserApi';
+import {useSignInMutation} from '@store/user/UserApi';
 
 export interface LoginProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'login'>;

@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
 
-import store from './app/stores/RootStore';
+import store from '@store/RootStore';
 import AppNavigator from '@routes/AppNavigator';
 import {CommonStyles} from '@utils';
 

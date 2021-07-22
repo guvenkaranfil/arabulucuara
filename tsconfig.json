@@ -59,6 +59,7 @@
     "paths": {
       "*": ["/*"],
       "@api/*": ["api/*"],
+      "@store/*": ["store/*"],
       "@auth/*": ["container/auth/*"],
       "@home/*": ["container/home/*"],
       "@search/*": ["container/search/*"],

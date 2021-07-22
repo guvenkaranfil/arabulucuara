@@ -5,8 +5,8 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
-import {updateToken} from '../stores/user/UserSlice';
-import {RootState} from '../stores/RootStore';
+import {updateToken} from '@store/user/UserSlice';
+import {RootState} from '@store/RootStore';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://api.arabulucuara.com',

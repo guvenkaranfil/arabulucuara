@@ -8,7 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "svgr": "svgr ./app/assets/svgs -d ./app/icons --ignore-existing --native --icon --svg-props 'width=24,height=24'"
+    "svgr": "svgr ./app/assets/svgs -d ./app/icons --ignore-existing --native --icon --svg-props 'width=24,height=24'",
+    "clean-cache": "yarn start --reset-cache"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",

@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {isUserLoggedIn} from '@selectors';
 import AsyncStorage from '@react-native-community/async-storage';
-import {logIn} from '../stores/user/UserSlice';
+import {logIn} from '@store/user/UserSlice';
 
 import AuthStack from './stacks/auth/AuthStack';
 import AppStack from './stacks/AppStack';
