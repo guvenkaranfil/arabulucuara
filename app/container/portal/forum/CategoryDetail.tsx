@@ -9,6 +9,7 @@ import Topic, {TopicType} from './components/Topic';
 import FilledButton from '@components/buttons/FilledButton';
 import NewTopicModal from './components/NewTopicModal';
 import {useGetCategoryPostsQuery} from './ForumApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'categoryDetail'>;
@@ -19,7 +20,7 @@ export default function CategoryDetail({route, navigation}: Props) {
   const {category} = route.params;
 
   //TODO: change categoryId with backend endpoint id. I'm waiting for addition to getForm endpoint.
-  const {data} = useGetCategoryPostsQuery({categoryId: 1});
+  const {data, isLoading, isFetching} = useGetCategoryPostsQuery({categoryId: 1});
   console.log('data dada:', data);
 
   const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
@@ -37,6 +38,10 @@ export default function CategoryDetail({route, navigation}: Props) {
       onPress={() => setisTopicAdditionModalOpen(true)}
     />
   );
+
+  if (isLoading || isFetching) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <View style={styles.container}>
