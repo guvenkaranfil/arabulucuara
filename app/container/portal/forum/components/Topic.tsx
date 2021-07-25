@@ -11,6 +11,9 @@ export interface TopicType {
   subjectHeader: string;
   nameSurname: string;
   viewsCount: number;
+  lastCommentUser?: {
+    name: string;
+  };
 }
 
 type Props = {
@@ -19,7 +22,7 @@ type Props = {
 };
 
 export default function Topic({topic, onPress}: Props) {
-  const {date, subjectHeader, nameSurname, viewsCount} = topic;
+  const {date, subjectHeader, lastCommentUser, viewsCount} = topic;
   console.log('topic:', topic);
 
   return (
@@ -32,7 +35,7 @@ export default function Topic({topic, onPress}: Props) {
       <View style={styles.footer}>
         <View style={styles.row}>
           <OnlyPersonIcon width={15} height={15} fill="#B3B3B3" />
-          <Text style={styles.labelForIcon}>{nameSurname}</Text>
+          <Text style={styles.labelForIcon}>{lastCommentUser?.name}</Text>
         </View>
         <View style={styles.row}>
           <ViewsIcon width={15} height={10} />
