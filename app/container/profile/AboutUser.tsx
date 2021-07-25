@@ -1,12 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 
 import {Fonts, Metrics} from '@utils';
 import Input from '@components/input/Input';
 import FilledButton from '@components/buttons/FilledButton';
+import {useAboutMeQuery} from './ProfileGetApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 
 export default function AboutUser() {
-  const [aboutMe, setaboutMe] = useState(ABOUT_ME);
+  const [aboutMe, setaboutMe] = useState('');
+
+  const {data, isFetching, isLoading} = useAboutMeQuery();
+
+  useEffect(() => {
+    if (data) {
+      setaboutMe(data);
+    }
+  }, [data]);
+
+  if (isFetching || isLoading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <View style={styles.container}>
@@ -59,6 +73,3 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
-
-const ABOUT_ME =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut dignissim est, at vestibulum purus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent massa ipsum, auctor at nunc quis, ultricies luctus neque. Nulla consectetur, elit at feugiat congue, quam urna sodales enim, sed consectetur turpis ligula nec quam. Quisque mattis non ipsum vel scelerisque. Suspendisse accumsan sodales pulvinar. In quis metus congue, iaculis eros vel, mollis nisl. In quam quam, interdum quis mi blandit, auctor gravida sapien. Cras ut eleifend arcu, ac pharetra elit. Maecenas sit amet ';

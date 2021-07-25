@@ -5,9 +5,9 @@ import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import Input from '@components/input/Input';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
-import {Fonts, Metrics} from 'utils';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
+import {Fonts, Metrics} from '@utils';
 
 export default function AboutMe() {
   const [aboutMe, setaboutMe] = useState('');
