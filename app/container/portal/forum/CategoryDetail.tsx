@@ -3,12 +3,12 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {topicSample} from './mocks';
-import {PortalNavigatorParamList} from 'routes/stacks/portal/Types';
-import {Fonts, Metrics} from 'utils';
+import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
+import {Fonts, Metrics} from '@utils';
 import Topic, {TopicType} from './components/Topic';
-import FilledButton from 'components/buttons/FilledButton';
+import FilledButton from '@components/buttons/FilledButton';
 import NewTopicModal from './components/NewTopicModal';
+import {useGetCategoryPostsQuery} from './ForumApi';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'categoryDetail'>;
@@ -16,13 +16,17 @@ export interface Props {
 }
 
 export default function CategoryDetail({route, navigation}: Props) {
-  const {label} = route.params;
+  const {category} = route.params;
+
+  //TODO: change categoryId with backend endpoint id. I'm waiting for addition to getForm endpoint.
+  const {data} = useGetCategoryPostsQuery({categoryId: 1});
+  console.log('data dada:', data);
 
   const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
 
   const _renderHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{label}</Text>
+      <Text style={styles.title}>{category}</Text>
     </View>
   );
 
@@ -44,7 +48,7 @@ export default function CategoryDetail({route, navigation}: Props) {
       )}
       <FlatList
         contentContainerStyle={styles.topics}
-        data={topicSample}
+        data={data}
         ListHeaderComponent={_renderHeader}
         renderItem={({item}) => (
           <Topic

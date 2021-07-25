@@ -3,13 +3,14 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 
 import {Fonts, Metrics} from '@utils';
 import {OnlyPersonIcon, ViewsIcon} from '@icons';
+import {getAnalogDate} from '@helpers/DateFormatter';
 
 export interface TopicType {
   id: number;
-  date: string;
-  label: string;
+  date: Date;
+  subjectHeader: string;
   nameSurname: string;
-  views: number;
+  viewsCount: number;
 }
 
 type Props = {
@@ -18,23 +19,24 @@ type Props = {
 };
 
 export default function Topic({topic, onPress}: Props) {
-  const {date, label, nameSurname, views} = topic;
+  const {date, subjectHeader, nameSurname, viewsCount} = topic;
+  console.log('topic:', topic);
 
   return (
     <Pressable style={styles.activity} onPress={() => onPress(topic)}>
       <View style={styles.row}>
         <View style={styles.border} />
-        <Text style={styles.dateLabel}>{date}</Text>
+        <Text style={styles.dateLabel}>{getAnalogDate(date)}</Text>
       </View>
-      <Text style={styles.activityLabel}>{label}</Text>
+      <Text style={styles.activityLabel}>{subjectHeader}</Text>
       <View style={styles.footer}>
         <View style={styles.row}>
-          <OnlyPersonIcon width={15} height={15} />
+          <OnlyPersonIcon width={15} height={15} fill="#B3B3B3" />
           <Text style={styles.labelForIcon}>{nameSurname}</Text>
         </View>
         <View style={styles.row}>
           <ViewsIcon width={15} height={10} />
-          <Text style={styles.labelForIcon}>{views}</Text>
+          <Text style={styles.labelForIcon}>{viewsCount}</Text>
         </View>
       </View>
     </Pressable>

@@ -9,4 +9,8 @@ function getHourAndMinute(date: Date): string {
   return moment(date).format('hh:mm');
 }
 
-export {getMonthAndDayName, getHourAndMinute};
+function getAnalogDate(date: Date): string {
+  return moment(date).format('D.M.YYYY');
+}
+
+export {getMonthAndDayName, getHourAndMinute, getAnalogDate};

@@ -3,8 +3,8 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-import {useGetForumQuery} from './ForumApi';
 import {topicSample} from './mocks';
+import {useGetForumQuery} from './ForumApi';
 import NewTopicModal from './components/NewTopicModal';
 import FilledButton from '@components/buttons/FilledButton';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
