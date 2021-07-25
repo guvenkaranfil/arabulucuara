@@ -5,7 +5,7 @@ import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
 import {topicSample} from './mocks';
 import {useGetForumQuery} from './ForumApi';
-import NewTopicModal from './components/NewTopicModal';
+import NewTopicModal, {NewTopicModel} from './components/NewTopicModal';
 import FilledButton from '@components/buttons/FilledButton';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
 import Categories, {Category} from './components/Categories';
@@ -29,8 +29,9 @@ export default function Forum({navigation}: Props) {
       <View style={styles.container}>
         {isTopicAdditionModalOpen && (
           <NewTopicModal
+            categories={data}
             onPressCancel={() => setisTopicAdditionModalOpen(false)}
-            onPressApprove={topic => console.log('onPress create topic:', topic)}
+            onPressApprove={(topic: NewTopicModel) => console.log('onPress create topic:', topic)}
           />
         )}
 
@@ -39,6 +40,7 @@ export default function Forum({navigation}: Props) {
             categories={data}
             onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
           />
+
           <UpdatedTopics topics={topicSample} />
 
           <View style={styles.footer}>

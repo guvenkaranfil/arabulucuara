@@ -23,7 +23,6 @@ type Props = {
 
 export default function Topic({topic, onPress}: Props) {
   const {date, subjectHeader, lastCommentUser, viewsCount} = topic;
-  console.log('topic:', topic);
 
   return (
     <Pressable style={styles.activity} onPress={() => onPress(topic)}>
