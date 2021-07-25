@@ -6,7 +6,7 @@ import {OnlyPersonIcon, ViewsIcon} from '@icons';
 import {getAnalogDate} from '@helpers/DateFormatter';
 
 export interface TopicType {
-  id: number;
+  subjectId: number;
   date: Date;
   subjectHeader: string;
   nameSurname: string;

@@ -58,7 +58,9 @@ export default function CategoryDetail({route, navigation}: Props) {
         renderItem={({item}) => (
           <Topic
             topic={item}
-            onPress={(topic: TopicType) => navigation.navigate('TopicDetail', {...topic})}
+            onPress={(topic: TopicType) =>
+              navigation.navigate('TopicDetail', {subjectId: topic.subjectId})
+            }
           />
         )}
         ListFooterComponent={_renderAddNewTopicButton}
