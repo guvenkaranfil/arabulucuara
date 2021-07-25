@@ -4,14 +4,14 @@ import {Fonts, Labels, Metrics} from '@utils';
 import {BottomIcon, UpIcon} from '@icons';
 import Modal from './Modal';
 
-type Props = {
+interface Props {
   style?: ViewStyle;
   value?: string;
   placeholder: string;
   items: Array<Object>;
   renderItem: (item: any) => ReactElement;
   onPress: (item: any) => void;
-};
+}
 
 export default function DropDownPicker({
   style,
@@ -37,7 +37,9 @@ export default function DropDownPicker({
         />
       )}
       <Pressable style={[styles.container, style]} onPress={() => setmodalVisible(true)}>
-        <Text style={[Labels.label16RegularMischka, value ? styles.value : styles.placeholder]}>
+        <Text
+          numberOfLines={2}
+          style={[Labels.label16RegularMischka, value ? styles.value : styles.placeholder]}>
           {value ?? placeholder}
         </Text>
         {modalVisible ? <UpIcon width={20} height={14} /> : <BottomIcon width={18} height={18} />}
@@ -62,6 +64,7 @@ const styles = StyleSheet.create({
   placeholder: {},
 
   value: {
+    maxWidth: Metrics.DEVICE_WIDTH - 56 * 3,
     fontFamily: Fonts.robotoMedium,
     color: '#0F0A39',
   },

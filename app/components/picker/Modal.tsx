@@ -10,7 +10,7 @@ import {
   ViewStyle,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Metrics} from 'utils';
+import {Metrics} from '@utils';
 
 type Props = {
   listStyle?: ViewStyle;
@@ -40,7 +40,9 @@ export default function PickModal({
               data={items}
               renderItem={({item}) => (
                 <Pressable style={[styles.item, itemStyle]} onPress={() => onPress(item)}>
-                  <Text style={[styles.label, labelStyle]}>{renderItem(item)}</Text>
+                  <Text numberOfLines={2} style={[styles.label, labelStyle]}>
+                    {renderItem(item)}
+                  </Text>
                 </Pressable>
               )}
               keyExtractor={(_, index) => String(index)}
@@ -70,12 +72,14 @@ const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     width: '100%',
-    height: 25,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderBottomColor: '#CBC9D9',
   },
 
-  label: {},
+  label: {
+    maxWidth: Metrics.DEVICE_WIDTH - 56 * 2,
+    textAlign: 'center',
+  },
 });
