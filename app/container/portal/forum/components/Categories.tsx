@@ -1,10 +1,10 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 
 export interface Category {
   id: number;
-  label: string;
+  category: string;
 }
 
 type Props = {
@@ -22,7 +22,7 @@ export default function Categories({categories, onPress}: Props) {
       <View style={styles.categories}>
         {categories.map((category, index) => (
           <Pressable key={index} style={styles.category} onPress={() => onPress(category)}>
-            <Text style={styles.categoryLabel}>{category.label}</Text>
+            <Text style={styles.categoryLabel}>{category.category}</Text>
           </Pressable>
         ))}
       </View>

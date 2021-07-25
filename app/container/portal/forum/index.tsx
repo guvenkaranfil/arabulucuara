@@ -3,9 +3,11 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-import {categoriesSample, topicSample} from './mocks';
+import {useGetForumQuery} from './ForumApi';
+import {topicSample} from './mocks';
 import NewTopicModal from './components/NewTopicModal';
 import FilledButton from '@components/buttons/FilledButton';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 import Categories, {Category} from './components/Categories';
 import UpdatedTopics from './components/UpdatedTopics';
 
@@ -16,32 +18,42 @@ export interface Props {
 export default function Forum({navigation}: Props) {
   const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
 
-  return (
-    <View style={styles.container}>
-      {isTopicAdditionModalOpen && (
-        <NewTopicModal
-          onPressCancel={() => setisTopicAdditionModalOpen(false)}
-          onPressApprove={topic => console.log('onPress create topic:', topic)}
-        />
-      )}
+  const {data, isLoading, isFetching} = useGetForumQuery();
 
-      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-        <Categories
-          categories={categoriesSample}
-          onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
-        />
-        <UpdatedTopics topics={topicSample} />
+  if (isLoading || isFetching) {
+    return <FullScreenLoader />;
+  }
 
-        <View style={styles.footer}>
-          <FilledButton
-            label="Yeni Konu"
-            bgColor="#7E0736"
-            onPress={() => setisTopicAdditionModalOpen(true)}
+  if (data) {
+    return (
+      <View style={styles.container}>
+        {isTopicAdditionModalOpen && (
+          <NewTopicModal
+            onPressCancel={() => setisTopicAdditionModalOpen(false)}
+            onPressApprove={topic => console.log('onPress create topic:', topic)}
           />
-        </View>
-      </ScrollView>
-    </View>
-  );
+        )}
+
+        <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+          <Categories
+            categories={data}
+            onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
+          />
+          <UpdatedTopics topics={topicSample} />
+
+          <View style={styles.footer}>
+            <FilledButton
+              label="Yeni Konu"
+              bgColor="#7E0736"
+              onPress={() => setisTopicAdditionModalOpen(true)}
+            />
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  return null;
 }
 
 const styles = StyleSheet.create({
