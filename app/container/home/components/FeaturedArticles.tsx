@@ -1,6 +1,6 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 
 import {OnlyPersonIcon} from '@icons';
 
@@ -24,7 +24,7 @@ export default function FeaturedArticles({articles, openArticle}: Props) {
         <Pressable key={index} style={styles.item} onPress={() => openArticle(article)}>
           <Text style={styles.articleTitle}>{article.title}</Text>
           <View style={styles.publisher}>
-            <OnlyPersonIcon width={15} height={15} fill="red" />
+            <OnlyPersonIcon width={15} height={15} fill="#a3a0a0" />
             <Text style={styles.articlePublisher}>{article.publisher}</Text>
           </View>
         </Pressable>

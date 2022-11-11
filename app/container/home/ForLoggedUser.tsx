@@ -1,5 +1,5 @@
 import React from 'react';
-import {RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
+import {Linking, RefreshControl, ScrollView, StyleSheet, View} from 'react-native';
 import {Metrics} from '@utils';
 
 import BannerArea from './components/Banner';
@@ -9,6 +9,12 @@ import LastMoves from './components/LastMoves';
 import FeaturedArticles from './components/FeaturedArticles';
 import {GetHomeResponse} from './HomeApi';
 
+interface Props {
+  openArticleDetail: (id: number) => void;
+  refetch: () => void;
+  isRefreshing: boolean;
+}
+
 export default function ForLoggedUser({
   banners,
   siteNews,
@@ -16,8 +22,9 @@ export default function ForLoggedUser({
   operations,
   articles,
   isRefreshing,
+  openArticleDetail,
   refetch,
-}: GetHomeResponse & {refetch: () => void; isRefreshing: boolean}) {
+}: GetHomeResponse & Props) {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -41,14 +48,17 @@ export default function ForLoggedUser({
         <View style={styles.newsShowCase}>
           <NewsShowecase
             news={siteNews ?? []}
-            openNew={(id: number) => console.log('open new id:', id)}
+            openNew={(id: number, webURL: string) => {
+              Linking.openURL(webURL);
+              console.log('open new id:', id);
+            }}
           />
         </View>
 
         <View style={styles.featuredArticles}>
           <FeaturedArticles
             articles={articles ?? []}
-            openArticle={article => console.log('pressed article + ', article)}
+            openArticle={article => openArticleDetail(article.id)}
           />
         </View>
       </ScrollView>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Linking, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 import {useSelector} from 'react-redux';
@@ -33,6 +33,13 @@ export default function Portal({navigation}: Props) {
     }
 
     return navigation.navigate(routeName);
+  };
+
+  const openNegotiator = () => {
+    try {
+      const webURL = 'https://arabulucuara.com/Ucrethesapla';
+      Linking.openURL(webURL);
+    } catch (error) {}
   };
 
   return (
@@ -76,7 +83,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<CalculatorMachineIcon width={32} hieght={37} />}
           label="Arabuluculuk Ücreti Hesaplama"
-          onPress={() => console.log('onPress...')}
+          onPress={openNegotiator}
         />
       </View>
     </View>

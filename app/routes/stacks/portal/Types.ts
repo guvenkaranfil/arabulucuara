@@ -7,7 +7,7 @@ export type PortalNavigatorParamList = {
   forum: undefined;
   categoryDetail: Category;
   TopicDetail: {subjectId: number};
-  articles: undefined;
+  articles: {articleId?: number};
   articleDetail: {article: Article};
   dataBank: undefined;
   dataBankList: {dataBank: DataBankCategory};

@@ -30,6 +30,9 @@ export default function Index({navigation}: Props) {
       users={data?.users}
       isRefreshing={isFetching}
       refetch={refetch}
+      openArticleDetail={(id: number) => {
+        navigation.navigate('portal', {screen: 'articles', params: {articleId: id}});
+      }}
     />
   ) : (
     <ForNonLoggedUser

@@ -16,6 +16,7 @@ export interface Props {
 const WEB_URL = 'https://arabulucuara.com/uploaded/Article/';
 export default function ArticleDetail({route}: Props) {
   const {article} = route.params;
+  console.log('article detail:', article);
 
   return (
     <ContentViewer

@@ -15,7 +15,7 @@ export default function LastMoves({actions, onPress}: Props) {
       <Text style={styles.title}>Son Hareketler</Text>
       {actions.map((move, index) => (
         <Pressable key={index} style={styles.moveAction} onPress={() => onPress(move)}>
-          <Text>{getHourAndMinute(move.time)}</Text>
+          <Text style={styles.date}>{getHourAndMinute(move.time)}</Text>
           {index + 1 !== actions.length ? (
             <View style={styles.stripe}>
               <View style={styles.actionBorder} />
@@ -50,6 +50,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     height: 38,
+  },
+
+  date: {
+    fontSize: 14,
+    width: 40,
   },
 
   stripe: {

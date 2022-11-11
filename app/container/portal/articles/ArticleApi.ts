@@ -11,6 +11,9 @@ const articlesApi = Client.injectEndpoints({
     getArticles: build.query<ArticlesResponse, void>({
       query: () => '/Portal/GetArticles',
     }),
+    getArticleDetail: build.query<Article, void>({
+      query: id => ({url: '/Portal/GetArticles', body: {id}}),
+    }),
   }),
 });
 

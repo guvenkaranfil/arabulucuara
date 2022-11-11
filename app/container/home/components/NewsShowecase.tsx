@@ -6,7 +6,7 @@ import {SiteNew} from '@home/Models';
 
 type Props = {
   news: Array<SiteNew>;
-  openNew: (id: number) => void;
+  openNew: (id: number, webURL: string) => void;
 };
 
 export default function NewsShowecase({news, openNew}: Props) {
@@ -14,7 +14,7 @@ export default function NewsShowecase({news, openNew}: Props) {
     <View>
       <Text style={styles.title}>Arabulucuara'dan Haberler</Text>
       {news.map((item, index) => (
-        <Pressable key={index} onPress={() => openNew(item?.id)}>
+        <Pressable key={index} onPress={() => openNew(item.id, item.uri)}>
           <View style={[styles.new, styles.shadow]}>
             <View style={styles.date}>
               {item?.createdOn && (

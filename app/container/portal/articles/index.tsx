@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View, Pressable} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
@@ -7,13 +7,23 @@ import {CommonStyles, Fonts, Metrics} from '@utils';
 import {OnlyPersonIcon} from '@icons';
 import {useGetArticlesQuery} from './ArticleApi';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
+import {RouteProp} from '@react-navigation/native';
 
 export interface Props {
   navigation: StackNavigationProp<PortalNavigatorParamList, 'articles'>;
+  route: RouteProp<PortalNavigatorParamList, 'articles'>;
 }
 
-export default function Articles({navigation}: Props) {
+export default function Articles({navigation, route}: Props) {
   const {data, isLoading, isError} = useGetArticlesQuery();
+
+  useEffect(() => {
+    if (data && route.params?.articleId) {
+      // @ts-ignore
+      const article = data.filter(item => item.id === route.params.articleId);
+      navigation.navigate('articleDetail', {article: article[0]});
+    }
+  }, [navigation, route, data]);
 
   if (isLoading) {
     return <FullScreenLoader />;
