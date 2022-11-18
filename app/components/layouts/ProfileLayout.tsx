@@ -14,9 +14,10 @@ import {Profile} from '@search/components/SearchProfile';
 interface ScreenProps {
   children: ReactElement;
   user: Profile;
+  onPressMessages: () => void;
 }
 
-export default function ProfileLayout({children, user}: ScreenProps) {
+export default function ProfileLayout({children, user, onPressMessages}: ScreenProps) {
   const navigation = useNavigation();
 
   const linearColors = ['#790633', '#BA1858'];
@@ -41,9 +42,11 @@ export default function ProfileLayout({children, user}: ScreenProps) {
         </Animated.Text>
       </View>
 
-      <View style={styles.right}>
-        <LetterIcon width={20} height={17} />
-      </View>
+      <Pressable onPress={onPressMessages}>
+        <View style={styles.right}>
+          <LetterIcon width={20} height={17} />
+        </View>
+      </Pressable>
     </View>
   );
 

@@ -8,6 +8,8 @@ export type ProfileNavigatorParamList = {
   userCertificates: undefined;
   userArticles: undefined;
   userGallery: undefined;
+  messagesContainer: undefined;
+  messageDetail: {messageId: number};
 };
 
 export interface ProfileScreenNavigationProps {

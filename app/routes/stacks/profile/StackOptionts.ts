@@ -19,3 +19,11 @@ export const userArticles: StackNavigationOptions = {
 export const userGallery: StackNavigationOptions = {
   title: 'Galeri',
 };
+
+export const messagesContainer: StackNavigationOptions = {
+  title: 'Mesajlar',
+};
+
+export const messageDetail: StackNavigationOptions = {
+  title: 'Mesajlar',
+};

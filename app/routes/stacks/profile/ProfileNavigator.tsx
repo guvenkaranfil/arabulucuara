@@ -12,13 +12,18 @@ import UserGallery from '@profile/UserGallery';
 import LoggedUserHeader from '../components/LoggedUserHeader';
 import {
   aboutUser,
+  messageDetail,
+  messagesContainer,
   profileInformation,
   userArticles,
   userCertificates,
   userGallery,
 } from './StackOptionts';
+import MessagesTopNavigator from './MessagesTopNavigator';
+import MessageDetail from '@profile/messages/MessageDetail';
 
 const Stack = createStackNavigator<ProfileNavigatorParamList>();
+
 function ProfileNavigator() {
   return (
     <Stack.Navigator screenOptions={{header: LoggedUserHeader}}>
@@ -36,6 +41,12 @@ function ProfileNavigator() {
       />
       <Stack.Screen name="userArticles" component={UserArticles} options={userArticles} />
       <Stack.Screen name="userGallery" component={UserGallery} options={userGallery} />
+      <Stack.Screen
+        name="messagesContainer"
+        component={MessagesTopNavigator}
+        options={messagesContainer}
+      />
+      <Stack.Screen name="messageDetail" component={MessageDetail} options={messageDetail} />
     </Stack.Navigator>
   );
 }

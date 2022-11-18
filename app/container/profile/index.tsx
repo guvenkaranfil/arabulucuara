@@ -6,7 +6,7 @@ import ProfileRouteButtons from './components/UserProfileButtons';
 
 export default function Profile({navigation}: ProfileScreenNavigationProps) {
   return (
-    <ProfileLayout user={user}>
+    <ProfileLayout user={user} onPressMessages={() => navigation.navigate('messagesContainer')}>
       <ProfileRouteButtons
         routeButtons={userProfileRoutes}
         onPressRoute={(pressedRoute: UserProfileRoute) =>

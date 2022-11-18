@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 import React from 'react';
 import {Pressable, StyleSheet, Text, View, Animated} from 'react-native';
 import {StackHeaderProps} from '@react-navigation/stack';
@@ -16,6 +17,15 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
     outputRange: [0, 1, 0],
   });
 
+  const shouldShowMessagesButton = () => {
+    const routeName = scene.route.name;
+
+    // @ts-ignore
+    if (routeName === 'messagesContainer' || routeName === 'messageDetail') return false;
+
+    return true;
+  };
+
   return (
     <Animated.View style={{opacity}}>
       <LinearGradient style={styles.container} colors={linearColors}>
@@ -30,9 +40,11 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
           <Text style={styles.screenTitle}>{scene.descriptor.options.title}</Text>
         </View>
 
-        <View style={styles.right}>
-          <LetterIcon width={20} height={17} />
-        </View>
+        {shouldShowMessagesButton() && (
+          <View style={styles.right}>
+            <LetterIcon width={20} height={17} />
+          </View>
+        )}
       </LinearGradient>
     </Animated.View>
   );
