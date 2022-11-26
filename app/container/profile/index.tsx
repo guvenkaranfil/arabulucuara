@@ -51,3 +51,6 @@ const userProfileRoutes: Array<UserProfileRoute> = [
     stackName: 'userGallery',
   },
 ];
+
+// base URL for images
+// https://arabulucuara.com/uploaded/UserImage/55168eff-df91-430c-ac6b-aaf782db5572.jpg
