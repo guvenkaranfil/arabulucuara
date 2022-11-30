@@ -20,6 +20,7 @@ module.exports = {
           '@helpers': './app/helpers',
           '@icons': './app/icons',
           '@selectors': './app/redux/selectors',
+          '@constants': './constants/index',
         },
       },
     ],

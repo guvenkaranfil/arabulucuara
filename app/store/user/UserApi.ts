@@ -4,6 +4,7 @@ import Client from '@api/Client';
 import {logIn} from './UserSlice';
 
 import store from '../RootStore';
+import {USER_INFO_STORAGE_KEY} from 'constants';
 
 interface Token {
   token: string;
@@ -32,8 +33,7 @@ const userApi = Client.injectEndpoints({
 
       transformResponse: (response: any) => {
         store.dispatch(logIn(response));
-
-        AsyncStorage.setItem('@user', JSON.stringify(response));
+        AsyncStorage.setItem(USER_INFO_STORAGE_KEY, JSON.stringify(response));
 
         console.log('response of login.', response);
         return response.data;

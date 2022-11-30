@@ -9,6 +9,7 @@ import {logIn} from '@store/user/UserSlice';
 import AuthStack from './stacks/auth/AuthStack';
 import AppStack from './stacks/AppStack';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
+import {USER_INFO_STORAGE_KEY} from '../constants';
 
 const Stack = createStackNavigator();
 export default function AppNavigator() {
@@ -20,10 +21,11 @@ export default function AppNavigator() {
   React.useEffect(() => {
     const checkUser = async () => {
       try {
-        const user = await AsyncStorage.getItem('@user');
+        const user = await AsyncStorage.getItem(USER_INFO_STORAGE_KEY);
 
         if (user) {
           dispatch(logIn(JSON.parse(user)));
+          console.log('USER: ', JSON.parse(user));
         }
       } catch (error) {
       } finally {

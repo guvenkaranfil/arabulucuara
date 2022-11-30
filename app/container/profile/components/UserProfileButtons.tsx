@@ -8,9 +8,10 @@ import {Fonts, Metrics} from '@utils';
 interface Props {
   routeButtons: Array<UserProfileRoute>;
   onPressRoute: (stackName: UserProfileRoute) => void;
+  onPressSignOut: () => void;
 }
 
-export default function ProfileRouteButtons({routeButtons, onPressRoute}: Props) {
+export default function ProfileRouteButtons({routeButtons, onPressRoute, onPressSignOut}: Props) {
   return (
     <View style={styles.routeButtons}>
       {routeButtons.map((routeButton, index) => (
@@ -22,6 +23,12 @@ export default function ProfileRouteButtons({routeButtons, onPressRoute}: Props)
           onPress={() => onPressRoute(routeButton)}
         />
       ))}
+      <FilledButton
+        style={styles.routeButton}
+        label={'Çıkış Yap'}
+        labelStyle={styles.routeLabel}
+        onPress={onPressSignOut}
+      />
     </View>
   );
 }

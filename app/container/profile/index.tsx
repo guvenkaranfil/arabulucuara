@@ -1,10 +1,30 @@
 import {ProfileScreenNavigationProps, UserProfileRoute} from '@routes/stacks/profile/Types';
 import React from 'react';
+import {Alert} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import ProfileRouteButtons from './components/UserProfileButtons';
+import {logOut} from '@store/user/UserSlice';
+import AsyncStorage from '@react-native-community/async-storage';
+import {USER_INFO_STORAGE_KEY} from '../../constants';
 
 export default function Profile({navigation}: ProfileScreenNavigationProps) {
+  const dispatch = useDispatch();
+
+  const handleSignOut = () => {
+    console.log('Handle sign out');
+    AsyncStorage.removeItem(USER_INFO_STORAGE_KEY)
+      .then(() => {
+        dispatch(logOut());
+        // TODO: check type error to fix
+        navigation.navigate('home');
+      })
+      .catch(() => {
+        Alert.alert('Bir sorun oluştu', 'Lütfen tekrar çıkış yapmayı deneyiniz');
+      });
+  };
+
   return (
     <ProfileLayout user={user} onPressMessages={() => navigation.navigate('messagesContainer')}>
       <ProfileRouteButtons
@@ -12,6 +32,7 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
         onPressRoute={(pressedRoute: UserProfileRoute) =>
           navigation.navigate(pressedRoute.stackName)
         }
+        onPressSignOut={handleSignOut}
       />
     </ProfileLayout>
   );

@@ -70,7 +70,8 @@
       "@utils": ["utils/index"],
       "@helpers/*": ["helpers/*"],
       "@icons": ["icons/index"],
-      "@selectors": ["redux/selectors/index"]
+      "@selectors": ["redux/selectors/index"],
+      "@constants": ["/constants/index"]
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
