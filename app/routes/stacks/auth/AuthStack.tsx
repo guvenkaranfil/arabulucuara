@@ -27,6 +27,11 @@ function AuthStack() {
     console.log('getInitialRoutename auth stack...: ', user.userLastStep);
     if (user.userLastStep === 1) return 'completions/address';
     if (user.userLastStep === 2) return 'completions/personal';
+    if (user.userLastStep === 3) return 'completions/professionType';
+    if (user.userLastStep === 4) return 'completions/profilePhoto';
+    if (user.userLastStep === 5) return 'completions/aboutMe';
+    if (user.userLastStep === 6) return 'completions/expertiesArea';
+    if (user.userLastStep === 7) return 'completions/meditationCenter';
 
     return 'login';
   };
