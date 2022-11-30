@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList, UserType} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
-import {Metrics} from 'utils';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
+import {Metrics} from '@utils';
 
 export interface RegisterIdentitiesProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'registerIdentities'>;
@@ -22,19 +22,19 @@ export default function RegisterIdentities({navigation}: RegisterIdentitiesProps
         <FilledButton
           label="Arabulucu"
           bgColor="#790F3E"
-          onPress={() => navigation.navigate('register')}
+          onPress={() => navigation.navigate('register', {userType: UserType.arabulucu})}
         />
 
         <FilledButton
           label="Arabulucuk Merkezi"
           bgColor="#790F3E"
-          onPress={() => navigation.navigate('register')}
+          onPress={() => navigation.navigate('register', {userType: UserType.arabulucuMerkezi})}
         />
 
         <FilledButton
           label="Uzman"
           bgColor="#790F3E"
-          onPress={() => navigation.navigate('register')}
+          onPress={() => navigation.navigate('register', {userType: UserType.uzman})}
         />
       </View>
 

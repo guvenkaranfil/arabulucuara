@@ -4,7 +4,7 @@ import Client from '@api/Client';
 import {logIn} from './UserSlice';
 
 import store from '../RootStore';
-import {USER_INFO_STORAGE_KEY} from 'constants';
+import {USER_INFO_STORAGE_KEY} from '../../constants';
 
 interface Token {
   token: string;
@@ -17,6 +17,51 @@ interface SignInResponse {
   token?: Token;
   userLastStep?: number;
 }
+
+interface SignUpResponse {}
+
+type PostRegisterType = {
+  uyelikTur: string;
+  arabulucu: {
+    adi: string;
+    soyadi: string;
+    email: string;
+    sicilNo: string;
+    kullaniciAdi: string;
+    sifre: string;
+  };
+};
+
+type RegisterMerkez = {
+  uyelikTur: string;
+  merkez: {
+    adi: string;
+    soyadi: string;
+    email: string;
+    merkezAdi: string;
+    kullaniciAdi: string;
+    sifre: string;
+    ticariUnvan: string;
+  };
+};
+
+type RegisterUzman = {
+  uyelikTur: string;
+  uzman: {
+    adi: string;
+    soyadi: string;
+    email: string;
+    kullaniciAdi: string;
+    sifre: string;
+  };
+};
+
+const saveUserToStorage = (response: SignInResponse) => {
+  store.dispatch(logIn(response));
+  AsyncStorage.setItem(USER_INFO_STORAGE_KEY, JSON.stringify(response));
+
+  console.log('response of login.', response);
+};
 
 const userApi = Client.injectEndpoints({
   overrideExisting: true,
@@ -39,7 +84,56 @@ const userApi = Client.injectEndpoints({
         return response.data;
       },
     }),
+
+    signUpArabulucu: build.mutation<SignInResponse, PostRegisterType>({
+      query: ({uyelikTur, arabulucu}) => ({
+        url: '/Account/registerArabulucu',
+        method: 'POST',
+        body: {uyelikTur, arabulucu},
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('sign up arabulucu arabulucu response: ', response);
+        return response.data;
+      },
+    }),
+
+    signUpMerkez: build.mutation<SignInResponse, RegisterMerkez>({
+      query: ({uyelikTur, merkez}) => ({
+        url: '/Account/registerMerkez',
+        method: 'POST',
+        body: {uyelikTur, merkez},
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('sign up merkez arabulucu response: ', response);
+        saveUserToStorage(response);
+        return response.data;
+      },
+    }),
+
+    signUpUzman: build.mutation<SignInResponse, RegisterUzman>({
+      query: ({uyelikTur, uzman}) => ({
+        url: '/Account/registerUzman',
+        method: 'POST',
+        body: {uyelikTur, uzman},
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('sign up uzman arabulucu response: ', response);
+        return response.data;
+      },
+    }),
   }),
 });
 
-export const {useSignInMutation} = userApi;
+export const {
+  useSignInMutation,
+  useSignUpArabulucuMutation,
+  useSignUpMerkezMutation,
+  useSignUpUzmanMutation,
+} = userApi;
+
+// merkez -> merkez
+// uzman -> uzman
+// arabulucu -> arabulucu

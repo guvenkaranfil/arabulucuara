@@ -10,12 +10,21 @@ export interface GetHomeResponse {
   articles?: Array<NewlyPublishedArticle>;
 }
 
+interface Region {
+  id: number;
+  type: string;
+}
+
 const homeApi = Client.injectEndpoints({
   endpoints: build => ({
     getHome: build.query<GetHomeResponse, void>({
       query: () => '/Home/GetHome',
     }),
+    getCities: build.query<Region[], {id?: number; type: string}>({
+      query: ({id, type}) =>
+        id ? `/Home/GetCity?id=${id}&type=${type}` : `/Home/GetCity?type=${type}`,
+    }),
   }),
 });
 
-export const {useGetHomeQuery} = homeApi;
+export const {useGetHomeQuery, useGetCitiesQuery, useLazyGetCitiesQuery} = homeApi;

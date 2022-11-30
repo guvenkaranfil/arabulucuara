@@ -1,28 +1,56 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import Input from '@components/input/Input';
-import {Fonts, Metrics} from 'utils';
-import FilledButton from 'components/buttons/FilledButton';
+import {Fonts, Metrics} from '@utils';
+import FilledButton from '@components/buttons/FilledButton';
+import {useGetCitiesQuery, useLazyGetCitiesQuery} from '@home/HomeApi';
+import {useStepOneMutation} from '@store/auth/AuthApi';
 
 export interface AddressProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/address'>;
 }
 
 export default function Address({navigation}: AddressProps) {
-  const [cities, setcities] = useState(cityItems);
-  const [selectedCity, setselectedCity] = useState({id: undefined, name: undefined});
-  const [towns, settowns] = useState(cityItems);
-  const [selectedTown, setselectedTown] = useState({id: undefined, name: undefined});
-  const [districts, setdistricts] = useState(cityItems);
-  const [selectedDistrict, setselectedDistrict] = useState({id: undefined, name: undefined});
+  // const [cities, setcities] = useState(cityItems);
+  const [selectedCity, setselectedCity] = useState({id: undefined, value: undefined});
+  const [selectedTown, setselectedTown] = useState({id: undefined, value: undefined});
+  const [selectedDistrict, setselectedDistrict] = useState({id: undefined, value: undefined});
   const [address, setaddress] = useState('');
+
+  const {data: cities} = useGetCitiesQuery({type: 'ilce'});
+  const [trigger, result] = useLazyGetCitiesQuery();
+  const [getDistricts, distrctsResult] = useLazyGetCitiesQuery();
+
+  const [completeStepOne, {isLoading: completeLoading}] = useStepOneMutation();
+
+  const selectCity = item => {
+    setselectedCity(item);
+    trigger({id: item.id, type: 'ilce'});
+    setselectedTown({id: undefined, value: undefined});
+    setselectedDistrict({id: undefined, value: undefined});
+  };
+
+  const selectTown = item => {
+    setselectedDistrict({id: undefined, value: undefined});
+    setselectedTown({id: item.id, value: item.value});
+    getDistricts({id: item.id, type: 'mahalle'});
+  };
+
+  const saveAndContinue = () => {
+    if (selectedTown) {
+      console.log('selectedDistrict.id:', selectedDistrict.id);
+      completeStepOne({mahalleId: selectedDistrict.id, adres: address}).then(() => {
+        navigation.replace('completions/personal');
+      });
+    }
+  };
 
   return (
     <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
@@ -38,41 +66,40 @@ export default function Address({navigation}: AddressProps) {
 
         <View style={styles.form}>
           <DropDownPicker
-            value={selectedCity?.name}
+            value={selectedCity?.value}
             placeholder="İl Seçiniz"
-            items={cities}
-            renderItem={item => item.name}
-            onPress={setselectedCity}
+            items={cities ?? []}
+            renderItem={item => item.value}
+            onPress={selectCity}
           />
 
           <DropDownPicker
-            value={selectedTown?.name}
+            value={selectedTown?.value}
             placeholder="İlçe Seçiniz"
-            items={towns}
-            renderItem={item => item.name}
-            onPress={setselectedTown}
+            items={result.data ?? []}
+            renderItem={item => item.value}
+            onPress={selectTown}
           />
 
           <DropDownPicker
-            value={selectedDistrict?.name}
-            placeholder="Semt Seçiniz"
-            items={districts}
-            renderItem={item => item.name}
-            onPress={setselectedDistrict}
+            value={selectedDistrict?.value}
+            placeholder="Mahalle Seçiniz"
+            items={distrctsResult.data ?? []}
+            renderItem={item => item.value}
+            onPress={item => setselectedDistrict({id: item.id, value: item.value})}
           />
 
           <Input
             height={100}
             value={address}
             onChangeText={setaddress}
-            placeholder="E-Posta"
-            keyboardType="email-address"
+            placeholder="Adres"
             isMultiLine={true}
           />
         </View>
 
         <View style={styles.footer}>
-          <FilledButton label="Devam Et" onPress={() => console.log('onPress..')} />
+          <FilledButton label="Devam Et" onPress={saveAndContinue} isLoading={completeLoading} />
         </View>
       </ScrollView>
     </LoginLayout>
@@ -106,22 +133,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
-const cityItems = [
-  {
-    id: 1,
-    name: 'Sakarya',
-  },
-  {
-    id: 1,
-    name: 'Adana',
-  },
-  {
-    id: 1,
-    name: 'Sakarya',
-  },
-  {
-    id: 1,
-    name: 'Sakarya',
-  },
-];

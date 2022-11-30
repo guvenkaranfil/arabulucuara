@@ -1,5 +1,8 @@
+/* eslint-disable curly */
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {RootState} from '@store/RootStore';
+import {useSelector} from 'react-redux';
 import {AuthNavigatorParamList} from './Types';
 
 import Login from '@auth/Login';
@@ -18,8 +21,18 @@ import MeditationCenter from '@auth/completions/07_MeditationCenter';
 
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
+  const user = useSelector((state: RootState) => state.user);
+
+  const getInitialRoutename = () => {
+    console.log('getInitialRoutename auth stack...: ', user.userLastStep);
+    if (user.userLastStep === 1) return 'completions/address';
+    if (user.userLastStep === 2) return 'completions/personal';
+
+    return 'login';
+  };
+
   return (
-    <Stack.Navigator headerMode="none" initialRouteName="login">
+    <Stack.Navigator headerMode="none" initialRouteName={getInitialRoutename()}>
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="registerIdentities" component={RegisterIdentities} />

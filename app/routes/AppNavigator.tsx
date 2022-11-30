@@ -10,22 +10,25 @@ import AuthStack from './stacks/auth/AuthStack';
 import AppStack from './stacks/AppStack';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
 import {USER_INFO_STORAGE_KEY} from '../constants';
+import {RootState} from '@store/RootStore';
 
 const Stack = createStackNavigator();
 export default function AppNavigator() {
   const haveUser = useSelector(isUserLoggedIn);
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  console.log('User in:', user);
 
   const [isCheckingForUser, setisCheckingForUser] = React.useState(true);
 
   React.useEffect(() => {
     const checkUser = async () => {
       try {
-        const user = await AsyncStorage.getItem(USER_INFO_STORAGE_KEY);
+        const savedUser = await AsyncStorage.getItem(USER_INFO_STORAGE_KEY);
 
-        if (user) {
-          dispatch(logIn(JSON.parse(user)));
-          console.log('USER: ', JSON.parse(user));
+        if (savedUser) {
+          dispatch(logIn(JSON.parse(savedUser)));
+          console.log('USER: ', JSON.parse(savedUser));
         }
       } catch (error) {
       } finally {
@@ -44,7 +47,7 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="app" component={AppStack} />
-        {!haveUser && <Stack.Screen name="auth" component={AuthStack} />}
+        <Stack.Screen name="auth" component={AuthStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

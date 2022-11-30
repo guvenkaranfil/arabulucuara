@@ -1,8 +1,14 @@
-export interface AuthNavigatorParamList {
+export enum UserType {
+  arabulucu,
+  arabulucuMerkezi,
+  uzman,
+}
+
+export type AuthNavigatorParamList = {
   login: undefined;
   forgotPassword: undefined;
   registerIdentities: undefined;
-  register: undefined;
+  register: {userType: UserType};
   welcome: {name: string};
   'completions/address': undefined;
   'completions/personal': undefined;
@@ -11,4 +17,4 @@ export interface AuthNavigatorParamList {
   'completions/aboutMe': undefined;
   'completions/expertiesArea': undefined;
   'completions/meditationCenter': undefined;
-}
+};

@@ -8,8 +8,10 @@ import {
 import {updateToken} from '@store/user/UserSlice';
 import {RootState} from '@store/RootStore';
 
+// const BASE_URL = 'https://api.arabulucuara.com';
+const BASE_URL = 'http://192.168.1.41';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://api.arabulucuara.com',
+  baseUrl: BASE_URL,
   prepareHeaders: (headers, {getState}) => {
     const token = (getState() as RootState).user.token?.token;
 

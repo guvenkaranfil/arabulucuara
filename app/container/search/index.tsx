@@ -21,7 +21,7 @@ export default function Search({navigation}: Props) {
 
   return (
     <View style={CommonStyles.container}>
-      {!isUserLoggedIn && <NotLoggedUserHeader onPressSignIn={() => console.log('sign in...')} />}
+      {!isUserLoggedIn && <NotLoggedUserHeader onPressSignIn={() => navigation.navigate('auth')} />}
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>
         <View style={styles.inputArea}>
           <View style={styles.inputLabel}>
