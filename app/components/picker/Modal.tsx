@@ -34,6 +34,7 @@ export default function PickModal({
   return (
     <Modal visible={true} transparent={true}>
       <TouchableWithoutFeedback onPress={closeModal}>
+        {/* <TouchableWithoutFeedback> */}
         <View style={styles.outOfBox}>
           <View style={[styles.container, listStyle]}>
             <FlatList

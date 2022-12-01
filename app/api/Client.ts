@@ -30,6 +30,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
+    console.log('Token expired');
     // try to get a new token
     const refreshResult = await baseQuery(
       '/Account/refresh' + '?t=' + (api.getState() as RootState).user.refreshToken,

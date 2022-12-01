@@ -169,3 +169,23 @@ export const SEARCH_RESULT = [
     rate: 5,
   },
 ];
+
+export const GENDERS = [
+  {id: 2, value: 'Kadın'},
+  {id: 1, value: 'Erkek'},
+  {id: 0, value: 'Farketmez'},
+];
+
+export const AGE_RANGE_ARABULUCU = [
+  {id: 1, range: '25 - 30'},
+  {id: 2, range: '31 - 40'},
+  {id: 3, range: '41 - 50'},
+  {id: 4, range: '50 - 99999'},
+];
+
+export const SENIORITY_RANGE_ARABULUCU = [
+  {id: 1, range: '0 - 5'},
+  {id: 2, range: '6 - 10'},
+  {id: 3, range: '11 - 15'},
+  {id: 3, range: '15 - 9999'},
+];

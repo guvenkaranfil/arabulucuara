@@ -139,7 +139,7 @@ const AuthApi = Client.injectEndpoints({
         console.info('/Account/stepThree >>> ', response);
         updateLastStep(4);
 
-        return response.data;
+        return response;
       },
     }),
 

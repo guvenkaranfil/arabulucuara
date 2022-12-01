@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Text, View} from 'react-native';
 import {
   useGetJobsQuery,
   useGetProfessionsQuery,
@@ -42,7 +42,8 @@ export default function ProfessionType({navigation}) {
   const [uzmanlikAlanlari, setuzmanlikAlanlari] = useState([]);
   const [uzmanlikAlani, setuzmanlikAlani] = useState({id: undefined, name: undefined});
 
-  const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
+  // const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
+  const {data: professions} = useGetJobsQuery();
   const [getUzamnlıkAlanlari, result] = useLazyGetProfessionsQuery();
   console.info('uzmanListesi:', result);
   const {data: jobs} = useGetJobsQuery();
@@ -69,7 +70,19 @@ export default function ProfessionType({navigation}) {
 
   const saveAndContinue = () => {
     let response = {};
-    if (user.userRole === 'merkez') {
+
+    if (user.userRole === 'arabulucu') {
+      response = {
+        arabulucu: {
+          meslekler: selectedProffesions,
+          sicilKayitYili: registrationYear.year,
+          merkezUyesiMi: isMeditationCenter,
+          dernekUyesiMi: isMemberOfMeditationCenter,
+        },
+        merkez: null,
+        uzman: null,
+      };
+    } else if (user.userRole === 'merkez') {
       response = {
         merkez: {
           ortakSayisi: Number(ortakSayisi),
@@ -91,10 +104,21 @@ export default function ProfessionType({navigation}) {
       };
     }
 
-    saveStepThree(response).then(res => {
-      console.info('response:', res);
-      navigation.replace('completions/profilePhoto');
-    });
+    saveStepThree(response)
+      .then(res => {
+        console.info('response of step 3:', res);
+        if (res?.data?.status === 200) {
+          navigation.replace('completions/profilePhoto');
+        } else {
+          Alert.alert(
+            'Bir sorun oluştu',
+            res?.data?.message ?? 'Lütfen daha sonra tekrar deneyiniz',
+          );
+        }
+      })
+      .catch(error => {
+        console.log('ERR: ', error);
+      });
   };
 
   const onPressProfession = profession => {
@@ -272,6 +296,7 @@ export default function ProfessionType({navigation}) {
   };
 
   const _renderContent = () => {
+    console.log('user.userRole:', user.userRole);
     if (user.userRole === 'merkez') {
       return _renderMerkez();
     } else if (user.userRole === 'arabulucu') {

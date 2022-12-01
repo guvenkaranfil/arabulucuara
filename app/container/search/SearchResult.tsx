@@ -1,27 +1,60 @@
 import React, {useState, useLayoutEffect} from 'react';
-import {StyleSheet, FlatList, View, TextInput, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  FlatList,
+  View,
+  TextInput,
+  Pressable,
+  ActivityIndicator,
+  Text,
+  Alert,
+} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {RouteProp} from '@react-navigation/native';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
-import {SEARCH_RESULT} from './mocks';
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {BackIcon} from '@icons';
-import SearchProfile, {Profile} from './components/SearchProfile';
+import SearchProfile from './components/SearchProfile';
+import {SearchResponse, useSearchGenelMutation} from './mocks/searchApi';
 
 interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'searchResult'>;
+  route: RouteProp<SearchNavigatorParamList, 'searchResult'>;
 }
 
-export default function SearchResult({navigation}: Props) {
+export default function SearchResult({navigation, route}: Props) {
   const [searchInput, setsearchInput] = useState('');
+  const [searchResult, setsearchResult] = useState<SearchResponse[]>(route.params?.data ?? []);
+
+  const [searchGeneral, {isLoading}] = useSearchGenelMutation();
 
   useLayoutEffect(() => {
     navigation.setOptions({headerShown: false});
   }, [navigation]);
 
-  const onPressProfile = (profile: Profile) => {
+  const onPressProfile = (profile: SearchResponse) => {
     console.log('pressedProfile:', profile);
     navigation.navigate('profileDetail', {profile});
+  };
+
+  const onSubmitSearch = () => {
+    if (searchInput?.length > 0) {
+      console.log('search..');
+      searchGeneral({value: searchInput})
+        .then(res => {
+          console.log('General search:', res);
+          console.log('general search data: ', res?.data);
+          if (!res?.error && res?.data) {
+            console.log('setting generalll');
+
+            setsearchResult(res.data);
+          }
+        })
+        .catch(err => console.log('general err:', err));
+    } else {
+      Alert.alert('Lütfen Dikkat', 'Aramak istediğiniz arabulucu ismini giriniz');
+    }
   };
 
   return (
@@ -31,23 +64,46 @@ export default function SearchResult({navigation}: Props) {
           <BackIcon width={17} height={12} stroke="#7E0736" />
         </Pressable>
         <View style={styles.inputArea}>
-          <TextInput style={styles.input} value={searchInput} onChangeText={setsearchInput} />
+          <TextInput
+            style={styles.input}
+            value={searchInput}
+            onChangeText={setsearchInput}
+            onSubmitEditing={onSubmitSearch}
+          />
         </View>
       </View>
 
-      <FlatList
-        data={SEARCH_RESULT}
-        contentContainerStyle={CommonStyles.paddingForScroll}
-        renderItem={({item, index}) => (
-          <SearchProfile key={index} profile={item} onPress={onPressProfile} />
-        )}
-        keyExtractor={(_, index) => String(index)}
-      />
+      {searchResult?.length === 0 && !isLoading && (
+        <View style={styles.fCenter}>
+          <Text>Sonuç bulunamadı</Text>
+        </View>
+      )}
+
+      {isLoading ? (
+        <View style={styles.fCenter}>
+          <ActivityIndicator size={'small'} color="black" />
+        </View>
+      ) : (
+        <FlatList
+          data={searchResult}
+          contentContainerStyle={CommonStyles.paddingForScroll}
+          renderItem={({item, index}) => (
+            <SearchProfile key={index} profile={item} onPress={onPressProfile} />
+          )}
+          keyExtractor={(_, index) => String(index)}
+        />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  fCenter: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   searchBar: {
     flexDirection: 'row',
     width: Metrics.DEVICE_WIDTH,

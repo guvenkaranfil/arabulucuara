@@ -113,7 +113,7 @@ const userApi = Client.injectEndpoints({
 
       transformResponse: (response: any) => {
         console.info('sign up arabulucu arabulucu response: ', response);
-        return response.data;
+        return response;
       },
     }),
 
@@ -127,7 +127,7 @@ const userApi = Client.injectEndpoints({
       transformResponse: (response: any) => {
         console.info('sign up merkez arabulucu response: ', response);
         saveUserToStorage(response);
-        return response.data;
+        return response;
       },
     }),
 
@@ -140,7 +140,7 @@ const userApi = Client.injectEndpoints({
 
       transformResponse: (response: any) => {
         console.info('sign up uzman arabulucu response: ', response);
-        return response.data;
+        return response;
       },
     }),
   }),

@@ -45,12 +45,12 @@ export default function ExpertiesArea({navigation}: Props) {
   };
 
   const saveAndGo = () => {
-    console.info('selectedExpertiesArea.keys: ', selectedExpertiesArea.keys());
+    console.info('selectedExpertiesArea.keys: ', Array.from(selectedExpertiesArea.keys()));
     let response = {};
     if (user.userRole === 'arabulucu') {
       response = {
         arabulucu: {
-          uzmanlikAlanlari: selectedExpertiesArea.keys(),
+          uzmanlikAlanlari: Array.from(selectedExpertiesArea.keys()),
         },
         uzmanMerkez: null,
       };

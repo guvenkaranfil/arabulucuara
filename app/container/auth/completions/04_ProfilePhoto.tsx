@@ -97,6 +97,11 @@ export default function ProfilePhoto({navigation}) {
       }
     } catch (error) {
       console.log('error on photo upload: ', error);
+      console.log('error on photo upload response: ', error?.response);
+      Alert.alert(
+        'Bir hata oluştu',
+        error?.response?.data?.message ?? 'Daha sonra tekrar deneyiniz',
+      );
     }
   };
 

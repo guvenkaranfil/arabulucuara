@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {AuthNavigatorParamList} from 'routes/stacks/auth/Types';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, View, StyleSheet} from 'react-native';
+import {ScrollView, View, StyleSheet, Alert} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList, UserType} from '@routes/stacks/auth/Types';
 
@@ -66,6 +66,8 @@ export default function Register({route, navigation}: RegisterProps) {
           kullaniciAdi: username,
           sifre: password,
         },
+      }).then(() => {
+        navigation.replace('completions/address');
       });
     } else if (userType === UserType.arabulucuMerkezi) {
       signUpMerkez({
@@ -79,6 +81,8 @@ export default function Register({route, navigation}: RegisterProps) {
           sifre: password,
           ticariUnvan: commercialTitle,
         },
+      }).then(() => {
+        navigation.replace('completions/address');
       });
     } else if (userType === UserType.uzman) {
       signUpUzman({
@@ -90,6 +94,9 @@ export default function Register({route, navigation}: RegisterProps) {
           kullaniciAdi: username,
           sifre: password,
         },
+      }).then(res => {
+        console.log('res');
+        navigation.replace('completions/address');
       });
     }
   };

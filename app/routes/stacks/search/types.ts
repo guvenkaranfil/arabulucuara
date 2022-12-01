@@ -1,8 +1,9 @@
 import {Profile} from '@search/components/SearchProfile';
+import {SearchResponse} from '@search/mocks/searchApi';
 
 export type SearchNavigatorParamList = {
   search: undefined;
-  searchResult: undefined;
+  searchResult: {data: SearchResponse[]};
   seekMediator: undefined;
   expertMediator: undefined;
   mediationCenter: undefined;
