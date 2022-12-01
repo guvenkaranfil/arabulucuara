@@ -32,6 +32,7 @@ export default function SearchExpertMediator() {
     label: 'Tümü',
   });
 
+  console.log('search for expert...')
   return (
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll}>

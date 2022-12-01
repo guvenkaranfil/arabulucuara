@@ -16,7 +16,7 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {BackIcon} from '@icons';
 import SearchProfile from './components/SearchProfile';
-import {SearchResponse, useSearchGenelMutation} from './mocks/searchApi';
+import {SearchResponse, useSearchGenelMutation} from './searchApi';
 
 interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'searchResult'>;

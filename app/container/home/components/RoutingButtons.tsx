@@ -2,11 +2,10 @@ import React from 'react';
 import {StyleSheet, Pressable, Text, View} from 'react-native';
 
 import {CalculatorIcon, SearchPersonIcon} from '@icons';
-import {Fonts, Metrics} from 'utils';
+import {Fonts, Metrics} from '@utils';
 
 type RoutingButtonsTypes = {
   searchMediator: () => void;
-  searchExpertMediator: () => void;
   searchMediatorCenter: () => void;
   searchPro: () => void;
   showCalculator?: boolean;
@@ -20,7 +19,6 @@ type RoutingButtonTypes = {
 
 export default function RoutingButtons({
   searchMediator,
-  searchExpertMediator,
   searchMediatorCenter,
   searchPro,
   showCalculator = true,
@@ -29,7 +27,6 @@ export default function RoutingButtons({
   return (
     <View style={styles.container}>
       <RoutingButton label="Arabulucu Ara" onPress={searchMediator} />
-      <RoutingButton label="Uzman Arabulucu Ara" onPress={searchExpertMediator} />
       <RoutingButton label="Arabuluculuk Merkezi Ara" onPress={searchMediatorCenter} />
       <RoutingButton label="Uzman Ara" onPress={searchPro} />
 

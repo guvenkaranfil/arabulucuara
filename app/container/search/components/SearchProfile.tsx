@@ -3,7 +3,7 @@ import {Image, Pressable, Text, View} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import {OnlyPersonIcon} from '@icons';
 import styles from './styles/SearchProfileStyle';
-import {SearchResponse} from '@search/mocks/searchApi';
+import {SearchResponse} from '@search/searchApi';
 
 interface ScreenProps {
   profile: SearchResponse;

@@ -32,7 +32,7 @@ export default function Search({navigation}: Props) {
 
           <Pressable
             style={styles.searchButton}
-            onPress={() => navigation.navigate('searchResult')}>
+            onPress={() => navigation.navigate('searchResult', {data: undefined})}>
             <Text style={styles.searchButtonLabel}>Arabulucuara'da Ara</Text>
           </Pressable>
         </View>
@@ -40,7 +40,6 @@ export default function Search({navigation}: Props) {
         <View style={styles.routingButtons}>
           <RoutingButtons
             searchMediator={() => navigation.navigate('seekMediator')}
-            searchExpertMediator={() => navigation.navigate('expertMediator')}
             searchMediatorCenter={() => navigation.navigate('mediationCenter')}
             searchPro={() => navigation.navigate('forExpert')}
             showCalculator={false}

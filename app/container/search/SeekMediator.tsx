@@ -9,7 +9,7 @@ import FilledButton from '@components/buttons/FilledButton';
 import TripleQuestion from './components/TripleQuestion';
 import {CommonStyles} from '@utils';
 import {useGetCitiesQuery, useLazyGetCitiesQuery} from '@home/HomeApi';
-import {useSearchArabulucuMutation, useTopicsQuery} from './mocks/searchApi';
+import {useSearchArabulucuMutation, useTopicsQuery} from './searchApi';
 import {useGetJobsQuery} from '@store/auth/AuthApi';
 
 export interface Props {

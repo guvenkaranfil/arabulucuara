@@ -4,7 +4,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Search from '@search/index';
 import SearchResult from '@search/SearchResult';
 import SeekMediator from '@search/SeekMediator';
-import SearchExpertMediator from '@search/SearchExpertMediator';
 import SearchMediationCenter from '@search/SearchMediationCenter';
 import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
@@ -32,11 +31,6 @@ function PortalNavigator() {
         name="seekMediator"
         component={SeekMediator}
         options={{title: 'Arabulucu Ara'}}
-      />
-      <Stack.Screen
-        name="expertMediator"
-        component={SearchExpertMediator}
-        options={{title: 'Uzman Arabulucu Ara'}}
       />
       <Stack.Screen
         name="mediationCenter"

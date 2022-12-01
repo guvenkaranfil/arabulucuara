@@ -30,6 +30,8 @@ export default function SearchMediationCenter() {
     setselectedExpertiseAreas(new Map(selectedExpertiseAreas.set(expertiseArea.id, status)));
   };
 
+  console.log('search mediation center')
+
   return (
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll}>
