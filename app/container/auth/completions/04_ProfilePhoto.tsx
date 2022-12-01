@@ -5,8 +5,8 @@ import ImagePicker from 'react-native-image-crop-picker';
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
 import Pedometer from '@components/auth/Pedometer';
-import FilledButton from 'components/buttons/FilledButton';
-import OutlineButton from 'components/buttons/OutlineButton';
+import FilledButton from '@components/buttons/FilledButton';
+import OutlineButton from '@components/buttons/OutlineButton';
 import {UserIcon} from '@icons';
 import styles from './styles/ProfilePhotoStyle';
 

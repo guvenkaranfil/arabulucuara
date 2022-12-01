@@ -10,12 +10,18 @@ interface UserState {
   refreshToken?: string;
   token?: Token;
   userLastStep?: number;
+  id?: number;
+  userRole?: string;
+  name?: string;
+  surname?: string;
 }
 
 const initialState: UserState = {
   refreshToken: undefined,
   token: undefined,
   userLastStep: undefined,
+  id: undefined,
+  userRole: undefined,
 };
 
 export const userSlice = createSlice({
@@ -46,12 +52,16 @@ export const userSlice = createSlice({
       state.userLastStep = undefined;
     },
 
-    updateLatestStep: (state, action) => {
-      state.userLastStep = action.payload;
+    setApiMe: (state, action) => {
+      state.id = action.payload.id;
+      state.userRole = action.payload.userRole;
+      state.name = action.payload.adi;
+      state.surname = action.payload.soyadi;
+      state.userLastStep = action.payload.lastStep;
     },
   },
 });
 
-export const {logIn, updateToken, changeToken, logOut, updateLatestStep} = userSlice.actions;
+export const {logIn, updateToken, changeToken, logOut, setApiMe} = userSlice.actions;
 
 export default userSlice.reducer;

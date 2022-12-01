@@ -25,6 +25,7 @@ function AuthStack() {
 
   const getInitialRoutename = () => {
     console.log('getInitialRoutename auth stack...: ', user.userLastStep);
+
     if (user.userLastStep === 1) return 'completions/address';
     if (user.userLastStep === 2) return 'completions/personal';
     if (user.userLastStep === 3) return 'completions/professionType';

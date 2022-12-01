@@ -11,24 +11,32 @@ import AppStack from './stacks/AppStack';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
 import {USER_INFO_STORAGE_KEY} from '../constants';
 import {RootState} from '@store/RootStore';
+import {useApiMeMutation} from '@store/user/UserApi';
 
 const Stack = createStackNavigator();
 export default function AppNavigator() {
   const haveUser = useSelector(isUserLoggedIn);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  console.log('User in:', user);
+  const [getApiMe] = useApiMeMutation();
 
   const [isCheckingForUser, setisCheckingForUser] = React.useState(true);
 
   React.useEffect(() => {
+    console.log('useeffect');
     const checkUser = async () => {
       try {
         const savedUser = await AsyncStorage.getItem(USER_INFO_STORAGE_KEY);
+        console.log('savedUser: ', savedUser);
 
         if (savedUser) {
           dispatch(logIn(JSON.parse(savedUser)));
           console.log('USER: ', JSON.parse(savedUser));
+          getApiMe()
+            .then(res => console.log('res of api me...: ', res))
+            .catch(error => {
+              console.error('Api me de bir hata oluştu: >> ', error);
+            });
         }
       } catch (error) {
       } finally {

@@ -4,6 +4,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
+import {RootState} from '@store/RootStore';
+import {useSelector} from 'react-redux';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -14,6 +16,7 @@ import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/PersonalStyles';
 import {Labels} from '@utils';
+import {useStepTwoMutation} from '@store/auth/AuthApi';
 
 export interface PersonalProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/personal'>;
@@ -24,10 +27,42 @@ export default function Personal({navigation}: PersonalProps) {
   const [phoneNumber, setphoneNumber] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDateTimePicker, setshowDateTimePicker] = useState(false);
+  const user = useSelector((state: RootState) => state.user);
+  const [saveStepTwo, result] = useStepTwoMutation();
 
+  console.log('user.userRole:', user.userRole);
   const handleConfirm = (pickedDate: Date) => {
     setDate(pickedDate);
     setshowDateTimePicker(false);
+  };
+
+  const saveAndContinue = () => {
+    let response = {};
+    if (user.userRole === 'merkez') {
+      response = {
+        arabulucuUzman: null,
+        merkez: {
+          ad: user.name,
+          soyad: user.surname,
+          dogumTarih: date.toISOString(),
+          cinsiyet: gender.id,
+        },
+      };
+    } else {
+      response = {
+        arabulucuUzman: {
+          dogumTarih: date,
+          cinsiyet: gender.id,
+          telefon: phoneNumber,
+        },
+        merkez: null,
+      };
+    }
+
+    console.log('response: ', response);
+    saveStepTwo(response).then(() => {
+      navigation.replace('completions/professionType');
+    });
   };
 
   return (
@@ -61,23 +96,26 @@ export default function Personal({navigation}: PersonalProps) {
             value={gender?.name}
             placeholder="Cinsiyet"
             items={[
-              {id: 1, name: 'Bayan'},
-              {id: 2, name: 'Erkek'},
+              {id: 2, name: 'Kadın'},
+              {id: 1, name: 'Erkek'},
             ]}
             renderItem={item => item.name}
             onPress={setgender}
           />
 
-          <Input
-            value={phoneNumber}
-            onChangeText={setphoneNumber}
-            placeholder="Telefon Numarası"
-            keyboardType="number-pad"
-          />
+          {user.userRole === 'uzman' ||
+            (user.userRole === 'arabulucu' && (
+              <Input
+                value={phoneNumber}
+                onChangeText={setphoneNumber}
+                placeholder="Telefon Numarası"
+                keyboardType="number-pad"
+              />
+            ))}
         </View>
 
         <View style={styles.footer}>
-          <FilledButton label="Devam Et" onPress={() => console.log('onPress...')} />
+          <FilledButton label="Devam Et" onPress={saveAndContinue} isLoading={result.isLoading} />
 
           <OutlineButton label="Geri" onPress={() => console.log('onPress...')} />
         </View>

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
 
@@ -21,6 +21,15 @@ export default function Login({navigation}: LoginProps) {
   const [hidePassword, sethidePassword] = useState(true);
 
   const [signIn, {isLoading}] = useSignInMutation();
+
+  const onPressSignIn = () => {
+    signIn({username: email, password: password})
+      .then(() => navigation.replace('app'))
+      .catch(() => {
+        console.log('error on login');
+        Alert.alert('Bir sorun oluştu', 'Lütfen tekrar deneyiniz');
+      });
+  };
 
   return (
     <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
@@ -51,11 +60,7 @@ export default function Login({navigation}: LoginProps) {
         </View>
 
         <View style={styles.signIn}>
-          <FilledButton
-            isLoading={isLoading}
-            label="Giriş Yap"
-            onPress={() => signIn({username: email, password: password})}
-          />
+          <FilledButton isLoading={isLoading} label="Giriş Yap" onPress={onPressSignIn} />
         </View>
 
         <View style={styles.footer}>

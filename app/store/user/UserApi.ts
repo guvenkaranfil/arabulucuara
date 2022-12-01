@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Client from '@api/Client';
-import {logIn} from './UserSlice';
+import {logIn, setApiMe} from './UserSlice';
 
 import store from '../RootStore';
 import {USER_INFO_STORAGE_KEY} from '../../constants';
@@ -17,8 +17,6 @@ interface SignInResponse {
   token?: Token;
   userLastStep?: number;
 }
-
-interface SignUpResponse {}
 
 type PostRegisterType = {
   uyelikTur: string;
@@ -63,9 +61,29 @@ const saveUserToStorage = (response: SignInResponse) => {
   console.log('response of login.', response);
 };
 
+interface ApiMe {
+  id: string;
+  userRole: string;
+  lastStep: string;
+}
+
 const userApi = Client.injectEndpoints({
   overrideExisting: true,
   endpoints: build => ({
+    apiMe: build.mutation<ApiMe, void>({
+      query: () => ({
+        url: '/Account/me',
+        method: 'GET',
+      }),
+
+      transformResponse: (response: any) => {
+        console.log('response of api me.', response);
+        store.dispatch(setApiMe(response));
+
+        return response;
+      },
+    }),
+
     signIn: build.mutation<SignInResponse, {username: string; password: string}>({
       query: ({username, password}) => ({
         url: '/Account/login',
@@ -128,6 +146,7 @@ const userApi = Client.injectEndpoints({
 });
 
 export const {
+  useApiMeMutation,
   useSignInMutation,
   useSignUpArabulucuMutation,
   useSignUpMerkezMutation,

@@ -5,6 +5,7 @@ export enum UserType {
 }
 
 export type AuthNavigatorParamList = {
+  app: undefined;
   login: undefined;
   forgotPassword: undefined;
   registerIdentities: undefined;
