@@ -143,6 +143,92 @@ const AuthApi = Client.injectEndpoints({
       },
     }),
 
+    stepFive: build.mutation<
+      SignInResponse,
+      {
+        arabulucu?: {
+          hakkimda: string;
+        };
+        merkez?: {
+          egitimVeriyorMu: boolean;
+          isBirligiVarMi: boolean;
+          kiralamaVarMi: boolean;
+          tahkimVarMi: boolean;
+          uzmanGorusVarMi: boolean;
+        };
+        uzman?: {
+          sicileKayitliMi: boolean;
+          merkezeUyeMi: boolean;
+          odaUyesiMi: boolean;
+        };
+      }
+    >({
+      query: params => ({
+        url: '/Account/StepFive',
+        method: 'POST',
+        body: params,
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('/Account/StepFive >>> ', response);
+        updateLastStep(6);
+
+        return response.data;
+      },
+    }),
+
+    stepSix: build.mutation<
+      SignInResponse,
+      {
+        arabulucu?: {
+          uzmanlikAlanlari: Array<number>;
+        };
+        uzmanMerkez?: {
+          hakkimda: string;
+        };
+      }
+    >({
+      query: params => ({
+        url: '/Account/StepSix',
+        method: 'POST',
+        body: params,
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('/Account/Siz >>> ', response);
+        updateLastStep(6);
+
+        return response;
+      },
+    }),
+
+    stepSeven: build.mutation<
+      SignInResponse,
+      {
+        merkezUyesiMi: boolean;
+        dernekUyesiMi: boolean;
+        odaUyesiMi: boolean;
+        sicilKayitliMi: boolean;
+        merkezAdi: string;
+        dernekAdi: string;
+        odaAdi: string;
+      }
+    >({
+      query: params => ({
+        url: '/Account/StepSeven',
+        method: 'POST',
+        body: params,
+      }),
+      invalidatesTags: ['apime'],
+
+      transformResponse: (response: any) => {
+        console.info('/Account/Siz >>> ', response);
+        updateLastStep(6);
+
+        return response;
+      },
+    }),
+
     getProfessions: build.query<UzmanResponse | ArabulucuResponse, {userType: string}>({
       query: ({userType}) => '/Home/GetProffesion?type=' + userType,
     }),
@@ -157,6 +243,9 @@ export const {
   useStepOneMutation,
   useStepTwoMutation,
   useStepThreeMutation,
+  useStepFiveMutation,
+  useStepSixMutation,
+  useStepSevenMutation,
   useGetProfessionsQuery,
   useGetJobsQuery,
   useLazyGetProfessionsQuery,

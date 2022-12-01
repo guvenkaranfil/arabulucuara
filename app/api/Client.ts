@@ -53,5 +53,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export default createApi({
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['apime'],
   endpoints: () => ({}),
 });

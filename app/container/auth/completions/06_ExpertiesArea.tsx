@@ -1,5 +1,7 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Alert, Text, View} from 'react-native';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
 import LoginLayout from '@components/layouts/LoginLayout';
 import Header from '@components/auth/Header';
@@ -8,36 +10,83 @@ import RoundCheckBox from '@components/checkbox/RoundCheckBox';
 import FilledButton from '@components/buttons/FilledButton';
 import OutlineButton from '@components/buttons/OutlineButton';
 import styles from './styles/ExpertiesAreaStyle';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {AuthNavigatorParamList} from '@routes/stacks/auth/Types';
+import {Metrics} from '@utils';
+import Input from '@components/input/Input';
+import {useLazyGetProfessionsQuery, useStepSixMutation} from '@store/auth/AuthApi';
 
-export default function ExpertiesArea() {
-  const [expertiesArea, setexpertiesArea] = useState(exptertiesArea);
+export interface Props {
+  navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/expertiesArea'>;
+}
+
+export default function ExpertiesArea({navigation}: Props) {
+  // Arabulucu
+
+  // Uzman ve Merkez
+  const [aboutMe, setaboutMe] = useState('');
   const [selectedExpertiesArea, setselectedExpertiesArea] = useState(new Map());
+
+  const user = useSelector((state: RootState) => state.user);
+  const [getUzamnlıkAlanlari, {data: professions}] = useLazyGetProfessionsQuery();
+  const [saveSixStep, {isLoading}] = useStepSixMutation();
+
+  console.log('Professions:', professions);
+
+  useEffect(() => {
+    if (user.userRole === 'arabulucu') {
+      getUzamnlıkAlanlari({userType: 'arabulucu'});
+    }
+  }, []);
 
   const onPressExperties = (expertiesId: number) => {
     var status = !selectedExpertiesArea.get(expertiesId);
     setselectedExpertiesArea(new Map(selectedExpertiesArea.set(expertiesId, status)));
   };
 
-  return (
-    <LoginLayout showBackButton={true} enableKeyboardDismiss={false}>
-      <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={200} />
+  const saveAndGo = () => {
+    console.info('selectedExpertiesArea.keys: ', selectedExpertiesArea.keys());
+    let response = {};
+    if (user.userRole === 'arabulucu') {
+      response = {
+        arabulucu: {
+          uzmanlikAlanlari: selectedExpertiesArea.keys(),
+        },
+        uzmanMerkez: null,
+      };
+    } else {
+      response = {
+        arabulucu: null,
+        uzmanMerkez: {
+          hakkimda: aboutMe,
+        },
+      };
+    }
 
-      <View style={styles.step}>
-        <Pedometer activeStep={5} totalCount={7} />
-        <Text style={styles.stepInfo}>
-          Profilinizde yer alan yıldızların parlaması için devam eden{'\n'}aşamaları tamamlamanız
-          gerekmektedir.
-        </Text>
-      </View>
+    saveSixStep(response).then(res => {
+      console.info('res expertise area:', res);
+      if (res?.data?.status === 200) {
+        if (user.userRole === 'merkez') {
+          navigation.replace('app');
+        } else {
+          navigation.replace('completions/meditationCenter');
+        }
+      } else {
+        Alert.alert('Bir sorun oluştu', 'Lütfen daha sonra tekrar deneyiniz');
+      }
+    });
+  };
 
+  const _renderArabulucu = () => {
+    return (
       <View style={styles.form}>
         <Text style={styles.expertiesLabel}>Arabuluculuk Uzmanlık Alanları</Text>
 
-        {expertiesArea.map((item, index) => (
+        {professions?.map((item, index) => (
           <RoundCheckBox
             key={index}
             id={item.id}
-            label={item.exptertiesName}
+            label={item.value}
             isVisible={selectedExpertiesArea.get(item.id)}
             onPress={onPressExperties}
           />
@@ -48,58 +97,56 @@ export default function ExpertiesArea() {
           bulunmamaktadır.
         </Text>
       </View>
+    );
+  };
+
+  const _renderMerkezveUzman = () => {
+    return (
+      <View style={styles.form}>
+        <Input
+          height={Metrics.hp(200)}
+          value={aboutMe}
+          onChangeText={setaboutMe}
+          placeholder="Hakkımda"
+          isMultiLine={true}
+        />
+      </View>
+    );
+  };
+
+  const _renderContentForm = () => {
+    if (user.userRole === 'merkez' || user.userRole === 'uzman') {
+      return _renderMerkezveUzman();
+    } else if (user.userRole === 'arabulucu') {
+      return _renderArabulucu();
+    }
+  };
+
+  return (
+    <LoginLayout
+      showBackButton={true}
+      enableKeyboardDismiss={false}
+      onPressBack={navigation.goBack}>
+      <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={200} />
+
+      <View style={styles.step}>
+        <Pedometer activeStep={5} totalCount={7} />
+        <Text style={styles.stepInfo}>
+          Profilinizde yer alan yıldızların parlaması için devam eden{'\n'}aşamaları tamamlamanız
+          gerekmektedir.
+        </Text>
+      </View>
+
+      {_renderContentForm()}
 
       <View style={styles.footer}>
-        <FilledButton label="Daha sonra dolduracağım" onPress={() => console.log('onPress...')} />
+        <FilledButton label="Kaydet ve Devam Et" onPress={saveAndGo} isLoading={isLoading} />
 
-        <OutlineButton label="Geri" onPress={() => console.log('onPress...')} />
+        <OutlineButton
+          label="Data Sonra Dolduracağım"
+          onPress={() => navigation.navigate('completions/meditationCenter')}
+        />
       </View>
     </LoginLayout>
   );
 }
-
-const exptertiesArea = [
-  {
-    id: 1,
-    exptertiesName: 'Genel Arabuluculuk',
-  },
-  {
-    id: 2,
-    exptertiesName: 'İş Hukuku Genel Uzmanlık Alanı',
-  },
-
-  {
-    id: 3,
-    exptertiesName: 'Ticaret Hukuku Genel Uzmanlık Alanı',
-  },
-
-  {
-    id: 4,
-    exptertiesName: 'Tüketici Hukuku Genel Uzmanlık Alanı',
-  },
-
-  {
-    id: 5,
-    exptertiesName: 'Banka ve Finans Hukuku Özel Uzmanlık Alanı',
-  },
-
-  {
-    id: 6,
-    exptertiesName: 'Sigorta Hukuku Özel Uzmanlık Alanı',
-  },
-
-  {
-    id: 7,
-    exptertiesName: 'İnşaat Hukuku Özel Uzmanlık Alanı',
-  },
-
-  {
-    id: 8,
-    exptertiesName: 'Sağlık Hukuku Özel Uzmanlık Alanı',
-  },
-
-  {
-    id: 9,
-    exptertiesName: 'Fikri ve Sinai Haklar Hukuku Özel',
-  },
-];

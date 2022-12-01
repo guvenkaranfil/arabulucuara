@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Labels, Metrics} from '@utils';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
 type PedometerProps = {
   totalCount: number;
@@ -9,14 +11,18 @@ type PedometerProps = {
 
 export default function Pedometer({totalCount, activeStep}: PedometerProps) {
   console.log('activeStep:', activeStep);
+  const user = useSelector((state: RootState) => state.user);
+
   const _renderSteps = () => {
-    return Array.from({length: totalCount}, (_, k) => k + 1).map((step, index) => (
-      <View
-        key={index}
-        style={[styles.step, step <= activeStep ? styles.activeStep : styles.inActiveStep]}>
-        <Text style={Labels.label18BoldWhite}>{step}</Text>
-      </View>
-    ));
+    return Array.from({length: user.userRole === 'merkez' ? 6 : totalCount}, (_, k) => k + 1).map(
+      (step, index) => (
+        <View
+          key={index}
+          style={[styles.step, step <= activeStep ? styles.activeStep : styles.inActiveStep]}>
+          <Text style={Labels.label18BoldWhite}>{step}</Text>
+        </View>
+      ),
+    );
   };
 
   return (

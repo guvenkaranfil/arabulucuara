@@ -71,6 +71,7 @@ const userApi = Client.injectEndpoints({
   overrideExisting: true,
   endpoints: build => ({
     apiMe: build.mutation<ApiMe, void>({
+      providesTags: ['apime'],
       query: () => ({
         url: '/Account/me',
         method: 'GET',

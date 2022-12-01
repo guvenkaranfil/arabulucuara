@@ -23,6 +23,27 @@ export default StyleSheet.create({
     marginTop: Metrics.hp(26),
   },
 
+  formQuestion: {
+    marginBottom: 20,
+  },
+
+  formQuestionRow: {
+    marginTop: Metrics.hp(10),
+    flexDirection: 'row',
+    width: 180,
+    justifyContent: 'space-between',
+  },
+
+  questionLabel: {
+    fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#fff',
+  },
+
+  questionFrom: {
+    alignItems: 'flex-start',
+  },
+
   expertiesLabel: {
     paddingBottom: 16,
     ...Labels.label16RegularWhite,
