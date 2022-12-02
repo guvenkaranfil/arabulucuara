@@ -25,6 +25,8 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
 
   const [showContactInformations, setshowContactInformations] = useState(false);
 
+  console.log('Profile..');
+
   const _renderContactInformations = () => {
     if (showContactInformations) {
       return (
@@ -38,7 +40,9 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
   };
 
   return (
-    <ProfileLayout user={profile}>
+    <ProfileLayout
+      user={profile}
+      onPressMessages={() => navigation.navigate('profile', {screen: 'messagesContainer'})}>
       <>
         <View style={styles.actionButtons}>
           <Pressable

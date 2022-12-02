@@ -1,23 +1,42 @@
 import {ProfileScreenNavigationProps, UserProfileRoute} from '@routes/stacks/profile/Types';
 import React from 'react';
-import {Alert} from 'react-native';
+import {ActivityIndicator, Alert, Linking, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
-import ProfileLayout from '@components/layouts/ProfileLayout';
+import ProfileLayout from './layouts/ProfileLayout';
 import ProfileRouteButtons from './components/UserProfileButtons';
 import {logOut} from '@store/user/UserSlice';
 import AsyncStorage from '@react-native-community/async-storage';
 import {USER_INFO_STORAGE_KEY} from '../../constants';
+import {ProfilePageLink, useGetProfileLinksQuery} from './ProfileGetApi';
 
+const mapPageNameToStackName = {
+  Profile: 'profile',
+  ChangePassword: undefined,
+  Messages: 'messagesContainer',
+  Index: undefined,
+  Memberships: undefined,
+  Biography: 'aboutUser',
+  Expertise: undefined,
+  Gallery: 'userGallery',
+  Articles: 'userArticles',
+  Videos: undefined,
+  Sertifikalar: 'userCertificates',
+};
 export default function Profile({navigation}: ProfileScreenNavigationProps) {
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  console.log('Profile.user:', user);
+  const {data: profile, isLoading} = useGetProfileLinksQuery();
+  console.log('profile links response: ', profile);
 
   const handleSignOut = () => {
     console.log('Handle sign out');
     AsyncStorage.removeItem(USER_INFO_STORAGE_KEY)
       .then(() => {
         dispatch(logOut());
-        // TODO: check type error to fix
         navigation.navigate('home');
       })
       .catch(() => {
@@ -25,53 +44,47 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
       });
   };
 
-  return (
-    <ProfileLayout user={user} onPressMessages={() => navigation.navigate('messagesContainer')}>
-      <ProfileRouteButtons
-        routeButtons={userProfileRoutes}
-        onPressRoute={(pressedRoute: UserProfileRoute) =>
-          navigation.navigate(pressedRoute.stackName)
-        }
-        onPressSignOut={handleSignOut}
-      />
-    </ProfileLayout>
-  );
+  if (isLoading) {
+    return (
+      <View style={styles.fCenter}>
+        <ActivityIndicator size="small" color="black" />
+      </View>
+    );
+  }
+
+  const navigateToPage = (pressedRoute: ProfilePageLink) => {
+    const pageStackName = mapPageNameToStackName[pressedRoute.pageName];
+    if (pageStackName) {
+      navigation.navigate(pageStackName);
+    } else {
+      Linking.openURL(pressedRoute.url);
+    }
+  };
+
+  if (profile?.linkler) {
+    return (
+      <ProfileLayout
+        user={profile!}
+        onPressMessages={() => navigation.navigate('messagesContainer')}>
+        <ProfileRouteButtons
+          routeButtons={profile?.linkler}
+          onPressRoute={navigateToPage}
+          onPressSignOut={handleSignOut}
+        />
+      </ProfileLayout>
+    );
+  }
+
+  return null;
 }
 
-const user = {
-  id: 1,
-  accountType: 'individualCenter',
-  profilePhoto:
-    'https://arabulucuara.com/uploaded/UserImage/0686a091-4571-4db1-ac9a-c8ebf967e984.jpg',
-  nameSurname: 'Sevil KOYUNCU',
-  userType: 'Arabulucu',
-  location: 'Osmangazi - Bursa',
-  profession: 'Avukat',
-  rate: 5,
-};
-
-const userProfileRoutes: Array<UserProfileRoute> = [
-  {
-    label: 'Profile Bilgileri',
-    stackName: 'profileInformation',
+const styles = StyleSheet.create({
+  fCenter: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  {
-    label: 'Hakkımda',
-    stackName: 'aboutUser',
-  },
-  {
-    label: 'Seminer & Eğitim ve Sertifikalar',
-    stackName: 'userCertificates',
-  },
-  {
-    label: 'Makaleler',
-    stackName: 'userArticles',
-  },
-  {
-    label: 'Galeri',
-    stackName: 'userGallery',
-  },
-];
+});
 
 // base URL for images
 // https://arabulucuara.com/uploaded/UserImage/55168eff-df91-430c-ac6b-aaf782db5572.jpg

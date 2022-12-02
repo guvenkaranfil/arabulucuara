@@ -9,11 +9,11 @@ import MediationCenter from './components/MediationCenter';
 import IndividualMediator from './components/IndividualMediator';
 
 import {BackIcon, LetterIcon} from '@icons';
-import {SearchResponse} from '@search/searchApi';
+import {ProfileLinks} from '@profile/ProfileGetApi';
 
 interface ScreenProps {
   children: ReactElement;
-  user: SearchResponse;
+  user: ProfileLinks;
   onPressMessages: () => void;
 }
 
@@ -61,7 +61,7 @@ export default function ProfileLayout({children, user, onPressMessages}: ScreenP
         scrollEventThrottle={16}>
         <View style={styles.shadow}>
           <LinearGradient style={styles.container} colors={linearColors}>
-            {user.role === 'arabulucu' ? (
+            {user.roleName === 'arabulucu' ? (
               <IndividualMediator {...user} />
             ) : (
               <MediationCenter {...user} />

@@ -4,10 +4,11 @@ import {StyleSheet, View} from 'react-native';
 
 import FilledButton from '@components/buttons/FilledButton';
 import {Fonts, Metrics} from '@utils';
+import {ProfilePageLink} from '@profile/ProfileGetApi';
 
 interface Props {
-  routeButtons: Array<UserProfileRoute>;
-  onPressRoute: (stackName: UserProfileRoute) => void;
+  routeButtons: Array<ProfilePageLink>;
+  onPressRoute: (stackName: ProfilePageLink) => void;
   onPressSignOut: () => void;
 }
 
@@ -18,7 +19,7 @@ export default function ProfileRouteButtons({routeButtons, onPressRoute, onPress
         <FilledButton
           key={index}
           style={styles.routeButton}
-          label={routeButton.label}
+          label={routeButton.name}
           labelStyle={styles.routeLabel}
           onPress={() => onPressRoute(routeButton)}
         />

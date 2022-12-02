@@ -1,6 +1,7 @@
 import {SearchResponse} from '@search/searchApi';
 
 export type SearchNavigatorParamList = {
+  profile: {screen: string};
   auth: undefined;
   search: undefined;
   searchResult: {data: SearchResponse[] | undefined};
