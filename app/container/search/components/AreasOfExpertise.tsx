@@ -29,7 +29,7 @@ export default function AreasOfExpertise({
             <RoundCheckBox
               roundStyle={styles.checkbox}
               labelStyle={styles.checkboxLabel}
-              label={expertise.label}
+              label={expertise.value}
               isVisible={selectedExpertiseAreas?.get(expertise?.id) ?? false}
               onPress={() => onSelect(expertise)}
             />

@@ -4,13 +4,14 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import {AGE_RANGE_ARABULUCU, GENDERS, SENIORITY_RANGE_ARABULUCU} from './mocks';
+import AreasOfExpertise, {ExpertiseArea} from './components/AreasOfExpertise';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import FilledButton from '@components/buttons/FilledButton';
 import TripleQuestion from './components/TripleQuestion';
 import {CommonStyles} from '@utils';
 import {useGetCitiesQuery, useLazyGetCitiesQuery} from '@home/HomeApi';
 import {useSearchArabulucuMutation, useTopicsQuery} from './searchApi';
-import {useGetJobsQuery} from '@store/auth/AuthApi';
+import {useGetJobsQuery, useGetProfessionsQuery} from '@store/auth/AuthApi';
 
 export interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'seekMediator'>;
@@ -28,8 +29,10 @@ export default function SeekMediator({navigation}: Props) {
     id: undefined,
     value: undefined,
   });
-  const [meditationCenter, setmeditationCenter] = useState({id: 2, label: 'Farketmez'});
-  const [associationMembership, setassociationMembership] = useState({id: 2, label: 'Farketmez'});
+  const [meditationCenter, setmeditationCenter] = useState({id: 0, label: 'Farketmez'});
+  const [associationMembership, setassociationMembership] = useState({id: 0, label: 'Farketmez'});
+
+  const [selectedExpertiseAreas, setselectedExpertiseAreas] = useState(new Map());
 
   const {data: cities} = useGetCitiesQuery({type: 'ilce'});
   const [trigger, {data: towns}] = useLazyGetCitiesQuery();
@@ -37,15 +40,39 @@ export default function SeekMediator({navigation}: Props) {
   const {data: topics} = useTopicsQuery();
   const {data: jobs} = useGetJobsQuery();
   const [searchArabulucu, {isLoading}] = useSearchArabulucuMutation();
+  const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
+
+  console.log('topics:', topics);
 
   const onPressSearch = () => {
+    let uzmanlıkAlanları = [];
+
+    for (let [key, value] of selectedExpertiseAreas) {
+      if (value) {
+        uzmanlıkAlanları.push(key);
+      }
+    }
+
+    console.table({
+      sehir: selectedCity.id ?? 0,
+      ilce: selectedTown.id ?? 0,
+      mahalleId: selectedDistrict.id ?? 0,
+      uyusmazlikKonusu: subjectOfDispute.id ?? 0,
+      cinsiyet: gender.id,
+      alanlar: uzmanlıkAlanları,
+      yasAraligi: ageRange.id ?? 0,
+      kidemAraligi: seniorityRange.id ?? 0,
+      meslek: alternativeProffession.id ?? 0,
+      merkezUyesiMi: meditationCenter.id,
+      dernekUyesiMi: associationMembership.id,
+    });
     searchArabulucu({
       sehir: selectedCity.id ?? 0,
       ilce: selectedTown.id ?? 0,
       mahalleId: selectedDistrict.id ?? 0,
       uyusmazlikKonusu: subjectOfDispute.id ?? 0,
       cinsiyet: gender.id,
-      alanlar: seniorityRange.id ? [seniorityRange.id] : [],
+      alanlar: uzmanlıkAlanları,
       yasAraligi: ageRange.id ?? 0,
       kidemAraligi: seniorityRange.id ?? 0,
       meslek: alternativeProffession.id ?? 0,
@@ -74,6 +101,12 @@ export default function SeekMediator({navigation}: Props) {
     setselectedDistrict({id: undefined, name: undefined});
     setselectedTown({id: item.id, name: item.value});
     getDistricts({id: item.id, type: 'mahalle'});
+  };
+
+  const pickExpertiseArea = (expertiseArea: ExpertiseArea) => {
+    var status = !selectedExpertiseAreas.get(expertiseArea.id);
+    setselectedExpertiseAreas(new Map(selectedExpertiseAreas.set(expertiseArea.id, status)));
+    console.log('Pickde uzmanlık alanları: ', Array.from(selectedExpertiseAreas.keys()));
   };
 
   return (
@@ -143,22 +176,28 @@ export default function SeekMediator({navigation}: Props) {
           onPress={setalternativeProffession}
         />
 
+        <AreasOfExpertise
+          expertises={professions}
+          onSelect={pickExpertiseArea}
+          selectedExpertiseAreas={selectedExpertiseAreas}
+        />
+
         <TripleQuestion
           question="Arabuluculuk merkezi üyeliği olsun mu?"
           selectedOption={meditationCenter}
           onPressOption={setmeditationCenter}
-          option1={{id: 2, label: 'Farketmez'}}
+          option1={{id: 0, label: 'Farketmez'}}
           option2={{id: 1, label: 'Evet'}}
-          option3={{id: 0, label: 'Hayır'}}
+          option3={{id: 2, label: 'Hayır'}}
         />
 
         <TripleQuestion
           question="Arabuluculuk derneği üyeliği olsun mu?"
           selectedOption={associationMembership}
           onPressOption={setassociationMembership}
-          option1={{id: 2, label: 'Farketmez'}}
+          option1={{id: 0, label: 'Farketmez'}}
           option2={{id: 1, label: 'Evet'}}
-          option3={{id: 0, label: 'Hayır'}}
+          option3={{id: 2, label: 'Hayır'}}
         />
 
         <FilledButton label="ARA" bgColor="#7E0736" onPress={onPressSearch} isLoading={isLoading} />

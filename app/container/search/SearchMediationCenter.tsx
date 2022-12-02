@@ -6,7 +6,6 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import {MERKEZ_ODA_SAYISI, MERKEZ_UYE_SAYISI} from './mocks';
 import DropDownPicker from '@components/picker/DropDownPicker';
 import FilledButton from '@components/buttons/FilledButton';
-import AreasOfExpertise, {ExpertiseArea} from './components/AreasOfExpertise';
 import TripleQuestion from './components/TripleQuestion';
 import {CommonStyles} from '@utils';
 
@@ -24,7 +23,6 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [selectedTown, setselectedTown] = useState({id: undefined, name: undefined});
   const [selectedDistrict, setselectedDistrict] = useState({id: undefined, name: undefined});
   const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: undefined});
-  const [selectedExpertiseAreas, setselectedExpertiseAreas] = useState(new Map());
   const [numberOfRooms, setnumberOfRooms] = useState({id: 0, name: 'Tümü'});
   const [numberOfMembers, setnumberOfMembers] = useState({id: 0, name: 'Tümü'});
   const [selectedUzmanlikAlanları, setselectedUzmanlikAlanları] = useState<Array<number>>([]);
@@ -48,11 +46,6 @@ export default function SearchMediationCenter({navigation}: Props) {
   const {data: topics} = useTopicsQuery();
   const {data: merkezUzmanlıkAlanlari} = useGetProfessionsQuery({userType: 'uzman'});
   const [searchMerkez, {isLoading}] = useSearchMerkezMutation();
-
-  const pickExpertiseArea = (expertiseArea: ExpertiseArea) => {
-    var status = !selectedExpertiseAreas.get(expertiseArea.id);
-    setselectedExpertiseAreas(new Map(selectedExpertiseAreas.set(expertiseArea.id, status)));
-  };
 
   const handleSearch = () => {
     searchMerkez({
@@ -147,12 +140,6 @@ export default function SearchMediationCenter({navigation}: Props) {
           renderItem={item => item.value}
           onPress={setsubjectOfDispute}
         />
-
-        {/* <AreasOfExpertise
-          expertises={EXPERTISES}
-          onSelect={pickExpertiseArea}
-          selectedExpertiseAreas={selectedExpertiseAreas}
-        /> */}
 
         <MultiSelectCategoryDropDownPicker
           selectedItems={selectedUzmanlikAlanları ?? []}
