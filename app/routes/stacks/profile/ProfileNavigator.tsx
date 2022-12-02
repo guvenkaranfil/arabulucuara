@@ -21,6 +21,7 @@ import {
 } from './StackOptionts';
 import MessagesTopNavigator from './MessagesTopNavigator';
 import MessageDetail from '@profile/messages/MessageDetail';
+import ArticleDetail from '@portal/articles/ArticleDetail';
 
 const Stack = createStackNavigator<ProfileNavigatorParamList>();
 
@@ -40,6 +41,7 @@ function ProfileNavigator() {
         options={userCertificates}
       />
       <Stack.Screen name="userArticles" component={UserArticles} options={userArticles} />
+      <Stack.Screen name="articleDetail" component={ArticleDetail} options={{title: 'Makaleler'}} />
       <Stack.Screen name="userGallery" component={UserGallery} options={userGallery} />
       <Stack.Screen
         name="messagesContainer"

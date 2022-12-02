@@ -1,16 +1,28 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Pressable, ActivityIndicator} from 'react-native';
 import {Swipeable} from 'react-native-gesture-handler';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
 import TransparentModal from '@components/modals/TransparentModal';
 import Input from '@components/input/Input';
 import FilledButton from '@components/buttons/FilledButton';
 import {DeleteIcon, EditIcon} from '@icons';
-import {Fonts, Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
+import {Article, useArticlesQuery} from './ProfileGetApi';
+import {ProfileNavigatorParamList} from '@routes/stacks/profile/Types';
 
-export default function UserArticles() {
+export interface Props {
+  navigation: StackNavigationProp<ProfileNavigatorParamList, 'userArticles'>;
+}
+
+export default function UserArticles({navigation}: Props) {
   const [showNewArticleModal, setshowNewArticleModal] = useState(false);
   const [articleTitle, setarticleTitle] = useState('');
+  const {data: articles, isLoading} = useArticlesQuery();
+  console.log('articles:', articles);
+  const user = useSelector((state: RootState) => state.user);
 
   const handleNewArticle = () => {};
 
@@ -31,43 +43,67 @@ export default function UserArticles() {
     </View>
   );
 
+  const onPressArticle = (article: Article) => {
+    navigation.navigate('articleDetail', {
+      article: {...article, createdBy: user.name! + ' ' + user.surname},
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <View style={CommonStyles.fCenter}>
+        <ActivityIndicator size="small" color="black" />
+      </View>
+    );
+  } else if (articles) {
+    return (
+      <View style={styles.screenContainer}>
+        {showNewArticleModal && (
+          <TransparentModal
+            title="Yeni Ekle"
+            cancelText="İptal"
+            approveText="Kaydet"
+            onPressCancel={() => setshowNewArticleModal(false)}
+            onPressApprove={handleNewArticle}>
+            <>
+              <Text style={styles.newCertificateTitle}>Konu</Text>
+              <Input value={articleTitle} onChangeText={setarticleTitle} width={Metrics.wp(278)} />
+
+              <Text style={styles.newCertificateTitle}>PDF Dosya</Text>
+              <FilledButton label="" bgColor="#F5F6FA" onPress={() => console.log('get article')} />
+            </>
+          </TransparentModal>
+        )}
+
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <Text style={styles.screenTitle}>Makaleler</Text>
+
+          {articles.map((article, index) => (
+            <Swipeable
+              key={index}
+              rightThreshold={30}
+              renderRightActions={_renderActions}
+              enabled={false}>
+              <Pressable style={styles.article} onPress={() => onPressArticle(article)}>
+                <Text style={styles.aritcleTitle}>{article.title}</Text>
+              </Pressable>
+            </Swipeable>
+          ))}
+
+          <FilledButton
+            style={styles.addNewCertificate}
+            label="Yeni Ekle"
+            bgColor="#7E0736"
+            onPress={() => setshowNewArticleModal(true)}
+          />
+        </ScrollView>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.screenContainer}>
-      {showNewArticleModal && (
-        <TransparentModal
-          title="Yeni Ekle"
-          cancelText="İptal"
-          approveText="Kaydet"
-          onPressCancel={() => setshowNewArticleModal(false)}
-          onPressApprove={handleNewArticle}>
-          <>
-            <Text style={styles.newCertificateTitle}>Konu</Text>
-            <Input value={articleTitle} onChangeText={setarticleTitle} width={Metrics.wp(278)} />
-
-            <Text style={styles.newCertificateTitle}>PDF Dosya</Text>
-            <FilledButton label="" bgColor="#F5F6FA" onPress={() => console.log('get article')} />
-          </>
-        </TransparentModal>
-      )}
-
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.screenTitle}>Makaleler</Text>
-
-        {ARTICLES.map((article, index) => (
-          <Swipeable key={index} rightThreshold={30} renderRightActions={_renderActions}>
-            <View style={styles.article}>
-              <Text style={styles.aritcleTitle}>{article.articleTitle}</Text>
-            </View>
-          </Swipeable>
-        ))}
-
-        <FilledButton
-          style={styles.addNewCertificate}
-          label="Yeni Ekle"
-          bgColor="#7E0736"
-          onPress={() => setshowNewArticleModal(true)}
-        />
-      </ScrollView>
+    <View style={CommonStyles.fCenter}>
+      <Text>Makale bulunamadı</Text>
     </View>
   );
 }
@@ -149,58 +185,3 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 });
-
-const ARTICLES = [
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle:
-      'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle:
-      'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle:
-      'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle: 'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-  {
-    id: 1,
-    articleTitle:
-      'DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI DAVA ŞARTI ARABULUCULUK SÜRECİNDE İŞ AKIŞI',
-  },
-];

@@ -1,3 +1,4 @@
+import {Article} from '@portal/articles/Model';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
@@ -8,6 +9,7 @@ export type ProfileNavigatorParamList = {
   aboutUser: undefined;
   userCertificates: undefined;
   userArticles: undefined;
+  articleDetail: {article: Article};
   userGallery: undefined;
   messagesContainer: undefined;
   messageDetail: {messageId: number};
