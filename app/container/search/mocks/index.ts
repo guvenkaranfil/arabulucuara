@@ -189,3 +189,19 @@ export const SENIORITY_RANGE_ARABULUCU = [
   {id: 3, range: '11 - 15'},
   {id: 3, range: '15 - 9999'},
 ];
+
+export const MERKEZ_ODA_SAYISI = [
+  {id: 0, name: 'Tümü'},
+  {id: 1, name: '0 - 5 arası'},
+  {id: 2, name: '5 ve üzeri'},
+];
+
+export const MERKEZ_UYE_SAYISI = [
+  {id: 0, name: 'Tümü'},
+  {id: 1, name: '0 - 10'},
+  {id: 2, name: '11 - 20'},
+  {id: 3, name: '21 - 30'},
+  {id: 4, name: '31 - 40'},
+  {id: 5, name: '41 - 50'},
+  {id: 6, name: '50 ve üzeri'},
+];

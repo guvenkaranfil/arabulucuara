@@ -53,6 +53,36 @@ const searchApi = Client.injectEndpoints({
       },
     }),
 
+    searchMerkez: build.mutation<
+      SearchResponse[] | undefined,
+      {
+        sehir: number;
+        ilce: number;
+        mahalleId: number;
+        uyusmazlikKonusu: number;
+        alanlar: Array<number>;
+        odaSayisi: number;
+        uyeSayisi: number;
+        egitimVarMi: number;
+        ortaklikVarMi: number;
+        kiralamaVarMi: number;
+        tahkimVarMi: number;
+        gorusVarMi: number;
+      }
+    >({
+      query: params => ({
+        url: '/Search/Merkezara',
+        method: 'POST',
+        body: params,
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('Search merkez ara response: ', response);
+
+        return response;
+      },
+    }),
+
     searchGenel: build.mutation<
       SearchResponse[] | undefined,
       {
@@ -74,4 +104,9 @@ const searchApi = Client.injectEndpoints({
   }),
 });
 
-export const {useTopicsQuery, useSearchArabulucuMutation, useSearchGenelMutation} = searchApi;
+export const {
+  useTopicsQuery,
+  useSearchArabulucuMutation,
+  useSearchGenelMutation,
+  useSearchMerkezMutation,
+} = searchApi;
