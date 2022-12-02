@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import HTML from 'react-native-render-html';
 
 import {Fonts, Metrics} from '@utils';
 import Input from '@components/input/Input';
@@ -22,28 +23,34 @@ export default function AboutUser() {
     return <FullScreenLoader />;
   }
 
-  return (
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.formTitle}>Hakkımda</Text>
+  if (aboutMe) {
+    return (
+      <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.scrollContent}>
+          <Text style={styles.formTitle}>Hakkımda</Text>
 
-        <Input
+          {/* <Input
           value={aboutMe}
           onChangeText={setaboutMe}
           viewStyle={styles.input}
           isMultiLine={true}
           height={469}
-        />
+        /> */}
 
-        <FilledButton
-          label="Kaydet"
-          labelStyle={styles.saveLabel}
-          bgColor="#7E0736"
-          onPress={() => console.log('Save Button')}
-        />
-      </ScrollView>
-    </View>
-  );
+          <HTML source={{html: aboutMe}} />
+
+          <FilledButton
+            label="Hakkımda Güncelle"
+            labelStyle={styles.saveLabel}
+            bgColor="#7E0736"
+            onPress={() => console.log('Save Button')}
+          />
+        </ScrollView>
+      </View>
+    );
+  }
+
+  return null;
 }
 
 const styles = StyleSheet.create({

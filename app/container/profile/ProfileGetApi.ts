@@ -26,6 +26,83 @@ export interface Article {
   createdOn: Date;
 }
 
+export interface Certificate {
+  id: number;
+  konu: string;
+  kurum: string;
+  yil: number;
+}
+
+interface Meslek {
+  id: number;
+  name: string;
+}
+export interface ProfileInformations {
+  adi: string;
+  soyadi: string;
+  dogumTarih: string;
+  kullaniciMeslekleri: Array<Meslek>;
+  meslekler: Array<Meslek>;
+  telefon: string;
+  telefonYayinla: boolean;
+  email: string;
+  emailYayinla: boolean;
+  iller: Array<{id: number; name: string; selected: Boolean}>;
+  sehirYayinla: boolean;
+  ilceler: Array<{id: number; name: string; selected: Boolean}>;
+  ilceYayinla: boolean;
+  mahalleler: Array<{id: number; name: string; selected: Boolean}>;
+  mahalleYayinla: boolean;
+  adres: string;
+  adresYayinla: boolean;
+}
+
+interface UpdateProfile {
+  arabulucuBilgileri?: {
+    phone: string;
+    email: string;
+    birthDay: string;
+    jobs: Array<number>;
+    districtId: number;
+    address: string;
+    phoneShow: boolean;
+    emailShow: boolean;
+    cityShow: boolean;
+    districtShow: boolean;
+    addressShow: boolean;
+  };
+  merkezBilgileri?: {
+    partnerCount: number;
+    roomCount: number;
+    memberCount: number;
+    commercialTitle: string;
+    phone: string;
+    email: string;
+    birthDay: Date;
+    districtId: number;
+    address: string;
+    phoneShow: boolean;
+    emailShow: boolean;
+    cityShow: boolean;
+    districtShow: boolean;
+    addressShow: boolean;
+  };
+  uzmanBilgileri?: {
+    phone: string;
+    email: string;
+    birthDay: Date;
+    jobs: Array<number>;
+    jobStartYear: number;
+    districtId: number;
+    address: string;
+    phoneShow: boolean;
+    emailShow: boolean;
+    cityShow: boolean;
+    districtShow: boolean;
+    addressShow: boolean;
+  };
+}
+
 const profileGETApi = Client.injectEndpoints({
   endpoints: build => ({
     aboutMe: build.query<string, void>({
@@ -39,7 +116,38 @@ const profileGETApi = Client.injectEndpoints({
     articles: build.query<Array<Article>, void>({
       query: () => ({url: '/Content/GetMyArticles'}),
     }),
+
+    certificates: build.query<Array<Certificate>, void>({
+      query: () => ({url: '/User/GetCertificate'}),
+    }),
+
+    profileInformations: build.query<ProfileInformations, void>({
+      providesTags: ['profileInformations'],
+      query: () => ({url: '/User/GetProfile'}),
+    }),
+
+    updateProfile: build.mutation<{}, UpdateProfile>({
+      invalidatesTags: ['profileInformations'],
+      query: params => ({
+        url: '/User/UpdateProfile',
+        method: 'POST',
+        body: params,
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('Update Profile Response: ', response);
+
+        return response;
+      },
+    }),
   }),
 });
 
-export const {useAboutMeQuery, useGetProfileLinksQuery, useArticlesQuery} = profileGETApi;
+export const {
+  useAboutMeQuery,
+  useGetProfileLinksQuery,
+  useArticlesQuery,
+  useCertificatesQuery,
+  useProfileInformationsQuery,
+  useUpdateProfileMutation,
+} = profileGETApi;

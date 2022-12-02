@@ -13,7 +13,7 @@ import {USER_INFO_STORAGE_KEY} from '../../constants';
 import {ProfilePageLink, useGetProfileLinksQuery} from './ProfileGetApi';
 
 const mapPageNameToStackName = {
-  Profile: 'profile',
+  Profile: 'profileInformation',
   ChangePassword: undefined,
   Messages: 'messagesContainer',
   Index: undefined,

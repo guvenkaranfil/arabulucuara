@@ -33,7 +33,7 @@ export default function IndividualMediator({
           <AirbnbRating
             count={5}
             size={15}
-            defaultRating={starPoints / 20}
+            defaultRating={Math.ceil(starPoints / 20)}
             showRating={false}
             isDisabled={true}
             reviewColor="#fff"

@@ -17,6 +17,7 @@ export default function Input({
   isPassowordInput = false,
   secureTextEntry = false,
   isMultiLine = false,
+  isEditable = true,
   onPressSecure,
 }: Props) {
   const hitSlopArea = {top: 15, right: 15, bottom: 15, left: 15};
@@ -27,6 +28,7 @@ export default function Input({
   return (
     <View style={[styles.container, CONTAINER_WIDTH, CONTAINER_HEIGHT, viewStyle]}>
       <TextInput
+        editable={isEditable}
         style={[styles.input, CONTAINER_WIDTH, CONTAINER_HEIGHT]}
         value={value}
         onChangeText={onChangeText}
@@ -88,4 +90,5 @@ type Props = {
   isPassowordInput?: boolean;
   isMultiLine?: boolean;
   onPressSecure?: () => void;
+  isEditable?: boolean;
 };
