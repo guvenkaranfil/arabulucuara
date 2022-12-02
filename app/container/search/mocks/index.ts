@@ -173,10 +173,11 @@ export const SEARCH_RESULT = [
 export const GENDERS = [
   {id: 2, value: 'Kadın'},
   {id: 1, value: 'Erkek'},
-  {id: 0, value: 'Farketmez'},
+  {id: 0, value: 'Tümü'},
 ];
 
 export const AGE_RANGE_ARABULUCU = [
+  {id: 0, range: 'Tümü'},
   {id: 1, range: '25 - 30'},
   {id: 2, range: '31 - 40'},
   {id: 3, range: '41 - 50'},
@@ -184,6 +185,7 @@ export const AGE_RANGE_ARABULUCU = [
 ];
 
 export const SENIORITY_RANGE_ARABULUCU = [
+  {id: 0, range: 'Tünü'},
   {id: 1, range: '0 - 5'},
   {id: 2, range: '6 - 10'},
   {id: 3, range: '11 - 15'},

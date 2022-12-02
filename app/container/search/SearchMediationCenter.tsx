@@ -47,7 +47,7 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [getDistricts, {data: districts}] = useLazyGetCitiesQuery();
   const {data: topics} = useTopicsQuery();
   const {data: merkezUzmanlıkAlanlari} = useGetProfessionsQuery({userType: 'uzman'});
-  const [searchMerkez, {data, isLoading}] = useSearchMerkezMutation();
+  const [searchMerkez, {isLoading}] = useSearchMerkezMutation();
 
   const pickExpertiseArea = (expertiseArea: ExpertiseArea) => {
     var status = !selectedExpertiseAreas.get(expertiseArea.id);
@@ -57,8 +57,8 @@ export default function SearchMediationCenter({navigation}: Props) {
   const handleSearch = () => {
     searchMerkez({
       sehir: selectedCity.id ?? 0,
-      ilce: selectedDistrict.id ?? 0,
-      mahalleId: selectedTown.id ?? 0,
+      ilce: selectedTown.id ?? 0,
+      mahalleId: selectedDistrict.id ?? 0,
       uyusmazlikKonusu: subjectOfDispute.id ?? 0,
       alanlar: selectedUzmanlikAlanları,
       odaSayisi: numberOfRooms.id,
