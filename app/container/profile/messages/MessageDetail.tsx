@@ -1,5 +1,17 @@
-import React from 'react';
-import {Image, Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
+/* eslint-disable curly */
+import React, {useState, useEffect, useRef} from 'react';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+  Alert,
+} from 'react-native';
 import HTML from 'react-native-render-html';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/RootStore';
@@ -8,9 +20,13 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileNavigatorParamList} from '@routes/stacks/profile/Types';
 import {Constants, Fonts, Metrics} from '@utils';
-import {MessageDetail as IMessageDetail, useGetMessageDetailQuery} from './messageApi';
+import {
+  MessageDetail as IMessageDetail,
+  useGetMessageDetailQuery,
+  useReplyMessageMutation,
+} from './messageApi';
 import {FlatList} from 'react-native-gesture-handler';
-import {TickIcon} from '@icons';
+import {SendIcon} from '@icons';
 
 export interface Props {
   route: RouteProp<ProfileNavigatorParamList, 'messageDetail'>;
@@ -19,14 +35,36 @@ export interface Props {
 
 export default function MessageDetail({navigation, route}: Props) {
   const {messageId, image, title, name} = route.params;
-  const {data: messages} = useGetMessageDetailQuery({id: messageId});
   const user = useSelector((state: RootState) => state.user);
+
+  const [repliedMessasge, setrepliedMessasge] = useState('');
+
+  const {data: messages, refetch} = useGetMessageDetailQuery({id: messageId});
+  const [replyMessage, {isLoading: isReplyingMessage}] = useReplyMessageMutation();
   console.log('user:', user);
 
   console.log('message id: ', messageId);
   console.log('message details...: ', messages);
 
+  const handleReplyMessage = () => {
+    if (repliedMessasge.length > 0) {
+      replyMessage({messageId: messageId, messageBody: repliedMessasge})
+        .then(res => {
+          console.log('reply handle message: ', res);
+          setrepliedMessasge('');
+          refetch();
+          Alert.alert('Başarılı', res?.data?.message);
+        })
+        .catch(err => {
+          console.log('reply error message: ', err);
+        });
+    } else {
+      Alert.alert('Lütfen Dikkat', 'Geçerli bir mesaj giriniz');
+    }
+  };
+
   const isMessageOwner = (message: IMessageDetail): Boolean => {
+    // @ts-ignore
     const username = user?.name + user?.surname;
     console.log('Message.name: ', message.name.toLocaleLowerCase().replace(/\s/g, ''));
     if (
@@ -39,48 +77,56 @@ export default function MessageDetail({navigation, route}: Props) {
 
   const _renderFooterInput = () => {
     return (
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} />
-        <Pressable style={styles.sendButton}>
-          <TickIcon />
+      <View style={[styles.inputContainer]}>
+        <TextInput value={repliedMessasge} onChangeText={setrepliedMessasge} style={styles.input} />
+        <Pressable style={styles.sendButton} onPress={handleReplyMessage}>
+          {isReplyingMessage ? <ActivityIndicator size="small" color="#fff" /> : <SendIcon />}
         </Pressable>
       </View>
     );
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.userProfile}>
-        <View style={styles.messageItem}>
-          <Image style={styles.profileImage} source={{uri: Constants.USER_IMAGE + image}} />
-          <View style={styles.userAndMessage}>
-            <Text style={styles.name}>{name}</Text>
-            <Text numberOfLines={2} ellipsizeMode="tail" style={styles.shortMessage}>
-              {title}
-            </Text>
+  if (messages && messages?.length > 0) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.userProfile}>
+          <View style={styles.messageItem}>
+            <Image style={styles.profileImage} source={{uri: Constants.USER_IMAGE + image}} />
+            <View style={styles.userAndMessage}>
+              <Text style={styles.name}>{name}</Text>
+              <Text numberOfLines={2} ellipsizeMode="tail" style={styles.shortMessage}>
+                {title}
+              </Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      <FlatList
-        // refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refetch} />}
-        data={[...messages, ...messages, ...messages, ...messages]}
-        contentContainerStyle={styles.contentStyle}
-        renderItem={({item, index}) => (
-          <View>
-            <HTML
-              key={index}
-              source={{html: item.body}}
-              containerStyle={isMessageOwner(item) ? styles.messageOwner : styles.messageSender}
-              baseFontStyle={styles.htmlFontStyle}
-            />
-          </View>
-        )}
-        keyExtractor={(item, index) => String(index)}
-      />
-      {_renderFooterInput()}
-    </View>
-  );
+        <FlatList
+          data={messages}
+          contentContainerStyle={styles.contentStyle}
+          renderItem={({item, index}) => (
+            <View>
+              <HTML
+                key={index}
+                source={{html: item.body}}
+                containerStyle={isMessageOwner(item) ? styles.messageOwner : styles.messageSender}
+                baseFontStyle={styles.htmlFontStyle}
+              />
+            </View>
+          )}
+          keyExtractor={(item, index) => String(index)}
+        />
+        <KeyboardAvoidingView
+          style={styles.inputAvoidingStyle}
+          keyboardVerticalOffset={120}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          {_renderFooterInput()}
+        </KeyboardAvoidingView>
+      </View>
+    );
+  }
+
+  return null;
 }
 
 const MARGIN_HORIZONTAL = 25;
@@ -94,13 +140,14 @@ const styles = StyleSheet.create({
     width: Metrics.DEVICE_WIDTH,
     height: 80,
     justifyContent: 'center',
-    backgroundColor: 'red',
+    borderBottomWidth: 1,
+    borderBottomColor: '#B3B3B3',
   },
 
   contentStyle: {
     paddingTop: 24,
     paddingHorizontal: 25,
-    paddingBottom: 50,
+    paddingBottom: 50 + 25,
   },
 
   messageItem: {
@@ -108,7 +155,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: Metrics.DEVICE_WIDTH - 50,
     height: 60,
-    backgroundColor: 'pink',
   },
 
   profileImage: {
@@ -162,15 +208,19 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    paddingLeft: 25,
+    // position: 'absolute',
     flexDirection: 'row',
+    paddingHorizontal: 25,
+    width: Metrics.DEVICE_WIDTH,
     height: 70,
-    backgroundColor: 'red',
+    backgroundColor: '#B3B3B3',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   input: {
-    width: Metrics.DEVICE_WIDTH - 100,
+    padding: 13,
+    width: Metrics.DEVICE_WIDTH - 125,
     height: 45,
     borderRadius: 10,
     backgroundColor: '#fff',
@@ -184,4 +234,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#7E0736',
   },
+
+  inputAvoidingStyle: {width: '100%'},
 });

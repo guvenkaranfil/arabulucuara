@@ -54,6 +54,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export default createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['apime', 'profileInformations'],
+  tagTypes: ['apime', 'profileInformations', 'messageBox'],
   endpoints: () => ({}),
 });

@@ -23,7 +23,15 @@ export default function Outbox({navigation}: Props) {
           data={messages}
           contentContainerStyle={styles.contentStyle}
           renderItem={({item, index}) => (
-            <Pressable onPress={() => navigation.navigate('messageDetail', {messageId: item.id})}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate('messageDetail', {
+                  messageId: item.id,
+                  name: item.name,
+                  image: item.image,
+                  title: item.title,
+                })
+              }>
               <View key={index} style={styles.messageItem}>
                 <Image
                   style={styles.profileImage}
