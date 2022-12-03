@@ -12,7 +12,7 @@ export type ProfileNavigatorParamList = {
   articleDetail: {article: Article};
   userGallery: undefined;
   messagesContainer: undefined;
-  messageDetail: {messageId: number};
+  messageDetail: {messageId: number; image: string; title: string; name: string};
 };
 
 export interface ProfileScreenNavigationProps {

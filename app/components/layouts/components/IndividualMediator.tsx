@@ -1,19 +1,19 @@
 import {OnlyPersonIcon} from '@icons';
 import {SearchResponse} from '@search/searchApi';
+import {Constants} from '@utils';
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {AirbnbRating} from 'react-native-ratings';
 
 import styles from '../styles/ProfileLayoutStyle';
 
-const BASE_URL = 'https://arabulucuara.com/uploaded/UserImage/';
 export default function IndividualMediator({image, displayName, role, starPoints}: SearchResponse) {
   console.log('IndividualMediator >> starPoints: ', starPoints);
   return (
     <View style={styles.infosContainer}>
       {image ? (
         <View style={styles.profilePhoto}>
-          <Image source={{uri: BASE_URL + image}} style={styles.userProfile} />
+          <Image source={{uri: Constants.USER_IMAGE + image}} style={styles.userProfile} />
         </View>
       ) : (
         <View style={[styles.profilePhoto, styles.profilePhotoWithBg]}>

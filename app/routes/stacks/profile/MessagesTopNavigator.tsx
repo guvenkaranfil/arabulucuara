@@ -20,7 +20,7 @@ function MessagesTopNavigator() {
       }}>
       <Tab.Screen name="inbox" component={Inbox} options={{title: 'Mesajlar'}} />
       <Tab.Screen name="outbox" component={Outbox} options={{title: 'Giden Kutusu'}} />
-      <Tab.Screen name="archive" component={Archives} options={{title: 'Arşiv'}} />
+      {/* <Tab.Screen name="archive" component={Archives} options={{title: 'Arşiv'}} /> */}
     </Tab.Navigator>
   );
 }
