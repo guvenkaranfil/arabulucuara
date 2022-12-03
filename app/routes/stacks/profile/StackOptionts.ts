@@ -4,6 +4,10 @@ export const profileInformation: StackNavigationOptions = {
   title: 'Profil Bilgileri',
 };
 
+export const membership: StackNavigationOptions = {
+  title: 'Üyelikler',
+};
+
 export const aboutUser: StackNavigationOptions = {
   title: 'Hakkımzda',
 };

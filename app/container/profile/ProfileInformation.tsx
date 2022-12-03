@@ -15,4 +15,6 @@ export default function ProfileInformation() {
   } else if (data) {
     if (user.userRole === 'arabulucu') return <InformationArabulucu informations={data} />;
   }
+
+  return <></>;
 }

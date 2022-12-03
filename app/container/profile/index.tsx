@@ -17,7 +17,7 @@ const mapPageNameToStackName = {
   ChangePassword: undefined,
   Messages: 'messagesContainer',
   Index: undefined,
-  Memberships: undefined,
+  Memberships: 'membership',
   Biography: 'aboutUser',
   Expertise: undefined,
   Gallery: 'userGallery',

@@ -103,6 +103,16 @@ interface UpdateProfile {
   };
 }
 
+export interface MembershipArabulucu {
+  merkezUyesiMi: boolean;
+  dernekUyesiMi: boolean;
+  odaUyesiMi: boolean;
+  sicilKayitliMi: boolean;
+  merkezAdi: string;
+  dernekAdi: string;
+  odaAdi: string;
+}
+
 const profileGETApi = Client.injectEndpoints({
   endpoints: build => ({
     aboutMe: build.query<string, void>({
@@ -111,6 +121,20 @@ const profileGETApi = Client.injectEndpoints({
 
     getProfileLinks: build.query<ProfileLinks, void>({
       query: () => ({url: '/User/GetProfileLinks'}),
+    }),
+
+    getMembership: build.query<MembershipArabulucu, void>({
+      providesTags: ['membership'],
+      query: () => ({url: '/User/GetMemberships'}),
+    }),
+
+    updateMembership: build.mutation<{}, MembershipArabulucu>({
+      invalidatesTags: ['membership'],
+      query: params => ({
+        url: '/User/UpdateMemberships',
+        method: 'POST',
+        body: params,
+      }),
     }),
 
     articles: build.query<Array<Article>, void>({
@@ -146,8 +170,10 @@ const profileGETApi = Client.injectEndpoints({
 export const {
   useAboutMeQuery,
   useGetProfileLinksQuery,
+  useGetMembershipQuery,
   useArticlesQuery,
   useCertificatesQuery,
   useProfileInformationsQuery,
   useUpdateProfileMutation,
+  useUpdateMembershipMutation,
 } = profileGETApi;

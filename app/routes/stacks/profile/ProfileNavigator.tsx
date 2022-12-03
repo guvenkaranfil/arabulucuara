@@ -8,10 +8,12 @@ import AboutUser from '@profile/AboutUser';
 import UserCertificates from '@profile/UserCertificates';
 import UserArticles from '@profile/UserArticles';
 import UserGallery from '@profile/UserGallery';
+import MemberShipContainer from '@profile/membership';
 
 import LoggedUserHeader from '../components/LoggedUserHeader';
 import {
   aboutUser,
+  membership,
   messageDetail,
   messagesContainer,
   profileInformation,
@@ -34,6 +36,7 @@ function ProfileNavigator() {
         component={ProfileInformation}
         options={profileInformation}
       />
+      <Stack.Screen name="membership" component={MemberShipContainer} options={membership} />
       <Stack.Screen name="aboutUser" component={AboutUser} options={aboutUser} />
       <Stack.Screen
         name="userCertificates"
