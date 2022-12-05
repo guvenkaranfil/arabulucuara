@@ -57,6 +57,11 @@ export interface MemberResponse {
   makaleler?: Array<SearchArticle>;
   belgeler?: Array<Certificate>;
   resimler?: Array<SearchProfileResim>;
+  uyelikler?: Array<{name: string; value: string}>;
+  phone?: string;
+  email?: string;
+  il?: string;
+  ilce?: string;
 }
 
 const searchApi = Client.injectEndpoints({

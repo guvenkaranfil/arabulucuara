@@ -5,33 +5,6 @@ export interface ProfileRoute {
   stackName: keyof SearchNavigatorParamList;
 }
 
-export const INDIVIDUAL_MEDIATOR_ROUTES: Array<ProfileRoute> = [
-  {
-    label: 'Hakkımda',
-    stackName: 'aboutProfile',
-  },
-  {
-    label: 'Arabuluculuk Uzmanlık Alanları',
-    stackName: 'mediationExpertises',
-  },
-  {
-    label: 'Üyelikler',
-    stackName: 'mediatorSubscriptions',
-  },
-  {
-    label: 'Makaleler',
-    stackName: 'mediatorArticles',
-  },
-  {
-    label: 'Seminer & Eğitim ve Sertifikalar',
-    stackName: 'mediatorCertificates',
-  },
-  {
-    label: 'Galeri',
-    stackName: 'mediatorGallery',
-  },
-];
-
 export const MEDIATOR_CENTER_ROUTES: Array<ProfileRoute> = [
   {
     label: 'Hakkımda',

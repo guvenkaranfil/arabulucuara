@@ -14,7 +14,7 @@ type ScreenProps = {
 export default function MediatorGallery({route}: ScreenProps) {
   const {profile, member} = route.params;
 
-  if (member && member?.resimler && member?.resimler.length > 0 && false) {
+  if (member && member?.resimler && member?.resimler.length > 0) {
     return (
       <ProfileLayout user={profile}>
         <View style={styles.screenContainer}>

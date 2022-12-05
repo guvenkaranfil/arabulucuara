@@ -25,4 +25,6 @@ export type SearchNavigatorParamList = {
   mediatorCertificates: {profile: SearchResponse; member: MemberResponse};
 
   mediatorGallery: {profile: SearchResponse; member: MemberResponse};
+
+  mediatorMembersip: {profile: SearchResponse; member: MemberResponse};
 };

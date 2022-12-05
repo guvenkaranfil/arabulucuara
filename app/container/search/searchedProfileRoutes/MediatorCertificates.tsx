@@ -36,9 +36,11 @@ export default function MediatorCertificates({route}: ScreenProps) {
   }
 
   return (
-    <View style={CommonStyles.fCenter}>
-      <Text>Sertifika bulunamadı</Text>
-    </View>
+    <ProfileLayout user={profile}>
+      <View style={CommonStyles.searchEmptyPage}>
+        <Text>Sertifika bulunamadı</Text>
+      </View>
+    </ProfileLayout>
   );
 }
 
@@ -89,42 +91,3 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 });
-
-const CERTIFICATES = [
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-  {
-    id: 1,
-    title: 'İŞ HUKUKU UZMAN ARABULUCULUK',
-    cooparate: 'ULUDAĞ ÜNİVERSİTESİ',
-    year: 2018,
-  },
-];

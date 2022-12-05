@@ -21,6 +21,7 @@ import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../components/LoggedUserHeader';
 import CenterMembers from '@search/searchedProfileRoutes/CenterMembers';
 import ArticleDetail from '@portal/articles/ArticleDetail';
+import MediatorMembership from '@search/searchedProfileRoutes/MediatorMembership';
 
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
@@ -82,6 +83,12 @@ function PortalNavigator() {
       <Stack.Screen
         name="mediatorGallery"
         component={MediatorGallery}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="mediatorMembersip"
+        component={MediatorMembership}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

@@ -9,11 +9,6 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import {Fonts, Metrics} from '@utils';
 import ProfileRouteButtons from './components/ProfileRouteButtons';
-import {
-  INDIVIDUAL_MEDIATOR_ROUTES,
-  MEDIATOR_CENTER_ROUTES,
-  ProfileRoute,
-} from './helpers/ProflieRoutes';
 import {SearchPage, useGetMemberQuery} from './searchApi';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
 
@@ -32,6 +27,7 @@ const mapPageNameToStackName = {
   ArabulucuMakaleler: 'mediatorArticles',
   ArabulucuBelgeler: 'mediatorCertificates',
   galeri: 'mediatorGallery',
+  ArabulucuUyelik: 'mediatorMembersip',
 };
 export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;
@@ -47,9 +43,11 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
     if (showContactInformations) {
       return (
         <Animatable.View style={styles.contactInformations} animation="fadeIn">
-          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.mail}</Text>
-          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.phone}</Text>
-          <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.location}</Text>
+          <Text style={styles.contactLabel}>{member?.email}</Text>
+          <Text style={styles.contactLabel}>{member?.phone}</Text>
+          <Text style={styles.contactLabel}>
+            {member?.il} {member?.ilce}
+          </Text>
         </Animatable.View>
       );
     }
@@ -135,9 +133,3 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 });
-
-const CONTACT_INFORMATIONS = {
-  mail: 'info@arabuluculukmerkezi.com',
-  phone: '(312) 473 3960',
-  location: 'Ankara / Çankaya',
-};

@@ -1,33 +1,29 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import {CommonStyles, Fonts, Metrics} from '@utils';
-import {StackNavigationProp} from '@react-navigation/stack';
 
 type ScreenProps = {
-  route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
-  navigation: StackNavigationProp<SearchNavigatorParamList, 'mediatorArticles'>;
+  route: RouteProp<SearchNavigatorParamList, 'mediatorCertificates'>;
 };
 
-export default function MediatorArticles({navigation, route}: ScreenProps) {
+export default function MediatorMembership({route}: ScreenProps) {
   const {profile, member} = route.params;
-  console.log('');
 
-  if (member?.makaleler && member?.makaleler?.length > 0) {
+  if (member?.uyelikler && member?.uyelikler?.length > 0) {
     return (
       <ProfileLayout user={profile}>
         <View style={styles.screenContainer}>
           <Text style={styles.screenTitle}>Makaleler</Text>
 
-          {member?.makaleler.map((article, index) => (
-            <Pressable onPress={() => navigation.navigate('articleDetail', {article: article})}>
-              <View key={index} style={styles.article}>
-                <Text style={styles.aritcleTitle}>{article.title}</Text>
-              </View>
-            </Pressable>
+          {member.uyelikler.map((certificate, index) => (
+            <View key={index} style={styles.certificate}>
+              <Text style={styles.certificateTitle}>{certificate.name}</Text>
+              <Text style={styles.cooparateLabel}>{certificate.value}</Text>
+            </View>
           ))}
         </View>
       </ProfileLayout>
@@ -35,11 +31,9 @@ export default function MediatorArticles({navigation, route}: ScreenProps) {
   }
 
   return (
-    <ProfileLayout user={profile}>
-      <View style={CommonStyles.searchEmptyPage}>
-        <Text>Makale bulunamadı</Text>
-      </View>
-    </ProfileLayout>
+    <View style={CommonStyles.fCenter}>
+      <Text>Sertifika bulunamadı</Text>
+    </View>
   );
 }
 
@@ -56,18 +50,36 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 
-  article: {
-    marginBottom: 20,
-    paddingVertical: 16,
+  certificate: {
+    paddingVertical: 8,
     paddingHorizontal: 20,
     width: Metrics.CONTAINER_WIDTH,
     borderRadius: 10,
     backgroundColor: '#F5F6FA',
   },
 
-  aritcleTitle: {
+  certificateTitle: {
+    paddingBottom: 8,
     fontSize: 16,
     fontFamily: Fonts.robotoBold,
+    color: '#181C32',
+  },
+
+  cooparateLabel: {
+    paddingBottom: 8,
+    fontSize: 12,
+    fontFamily: Fonts.robotoRegular,
+    color: '#181C32',
+  },
+
+  date: {
+    flexDirection: 'row',
+  },
+
+  yearLabel: {
+    paddingLeft: 7,
+    fontSize: 12,
+    fontFamily: Fonts.robotoRegular,
     color: '#181C32',
   },
 });
