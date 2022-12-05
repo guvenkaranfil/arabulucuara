@@ -36,10 +36,11 @@ export default function Portal({navigation}: Props) {
   };
 
   const openNegotiator = () => {
-    try {
-      const webURL = 'https://arabulucuara.com/Ucrethesapla';
-      Linking.openURL(webURL);
-    } catch (error) {}
+    navigation.navigate('arabulucuFee');
+    // try {
+    //   const webURL = 'https://arabulucuara.com/Ucrethesapla';
+    //   Linking.openURL(webURL);
+    // } catch (error) {}
   };
 
   return (

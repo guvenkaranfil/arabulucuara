@@ -17,6 +17,7 @@ import MinistryAnnouncement from '@portal/ministryAnnouncements/MinistryAnnounce
 
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../components/LoggedUserHeader';
+import ArabulucuFee from '@portal/arabulucuFee';
 
 const Stack = createStackNavigator<PortalNavigatorParamList>();
 function PortalNavigator() {
@@ -48,6 +49,12 @@ function PortalNavigator() {
         name="ministryAnnouncement"
         component={MinistryAnnouncement}
         options={{title: 'Bakanlık Duyuruları'}}
+      />
+
+      <Stack.Screen
+        name="arabulucuFee"
+        component={ArabulucuFee}
+        options={{title: 'Arabuluculuk Ücreti'}}
       />
     </Stack.Navigator>
   );
