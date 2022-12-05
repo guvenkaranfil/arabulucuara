@@ -5,32 +5,40 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
 import {CalendarIcon} from '@icons';
-import {Fonts, Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
 
 type ScreenProps = {
-  route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
+  route: RouteProp<SearchNavigatorParamList, 'mediatorCertificates'>;
 };
 
 export default function MediatorCertificates({route}: ScreenProps) {
-  const {profile} = route.params;
+  const {profile, member} = route.params;
+
+  if (member?.belgeler && member?.belgeler?.length > 0) {
+    return (
+      <ProfileLayout user={profile}>
+        <View style={styles.screenContainer}>
+          <Text style={styles.screenTitle}>Makaleler</Text>
+
+          {member.belgeler.map((certificate, index) => (
+            <View key={index} style={styles.certificate}>
+              <Text style={styles.certificateTitle}>{certificate.konu}</Text>
+              <Text style={styles.cooparateLabel}>{certificate.kurum}</Text>
+              <View style={styles.date}>
+                <CalendarIcon width={15} height={17} />
+                <Text style={styles.yearLabel}>{certificate.yil}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
+      </ProfileLayout>
+    );
+  }
 
   return (
-    <ProfileLayout user={profile}>
-      <View style={styles.screenContainer}>
-        <Text style={styles.screenTitle}>Makaleler</Text>
-
-        {CERTIFICATES.map((certificate, index) => (
-          <View key={index} style={styles.certificate}>
-            <Text style={styles.certificateTitle}>{certificate.title}</Text>
-            <Text style={styles.cooparateLabel}>{certificate.cooparate}</Text>
-            <View style={styles.date}>
-              <CalendarIcon width={15} height={17} />
-              <Text style={styles.yearLabel}>{certificate.year}</Text>
-            </View>
-          </View>
-        ))}
-      </View>
-    </ProfileLayout>
+    <View style={CommonStyles.fCenter}>
+      <Text>Sertifika bulunamadı</Text>
+    </View>
   );
 }
 

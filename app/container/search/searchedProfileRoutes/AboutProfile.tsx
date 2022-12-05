@@ -5,7 +5,7 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import HTML from 'react-native-render-html';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {CommonStyles, Fonts, Metrics} from '@utils';
+import {Fonts} from '@utils';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;

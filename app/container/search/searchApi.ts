@@ -1,4 +1,5 @@
 import Client from '@api/Client';
+import {Certificate} from '@profile/ProfileGetApi';
 
 interface TopicsResponse {
   id: number;
@@ -49,6 +50,7 @@ export interface MemberResponse {
   cozumOrtaklari?: Array<CozumOrtagi>;
   uzmanlikAlanlari?: Array<string>;
   makaleler?: Array<SearchArticle>;
+  belgeler?: Array<Certificate>;
 }
 
 const searchApi = Client.injectEndpoints({

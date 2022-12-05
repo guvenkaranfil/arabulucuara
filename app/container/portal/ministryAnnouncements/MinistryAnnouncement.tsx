@@ -31,4 +31,6 @@ export default function MinistryAnnouncement({route}: Props) {
       />
     );
   }
+
+  return null;
 }

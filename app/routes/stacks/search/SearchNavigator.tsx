@@ -78,6 +78,7 @@ function PortalNavigator() {
         component={MediatorCertificates}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="mediatorGallery"
         component={MediatorGallery}

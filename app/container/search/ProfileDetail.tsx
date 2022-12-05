@@ -30,6 +30,7 @@ const mapPageNameToStackName = {
   MerkezUzmanlik: 'mediationExpertises',
   MerkezMakaleler: 'mediatorArticles',
   ArabulucuMakaleler: 'mediatorArticles',
+  ArabulucuBelgeler: 'mediatorCertificates',
 };
 export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;

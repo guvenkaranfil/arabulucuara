@@ -56,6 +56,8 @@ export default function Articles({navigation, route}: Props) {
       </View>
     );
   }
+
+  return null;
 }
 
 const styles = StyleSheet.create({
