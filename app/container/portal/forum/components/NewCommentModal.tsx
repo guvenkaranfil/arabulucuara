@@ -7,9 +7,10 @@ import {Fonts, Metrics} from 'utils';
 interface NewCommentModalProps {
   onPressCancel: () => void;
   onPressApprove: (comment: string) => void;
+  isLoading?: boolean;
 }
 
-export default function NewComment({onPressCancel, onPressApprove}: NewCommentModalProps) {
+export default function NewComment({onPressCancel, onPressApprove, isLoading}: NewCommentModalProps) {
   const [comment, setcomment] = useState('');
 
   return (
@@ -18,7 +19,8 @@ export default function NewComment({onPressCancel, onPressApprove}: NewCommentMo
       cancelText="İptal"
       approveText="Gönder"
       onPressCancel={onPressCancel}
-      onPressApprove={() => onPressApprove(comment)}>
+      onPressApprove={() => onPressApprove(comment)}
+      isLoading={isLoading}>
       <>
         <Text style={styles.newTopicFormTitle}>Yorumunuz</Text>
         <Input

@@ -12,6 +12,7 @@ export interface TopicComment {
 }
 
 export interface TopicDetail {
+  konuId: number;
   konuBaslik: string;
   konuBody: string;
   konuYazar: string;
@@ -43,12 +44,12 @@ const forumApi = Client.injectEndpoints({
       query: ({categoryId}) => `/Forum/GetCategoryPosts?id=${categoryId}`,
     }),
     getSubjectDetails: build.query<TopicDetail, {subjectId: number}>({
+      providesTags: ['subjectComment'],
       query: ({subjectId}) => `/Forum/GetSubjectDetails?id=${subjectId}`,
     }),
 
     addSubject: build.mutation<{}, {categoryId: number; subjectTitle: string; subjectBody: string}>(
       {
-        invalidatesTags: ['membership'],
         query: params => ({
           url: '/Forum/AddSubject',
           method: 'POST',
@@ -56,6 +57,15 @@ const forumApi = Client.injectEndpoints({
         }),
       },
     ),
+
+    addComment: build.mutation<{}, {subjectId: number; comment: string}>({
+      invalidatesTags: ['subjectComment'],
+      query: params => ({
+        url: '/Forum/AddComment',
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -64,4 +74,5 @@ export const {
   useGetCategoryPostsQuery,
   useGetSubjectDetailsQuery,
   useAddSubjectMutation,
+  useAddCommentMutation,
 } = forumApi;
