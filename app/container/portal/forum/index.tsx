@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {Alert, ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-import {useGetForumQuery} from './ForumApi';
+import {useAddSubjectMutation, useGetForumQuery} from './ForumApi';
 import NewTopicModal, {NewTopicModel} from './components/NewTopicModal';
 import FilledButton from '@components/buttons/FilledButton';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
@@ -20,6 +20,25 @@ export default function Forum({navigation}: Props) {
   const {data, isLoading, isFetching} = useGetForumQuery();
   console.log('Category forum: ', data);
 
+  const [addSubject, {isLoading: isCreatingTopic}] = useAddSubjectMutation();
+
+  const generalError = () => {
+    Alert.alert('Bir sorun oluştu', 'Lütfen daha sonra tekrar deneyiniz');
+  };
+
+  const createTopic = (topic: NewTopicModel) => {
+    addSubject({
+      categoryId: topic.categoryId,
+      subjectTitle: topic.subjectTitle,
+      subjectBody: topic.subjectBody,
+    })
+      .then(res => {
+        console.log('res:', res);
+        Alert.alert('Başarılı', 'Konu başarılı bir şekilde eklendi');
+      })
+      .catch(() => generalError());
+  };
+
   if (isLoading || isFetching) {
     return <FullScreenLoader />;
   }
@@ -31,7 +50,8 @@ export default function Forum({navigation}: Props) {
           <NewTopicModal
             categories={data?.categories}
             onPressCancel={() => setisTopicAdditionModalOpen(false)}
-            onPressApprove={(topic: NewTopicModel) => console.log('onPress create topic:', topic)}
+            onPressApprove={createTopic}
+            isLoading={isCreatingTopic}
           />
         )}
 

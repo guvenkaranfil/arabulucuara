@@ -18,12 +18,14 @@ interface NewTopicModalProps {
   categories: Array<Category>;
   onPressCancel: () => void;
   onPressApprove: (topic: NewTopicModel) => void;
+  isLoading?: boolean;
 }
 
 export default function NewTopicModal({
   categories,
   onPressCancel,
   onPressApprove,
+  isLoading,
 }: NewTopicModalProps) {
   console.log('categories:', categories);
   const [selectedTopicCategory, setselectedTopicCategory] = useState<Category>();
@@ -48,7 +50,8 @@ export default function NewTopicModal({
       cancelText="İptal"
       approveText="Gönder"
       onPressCancel={onPressCancel}
-      onPressApprove={createTopic}>
+      onPressApprove={createTopic}
+      isLoading={isLoading}>
       <>
         <Text style={styles.newTopicFormTitle}>Kategori</Text>
         <DropDownPicker
