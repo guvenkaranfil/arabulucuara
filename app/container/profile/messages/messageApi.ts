@@ -29,6 +29,10 @@ const messageApi = Client.injectEndpoints({
     getInbox: build.query<Array<Inbox>, void>({
       providesTags: ['messageBox'],
       query: () => '/Messages/GetInbox',
+      // transformResponse: (res: any) => {
+      //   console.log('Messages res: ', res);
+      //   return res;
+      // },
     }),
 
     getOutbox: build.query<Array<Outbox>, void>({
@@ -52,6 +56,18 @@ const messageApi = Client.injectEndpoints({
         body: params,
       }),
     }),
+
+    sendMessage: build.mutation<
+      {data: {message: string}},
+      {usernameOrMail: string; messageTitle: string; messageBody: string}
+    >({
+      invalidatesTags: ['profileInformations', 'messageBox'],
+      query: params => ({
+        url: '/Messages/SendMessage',
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -60,4 +76,5 @@ export const {
   useGetOutboxQuery,
   useGetMessageDetailQuery,
   useReplyMessageMutation,
+  useSendMessageMutation,
 } = messageApi;

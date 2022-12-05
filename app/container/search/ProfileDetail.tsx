@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable, Linking} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Linking, Alert} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import {RouteProp} from '@react-navigation/native';
@@ -11,6 +11,8 @@ import {Fonts, Metrics} from '@utils';
 import ProfileRouteButtons from './components/ProfileRouteButtons';
 import {SearchPage, useGetMemberQuery} from './searchApi';
 import FullScreenLoader from '@components/loader/FullScreenLoader';
+import SearchMessageModal, {SendMessageModal} from '@portal/forum/components/SearchMessageModal';
+import {useSendMessageMutation} from '@profile/messages/messageApi';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
@@ -33,11 +35,39 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;
   console.log('profile: ', profile);
 
+  const [showMessageModal, setshowMessageModal] = useState(false);
   const [showContactInformations, setshowContactInformations] = useState(false);
   const {data: member, isLoading} = useGetMemberQuery({username: profile.uri.value});
+  const [sendMessage, {isLoading: isMessageSending}] = useSendMessageMutation();
+
   console.log('member informations: ', member);
 
   console.log('Profile..');
+
+  const handleMessageSend = (message: SendMessageModal) => {
+    if (message.messageTitle.length === 0)
+      return Alert.alert('Lütfen Dikkat', 'Lütfen mesaj başlığını giriniz');
+    else if (message.messageBody.length === 0)
+      return Alert.alert('Lütfen Dikkat', 'Lütfen mesajınızı giriniz');
+
+    if (member && member.email) {
+      sendMessage({
+        usernameOrMail: member.email,
+        messageTitle: message.messageTitle,
+        messageBody: message.messageBody,
+      })
+        .then(res => {
+          console.log('res: ', res);
+          if (res && res?.data?.message) {
+            Alert.alert('Başarılı', res?.data?.message);
+            setshowMessageModal(false);
+          }
+        })
+        .catch(err => {
+          console.log('err:', err);
+        });
+    }
+  };
 
   const _renderContactInformations = () => {
     if (showContactInformations) {
@@ -71,6 +101,14 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
       user={profile}
       onPressMessages={() => navigation.navigate('profile', {screen: 'messagesContainer'})}>
       <>
+        {showMessageModal && (
+          <SearchMessageModal
+            onPressCancel={() => setshowMessageModal(false)}
+            onPressApprove={handleMessageSend}
+            isLoading={isMessageSending}
+          />
+        )}
+
         <View style={styles.actionButtons}>
           <Pressable
             style={styles.actionButton}
@@ -78,7 +116,7 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
             <Text style={styles.actionLabel}>İletişim Bilgileri</Text>
           </Pressable>
 
-          <Pressable style={styles.actionButton}>
+          <Pressable style={styles.actionButton} onPress={() => setshowMessageModal(true)}>
             <Text style={styles.actionLabel}>Mesaj Gönder</Text>
           </Pressable>
         </View>

@@ -1,5 +1,5 @@
-import {CommonStyles, Fonts, Metrics} from '@utils';
 import React from 'react';
+import {CommonStyles, Fonts, Metrics} from '@utils';
 import {StyleSheet, Text, View, FlatList, Pressable, Image, RefreshControl} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ProfileNavigatorParamList} from '@routes/stacks/profile/Types';
@@ -12,6 +12,7 @@ export interface Props {
 
 export default function Inbox({navigation}: Props) {
   const {data: messages, isLoading, refetch} = useGetInboxQuery();
+  console.log('Messages: ', messages);
 
   if (isLoading) {
     return <FullScreenLoader />;

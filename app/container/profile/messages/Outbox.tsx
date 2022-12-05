@@ -12,6 +12,7 @@ export interface Props {
 
 export default function Outbox({navigation}: Props) {
   const {data: messages, isLoading, refetch} = useGetOutboxQuery();
+  console.log('SEND MESSAGES: ', messages);
 
   if (isLoading) {
     return <FullScreenLoader />;

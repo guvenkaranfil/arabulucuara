@@ -12,6 +12,7 @@ interface TransparentModalProps {
   showCancelButton?: boolean;
   onPressCancel: () => void;
   onPressApprove: () => void;
+  isLoading?: boolean;
 }
 
 export default function TransparentModal({
@@ -22,6 +23,7 @@ export default function TransparentModal({
   showCancelButton = true,
   onPressCancel,
   onPressApprove,
+  isLoading = false,
 }: TransparentModalProps) {
   return (
     <Modal transparent={true} visible={true}>
@@ -49,6 +51,7 @@ export default function TransparentModal({
               style={styles.approveButton}
               label={approveText}
               onPress={onPressApprove}
+              isLoading={isLoading}
             />
           </View>
         </View>

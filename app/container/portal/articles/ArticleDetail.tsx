@@ -5,7 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 import {OnlyPersonIcon} from '@icons';
-import {Fonts} from '@utils';
+import {Constants, Fonts} from '@utils';
 import ContentViewer from '@components/content/ContentViewer';
 
 export interface Props {
@@ -13,7 +13,6 @@ export interface Props {
   navigation: StackNavigationProp<PortalNavigatorParamList, 'articleDetail'>;
 }
 
-const WEB_URL = 'https://arabulucuara.com/uploaded/Article/';
 export default function ArticleDetail({route}: Props) {
   const {article} = route.params;
   console.log('article detail:', article);
@@ -22,7 +21,7 @@ export default function ArticleDetail({route}: Props) {
     <ContentViewer
       title={article.title}
       body={article?.body}
-      path={article?.path ? WEB_URL + article?.path : undefined}>
+      path={article?.path ? Constants.ARTICLE_URL + article?.path : undefined}>
       <View style={styles.aritcleOwner}>
         <OnlyPersonIcon width={15} height={15} />
         <Text style={styles.publisher}>{article.createdBy}</Text>
