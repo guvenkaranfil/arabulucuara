@@ -128,6 +128,10 @@ const profileGETApi = Client.injectEndpoints({
       query: () => ({url: '/User/GetMemberships'}),
     }),
 
+    getGallery: build.query<ProfileLinks, void>({
+      query: () => ({url: '/Gallery/GetMyGallery'}),
+    }),
+
     updateMembership: build.mutation<{}, MembershipArabulucu>({
       invalidatesTags: ['membership'],
       query: params => ({
@@ -171,6 +175,7 @@ export const {
   useAboutMeQuery,
   useGetProfileLinksQuery,
   useGetMembershipQuery,
+  useGetGalleryQuery,
   useArticlesQuery,
   useCertificatesQuery,
   useProfileInformationsQuery,

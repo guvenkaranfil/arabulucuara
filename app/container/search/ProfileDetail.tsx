@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, Pressable, Linking} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import {RouteProp} from '@react-navigation/native';
@@ -14,16 +14,30 @@ import {
   MEDIATOR_CENTER_ROUTES,
   ProfileRoute,
 } from './helpers/ProflieRoutes';
+import {SearchPage, useGetMemberQuery} from './searchApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
   navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
 }
 
+const mapPageNameToStackName = {
+  hakkimizda: 'aboutProfile',
+  hakkimda: 'aboutProfile',
+  MerkezUyeler: 'centerMembers',
+  CozumOrtaklari: 'cooperationAndSolutionPartners',
+  MerkezUzmanlik: 'mediationExpertises',
+  MerkezMakaleler: 'mediatorArticles',
+  ArabulucuMakaleler: 'mediatorArticles',
+};
 export default function ProfileDetail({route, navigation}: ScreenProps) {
   const {profile} = route.params;
+  console.log('profile: ', profile);
 
   const [showContactInformations, setshowContactInformations] = useState(false);
+  const {data: member, isLoading} = useGetMemberQuery({username: profile.uri.value});
+  console.log('member informations: ', member);
 
   console.log('Profile..');
 
@@ -36,6 +50,19 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
           <Text style={styles.contactLabel}>{CONTACT_INFORMATIONS.location}</Text>
         </Animatable.View>
       );
+    }
+  };
+
+  const onPressRouteButton = (pressedRoute: SearchPage) => {
+    const stackName = mapPageNameToStackName[pressedRoute.pageName];
+
+    if (stackName) {
+      navigation.navigate(stackName!, {
+        profile,
+        member: member,
+      });
+    } else {
+      Linking.openURL(pressedRoute.url);
     }
   };
 
@@ -58,16 +85,13 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
 
         {_renderContactInformations()}
 
-        <ProfileRouteButtons
-          routeButtons={
-            profile.accountType === 'individualCenter'
-              ? INDIVIDUAL_MEDIATOR_ROUTES
-              : MEDIATOR_CENTER_ROUTES
-          }
-          onPressRoute={(pressedRoute: ProfileRoute) =>
-            navigation.navigate(pressedRoute.stackName, {profile})
-          }
-        />
+        {isLoading ? (
+          <FullScreenLoader />
+        ) : (
+          member?.linkler && (
+            <ProfileRouteButtons routeButtons={member.linkler} onPressRoute={onPressRouteButton} />
+          )
+        )}
       </>
     </ProfileLayout>
   );

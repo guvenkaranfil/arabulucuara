@@ -1,30 +1,43 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {Fonts, Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 type ScreenProps = {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
+  navigation: StackNavigationProp<SearchNavigatorParamList, 'mediatorArticles'>;
 };
 
-export default function MediatorArticles({route}: ScreenProps) {
-  const {profile} = route.params;
+export default function MediatorArticles({navigation, route}: ScreenProps) {
+  const {profile, member} = route.params;
+  console.log('');
+
+  if (member?.makaleler && member?.makaleler?.length > 0) {
+    return (
+      <ProfileLayout user={profile}>
+        <View style={styles.screenContainer}>
+          <Text style={styles.screenTitle}>Makaleler</Text>
+
+          {member?.makaleler.map((article, index) => (
+            <Pressable onPress={() => navigation.navigate('articleDetail', {article: article})}>
+              <View key={index} style={styles.article}>
+                <Text style={styles.aritcleTitle}>{article.title}</Text>
+              </View>
+            </Pressable>
+          ))}
+        </View>
+      </ProfileLayout>
+    );
+  }
 
   return (
-    <ProfileLayout user={profile}>
-      <View style={styles.screenContainer}>
-        <Text style={styles.screenTitle}>Makaleler</Text>
-
-        {ARTICLES.map((article, index) => (
-          <View key={index} style={styles.article}>
-            <Text style={styles.aritcleTitle}>{article.articleTitle}</Text>
-          </View>
-        ))}
-      </View>
-    </ProfileLayout>
+    <View style={CommonStyles.fCenter}>
+      <Text>Makale bulunamadı</Text>
+    </View>
   );
 }
 

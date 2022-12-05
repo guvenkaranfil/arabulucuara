@@ -5,9 +5,12 @@ import {Fonts, Metrics} from '@utils';
 import {DeleteIcon} from '@icons';
 import VideoPlayer from '@components/videoPlayer';
 import FilledButton from '@components/buttons/FilledButton';
+import {useGetGalleryQuery} from './ProfileGetApi';
 
 export default function UserGallery() {
   const [showVideo, setshowVideo] = useState(true);
+  const {data, isLoading} = useGetGalleryQuery();
+  console.log('GALLERY: ', data);
 
   return (
     <View style={styles.container}>

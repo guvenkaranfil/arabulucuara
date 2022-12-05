@@ -7,6 +7,7 @@ import SeekMediator from '@search/SeekMediator';
 import SearchMediationCenter from '@search/SearchMediationCenter';
 import SearchForExpert from '@search/SearchForExpert';
 import ProfileDetail from '@search/ProfileDetail';
+
 import AboutProfile from '@search/searchedProfileRoutes/AboutProfile';
 import MediationCenterMembers from '@search/searchedProfileRoutes/MediationCenterMembers';
 import MediationExpertises from '@search/searchedProfileRoutes/MediationExpertises';
@@ -18,6 +19,8 @@ import MediatorGallery from '@search/searchedProfileRoutes/MediatorGallery';
 
 import {SearchNavigatorParamList} from './types';
 import LoggedUserHeader from '../components/LoggedUserHeader';
+import CenterMembers from '@search/searchedProfileRoutes/CenterMembers';
+import ArticleDetail from '@portal/articles/ArticleDetail';
 
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
@@ -39,7 +42,9 @@ function PortalNavigator() {
       />
       <Stack.Screen name="forExpert" component={SearchForExpert} options={{title: 'Uzman Ara'}} />
       <Stack.Screen name="profileDetail" component={ProfileDetail} options={{headerShown: false}} />
+
       <Stack.Screen name="aboutProfile" component={AboutProfile} options={{headerShown: false}} />
+      <Stack.Screen name="centerMembers" component={CenterMembers} options={{headerShown: false}} />
       <Stack.Screen
         name="mediationCenterMembers"
         component={MediationCenterMembers}
@@ -60,11 +65,14 @@ function PortalNavigator() {
         component={MediatorSubscriptions}
         options={{headerShown: false}}
       />
+
       <Stack.Screen
         name="mediatorArticles"
         component={MediatorArticles}
         options={{headerShown: false}}
       />
+      <Stack.Screen name="articleDetail" component={ArticleDetail} options={{title: 'Makaleler'}} />
+
       <Stack.Screen
         name="mediatorCertificates"
         component={MediatorCertificates}

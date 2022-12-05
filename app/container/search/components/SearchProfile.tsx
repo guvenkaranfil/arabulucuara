@@ -4,19 +4,20 @@ import {Rating} from 'react-native-ratings';
 import {OnlyPersonIcon} from '@icons';
 import styles from './styles/SearchProfileStyle';
 import {SearchResponse} from '@search/searchApi';
+import {Constants} from '@utils';
 
 interface ScreenProps {
   profile: SearchResponse;
   onPress: (item: SearchResponse) => void;
 }
 
-const BASE_URL = 'https://arabulucuara.com/uploaded/UserImage/';
 export default function SearchProfile({profile, onPress}: ScreenProps) {
+  console.log('profileimage: ', profile);
   const _renderProfilePhoto = () => {
     if (profile?.image && profile?.image?.length) {
       return (
         <View style={styles.profilePhoto}>
-          <Image source={{uri: BASE_URL + profile?.image}} style={styles.userPhoto} />
+          <Image source={{uri: Constants.USER_IMAGE + profile?.image}} style={styles.userPhoto} />
         </View>
       );
     }

@@ -4,25 +4,27 @@ import {RouteProp} from '@react-navigation/native';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {Fonts, Metrics} from '@utils';
+import {Constants, Fonts, Metrics} from '@utils';
 
 type ScreenProps = {
-  route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
+  route: RouteProp<SearchNavigatorParamList, 'cooperationAndSolutionPartners'>;
 };
 
 export default function CooperationAndSolutionPartners({route}: ScreenProps) {
-  const {profile} = route.params;
+  const {profile, member} = route.params;
   return (
     <ProfileLayout user={profile}>
       <View style={styles.screenContainer}>
         <Text style={styles.screenTitle}>İşbirliği ve Çözüm Ortakları</Text>
 
-        {PARTNERS.map((member, index) => (
-          <View key={index} style={styles.member}>
-            <Image source={{uri: member?.logo}} style={styles.logo} />
-            <Text style={styles.memberTitle}>{member.partnerTitle}</Text>
-          </View>
-        ))}
+        {member?.cozumOrtaklari &&
+          member?.cozumOrtaklari?.length > 0 &&
+          member.cozumOrtaklari.map((item, index) => (
+            <View key={index} style={styles.member}>
+              <Image source={{uri: Constants.USER_IMAGE + item?.logo}} style={styles.logo} />
+              <Text style={styles.memberTitle}>{item.adi}</Text>
+            </View>
+          ))}
       </View>
     </ProfileLayout>
   );
@@ -66,36 +68,3 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
-const PARTNERS = [
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-  {
-    id: 1,
-    logo: 'https://pbs.twimg.com/profile_images/869696150659584000/fO_RHSZe_400x400.jpg',
-    partnerTitle: 'Çözüm Ortağı Başlığı',
-  },
-];

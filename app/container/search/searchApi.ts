@@ -17,6 +17,40 @@ export type SearchResponse = {
   image: string;
 };
 
+export interface SearchPage {
+  name: string;
+  pageName: string;
+  url: string;
+}
+export interface MerkezUye {
+  adi: string;
+  image: string;
+  meslek: string;
+  pozisyon: string;
+  soyadi: string;
+}
+export interface CozumOrtagi {
+  adi: string;
+  image: string;
+}
+
+export interface SearchArticle {
+  body: string;
+  createdOn: string;
+  id: number;
+  path?: string;
+  title: string;
+}
+export interface MemberResponse {
+  ozgecmis?: string;
+  ozgecmisMaddeler?: Array<string>;
+  linkler: Array<SearchPage>;
+  merkezUyeler?: Array<MerkezUye>;
+  cozumOrtaklari?: Array<CozumOrtagi>;
+  uzmanlikAlanlari?: Array<string>;
+  makaleler?: Array<SearchArticle>;
+}
+
 const searchApi = Client.injectEndpoints({
   overrideExisting: true,
   endpoints: build => ({
@@ -130,6 +164,10 @@ const searchApi = Client.injectEndpoints({
         return response;
       },
     }),
+
+    getMember: build.query<MemberResponse, {username: string}>({
+      query: ({username}) => ({url: '/GetUserInfo?username=' + username}),
+    }),
   }),
 });
 
@@ -139,4 +177,5 @@ export const {
   useSearchGenelMutation,
   useSearchMerkezMutation,
   useSearchUzmanMutation,
+  useGetMemberQuery,
 } = searchApi;

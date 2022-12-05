@@ -17,28 +17,30 @@ type ScreenProps = {
 };
 
 export default function MediationExpertises({route}: ScreenProps) {
-  const {profile} = route.params;
+  const {profile, member} = route.params;
 
   return (
     <ProfileLayout user={profile}>
       <View style={styles.screenContainer}>
         <Text style={styles.screenTitle}>Arabuluculuk Uzmanlık Alanları</Text>
 
-        {EXPERTISE_AREAS.map((area, index) => (
-          <View key={index} style={styles.expertiseArea}>
-            {index + 1 !== EXPERTISE_AREAS.length ? (
-              <View style={styles.stripe}>
-                <View style={styles.actionBorder} />
-              </View>
-            ) : (
-              <View style={[styles.stripe, styles.latestStripe]}>
-                <View style={[styles.actionBorder]} />
-              </View>
-            )}
+        {member.uzmanlikAlanlari &&
+          member.uzmanlikAlanlari?.length > 0 &&
+          member.uzmanlikAlanlari.map((area, index) => (
+            <View key={index} style={styles.expertiseArea}>
+              {index + 1 !== EXPERTISE_AREAS.length ? (
+                <View style={styles.stripe}>
+                  <View style={styles.actionBorder} />
+                </View>
+              ) : (
+                <View style={[styles.stripe, styles.latestStripe]}>
+                  <View style={[styles.actionBorder]} />
+                </View>
+              )}
 
-            <Text style={styles.areaLabel}>{area.name}</Text>
-          </View>
-        ))}
+              <Text style={styles.areaLabel}>{area}</Text>
+            </View>
+          ))}
       </View>
     </ProfileLayout>
   );

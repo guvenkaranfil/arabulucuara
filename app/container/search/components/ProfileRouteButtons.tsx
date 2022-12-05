@@ -3,11 +3,11 @@ import {StyleSheet, View} from 'react-native';
 
 import FilledButton from '@components/buttons/FilledButton';
 import {Fonts, Metrics} from '@utils';
-import {ProfileRoute} from '@search/helpers/ProflieRoutes';
+import {SearchPage} from '@search/searchApi';
 
 interface Props {
-  routeButtons: Array<ProfileRoute>;
-  onPressRoute: (stackName: ProfileRoute) => void;
+  routeButtons: Array<SearchPage>;
+  onPressRoute: (stackName: SearchPage) => void;
 }
 
 export default function ProfileRouteButtons({routeButtons, onPressRoute}: Props) {
@@ -17,7 +17,7 @@ export default function ProfileRouteButtons({routeButtons, onPressRoute}: Props)
         <FilledButton
           key={index}
           style={styles.routeButton}
-          label={routeButton.label}
+          label={routeButton.name}
           labelStyle={styles.routeLabel}
           onPress={() => onPressRoute(routeButton)}
         />

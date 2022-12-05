@@ -5,20 +5,37 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import HTML from 'react-native-render-html';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {Fonts, Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
 }
 
 export default function AboutProfile({route}: ScreenProps) {
-  const {profile} = route.params;
+  const {profile, member} = route.params;
+
+  if (member.ozgecmis || (member.ozgecmisMaddeler && member.ozgecmisMaddeler.length > 0)) {
+    return (
+      <ProfileLayout user={profile}>
+        <View style={styles.screenContainer}>
+          <Text style={styles.aboutMeLabel}>Hakkımızda</Text>
+          {member.ozgecmisMaddeler &&
+            member.ozgecmisMaddeler?.length > 0 &&
+            member.ozgecmisMaddeler.map((ozgecmis, index) => (
+              <View style={styles.item} key={index}>
+                <Text style={styles.madde}>{ozgecmis}</Text>
+              </View>
+            ))}
+          {member.ozgecmis && <HTML source={{html: member.ozgecmis}} />}
+        </View>
+      </ProfileLayout>
+    );
+  }
 
   return (
     <ProfileLayout user={profile}>
       <View style={styles.screenContainer}>
-        <Text style={styles.aboutMeLabel}>Hakkımızda</Text>
-        <HTML source={{html: content.htmlContent}} />
+        <Text>Özgeçmiş bulunamadı</Text>
       </View>
     </ProfileLayout>
   );
@@ -26,8 +43,8 @@ export default function AboutProfile({route}: ScreenProps) {
 
 const styles = StyleSheet.create({
   screenContainer: {
-    paddingTop: 30,
-    paddingHorizontal: Metrics.horizontalContainerPadding,
+    paddingLeft: 16,
+    paddingVertical: 30,
   },
 
   aboutMeLabel: {
@@ -37,11 +54,3 @@ const styles = StyleSheet.create({
     color: '#181C32',
   },
 });
-
-export const content = {
-  title: 'Med-Arb sürecinde Tahkim şartı ne şekilde yazılmalıdır?',
-  htmlContent:
-    '<b>Line1</b><br/>line2<br/>line3<br/><a href="http://arabulucuara.com">Arabulucu Ara</a>',
-  publisher: 'Mehmet GÜNEY',
-  views: 10,
-};
