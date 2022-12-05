@@ -4,27 +4,38 @@ import {RouteProp} from '@react-navigation/native';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {Fonts, Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
+import {USER_IMAGE} from '@constants';
 
 type ScreenProps = {
   route: RouteProp<SearchNavigatorParamList, 'mediatorGallery'>;
 };
 
 export default function MediatorGallery({route}: ScreenProps) {
-  const {profile} = route.params;
+  const {profile, member} = route.params;
+
+  if (member && member?.resimler && member?.resimler.length > 0 && false) {
+    return (
+      <ProfileLayout user={profile}>
+        <View style={styles.screenContainer}>
+          <Text style={styles.screenTitle}>Fotoğraf Galerisi</Text>
+
+          <View style={styles.gallery}>
+            {member.resimler.map((gallery, index) => (
+              <View key={index} style={styles.photoContainer}>
+                <Image source={{uri: USER_IMAGE + gallery.path}} style={styles.photo} />
+              </View>
+            ))}
+          </View>
+        </View>
+      </ProfileLayout>
+    );
+  }
 
   return (
     <ProfileLayout user={profile}>
-      <View style={styles.screenContainer}>
-        <Text style={styles.screenTitle}>Fotoğraf Galerisi</Text>
-
-        <View style={styles.gallery}>
-          {GALLERY.map((gallery, index) => (
-            <View key={index} style={styles.photoContainer}>
-              <Image source={{uri: gallery.photoURL}} style={styles.photo} />
-            </View>
-          ))}
-        </View>
+      <View style={CommonStyles.searchEmptyPage}>
+        <Text>Kullanıcıya ait resim bulunamadı</Text>
       </View>
     </ProfileLayout>
   );
@@ -64,31 +75,3 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
-const GALLERY = [
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/0686a091-4571-4db1-ac9a-c8ebf967e984.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/0686a091-4571-4db1-ac9a-c8ebf967e984.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-];

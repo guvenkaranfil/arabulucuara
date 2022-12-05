@@ -10,4 +10,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  searchEmptyPage: {
+    paddingTop: 50,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

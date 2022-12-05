@@ -42,6 +42,11 @@ export interface SearchArticle {
   path?: string;
   title: string;
 }
+
+export interface SearchProfileResim {
+  adi: string;
+  path: string;
+}
 export interface MemberResponse {
   ozgecmis?: string;
   ozgecmisMaddeler?: Array<string>;
@@ -51,6 +56,7 @@ export interface MemberResponse {
   uzmanlikAlanlari?: Array<string>;
   makaleler?: Array<SearchArticle>;
   belgeler?: Array<Certificate>;
+  resimler?: Array<SearchProfileResim>;
 }
 
 const searchApi = Client.injectEndpoints({
