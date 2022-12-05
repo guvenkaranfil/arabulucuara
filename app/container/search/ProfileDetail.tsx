@@ -65,7 +65,10 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
         })
         .catch(err => {
           console.log('err:', err);
+          Alert.alert('Lütfen Dikkat', 'Bir sorun oluştu. Lütfen daha sonra tekrar deneyiniz');
         });
+    } else {
+      Alert.alert('Lütfen Dikkat', 'Bir sorun oluştu. Kullanıcının mail bilgisine ulaşılamadı');
     }
   };
 
