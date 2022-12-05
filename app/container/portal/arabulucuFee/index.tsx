@@ -39,7 +39,7 @@ export default function ArabulucuFee() {
   };
 
   const _renderFeesResult = () => {
-    if ((fees && fees?.length > 0) || true) {
+    if (fees && fees?.length > 0) {
       return (
         <ScrollView>
           <View>

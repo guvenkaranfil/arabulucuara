@@ -5,9 +5,10 @@ import Topic, {TopicType} from './Topic';
 
 type Props = {
   topics: Array<TopicType>;
+  onPress: (item: TopicType) => void;
 };
 
-export default function UpdatedTopics({topics}: Props) {
+export default function UpdatedTopics({topics, onPress}: Props) {
   return (
     <View>
       <View style={styles.header}>
@@ -16,7 +17,7 @@ export default function UpdatedTopics({topics}: Props) {
 
       <View style={styles.activities}>
         {topics.map((topic, index) => (
-          <Topic key={index} topic={topic} />
+          <Topic key={index} topic={topic} onPress={onPress} />
         ))}
       </View>
     </View>

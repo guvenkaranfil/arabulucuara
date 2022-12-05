@@ -33,7 +33,7 @@ export default function NewTopicModal({
   const createTopic = () => {
     if (selectedTopicCategory) {
       onPressApprove({
-        categoryId: selectedTopicCategory?.id,
+        categoryId: selectedTopicCategory?.kategoriId,
         subjectTitle: topicTitle,
         subjectBody: content,
       });
@@ -53,10 +53,10 @@ export default function NewTopicModal({
         <Text style={styles.newTopicFormTitle}>Kategori</Text>
         <DropDownPicker
           style={{width: Metrics.wp(278)}}
-          value={selectedTopicCategory?.category}
+          value={selectedTopicCategory?.kategoriAdi}
           placeholder="Kategori Seçiniz"
           items={categories}
-          renderItem={item => item.category}
+          renderItem={item => item.kategoriAdi}
           onPress={setselectedTopicCategory}
         />
 

@@ -22,23 +22,21 @@ type Props = {
 };
 
 export default function Topic({topic, onPress}: Props) {
-  const {date, subjectHeader, lastCommentUser, viewsCount} = topic;
-
   return (
     <Pressable style={styles.activity} onPress={() => onPress(topic)}>
       <View style={styles.row}>
         <View style={styles.border} />
-        <Text style={styles.dateLabel}>{getAnalogDate(date)}</Text>
+        <Text style={styles.dateLabel}>{getAnalogDate(topic?.modifiedOn)}</Text>
       </View>
-      <Text style={styles.activityLabel}>{subjectHeader}</Text>
+      <Text style={styles.activityLabel}>{topic?.subjectHeader}</Text>
       <View style={styles.footer}>
         <View style={styles.row}>
           <OnlyPersonIcon width={15} height={15} fill="#B3B3B3" />
-          <Text style={styles.labelForIcon}>{lastCommentUser?.name}</Text>
+          <Text style={styles.labelForIcon}>{topic?.lastCommentUser?.name}</Text>
         </View>
         <View style={styles.row}>
           <ViewsIcon width={15} height={10} />
-          <Text style={styles.labelForIcon}>{viewsCount}</Text>
+          <Text style={styles.labelForIcon}>{topic?.viewsCount}</Text>
         </View>
       </View>
     </Pressable>
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   labelForIcon: {
-    paddingLeft: 3,
+    paddingLeft: 9,
     fontSize: 12,
     fontFamily: Fonts.robotoRegular,
     color: '#B3B3B3',

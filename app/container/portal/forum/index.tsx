@@ -3,7 +3,6 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
-import {topicSample} from './mocks';
 import {useGetForumQuery} from './ForumApi';
 import NewTopicModal, {NewTopicModel} from './components/NewTopicModal';
 import FilledButton from '@components/buttons/FilledButton';
@@ -19,6 +18,7 @@ export default function Forum({navigation}: Props) {
   const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
 
   const {data, isLoading, isFetching} = useGetForumQuery();
+  console.log('Category forum: ', data);
 
   if (isLoading || isFetching) {
     return <FullScreenLoader />;
@@ -27,21 +27,28 @@ export default function Forum({navigation}: Props) {
   if (data) {
     return (
       <View style={styles.container}>
-        {isTopicAdditionModalOpen && (
+        {data?.categories && data?.categories?.length > 0 && isTopicAdditionModalOpen && (
           <NewTopicModal
-            categories={data}
+            categories={data?.categories}
             onPressCancel={() => setisTopicAdditionModalOpen(false)}
             onPressApprove={(topic: NewTopicModel) => console.log('onPress create topic:', topic)}
           />
         )}
 
         <ScrollView contentContainerStyle={styles.contentContainerStyle}>
-          <Categories
-            categories={data}
-            onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
-          />
+          {data && data?.categories && data?.categories?.length > 0 && (
+            <Categories
+              categories={data.categories}
+              onPress={(item: Category) => navigation.navigate('categoryDetail', {...item})}
+            />
+          )}
 
-          <UpdatedTopics topics={topicSample} />
+          {data && data?.lastUpdateSubjects && data?.lastUpdateSubjects?.length > 0 && (
+            <UpdatedTopics
+              topics={data?.lastUpdateSubjects}
+              onPress={topic => navigation.navigate('TopicDetail', {subjectId: topic.subjectId})}
+            />
+          )}
 
           <View style={styles.footer}>
             <FilledButton

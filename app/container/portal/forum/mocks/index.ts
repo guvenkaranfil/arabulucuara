@@ -20,65 +20,6 @@ export const categoriesSample = [
   },
 ];
 
-export const topicSample = [
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-  {
-    id: 1,
-    date: '16.4.2021',
-    label: 'ARABULUCULUK UZMANLIK EĞİTİMLERİNİN GEREKLİLİĞİ HAKKINDA NE DÜŞÜNÜYORSUNUZ?',
-    nameSurname: 'Murat GÜNEY',
-    views: 152,
-  },
-];
-
 export const topics = [
   {
     id: 1,

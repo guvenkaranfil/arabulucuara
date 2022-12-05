@@ -43,6 +43,13 @@ export default function Portal({navigation}: Props) {
     // } catch (error) {}
   };
 
+  const openEvents = () => {
+    try {
+      const webURL = 'https://arabulucuara.com/Forum/Events';
+      Linking.openURL(webURL);
+    } catch (error) {}
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.routes}>
@@ -64,7 +71,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<EventsIcon width={37} hieght={37} />}
           label="Etkinlikler"
-          onPress={() => console.log('onPress...')}
+          onPress={openEvents}
         />
         <PortalRoute
           icon={<DataBaseIcon width={37} hieght={37} />}

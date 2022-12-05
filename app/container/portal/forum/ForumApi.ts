@@ -18,9 +18,25 @@ export interface TopicDetail {
   konuMesajlar: Array<TopicComment>;
 }
 
+export interface Topic {
+  subjectId: number;
+  category: string;
+  modifiedOn: Date;
+  subjectBody: string;
+  subjectHeader: string;
+  viewsCount: 31;
+  postUrl: string;
+  lastCommentUser: {name: string};
+}
+
+export interface ForumResponse {
+  categories?: Array<{kategoriId: number; kategoriAdi: string}>;
+  lastUpdateSubjects?: Array<Topic>;
+}
+
 const forumApi = Client.injectEndpoints({
   endpoints: build => ({
-    getForum: build.query<Array<Category>, void>({
+    getForum: build.query<ForumResponse, void>({
       query: () => '/Forum/GetForum',
     }),
     getCategoryPosts: build.query<Array<TopicType>, {categoryId: number}>({
