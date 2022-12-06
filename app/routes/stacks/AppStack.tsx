@@ -34,7 +34,14 @@ const AppStack = () => {
               return Alert.alert(
                 'Lütfen Dikkat',
                 'Profil Sayfasını açmak için giriş yapmalısınız!',
-                [{text: 'Vazgeç'}, {text: 'Giriş Yap'}, {text: 'Kayıt Ol'}],
+                [
+                  {text: 'Vazgeç'},
+                  {text: 'Giriş Yap', onPress: () => navigation.navigate('auth')},
+                  {
+                    text: 'Kayıt Ol',
+                    onPress: () => navigation.navigate('auth', {screen: 'registerIdentities'}),
+                  },
+                ],
               );
             }
 

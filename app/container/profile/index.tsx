@@ -1,4 +1,4 @@
-import {ProfileScreenNavigationProps, UserProfileRoute} from '@routes/stacks/profile/Types';
+import {ProfileScreenNavigationProps} from '@routes/stacks/profile/Types';
 import React from 'react';
 import {ActivityIndicator, Alert, Linking, StyleSheet, View} from 'react-native';
 import {useDispatch} from 'react-redux';
@@ -11,6 +11,8 @@ import {logOut} from '@store/user/UserSlice';
 import AsyncStorage from '@react-native-community/async-storage';
 import {USER_INFO_STORAGE_KEY} from '../../constants';
 import {ProfilePageLink, useGetProfileLinksQuery} from './ProfileGetApi';
+import {Fonts, Metrics} from '@utils';
+import FilledButton from '@components/buttons/FilledButton';
 
 const mapPageNameToStackName = {
   Profile: 'profileInformation',
@@ -75,7 +77,18 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
     );
   }
 
-  return null;
+  return (
+    <ProfileLayout user={profile!} onPressMessages={() => navigation.navigate('messagesContainer')}>
+      <View style={styles.routeButtons}>
+        <FilledButton
+          style={styles.routeButton}
+          label={'Çıkış Yap'}
+          labelStyle={styles.routeLabel}
+          onPress={handleSignOut}
+        />
+      </View>
+    </ProfileLayout>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -83,6 +96,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  routeButtons: {
+    marginVertical: 35,
+    marginLeft: Metrics.horizontalContainerPadding,
+    width: Metrics.CONTAINER_WIDTH,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  routeButton: {
+    marginBottom: 15,
+    paddingLeft: 21,
+    alignItems: 'flex-start',
+    height: 55,
+    backgroundColor: '#E1E3E9',
+  },
+
+  routeLabel: {
+    fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#181C32',
   },
 });
 

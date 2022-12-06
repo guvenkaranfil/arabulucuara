@@ -86,6 +86,7 @@ const userApi = Client.injectEndpoints({
     }),
 
     signIn: build.mutation<SignInResponse, {username: string; password: string}>({
+      invalidatesTags: ['apime'],
       query: ({username, password}) => ({
         url: '/Account/login',
         method: 'POST',

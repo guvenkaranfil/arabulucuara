@@ -34,7 +34,7 @@ export default function ProfileRouteButtons({routeButtons, onPressRoute, onPress
   );
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   routeButtons: {
     marginVertical: 35,
     marginLeft: Metrics.horizontalContainerPadding,

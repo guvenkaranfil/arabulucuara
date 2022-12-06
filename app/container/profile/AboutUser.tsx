@@ -39,12 +39,12 @@ export default function AboutUser() {
 
           <HTML source={{html: aboutMe}} />
 
-          <FilledButton
+          {/* <FilledButton
             label="Hakkımda Güncelle"
             labelStyle={styles.saveLabel}
             bgColor="#7E0736"
             onPress={() => console.log('Save Button')}
-          />
+          /> */}
         </ScrollView>
       </View>
     );
@@ -64,9 +64,10 @@ const styles = StyleSheet.create({
   },
 
   formTitle: {
+    textAlign: 'center',
     paddingBottom: 10,
     fontSize: 14,
-    fontFamily: Fonts.robotoRegular,
+    fontFamily: Fonts.robotoBold,
     color: '#181C32',
   },
 

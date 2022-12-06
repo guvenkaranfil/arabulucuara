@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {isUserLoggedIn} from '@selectors';
+import {useSelector} from 'react-redux';
 
 import Portal from '@portal/index';
 import Forum from '@portal/forum/index';
@@ -17,12 +19,18 @@ import MinistryAnnouncement from '@portal/ministryAnnouncements/MinistryAnnounce
 
 import {PortalNavigatorParamList} from './Types';
 import LoggedUserHeader from '../components/LoggedUserHeader';
+
 import ArabulucuFee from '@portal/arabulucuFee';
+import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
 
 const Stack = createStackNavigator<PortalNavigatorParamList>();
 function PortalNavigator() {
+  const userLoggedIn = useSelector(isUserLoggedIn);
+
   return (
-    <Stack.Navigator screenOptions={{header: LoggedUserHeader}} initialRouteName="portal">
+    <Stack.Navigator
+      screenOptions={{header: userLoggedIn ? LoggedUserHeader : NotLoggedHeaderForNavigator}}
+      initialRouteName="portal">
       <Stack.Screen name="portal" component={Portal} options={{title: 'Portal'}} />
       <Stack.Screen name="forum" component={Forum} options={{title: 'Forum'}} />
       <Stack.Screen name="categoryDetail" component={CategoryDetail} options={{title: 'Forum'}} />

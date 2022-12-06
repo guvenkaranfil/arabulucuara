@@ -38,7 +38,7 @@ export default function ProfileLayout({children, user, onPressMessages}: ScreenP
         <Animated.Text
           numberOfLines={1}
           style={[Labels.label16BoldWhite, {opacity: opacityNameSurname}]}>
-          {user.displayName}
+          {user?.displayName ?? ''}
         </Animated.Text>
       </View>
 
@@ -61,7 +61,7 @@ export default function ProfileLayout({children, user, onPressMessages}: ScreenP
         scrollEventThrottle={16}>
         <View style={styles.shadow}>
           <LinearGradient style={styles.container} colors={linearColors}>
-            {user.roleName === 'arabulucu' ? (
+            {user?.roleName === 'arabulucu' ? (
               <IndividualMediator {...user} />
             ) : (
               <MediationCenter {...user} />

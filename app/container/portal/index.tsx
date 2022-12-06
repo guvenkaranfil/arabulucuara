@@ -56,18 +56,15 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<ForumIcon width={40} hieght={40} />}
           label="Forum"
-          onPress={() => navigation.navigate('forum')}
+          onPress={() => onPressRoute('forum', true)}
         />
+
         <PortalRoute
           icon={<ArticleIcon width={29} hieght={34} />}
           label="Makaleler"
           onPress={() => onPressRoute('articles', true)}
         />
-        <PortalRoute
-          icon={<InvitationDocumentIcon width={26} hieght={35} />}
-          label="Davet Mektubu"
-          onPress={() => console.log('onPress...')}
-        />
+
         <PortalRoute
           icon={<EventsIcon width={37} hieght={37} />}
           label="Etkinlikler"
@@ -76,7 +73,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<DataBaseIcon width={37} hieght={37} />}
           label="Bilgi Bankası"
-          onPress={() => navigation.navigate('dataBank')}
+          onPress={() => onPressRoute('dataBank', true)}
         />
         <PortalRoute
           icon={<MegaphoneIcon width={39} hieght={37} />}
