@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {isUserLoggedIn} from '@selectors';
+import {useSelector} from 'react-redux';
 
 import Search from '@search/index';
 import SearchResult from '@search/SearchResult';
@@ -22,14 +24,16 @@ import LoggedUserHeader from '../components/LoggedUserHeader';
 import CenterMembers from '@search/searchedProfileRoutes/CenterMembers';
 import ArticleDetail from '@portal/articles/ArticleDetail';
 import MediatorMembership from '@search/searchedProfileRoutes/MediatorMembership';
+import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
 
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
-  const isUserLoggedIn = true;
+  const userLoggedIn = useSelector(isUserLoggedIn);
 
   return (
-    <Stack.Navigator screenOptions={{header: isUserLoggedIn && LoggedUserHeader}}>
-      <Stack.Screen name="search" component={Search} />
+    <Stack.Navigator
+      screenOptions={{header: userLoggedIn ? LoggedUserHeader : NotLoggedHeaderForNavigator}}>
+      <Stack.Screen name="search" component={Search} options={{title: 'Arama Yap'}} />
       <Stack.Screen name="searchResult" component={SearchResult} />
       <Stack.Screen
         name="seekMediator"

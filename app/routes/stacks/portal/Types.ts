@@ -5,6 +5,7 @@ import {DataBankCategory, DataBankSubCategory} from '@portal/dataBank/Model';
 export type PortalNavigatorParamList = {
   portal: undefined;
   forum: undefined;
+  events: undefined;
   categoryDetail: Category;
   TopicDetail: {subjectId: number};
   articles: {articleId?: number};

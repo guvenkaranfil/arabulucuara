@@ -41,9 +41,11 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
         </View>
 
         {shouldShowMessagesButton() && (
-          <View style={styles.right}>
-            <LetterIcon width={20} height={17} />
-          </View>
+          <Pressable onPress={() => navigation.navigate('profile', {screen: 'messagesContainer'})}>
+            <View style={styles.right}>
+              <LetterIcon width={20} height={17} />
+            </View>
+          </Pressable>
         )}
       </LinearGradient>
     </Animated.View>

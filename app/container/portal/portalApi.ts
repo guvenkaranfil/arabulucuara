@@ -9,6 +9,15 @@ export interface FeeResponse {
   ucret2Arabulucu: number;
 }
 
+export interface Event {
+  id: number;
+  name: string;
+  details: string;
+  image: string;
+  startDate: Date;
+  endDate: Date;
+}
+
 const articlesApi = Client.injectEndpoints({
   endpoints: build => ({
     calculateFee: build.mutation<Array<FeeResponse>, {ucret: number; uyusmalikTuru: number}>({
@@ -19,7 +28,11 @@ const articlesApi = Client.injectEndpoints({
         body: params,
       }),
     }),
+
+    getEvents: build.query<Array<Event>, void>({
+      query: () => '/Portal/GetEvents',
+    }),
   }),
 });
 
-export const {useCalculateFeeMutation} = articlesApi;
+export const {useCalculateFeeMutation, useGetEventsQuery} = articlesApi;

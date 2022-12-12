@@ -24,7 +24,14 @@ export default function Login({navigation}: LoginProps) {
 
   const onPressSignIn = () => {
     signIn({username: email, password: password})
-      .then(() => navigation.replace('app'))
+      .then(res => {
+        console.log('res of login: ', res);
+        if (res?.data?.status === 200 && res?.data?.result) {
+          navigation.replace('app');
+        } else {
+          Alert.alert('Bir sorun oluştu', 'Lütfen tekrar deneyiniz');
+        }
+      })
       .catch(() => {
         console.log('error on login');
         Alert.alert('Bir sorun oluştu', 'Lütfen tekrar deneyiniz');

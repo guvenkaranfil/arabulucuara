@@ -101,7 +101,7 @@ const userApi = Client.injectEndpoints({
         AsyncStorage.setItem(USER_INFO_STORAGE_KEY, JSON.stringify(response));
 
         console.log('response of login.', response);
-        return response.data;
+        return response;
       },
     }),
 

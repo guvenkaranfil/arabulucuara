@@ -1,5 +1,5 @@
 import React from 'react';
-import {Linking, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 import {useSelector} from 'react-redux';
@@ -9,7 +9,6 @@ import {Metrics} from '@utils';
 import {
   ForumIcon,
   ArticleIcon,
-  InvitationDocumentIcon,
   EventsIcon,
   DataBaseIcon,
   MegaphoneIcon,
@@ -43,13 +42,6 @@ export default function Portal({navigation}: Props) {
     // } catch (error) {}
   };
 
-  const openEvents = () => {
-    try {
-      const webURL = 'https://arabulucuara.com/Forum/Events';
-      Linking.openURL(webURL);
-    } catch (error) {}
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.routes}>
@@ -68,7 +60,7 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<EventsIcon width={37} hieght={37} />}
           label="Etkinlikler"
-          onPress={openEvents}
+          onPress={() => onPressRoute('events', true)}
         />
         <PortalRoute
           icon={<DataBaseIcon width={37} hieght={37} />}

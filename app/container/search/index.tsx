@@ -1,9 +1,8 @@
-import React, {useLayoutEffect} from 'react';
+import React from 'react';
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
-import NotLoggedUserHeader from '@components/header/NotLoggedUserHeader';
 import RoutingButtons from '@home/components/RoutingButtons';
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {SearchPath} from '@icons';
@@ -13,15 +12,8 @@ export interface Props {
 }
 
 export default function Search({navigation}: Props) {
-  const isUserLoggedIn = false;
-
-  useLayoutEffect(() => {
-    navigation.setOptions({headerShown: false});
-  }, [navigation]);
-
   return (
     <View style={CommonStyles.container}>
-      {!isUserLoggedIn && <NotLoggedUserHeader onPressSignIn={() => navigation.navigate('auth')} />}
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>
         <View style={styles.inputArea}>
           <View style={styles.inputLabel}>

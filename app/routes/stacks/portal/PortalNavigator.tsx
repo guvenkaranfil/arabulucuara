@@ -22,6 +22,7 @@ import LoggedUserHeader from '../components/LoggedUserHeader';
 
 import ArabulucuFee from '@portal/arabulucuFee';
 import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
+import Events from '@portal/Events';
 
 const Stack = createStackNavigator<PortalNavigatorParamList>();
 function PortalNavigator() {
@@ -38,11 +39,15 @@ function PortalNavigator() {
       <Stack.Screen name="articles" component={Articles} options={{title: 'Makaleler'}} />
       <Stack.Screen name="articleDetail" component={ArticleDetail} options={{title: 'Makaleler'}} />
       <Stack.Screen name="dataBank" component={DataBank} options={{title: 'Bilgi Bankası'}} />
+
+      <Stack.Screen name="events" component={Events} options={{title: 'Bilgi Bankası'}} />
+
       <Stack.Screen
         name="dataBankList"
         component={DataBankList}
         options={{title: 'Bilgi Bankası'}}
       />
+
       <Stack.Screen
         name="dataBankDetail"
         component={DataBankDetail}
