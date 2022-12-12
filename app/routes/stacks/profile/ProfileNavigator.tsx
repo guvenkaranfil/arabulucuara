@@ -29,7 +29,7 @@ const Stack = createStackNavigator<ProfileNavigatorParamList>();
 
 function ProfileNavigator() {
   return (
-    <Stack.Navigator screenOptions={{header: LoggedUserHeader}}>
+    <Stack.Navigator screenOptions={{header: LoggedUserHeader}} initialRouteName="profile">
       <Stack.Screen name="profile" component={Profile} options={{headerShown: false}} />
       <Stack.Screen
         name="profileInformation"

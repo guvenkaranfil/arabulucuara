@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView, Pressable} from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 import {Fonts, Metrics} from '@utils';
 import {DeleteIcon} from '@icons';
@@ -8,9 +9,20 @@ import FilledButton from '@components/buttons/FilledButton';
 import {useGetGalleryQuery} from './ProfileGetApi';
 
 export default function UserGallery() {
-  const [showVideo, setshowVideo] = useState(true);
+  const [showVideo, setshowVideo] = useState(false);
   const {data, isLoading} = useGetGalleryQuery();
   console.log('GALLERY: ', data);
+
+  const choseFromLibrary = async (mediaType: 'photo' | 'video' | 'any') => {
+    ImagePicker.openPicker({
+      mediaType: mediaType,
+      width: 150,
+      height: 150,
+      cropping: true,
+    }).then(image => {
+      console.log(image);
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -48,12 +60,12 @@ export default function UserGallery() {
           <FilledButton
             style={styles.newVideo}
             label="Video Ekle"
-            onPress={() => console.log('new Video')}
+            onPress={() => choseFromLibrary('video')}
           />
           <FilledButton
             style={styles.newPhoto}
             label="Fotoğraf Ekle"
-            onPress={() => console.log('new photo')}
+            onPress={() => choseFromLibrary('photo')}
           />
         </View>
       </ScrollView>
@@ -77,7 +89,7 @@ const GalleryPhoto = ({
       {showDeleteOption && (
         <View style={styles.deletePreview}>
           <Pressable style={styles.deletebutton} onPress={() => onPressDelete(id)}>
-            <DeleteIcon width={19} height={20} stroke="black" />
+            <DeleteIcon width={19} height={20} stroke="#000" />
           </Pressable>
         </View>
       )}
@@ -143,6 +155,8 @@ const styles = StyleSheet.create({
   deletebutton: {
     width: 40,
     height: 40,
+    borderRadius: 20,
+    backgroundColor: '#CFCFCF',
     alignItems: 'center',
     justifyContent: 'center',
   },
