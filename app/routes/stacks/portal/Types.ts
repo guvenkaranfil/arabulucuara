@@ -6,6 +6,8 @@ export type PortalNavigatorParamList = {
   portal: undefined;
   forum: undefined;
   events: undefined;
+  joinConference: undefined;
+  conferenceRoom: {roomURL: string};
   categoryDetail: Category;
   TopicDetail: {subjectId: number};
   articles: {articleId?: number};

@@ -32,7 +32,24 @@ const articlesApi = Client.injectEndpoints({
     getEvents: build.query<Array<Event>, void>({
       query: () => '/Portal/GetEvents',
     }),
+
+    createConference: build.query<{}, void>({
+      query: () => '/Conferance/CreateConference',
+    }),
+
+    joinConference: build.mutation<{}, {meetingId: string; userName: string; password: string}>({
+      query: params => ({
+        url: '/Conferance/JoinConference',
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
-export const {useCalculateFeeMutation, useGetEventsQuery} = articlesApi;
+export const {
+  useCalculateFeeMutation,
+  useGetEventsQuery,
+  useLazyCreateConferenceQuery,
+  useJoinConferenceMutation,
+} = articlesApi;

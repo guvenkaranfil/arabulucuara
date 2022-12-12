@@ -3,7 +3,7 @@ import {ActivityIndicator, StyleSheet, Text, Pressable, ViewStyle, TextStyle} fr
 import {Labels, Metrics} from '@utils';
 
 type Props = {
-  style?: ViewStyle;
+  style?: ViewStyle[];
   labelStyle?: TextStyle;
   label: string;
   bgColor?: string;

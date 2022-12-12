@@ -26,12 +26,16 @@ export interface Props {
 export default function Portal({navigation}: Props) {
   const isUserSigned = useSelector(isUserLoggedIn);
 
-  const onPressRoute = (routeName: keyof PortalNavigatorParamList, mustSigned: boolean) => {
+  const onPressRoute = (
+    routeName: keyof PortalNavigatorParamList,
+    mustSigned: boolean,
+    params?: Object,
+  ) => {
     if (mustSigned && !isUserSigned) {
       return mustSignDialog(navigation);
     }
 
-    return navigation.navigate(routeName);
+    return navigation.navigate(routeName, params);
   };
 
   const openNegotiator = () => {
@@ -75,7 +79,13 @@ export default function Portal({navigation}: Props) {
         <PortalRoute
           icon={<ZoomEventIcon width={39} hieght={39} />}
           label="Konferans Görüşmesi"
-          onPress={() => console.log('onPress...')}
+          onPress={() =>
+            // onPressRoute('conferenceRoom', true, {
+            //   roomURL:
+            //     'https://sanalsinif.omeet.com.tr/bigbluebutton/api/join?fullName=Kadri+Y%c4%b1ld%c4%b1r%c4%b1m&meetingID=273c391b-0086-4465-aa08-c875a84eeae0&password=c9d93f91&joinViaHtml5=true&redirect=false&userID=&logoutURL=https://arabulucuara.com&checksum=ad33b7d9a0b43c1198a121b1adc1008dd590fb79',
+            // })
+            onPressRoute('joinConference', true)
+          }
         />
         <PortalRoute
           icon={<CalculatorMachineIcon width={32} hieght={37} />}

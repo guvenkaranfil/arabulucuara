@@ -23,6 +23,8 @@ import LoggedUserHeader from '../components/LoggedUserHeader';
 import ArabulucuFee from '@portal/arabulucuFee';
 import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
 import Events from '@portal/Events';
+import ConferenceRoom from '@portal/conference/ConferenceRoom';
+import JoinConference from '@portal/conference/JoinConference';
 
 const Stack = createStackNavigator<PortalNavigatorParamList>();
 function PortalNavigator() {
@@ -41,6 +43,18 @@ function PortalNavigator() {
       <Stack.Screen name="dataBank" component={DataBank} options={{title: 'Bilgi Bankası'}} />
 
       <Stack.Screen name="events" component={Events} options={{title: 'Bilgi Bankası'}} />
+
+      <Stack.Screen
+        name="joinConference"
+        component={JoinConference}
+        options={{title: 'Konferans Giriş'}}
+      />
+
+      <Stack.Screen
+        name="conferenceRoom"
+        component={ConferenceRoom}
+        options={{title: 'Konferans Odası'}}
+      />
 
       <Stack.Screen
         name="dataBankList"
