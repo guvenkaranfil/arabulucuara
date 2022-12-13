@@ -9,7 +9,7 @@ import {updateToken} from '@store/user/UserSlice';
 import {RootState} from '@store/RootStore';
 
 // const BASE_URL = 'https://api.arabulucuara.com';
-const BASE_URL = 'http://192.168.1.41';
+const BASE_URL = 'http://192.168.1.141';
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   prepareHeaders: (headers, {getState}) => {

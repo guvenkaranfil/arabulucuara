@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
 import {Fonts, Metrics} from '@utils';
 import FilledButton from '@components/buttons/FilledButton';
-import {useLazyCreateConferenceQuery} from '@portal/portalApi';
+import {useCreateConferenceMutation} from '@portal/portalApi';
+import {GENERAL_ALERT_BODY, GENERA_ALERT_TITLE} from '@constants';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'joinConference'>;
@@ -18,28 +19,23 @@ export default function JoinConference({navigation}: Props) {
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
 
-  const [isMounted, setisMounted] = useState(false);
-  const [createConference, {data: createdConference, isLoading: isCreatingConference, isSuccess}] =
-    useLazyCreateConferenceQuery();
-  console.log('createdConference:', createdConference);
-
-  useEffect(() => {
-    setisMounted(true);
-
-    console.log('isSuccess:', isSuccess);
-    if (isMounted) {
-      console.log('createdConference:', createdConference);
-      navigation.navigate('conferenceRoom', {
-        roomURL:
-          'https://sanalsinif.omeet.com.tr/bigbluebutton/api/join?fullName=Kadri+Y%c4%b1ld%c4%b1r%c4%b1m&meetingID=273c391b-0086-4465-aa08-c875a84eeae0&password=c9d93f91&joinViaHtml5=true&redirect=false&userID=&logoutURL=https://arabulucuara.com&checksum=ad33b7d9a0b43c1198a121b1adc1008dd590fb79',
-      });
-    }
-  }, [createdConference]);
+  const [createConference, {isLoading: isCreatingConference}] = useCreateConferenceMutation();
 
   const joinConference = () => {};
 
   const handleConferenceCreate = () => {
-    createConference();
+    createConference()
+      .then(res => {
+        console.log('create conf res: ', res);
+        if (res?.data?.joinResult) {
+          navigation.navigate('conferenceRoom', {
+            roomURL: res.data?.joinResult?.urlWithParameters,
+          });
+        } else {
+          Alert.alert(GENERA_ALERT_TITLE, GENERAL_ALERT_BODY);
+        }
+      })
+      .catch(() => Alert.alert(GENERA_ALERT_TITLE, GENERAL_ALERT_BODY));
   };
 
   return (
