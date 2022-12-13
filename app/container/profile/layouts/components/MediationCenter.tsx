@@ -1,19 +1,19 @@
 import {OnlyPersonIcon} from '@icons';
 import {ProfileLinks} from '@profile/ProfileGetApi';
+import {Constants} from '@utils';
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {AirbnbRating} from 'react-native-ratings';
 
 import styles from '../styles/ProfileLayoutStyle';
 
-const BASE_URL = 'https://arabulucuara.com/uploaded/UserImage/';
 export default function MediationCenter({displayName, image, roleName, starPoints}: ProfileLinks) {
   console.log('MediationCenter >> starPoints: ', starPoints);
   return (
     <View style={styles.infosContainer}>
       <View style={styles.profilePhoto}>
         {image ? (
-          <Image source={{uri: BASE_URL + image}} style={styles.userProfile} />
+          <Image source={{uri: Constants.USER_IMAGE + image}} style={styles.userProfile} />
         ) : (
           <View style={[styles.profilePhoto, styles.profilePhotoWithBg]}>
             <OnlyPersonIcon width={70} height={70} />

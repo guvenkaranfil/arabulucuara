@@ -12,6 +12,7 @@ export default function AboutUser() {
   const [aboutMe, setaboutMe] = useState('');
 
   const {data, isFetching, isLoading} = useAboutMeQuery();
+  console.log('data about me:', data);
 
   useEffect(() => {
     if (data) {
