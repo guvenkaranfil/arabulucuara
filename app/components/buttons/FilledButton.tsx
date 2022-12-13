@@ -1,9 +1,17 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, Pressable, ViewStyle, TextStyle} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  Pressable,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 import {Labels, Metrics} from '@utils';
 
 type Props = {
-  style?: ViewStyle[];
+  style?: StyleProp<ViewStyle>;
   labelStyle?: TextStyle;
   label: string;
   bgColor?: string;

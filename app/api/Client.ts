@@ -7,11 +7,10 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import {updateToken} from '@store/user/UserSlice';
 import {RootState} from '@store/RootStore';
+import {Constants} from '@utils';
 
-// const BASE_URL = 'https://api.arabulucuara.com';
-const BASE_URL = 'http://192.168.1.141';
 const baseQuery = fetchBaseQuery({
-  baseUrl: BASE_URL,
+  baseUrl: Constants.API_BASE_URL,
   prepareHeaders: (headers, {getState}) => {
     const token = (getState() as RootState).user.token?.token;
 

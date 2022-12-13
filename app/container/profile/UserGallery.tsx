@@ -1,72 +1,166 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView, Pressable} from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+import {StyleSheet, Text, View, Image, ScrollView, Pressable, Platform, Alert} from 'react-native';
+import ImagePicker, {Image as ImageType} from 'react-native-image-crop-picker';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
-import {Fonts, Metrics} from '@utils';
-import {DeleteIcon} from '@icons';
+import {Constants, Fonts, Metrics} from '@utils';
+import {DeleteIcon, PlayIcon} from '@icons';
 import VideoPlayer from '@components/videoPlayer';
 import FilledButton from '@components/buttons/FilledButton';
-import {useGetGalleryQuery} from './ProfileGetApi';
+import {useDeleteGalleryMutation, useGetGalleryQuery, UserMedia} from './ProfileGetApi';
+import FullScreenLoader from '@components/loader/FullScreenLoader';
+import axios from 'axios';
 
 export default function UserGallery() {
   const [showVideo, setshowVideo] = useState(false);
-  const {data, isLoading} = useGetGalleryQuery();
-  console.log('GALLERY: ', data);
+  const [currentPlayingVideoURL, setcurrentPlayingVideoURL] = useState<string>('');
+
+  const user = useSelector((state: RootState) => state.user);
+
+  const {data: media, isLoading, refetch} = useGetGalleryQuery();
+  const [deleteMedia, {isLoading: isMediaDeleting}] = useDeleteGalleryMutation();
+
+  console.log('GALLERY: ', media);
 
   const choseFromLibrary = async (mediaType: 'photo' | 'video' | 'any') => {
     ImagePicker.openPicker({
       mediaType: mediaType,
       width: 150,
       height: 150,
-      cropping: true,
-    }).then(image => {
-      console.log(image);
+      cropping: mediaType === 'video' ? false : true,
+    }).then(res => {
+      console.log(res);
+      uploadPhoto(res, mediaType === 'video' ? 'video' : 'fotograf');
     });
   };
+
+  const generalErrroMessage = (error?: any) =>
+    Alert.alert(
+      Constants.GENERA_ALERT_TITLE,
+      error?.response?.data?.message ?? Constants.GENERAL_ALERT_BODY,
+    );
+
+  const uploadPhoto = async (file: ImageType, fileType: 'video' | 'fotograf') => {
+    const data = new FormData();
+    data.append('file', {
+      name: file.filename,
+      uri: Platform.OS === 'ios' ? file.path?.replace('file://', '') : file.path,
+    });
+
+    // video, fotograf
+    data.append('type', fileType);
+    data.append('title', 'This is a title sample');
+
+    try {
+      const response = await axios.post(Constants.API_BASE_URL + '/Gallery/AddGallery', data, {
+        headers: {
+          Authorization: 'Bearer ' + user.token?.token,
+          'Content-Type': 'multipart/form-data',
+          accept: 'text/plain',
+        },
+      });
+
+      console.log('response: ', response);
+
+      if (response.status === 200) {
+        console.log('Image has been added successfully');
+        Alert.alert('Başarılı', response.data?.message);
+        refetch();
+      }
+    } catch (error: any) {
+      console.log('error on photo upload: ', error);
+      console.log('error on photo upload response: ', error?.response);
+      Alert.alert(
+        Constants.GENERA_ALERT_TITLE,
+        error?.response?.data?.message ?? Constants.GENERAL_ALERT_BODY,
+      );
+    }
+  };
+
+  const handleDeleteMedia = (id: number, type: 'video' | 'fotograf') => {
+    deleteMedia({id: id, type: type})
+      .then(res => {
+        console.log('media delete res: ', res);
+        if (res?.data?.status === 200) {
+          Alert.alert('Başarılı!', 'Fotoğraf başarılı bir şekilde silindi');
+          refetch();
+        } else {
+          generalErrroMessage();
+        }
+      })
+      .catch(error => generalErrroMessage(error));
+  };
+
+  const _renderPhotos = () => {
+    if (media?.fotolar && media.fotolar.length > 0) {
+      return (
+        <>
+          <Text style={styles.screenTitle}>Fotoğraf Galerisi</Text>
+          <View style={styles.gallery}>
+            {media.fotolar.map((gallery, index) => (
+              <GalleryPhoto
+                key={index}
+                id={gallery.id}
+                photo={Constants.USER_GALLERY_PHOTO + gallery.file}
+                onPressDelete={deletedPhotoId => handleDeleteMedia(deletedPhotoId, 'fotograf')}
+              />
+            ))}
+          </View>
+        </>
+      );
+    }
+  };
+
+  const _renderVideos = () => {
+    if (media?.videos && media.videos.length > 0) {
+      return (
+        <View style={styles.videos}>
+          <Text style={styles.screenTitle}>Videonuz</Text>
+          {media.videos.map((gallery, index) => (
+            <GalleryVideo
+              key={index}
+              media={gallery}
+              onPressDelete={selectedMedia => handleDeleteMedia(selectedMedia.id, 'video')}
+              onPressOpen={selectedMedia => {
+                setcurrentPlayingVideoURL(Constants.USER_GALLERY_VIDEOS + selectedMedia.file);
+                setshowVideo(true);
+              }}
+            />
+          ))}
+        </View>
+      );
+    }
+  };
+
+  if (isLoading) return <FullScreenLoader />;
 
   return (
     <View style={styles.container}>
       {showVideo && (
-        <VideoPlayer
-          videoURL="https://arabulucuara.com/uploaded/Videos/tanitim.mp4"
-          onPressClose={() => setshowVideo(false)}
-        />
+        <VideoPlayer videoURL={currentPlayingVideoURL} onPressClose={() => setshowVideo(false)} />
       )}
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.screenTitle}>Fotoğraf Galerisi</Text>
-
-        <View style={styles.gallery}>
-          {GALLERY.map((gallery, index) => (
-            <GalleryPhoto
-              key={index}
-              id={gallery.id}
-              photo={gallery.photoURL}
-              onPressDelete={deletedPhotoId => console.log('deletedPhotoId:', deletedPhotoId)}
-            />
-          ))}
-        </View>
-
-        <View style={styles.videos}>
-          <Text style={styles.screenTitle}>Videonuz</Text>
-          {VIDEO.map((gallery, index) => (
-            <Pressable key={index} style={styles.photoContainer} onPress={() => setshowVideo(true)}>
-              <Image source={{uri: gallery.photoURL}} style={styles.photo} />
-            </Pressable>
-          ))}
-        </View>
+        {_renderPhotos()}
+        {_renderVideos()}
 
         <View style={styles.actionButtons}>
-          <FilledButton
-            style={styles.newVideo}
-            label="Video Ekle"
-            onPress={() => choseFromLibrary('video')}
-          />
-          <FilledButton
-            style={styles.newPhoto}
-            label="Fotoğraf Ekle"
-            onPress={() => choseFromLibrary('photo')}
-          />
+          {media?.videos && media?.videos?.length < 1 && (
+            <FilledButton
+              style={styles.newVideo}
+              label="Video Ekle"
+              onPress={() => choseFromLibrary('video')}
+            />
+          )}
+
+          {media?.fotolar && media?.fotolar?.length < 5 && (
+            <FilledButton
+              style={styles.newPhoto}
+              label="Fotoğraf Ekle"
+              onPress={() => choseFromLibrary('photo')}
+            />
+          )}
         </View>
       </ScrollView>
     </View>
@@ -98,10 +192,40 @@ const GalleryPhoto = ({
   );
 };
 
+interface VideoProps {
+  media: UserMedia;
+  onPressDelete: (media: UserMedia) => void;
+  onPressOpen: (media: UserMedia) => void;
+}
+const GalleryVideo = ({media, onPressDelete, onPressOpen}: VideoProps) => {
+  const [shouldShowDelete, setshouldShowDelete] = useState(true);
+
+  return (
+    <Pressable style={styles.photoContainer} onPress={() => setshouldShowDelete(prev => !prev)}>
+      <View style={styles.photo}>
+        {shouldShowDelete ? (
+          <Pressable onPress={() => onPressDelete(media)}>
+            <DeleteIcon />
+          </Pressable>
+        ) : (
+          <Pressable style={styles.deleteContainer} onPress={() => onPressOpen(media)}>
+            <PlayIcon width={60} height={60} />
+          </Pressable>
+        )}
+      </View>
+    </Pressable>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+
+  deleteContainer: {
+    width: 60,
+    height: 60,
   },
 
   scrollContent: {
@@ -138,7 +262,10 @@ const styles = StyleSheet.create({
     flex: 1,
     width: undefined,
     height: undefined,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 10,
+    backgroundColor: '#000',
   },
 
   deletePreview: {
@@ -189,39 +316,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#7E0736',
   },
 });
-
-const GALLERY = [
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/0686a091-4571-4db1-ac9a-c8ebf967e984.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/0686a091-4571-4db1-ac9a-c8ebf967e984.jpg',
-  },
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-];
-
-const VIDEO = [
-  {
-    id: 1,
-    photoURL:
-      'https://arabulucuara.com/uploaded/UserImage/4bf55e12-8fbe-40f4-a02d-02b19df5a178.jpg',
-  },
-];

@@ -18,6 +18,7 @@ export {default as LetterIcon} from './LetterIcon';
 export {default as MegaphoneIcon} from './MegaphoneIcon';
 export {default as OnlyPersonIcon} from './OnlyPersonIcon';
 export {default as PersonIcon} from './PersonIcon';
+export {default as PlayIcon} from './PlayIcon';
 export {default as PortalIcon} from './PortalIcon';
 export {default as SearchIcon} from './SearchIcon';
 export {default as SearchPath} from './SearchPath';

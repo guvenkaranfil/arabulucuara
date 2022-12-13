@@ -80,7 +80,7 @@ export default function ProfilePhoto({navigation}) {
 
     try {
       // const BASE_URL = 'https://api.arabulucuara.com';
-      const BASE_URL = 'http://192.168.1.41';
+      const BASE_URL = 'http://192.168.1.141';
       const response = await axios.post(BASE_URL + '/Account/StepFour', data, {
         headers: {
           Authorization: 'Bearer ' + user.token?.token,

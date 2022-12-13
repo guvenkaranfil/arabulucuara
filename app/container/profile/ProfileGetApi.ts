@@ -113,6 +113,15 @@ export interface MembershipArabulucu {
   odaAdi: string;
 }
 
+export interface UserMedia {
+  id: number;
+  file: string;
+}
+export interface UserGallery {
+  fotolar: Array<UserMedia>;
+  videos: Array<UserMedia>;
+}
+
 const profileGETApi = Client.injectEndpoints({
   endpoints: build => ({
     aboutMe: build.query<string, void>({
@@ -128,8 +137,16 @@ const profileGETApi = Client.injectEndpoints({
       query: () => ({url: '/User/GetMemberships'}),
     }),
 
-    getGallery: build.query<ProfileLinks, void>({
+    getGallery: build.query<UserGallery, void>({
       query: () => ({url: '/Gallery/GetMyGallery'}),
+    }),
+
+    deleteGallery: build.mutation<{}, {id: number; type: string}>({
+      query: params => ({
+        url: '/Gallery/DeleteGallery',
+        method: 'POST',
+        body: params,
+      }),
     }),
 
     updateMembership: build.mutation<{}, MembershipArabulucu>({
@@ -176,6 +193,7 @@ export const {
   useGetProfileLinksQuery,
   useGetMembershipQuery,
   useGetGalleryQuery,
+  useDeleteGalleryMutation,
   useArticlesQuery,
   useCertificatesQuery,
   useProfileInformationsQuery,
