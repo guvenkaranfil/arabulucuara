@@ -3,6 +3,7 @@ import {StyleSheet, Pressable, Text, ViewStyle} from 'react-native';
 import {Fonts, Labels, Metrics} from '@utils';
 import {BottomIcon, UpIcon} from '@icons';
 import Modal from './Modal';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface Props {
   style?: ViewStyle;
