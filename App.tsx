@@ -100,4 +100,5 @@ const codePushOptions: CodePushOptions = {
 };
 
 // const AppWithCodepush = CodePush(codePushOptions)(App);
-export default CodePush(codePushOptions)(App);
+// export default CodePush(codePushOptions)(App);
+export default App;
