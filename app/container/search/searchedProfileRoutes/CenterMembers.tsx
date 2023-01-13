@@ -18,7 +18,12 @@ export default function CenterMembers({route, navigation}: ScreenProps) {
   return (
     <ProfileLayout
       user={profile}
-      onPressMessages={() => navigation.navigate('profile', {screen: 'messagesContainer'})}>
+      onPressMessages={() => {
+        navigation.navigate('profile');
+        setTimeout(() => {
+          navigation.push('profile', {screen: 'messagesContainer'});
+        }, 100);
+      }}>
       <View style={styles.container}>
         <Text style={styles.title}>Üyelikler</Text>
 

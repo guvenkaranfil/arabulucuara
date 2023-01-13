@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: Fonts.robotoBold,
     color: '#181C32',
+    textDecorationLine: 'underline',
   },
 
   attendee: {

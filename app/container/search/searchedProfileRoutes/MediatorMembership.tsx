@@ -17,7 +17,7 @@ export default function MediatorMembership({route}: ScreenProps) {
     return (
       <ProfileLayout user={profile}>
         <View style={styles.screenContainer}>
-          <Text style={styles.screenTitle}>Makaleler</Text>
+          <Text style={styles.screenTitle}>Üyelikler</Text>
 
           {member.uyelikler.map((certificate, index) => (
             <View key={index} style={styles.certificate}>
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   },
 
   certificate: {
+    marginBottom: 20,
     paddingVertical: 8,
     paddingHorizontal: 20,
     width: Metrics.CONTAINER_WIDTH,

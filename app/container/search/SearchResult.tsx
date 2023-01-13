@@ -26,6 +26,7 @@ interface Props {
 export default function SearchResult({navigation, route}: Props) {
   const [searchInput, setsearchInput] = useState('');
   const [searchResult, setsearchResult] = useState<SearchResponse[]>(route.params?.data ?? []);
+  console.log('searchResult:', searchResult);
 
   const [searchGeneral, {isLoading}] = useSearchGenelMutation();
 

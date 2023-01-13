@@ -8,6 +8,8 @@ import RoutingButtons from './components/RoutingButtons';
 import Attendees from './components/Attendees';
 import {GetHomeResponse} from './HomeApi';
 import NotLoggedUserHeader from '@components/header/NotLoggedUserHeader';
+import {useNavigation} from '@react-navigation/native';
+import HomeFooter from './components/HomeFooter';
 
 export default function Home({
   banners,
@@ -17,23 +19,42 @@ export default function Home({
   refetch,
   onPressLogin,
 }: GetHomeResponse & {refetch: () => void; isRefreshing: boolean; onPressLogin: () => void}) {
+  const navigation = useNavigation();
+  console.log('banners:', banners);
   return (
     <View style={styles.container}>
       <NotLoggedUserHeader onPressSignIn={onPressLogin} />
       <ScrollView
         contentContainerStyle={styles.cotentContainerStyle}
         refreshControl={<RefreshControl onRefresh={refetch} refreshing={isRefreshing} />}>
-        <View style={styles.bannerArea}>
-          <Banner banners={banners ?? []} />
-        </View>
+        {banners && banners?.length > 0 && (
+          <View style={styles.bannerArea}>
+            <Banner banners={banners ?? []} />
+          </View>
+        )}
 
         <View style={styles.routingButtons}>
           <RoutingButtons
-            searchMediator={() => console.log('onPress..')}
-            searchExpertMediator={() => console.log('onPress..')}
-            searchMediatorCenter={() => console.log('onPress..')}
-            searchPro={() => console.log('onPress..')}
-            openCalculator={() => console.log('onPress..')}
+            searchMediator={() => {
+              navigation.navigate('search');
+              navigation.navigate('search', {screen: 'seekMediator'});
+            }}
+            searchMediatorCenter={() => {
+              navigation.navigate('search');
+              navigation.navigate('search', {screen: 'mediationCenter'});
+            }}
+            searchPro={() => {
+              navigation.navigate('search');
+              navigation.navigate('search', {screen: 'forExpert'});
+            }}
+            openCalculator={() => {
+              // TODO: needs to resolve more ellegant way
+              // ISSUE LINk: https://github.com/react-navigation/react-navigation/issues/7698
+              navigation.navigate('portal');
+              setTimeout(() => {
+                navigation.push('arabulucuFee');
+              }, 100);
+            }}
           />
         </View>
 
@@ -47,6 +68,8 @@ export default function Home({
         <View style={styles.attendees}>
           <Attendees attendees={users ?? []} />
         </View>
+
+        <HomeFooter />
       </ScrollView>
     </View>
   );

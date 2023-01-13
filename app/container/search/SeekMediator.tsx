@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, View, Alert} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
@@ -23,7 +23,7 @@ export default function SeekMediator({navigation}: Props) {
   const [selectedDistrict, setselectedDistrict] = useState({id: 0, name: undefined});
   const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: undefined});
   const [gender, setgender] = useState({id: 0, value: 'Farketmez'});
-  const [ageRange, setageRange] = useState({id: undefined, range: undefined});
+  const [ageRange, setageRange] = useState({id: undefined, range: 'Tümü'});
   const [seniorityRange, setseniorityRange] = useState({id: undefined, range: undefined});
   const [alternativeProffession, setalternativeProffession] = useState({
     id: undefined,
@@ -41,10 +41,19 @@ export default function SeekMediator({navigation}: Props) {
   const {data: jobs} = useGetJobsQuery();
   const [searchArabulucu, {isLoading}] = useSearchArabulucuMutation();
   const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
+  console.log('professions:', professions);
 
   console.log('topics:', topics);
 
+  useEffect(() => {
+    pickExpertiseArea({id: 1, label: 'Genel Arabuluculuk'});
+  }, []);
+
   const onPressSearch = () => {
+    if (!selectedCity.name) {
+      return Alert.alert('Lütfen Dikkat', 'Arama yapabilmek için şehir seçiniz.');
+    }
+
     let uzmanlıkAlanları = [];
 
     for (let [key, value] of selectedExpertiseAreas) {
@@ -145,7 +154,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={gender?.value}
+          value={`Cinsiyet (${gender?.value})`}
           placeholder="Cinsiyet"
           items={GENDERS}
           renderItem={item => item.value}
@@ -153,7 +162,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={ageRange?.range}
+          value={`Yaş Aralığı (${ageRange?.range})`}
           placeholder="Yaş Aralığı"
           items={AGE_RANGE_ARABULUCU}
           renderItem={item => item.range}

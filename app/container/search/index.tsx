@@ -34,8 +34,15 @@ export default function Search({navigation}: Props) {
             searchMediator={() => navigation.navigate('seekMediator')}
             searchMediatorCenter={() => navigation.navigate('mediationCenter')}
             searchPro={() => navigation.navigate('forExpert')}
-            showCalculator={false}
-            openCalculator={() => console.log('onPress..')}
+            showCalculator={true}
+            openCalculator={() => {
+              // TODO: needs to resolve more ellegant way
+              // ISSUE LINk: https://github.com/react-navigation/react-navigation/issues/7698
+              navigation.navigate('portal');
+              setTimeout(() => {
+                navigation.push('arabulucuFee');
+              }, 100);
+            }}
           />
         </View>
       </ScrollView>

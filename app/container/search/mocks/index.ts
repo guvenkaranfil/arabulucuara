@@ -173,7 +173,7 @@ export const SEARCH_RESULT = [
 export const GENDERS = [
   {id: 2, value: 'Kadın'},
   {id: 1, value: 'Erkek'},
-  {id: 0, value: 'Tümü'},
+  {id: 0, value: 'Farketmez'},
 ];
 
 export const AGE_RANGE_ARABULUCU = [

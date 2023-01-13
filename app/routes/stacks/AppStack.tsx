@@ -18,7 +18,7 @@ const AppStack = () => {
   const haveUser = useSelector(isUserLoggedIn);
 
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar}>
+    <Tab.Navigator tabBarOptions={tabBarOptions} tabBar={TabBar} initialRouteName="search">
       <Tab.Screen name="home" component={HomeNavigator} options={homeOptions} />
       <Tab.Screen name="search" component={SearchNavigator} options={searchOptions} />
       <Tab.Screen name="portal" component={PortalNavigator} options={portalOptions} />

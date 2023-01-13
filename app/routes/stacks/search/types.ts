@@ -3,6 +3,7 @@ import {MemberResponse, SearchResponse} from '@search/searchApi';
 
 export type SearchNavigatorParamList = {
   profile: {screen: string};
+  portal: undefined;
   auth: undefined;
   search: undefined;
   searchResult: {data: SearchResponse[] | undefined};

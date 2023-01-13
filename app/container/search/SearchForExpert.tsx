@@ -33,7 +33,7 @@ export default function SearchExpertMediator({navigation}: Props) {
     name: undefined,
   });
 
-  const [gender, setgender] = useState({id: 0, value: 'Tümü'});
+  const [gender, setgender] = useState({id: 0, value: 'Farketmez'});
   const [ageRange, setageRange] = useState({id: 0, range: 'Tümü'});
   const [seniorityRange, setseniorityRange] = useState({id: 0, range: 'Tümü'});
 
@@ -52,6 +52,10 @@ export default function SearchExpertMediator({navigation}: Props) {
   const [searchUzman, {isLoading}] = useSearchUzmanMutation();
 
   const handleSearch = () => {
+    if (!selectedCity.name) {
+      return Alert.alert('Lütfen Dikkat', 'Arama yapabilmek için şehir seçiniz.');
+    }
+
     searchUzman({
       sehir: selectedCity.id ?? 0,
       ilce: selectedTown.id ?? 0,
@@ -187,7 +191,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={gender?.value}
+          value={`Cinsiyet (${gender?.value})`}
           placeholder="Cinsiyet"
           items={GENDERS}
           renderItem={item => item.value}
@@ -195,7 +199,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={ageRange?.range}
+          value={`Yaş Aralığı (${ageRange?.range})`}
           placeholder="Yaş Aralığı"
           items={AGE_RANGE_ARABULUCU}
           renderItem={item => item.range}

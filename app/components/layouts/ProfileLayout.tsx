@@ -42,7 +42,13 @@ export default function ProfileLayout({children, user, onPressMessages}: ScreenP
         </Animated.Text>
       </View>
 
-      <Pressable onPress={onPressMessages}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('profile');
+          setTimeout(() => {
+            navigation.navigate('profile', {screen: 'messagesContainer'});
+          }, 100);
+        }}>
         <View style={styles.right}>
           <LetterIcon width={20} height={17} />
         </View>

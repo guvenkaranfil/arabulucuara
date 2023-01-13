@@ -25,6 +25,7 @@ const mapPageNameToStackName = {
   MerkezUyeler: 'centerMembers',
   CozumOrtaklari: 'cooperationAndSolutionPartners',
   MerkezUzmanlik: 'mediationExpertises',
+  ArabulucuUzmanlik: 'mediationExpertises',
   MerkezMakaleler: 'mediatorArticles',
   ArabulucuMakaleler: 'mediatorArticles',
   ArabulucuBelgeler: 'mediatorCertificates',
@@ -87,6 +88,7 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
   };
 
   const onPressRouteButton = (pressedRoute: SearchPage) => {
+    console.log('pressedRoute.pageName:', pressedRoute.pageName);
     const stackName = mapPageNameToStackName[pressedRoute.pageName];
 
     if (stackName) {

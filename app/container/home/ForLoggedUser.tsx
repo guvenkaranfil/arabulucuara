@@ -8,6 +8,7 @@ import Attendees from './components/Attendees';
 import LastMoves from './components/LastMoves';
 import FeaturedArticles from './components/FeaturedArticles';
 import {GetHomeResponse} from './HomeApi';
+import HomeFooter from './components/HomeFooter';
 
 interface Props {
   openArticleDetail: (id: number) => void;
@@ -61,6 +62,8 @@ export default function ForLoggedUser({
             openArticle={article => openArticleDetail(article.id)}
           />
         </View>
+
+        <HomeFooter />
       </ScrollView>
     </View>
   );

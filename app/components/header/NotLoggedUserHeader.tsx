@@ -1,9 +1,8 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Fonts, Metrics} from '@utils';
-import {TextLogo} from '@icons';
 
 interface ScreenProps {
   onPressSignIn: () => void;
@@ -15,7 +14,7 @@ export default function NotLoggedUserHeader({onPressSignIn}: ScreenProps) {
   return (
     <LinearGradient style={styles.container} colors={linearColors}>
       <View style={styles.appLogo}>
-        <TextLogo width={183} height={33} />
+        <Image source={require('../../assets/images/logo_white.png')} resizeMode="contain" />
       </View>
 
       <View style={styles.right}>

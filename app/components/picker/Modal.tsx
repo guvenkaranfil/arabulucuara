@@ -9,10 +9,10 @@ import {
   View,
   ViewStyle,
   TouchableWithoutFeedback,
-  SafeAreaView,
 } from 'react-native';
-import {Metrics} from '@utils';
+import {CommonStyles, Fonts, Metrics} from '@utils';
 import {BackIcon} from '@icons';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 type Props = {
   listStyle?: ViewStyle;
@@ -33,37 +33,43 @@ export default function PickModal({
   onPress,
   closeModal,
 }: Props) {
+  const insets = useSafeAreaInsets();
+  console.log('insets.top:', insets.top);
+
   return (
     <Modal visible={true} transparent={true}>
-      <SafeAreaView style={{flex: 1}}>
-        <Pressable
-          style={styles.closeButton}
-          hitSlop={{left: 16, right: 16, bottom: 8, top: 16}}
-          onPress={closeModal}>
-          {/* <Text style={styles.closeButtonText}>X</Text> */}
-          <BackIcon width={25} height={25} stroke="#000" />
-        </Pressable>
-        <TouchableWithoutFeedback onPress={closeModal}>
-          {/* <TouchableWithoutFeedback> */}
-          <View style={styles.outOfBox}>
-            <View style={[styles.container, listStyle]}>
-              <FlatList
-                data={items}
-                renderItem={({item}) => (
-                  <Pressable
-                    style={[styles.item, itemStyle]}
-                    // onLongPress={() => onPress(item)}
-                    onPress={() => onPress(item)}>
-                    <Text numberOfLines={2} style={[styles.label, labelStyle]}>
-                      {renderItem(item)}
-                    </Text>
-                  </Pressable>
-                )}
-                keyExtractor={(_, index) => String(index)}
-              />
-            </View>
+      <SafeAreaView style={CommonStyles.f1}>
+        <View style={[styles.header]}>
+          <Pressable
+            style={styles.closeButton}
+            hitSlop={{left: 50, right: 100, bottom: 8, top: 16}}
+            onPress={closeModal}>
+            <BackIcon width={25} height={25} stroke="#fff" />
+          </Pressable>
+          <Pressable onPress={closeModal}>
+            <Text style={styles.closeButtonText}>Geri</Text>
+          </Pressable>
+        </View>
+
+        <View style={styles.outOfBox}>
+          <View style={[styles.container, listStyle]}>
+            <FlatList
+              data={items}
+              contentContainerStyle={styles.listContent}
+              renderItem={({item}) => (
+                <Pressable
+                  style={[styles.item, itemStyle]}
+                  // onLongPress={() => onPress(item)}
+                  onPress={() => onPress(item)}>
+                  <Text numberOfLines={2} style={[styles.label, labelStyle]}>
+                    {renderItem(item)}
+                  </Text>
+                </Pressable>
+              )}
+              keyExtractor={(_, index) => String(index)}
+            />
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </SafeAreaView>
     </Modal>
   );
@@ -72,32 +78,41 @@ export default function PickModal({
 const styles = StyleSheet.create({
   outOfBox: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#00000aaa',
   },
 
-  closeButton: {
-    position: 'absolute',
-    top: 40,
-    left: 16,
-    zIndex: 9999,
+  header: {
+    flexDirection: 'row',
+    paddingLeft: 16,
+    width: Metrics.DEVICE_WIDTH,
+    height: 55,
+    alignItems: 'center',
+    backgroundColor: '#790633',
   },
 
+  closeButton: {},
+
   closeButtonText: {
-    fontSize: 30,
+    paddingLeft: 8,
+    fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#fff',
   },
 
   container: {
-    paddingTop: 40,
-    paddingVertical: 28,
+    flex: 1,
     width: Metrics.DEVICE_WIDTH,
     // borderRadius: 16,
     backgroundColor: '#fff',
   },
 
+  listContent: {
+    paddingVertical: 20,
+  },
+
   item: {
-    paddingLeft: 16,
+    paddingBottom: 3,
+    marginHorizontal: 16,
     marginBottom: 20,
     width: '100%',
     alignItems: 'flex-start',

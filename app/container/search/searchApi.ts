@@ -68,7 +68,7 @@ const searchApi = Client.injectEndpoints({
   overrideExisting: true,
   endpoints: build => ({
     topics: build.query<TopicsResponse[], void>({
-      query: () => '/Home/GetJobs',
+      query: () => '/Home/GetTopics',
     }),
 
     searchArabulucu: build.mutation<

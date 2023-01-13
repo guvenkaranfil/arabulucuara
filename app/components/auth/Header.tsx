@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 
 import {Labels, Metrics} from '@utils';
-import {TextLogo} from '@icons';
 
 type Props = {
   screenTitle: string;
@@ -13,7 +12,7 @@ type Props = {
 export default function Header({screenTitle, dynamicHeight, logoPaddingTop = 37}: Props) {
   return (
     <View style={[styles.container, {height: Metrics.hp(dynamicHeight)}]}>
-      <TextLogo width={280} height={50} />
+      <Image source={require('../../assets/images/logo_white.png')} resizeMode="contain" />
       <Text style={[styles.title, {paddingTop: Metrics.hp(logoPaddingTop)}]}>{screenTitle}</Text>
     </View>
   );

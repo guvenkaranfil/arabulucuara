@@ -5,7 +5,7 @@ import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import HTML from 'react-native-render-html';
 
 import ProfileLayout from '@components/layouts/ProfileLayout';
-import {Fonts} from '@utils';
+import {Fonts, Metrics} from '@utils';
 
 interface ScreenProps {
   route: RouteProp<SearchNavigatorParamList, 'profileDetail'>;
@@ -43,6 +43,7 @@ export default function AboutProfile({route}: ScreenProps) {
 
 const styles = StyleSheet.create({
   screenContainer: {
+    width: Metrics.DEVICE_WIDTH - 32,
     paddingLeft: 16,
     paddingVertical: 30,
   },

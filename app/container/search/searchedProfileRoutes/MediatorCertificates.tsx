@@ -18,7 +18,7 @@ export default function MediatorCertificates({route}: ScreenProps) {
     return (
       <ProfileLayout user={profile}>
         <View style={styles.screenContainer}>
-          <Text style={styles.screenTitle}>Makaleler</Text>
+          <Text style={styles.screenTitle}>Seminer & Eğitim ve Sertifikalar</Text>
 
           {member.belgeler.map((certificate, index) => (
             <View key={index} style={styles.certificate}>

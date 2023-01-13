@@ -17,14 +17,19 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
     outputRange: [0, 1, 0],
   });
 
+  const blockedStackNames = ['search', 'seekMediator', 'mediationCenter', 'forExpert'];
   const shouldShowMessagesButton = () => {
     const routeName = scene.route.name;
+    console.log('scene.route:', scene.route);
 
     // @ts-ignore
     if (routeName === 'messagesContainer' || routeName === 'messageDetail') return false;
+    if (blockedStackNames.includes(routeName)) return false;
 
     return true;
   };
+
+  let titleWidth = Metrics.DEVICE_WIDTH - 50 - 50;
 
   return (
     <Animated.View style={{opacity}}>
@@ -36,12 +41,26 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
           {previous && <BackIcon width={17} height={12} stroke="#fff" />}
         </Pressable>
 
-        <View style={styles.center}>
-          <Text style={styles.screenTitle}>{scene.descriptor.options.title}</Text>
+        <View
+          style={[
+            styles.center,
+            {
+              width: titleWidth,
+            },
+          ]}>
+          <Text style={[styles.screenTitle]}>{scene.descriptor.options.title}</Text>
         </View>
 
         {shouldShowMessagesButton() && (
-          <Pressable onPress={() => navigation.navigate('profile', {screen: 'messagesContainer'})}>
+          <Pressable
+            onPress={() => {
+              // TODO: needs to resolve more ellegant way
+              // ISSUE LINk: https://github.com/react-navigation/react-navigation/issues/7698
+              navigation.navigate('profile');
+              setTimeout(() => {
+                navigation.navigate('profile', {screen: 'messagesContainer'});
+              }, 100);
+            }}>
             <View style={styles.right}>
               <LetterIcon width={20} height={17} />
             </View>
@@ -67,7 +86,7 @@ const styles = StyleSheet.create({
   },
 
   center: {
-    flex: 1,
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

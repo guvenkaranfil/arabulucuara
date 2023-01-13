@@ -26,7 +26,6 @@ export {default as SearchPersonIcon} from './SearchPersonIcon';
 export {default as SecureIcon} from './SecureIcon';
 export {default as StarParticles} from './StarParticles';
 export {default as StartsIcon} from './StartsIcon';
-export {default as TextLogo} from './TextLogo';
 export {default as TickIcon} from './TickIcon';
 export {default as UpIcon} from './UpIcon';
 export {default as UserIcon} from './UserIcon';

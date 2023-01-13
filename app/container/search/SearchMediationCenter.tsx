@@ -48,6 +48,10 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [searchMerkez, {isLoading}] = useSearchMerkezMutation();
 
   const handleSearch = () => {
+    if (!selectedCity.name) {
+      return Alert.alert('Lütfen Dikkat', 'Arama yapabilmek için şehir seçiniz.');
+    }
+
     searchMerkez({
       sehir: selectedCity.id ?? 0,
       ilce: selectedTown.id ?? 0,

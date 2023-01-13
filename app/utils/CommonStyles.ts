@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import Fonts from './Fonts';
 
 export default StyleSheet.create({
   f1: {flex: 1},
@@ -16,5 +17,12 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  updatingText: {
+    paddingBottom: 8,
+    fontSize: 16,
+    fontFamily: Fonts.robotoMedium,
+    color: '#000',
   },
 });

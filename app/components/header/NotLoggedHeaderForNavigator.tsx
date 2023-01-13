@@ -1,10 +1,9 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {StackHeaderProps} from '@react-navigation/stack';
 
 import {Fonts, Metrics} from '@utils';
-import {TextLogo} from '@icons';
 import {mustSignDialog} from '@components/alert';
 
 export default function NotLoggedHeaderForNavigator({navigation}: StackHeaderProps) {
@@ -17,7 +16,7 @@ export default function NotLoggedHeaderForNavigator({navigation}: StackHeaderPro
   return (
     <LinearGradient style={styles.container} colors={linearColors}>
       <View style={styles.appLogo}>
-        <TextLogo width={183} height={33} />
+        <Image source={require('../../assets/images/logo_white.png')} resizeMode="contain" />
       </View>
 
       <View style={styles.right}>
