@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ArabulucuAra</string>
+     <string moduleConfig="true" name="CodePushDeploymentKey">Wx0PMLUcba8LPdCu662dUpxiyrqtPJnkruswC</string>
+     <string name="default_notification_channel_id">arabulucuara</string>
 </resources>

@@ -20,13 +20,14 @@ const DEPLOYMENT_KEY_PRODUCTION = 'mz2hCdp3keysRacX7tcY41k8OH1xzEjenn5yw';
 PushNotification.createChannel(
   {
     channelId: '10',
-    channelName: 'yibs-chanel',
+    channelName: 'arabulucuara',
     vibrate: true,
   },
   () => {},
 );
 
 const showNotification = (notification?: FirebaseMessagingTypes.Notification) => {
+  console.log('SHOW NOTIFICATION: ', notification);
   PushNotification.localNotification({
     ignoreInForeground: false,
     vibrate: true,
@@ -35,6 +36,10 @@ const showNotification = (notification?: FirebaseMessagingTypes.Notification) =>
     message: notification?.body ?? '',
   });
 };
+
+firebase.messaging().setBackgroundMessageHandler(async message => {
+  console.log('MESSAGE HANDLER: ', message);
+});
 
 firebase.messaging().onMessage(response => {
   console.log('onMessage...');
@@ -49,7 +54,6 @@ firebase.messaging().onMessage(response => {
     });
   } else {
     console.log('else...');
-
     showNotification(response.notification);
   }
 });
@@ -97,17 +101,15 @@ class App extends Component {
 
     if (Platform.OS === 'ios') {
       registerForRemoteMessages();
-      if (Platform.OS === 'ios') {
-        PushNotificationIOS.checkPermissions(({authorizationStatus}) => {
-          if (authorizationStatus === 0) {
-            PushNotificationIOS.requestPermissions().then(this.saveFCMToken);
-          } else {
-            this.saveFCMToken();
-          }
-        });
-      } else {
-        this.saveFCMToken();
-      }
+      PushNotificationIOS.checkPermissions(({authorizationStatus}) => {
+        if (authorizationStatus === 0) {
+          PushNotificationIOS.requestPermissions().then(this.saveFCMToken);
+        } else {
+          this.saveFCMToken();
+        }
+      });
+    } else {
+      this.saveFCMToken();
     }
   }
 

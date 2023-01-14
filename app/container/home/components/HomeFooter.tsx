@@ -24,7 +24,7 @@ export default function HomeFooter() {
         <Text style={styles.label}>Canlı Destek</Text>
       </Pressable>
 
-      <Text style={styles.appVersion}>APP VERSION: 0.0.1</Text>
+      <Text style={styles.appVersion}>APP VERSION: 0.0.2</Text>
     </View>
   );
 }

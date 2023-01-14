@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "256882313542",
+    "project_id": "arabulucuara-b6823",
+    "storage_bucket": "arabulucuara-b6823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256882313542:android:daf6ede0232106a213fd47",
+        "android_client_info": {
+          "package_name": "com.arabulucuara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256882313542-d8grqkjkrm9s231b7fd5e219a2gl6ceb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbMvI5WAdYfjM7GJDVSDxfA9SAoa6y9YQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256882313542-d8grqkjkrm9s231b7fd5e219a2gl6ceb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "256882313542-gvtrv65sgg7tm7e8ku42hf0sq35dvb9e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.exert.arabulucuara"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
