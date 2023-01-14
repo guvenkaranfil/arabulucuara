@@ -23,6 +23,8 @@ export default function HomeFooter() {
       <Pressable style={styles.supportButton} onPress={openLivesupport}>
         <Text style={styles.label}>Canlı Destek</Text>
       </Pressable>
+
+      <Text style={styles.appVersion}>APP VERSION: 0.0.1</Text>
     </View>
   );
 }
@@ -53,6 +55,13 @@ const styles = StyleSheet.create({
 
   label: {
     fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#181C32',
+  },
+
+  appVersion: {
+    paddingTop: 20,
+    fontSize: 14,
     fontFamily: Fonts.robotoRegular,
     color: '#181C32',
   },

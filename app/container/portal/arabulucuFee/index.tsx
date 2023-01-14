@@ -48,13 +48,13 @@ export default function ArabulucuFee() {
               {fees?.map((item, index) => (
                 <View style={styles.tableRow} key={index}>
                   <View style={styles.tableItem}>
-                    <Text>{item.ucretDilimi}</Text>
+                    <Text style={styles.alignToRight}>{item.ucretDilimi}</Text>
                   </View>
                   <View style={styles.tableItem}>
                     <Text>{item.oran}</Text>
                   </View>
                   <View style={styles.tableItem}>
-                    <Text>{item.ucret2Arabulucu}</Text>
+                    <Text style={styles.alignToRight}>{item.ucret2Arabulucu}</Text>
                   </View>
                 </View>
               ))}
@@ -166,4 +166,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 16,
   },
+
+  alignToRight: {},
 });

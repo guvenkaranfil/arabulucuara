@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, SafeAreaView, StatusBar, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
-import CodePush from 'react-native-code-push';
+import CodePush, {CodePushOptions} from 'react-native-code-push';
 
 import firebase from '@react-native-firebase/app';
 import '@react-native-firebase/messaging';
@@ -76,7 +76,16 @@ class App extends Component {
         if (res) {
           setTimeout(() => {
             CodePush.sync({
-              updateDialog: {title: 'Uygulama güncelleniyor...'},
+              updateDialog: {
+                title: 'Uygulama güncelleniyor...',
+
+                mandatoryContinueButtonLabel: 'İptal',
+                mandatoryUpdateMessage:
+                  'Uygulamayı kullanmaya devam etmek için lütfen güncellemeyi yükleyiniz',
+                optionalIgnoreButtonLabel: 'Vazgeç',
+                optionalInstallButtonLabel: 'Yükle',
+                optionalUpdateMessage: 'Yeni versiyon bulundu. Yüklemek ister misiniz?',
+              },
               installMode: CodePush.InstallMode.IMMEDIATE,
             });
           }, 500);
@@ -138,4 +147,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const codePushOptions: CodePushOptions = {
+  updateDialog: {
+    title: 'Uygulama Güncelleniyor',
+  },
+  checkFrequency: CodePush.CheckFrequency.MANUAL,
+  installMode: CodePush.InstallMode.ON_NEXT_RESUME,
+};
+
+export default CodePush(codePushOptions)(App);
