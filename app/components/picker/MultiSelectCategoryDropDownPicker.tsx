@@ -24,7 +24,6 @@ export default function DropDownPicker({
   selectedItems,
 }: Props) {
   const [modalVisible, setmodalVisible] = useState(false);
-  console.log('selectedItems: ', selectedItems);
 
   return (
     <>
@@ -40,11 +39,19 @@ export default function DropDownPicker({
         />
       )}
       <Pressable style={[styles.container, style]} onPress={() => setmodalVisible(true)}>
-        <Text
-          numberOfLines={2}
-          style={[Labels.label16RegularMischka, value ? styles.value : styles.placeholder]}>
-          {value ?? placeholder}
-        </Text>
+        {value ? (
+          <Text
+            numberOfLines={2}
+            style={[Labels.label16RegularMischka, value ? styles.value : styles.placeholder]}>
+            {placeholder} ( {value} )
+          </Text>
+        ) : (
+          <Text
+            numberOfLines={2}
+            style={[Labels.label16RegularMischka, value ? styles.value : styles.placeholder]}>
+            {value ?? placeholder}
+          </Text>
+        )}
         {modalVisible ? <UpIcon width={20} height={14} /> : <BottomIcon width={18} height={18} />}
       </Pressable>
     </>

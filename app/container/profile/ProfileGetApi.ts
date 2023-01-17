@@ -185,6 +185,20 @@ const profileGETApi = Client.injectEndpoints({
         return response;
       },
     }),
+
+    saveFCMToken: build.mutation<{data: {success: boolean}}, {token: string; userId?: string}>({
+      query: params => ({
+        url: '/Account/SaveFCMToken',
+        method: 'POST',
+        body: params,
+      }),
+
+      transformResponse: (response: any) => {
+        console.info('Update Profile Response: ', response);
+
+        return response;
+      },
+    }),
   }),
 });
 
@@ -199,4 +213,5 @@ export const {
   useProfileInformationsQuery,
   useUpdateProfileMutation,
   useUpdateMembershipMutation,
+  useSaveFCMTokenMutation,
 } = profileGETApi;

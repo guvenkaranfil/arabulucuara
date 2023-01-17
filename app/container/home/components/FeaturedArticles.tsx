@@ -20,15 +20,17 @@ export default function FeaturedArticles({articles, openArticle}: Props) {
     <View style={styles.container}>
       <Text style={styles.title}>Öne Çıkan Makaleler</Text>
 
-      {articles?.map((article, index) => (
-        <Pressable key={index} style={styles.item} onPress={() => openArticle(article)}>
-          <Text style={styles.articleTitle}>{article.title}</Text>
-          <View style={styles.publisher}>
-            <OnlyPersonIcon width={15} height={15} fill="#a3a0a0" />
-            <Text style={styles.articlePublisher}>{article.publisher}</Text>
-          </View>
-        </Pressable>
-      ))}
+      {articles &&
+        articles?.length > 0 &&
+        articles?.map((article, index) => (
+          <Pressable key={index} style={styles.item} onPress={() => openArticle(article)}>
+            <Text style={styles.articleTitle}>{article.title}</Text>
+            <View style={styles.publisher}>
+              <OnlyPersonIcon width={15} height={15} fill="#a3a0a0" />
+              <Text style={styles.articlePublisher}>{article.publisher}</Text>
+            </View>
+          </Pressable>
+        ))}
     </View>
   );
 }

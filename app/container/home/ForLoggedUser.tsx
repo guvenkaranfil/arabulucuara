@@ -31,9 +31,9 @@ export default function ForLoggedUser({
       <ScrollView
         contentContainerStyle={styles.cotentContainerStyle}
         refreshControl={<RefreshControl onRefresh={refetch} refreshing={isRefreshing} />}>
-        <View style={styles.bannerArea}>
+        {/* <View style={styles.bannerArea}>
           <BannerArea banners={banners ?? []} />
-        </View>
+        </View> */}
 
         <View style={styles.lastMoves}>
           <LastMoves

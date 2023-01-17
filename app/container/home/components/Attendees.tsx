@@ -12,19 +12,20 @@ export default function Attendees({attendees}: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Aramıza Katılanlar</Text>
-      {attendees.map((attendee, index) => (
-        <Pressable key={index}>
-          <View style={styles.attendee}>
-            <Image style={styles.profilePhoto} source={{uri: attendee.image}} />
-            <View style={styles.userInfo}>
-              <Text style={styles.name}>
-                {attendee.name} <Text style={styles.welcomeMessage}>aramıza hoşgedin!</Text>
-              </Text>
-              <Text style={styles.time}>{getHourAndMinute(attendee.createdOn)}</Text>
+      {attendees && attendees?.length > 0 &&
+        attendees?.map((attendee, index) => (
+          <Pressable key={index}>
+            <View style={styles.attendee}>
+              <Image style={styles.profilePhoto} source={{uri: attendee.image}} />
+              <View style={styles.userInfo}>
+                <Text style={styles.name}>
+                  {attendee.name} <Text style={styles.welcomeMessage}>aramıza hoşgedin!</Text>
+                </Text>
+                <Text style={styles.time}>{getHourAndMinute(attendee.createdOn)}</Text>
+              </View>
             </View>
-          </View>
-        </Pressable>
-      ))}
+          </Pressable>
+        ))}
     </View>
   );
 }

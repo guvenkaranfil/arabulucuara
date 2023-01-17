@@ -10,7 +10,7 @@ interface UserState {
   refreshToken?: string;
   token?: Token;
   userLastStep?: number;
-  id?: number;
+  id?: string;
   userRole?: string;
   name?: string;
   surname?: string;

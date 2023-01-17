@@ -20,6 +20,7 @@ export interface DataBankDetail {
 
 export default function DataBankDetail({route}: Props) {
   const {dataBankDetail} = route.params;
+  console.log('dataBankDetail:', dataBankDetail);
 
   return (
     <ContentViewer
@@ -27,6 +28,7 @@ export default function DataBankDetail({route}: Props) {
       body={dataBankDetail?.body}
       path={dataBankDetail?.path ? WEB_URL + dataBankDetail?.path : undefined}>
       <FilledButton
+        style={{marginTop: 25}}
         label="İçeriği Görüntüle"
         bgColor="#7E0736"
         onPress={() => console.log('onPress...')}

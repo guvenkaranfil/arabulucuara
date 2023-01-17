@@ -47,6 +47,11 @@ export interface SearchProfileResim {
   adi: string;
   path: string;
 }
+
+export interface SearchVideo {
+  adi: string;
+  path: string;
+}
 export interface MemberResponse {
   ozgecmis?: string;
   ozgecmisMaddeler?: Array<string>;
@@ -57,6 +62,7 @@ export interface MemberResponse {
   makaleler?: Array<SearchArticle>;
   belgeler?: Array<Certificate>;
   resimler?: Array<SearchProfileResim>;
+  videolar?: Array<SearchVideo>;
   uyelikler?: Array<{name: string; value: string}>;
   phone?: string;
   email?: string;

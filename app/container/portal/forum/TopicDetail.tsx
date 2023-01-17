@@ -19,6 +19,7 @@ export interface Props {
 
 export default function TopicDetail({route}: Props) {
   const {subjectId} = route.params;
+  console.log('Subject ID: ', subjectId);
 
   const [showNewCommentModal, setshowNewCommentModal] = useState(false);
 

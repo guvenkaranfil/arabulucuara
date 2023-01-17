@@ -17,17 +17,18 @@ export interface Props {
 }
 
 export default function CategoryDetail({route, navigation}: Props) {
-  const {category} = route.params;
+  const {kategoriAdi, kategoriId} = route.params;
+  console.log('CATEGORY::: ', kategoriId);
 
   //TODO: change categoryId with backend endpoint id. I'm waiting for addition to getForm endpoint.
-  const {data, isLoading, isFetching} = useGetCategoryPostsQuery({categoryId: 1});
+  const {data, isLoading, isFetching} = useGetCategoryPostsQuery({categoryId: kategoriId ?? 1});
   console.log('data dada:', data);
 
   const [isTopicAdditionModalOpen, setisTopicAdditionModalOpen] = useState(false);
 
   const _renderHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{category}</Text>
+      <Text style={styles.title}>{kategoriAdi}</Text>
     </View>
   );
 

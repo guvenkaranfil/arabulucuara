@@ -132,7 +132,7 @@ export default function SearchExpertMediator({navigation}: Props) {
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll}>
         <DropDownPicker
-          value={selectedCity?.name}
+          value={selectedCity?.name ? `İl Seçiniz ( ${selectedCity?.name} )` : undefined}
           placeholder="İl Seçiniz"
           items={cities ?? []}
           renderItem={item => item.value}
@@ -140,7 +140,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedTown?.name}
+          value={selectedTown?.name ? `İlçe Seçiniz ( ${selectedTown?.name} )` : undefined}
           placeholder="İlçe Seçiniz"
           items={towns ?? []}
           renderItem={item => item.value}
@@ -148,7 +148,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedDistrict?.name}
+          value={selectedDistrict?.name ? `Semt Seçiniz ( ${selectedDistrict?.name} )` : undefined}
           placeholder="Semt Seçiniz"
           items={distrctsResult.data ?? []}
           renderItem={item => item.value}

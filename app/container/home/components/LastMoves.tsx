@@ -10,26 +10,29 @@ type Props = {
 };
 
 export default function LastMoves({actions, onPress}: Props) {
+  console.log('actions:', actions);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Son Hareketler</Text>
-      {actions.map((move, index) => (
-        <Pressable key={index} style={styles.moveAction} onPress={() => onPress(move)}>
-          <Text style={styles.date}>{getHourAndMinute(move.time)}</Text>
-          {index + 1 !== actions.length ? (
-            <View style={styles.stripe}>
-              <View style={styles.actionBorder} />
-            </View>
-          ) : (
-            <View style={[styles.stripe, styles.latestStripe]}>
-              <View style={styles.actionBorder} />
-            </View>
-          )}
-          <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
-            {move.user} <Text style={styles.welcomeMessage}>{move.operationName}</Text>
-          </Text>
-        </Pressable>
-      ))}
+      {actions &&
+        actions?.length > 0 &&
+        actions?.map((move, index) => (
+          <Pressable key={index} style={styles.moveAction} onPress={() => onPress(move)}>
+            <Text style={styles.date}>{getHourAndMinute(move.time)}</Text>
+            {index + 1 !== actions?.length ? (
+              <View style={styles.stripe}>
+                <View style={styles.actionBorder} />
+              </View>
+            ) : (
+              <View style={[styles.stripe, styles.latestStripe]}>
+                <View style={styles.actionBorder} />
+              </View>
+            )}
+            <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+              {move.user?.name} <Text style={styles.welcomeMessage}>{move.operationName}</Text>
+            </Text>
+          </Pressable>
+        ))}
     </View>
   );
 }

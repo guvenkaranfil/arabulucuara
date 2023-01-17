@@ -1,17 +1,41 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import firebase from '@react-native-firebase/app';
+import '@react-native-firebase/messaging';
 
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
 import RoutingButtons from '@home/components/RoutingButtons';
 import {CommonStyles, Fonts, Metrics} from '@utils';
 import {SearchPath} from '@icons';
+import {useSaveFCMTokenMutation} from '@profile/ProfileGetApi';
+import {useSelector} from 'react-redux';
+import {RootState} from '@store/RootStore';
 
 export interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
 }
 
 export default function Search({navigation}: Props) {
+  const user = useSelector((state: RootState) => state.user);
+  const [saveFCMToken] = useSaveFCMTokenMutation();
+
+  const [] = useSaveFCMTokenMutation();
+  useEffect(() => {
+    firebase
+      .messaging()
+      .getToken(firebase.app().options.messagingSenderId)
+      .then(token => {
+        console.log('Token:', token);
+        if (token) {
+          console.log('user?.id:', user?.id);
+          saveFCMToken({token: token, userId: user?.id ?? ''}).then(res => {
+            console.log('Token save res: ', res);
+          });
+        }
+      });
+  }, []);
+
   return (
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>

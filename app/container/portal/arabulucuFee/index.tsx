@@ -40,6 +40,7 @@ export default function ArabulucuFee() {
 
   const _renderFeesResult = () => {
     if (fees && fees?.length > 0) {
+      const totalFee = fees.map(item => item.ucret2Arabulucu).reduce((prev, next) => prev + next);
       return (
         <ScrollView>
           <View>
@@ -53,11 +54,27 @@ export default function ArabulucuFee() {
                   <View style={styles.tableItem}>
                     <Text>{item.oran}</Text>
                   </View>
-                  <View style={styles.tableItem}>
-                    <Text style={styles.alignToRight}>{item.ucret2Arabulucu}</Text>
+                  <View style={[styles.tableItem, {alignItems: 'flex-end'}]}>
+                    <Text style={styles.alignToRight}>₺{item.ucret2Arabulucu}</Text>
                   </View>
                 </View>
               ))}
+            </View>
+
+            <View style={styles.tableRow}>
+              <View style={styles.tableItem}>
+                <Text style={styles.totalFee}>Toplam Ücret:</Text>
+              </View>
+              <View style={styles.tableItem} />
+              <View style={[styles.tableItem, {alignItems: 'flex-end'}]}>
+                <Text style={styles.alignToRight}>₺{totalFee}</Text>
+              </View>
+            </View>
+
+            <View>
+              <Text>(İşçi İşveren için Min ₺ 1.600)</Text>
+              <Text>(Ticari için Min ₺ 3.120)</Text>
+              <Text>(Tüketici için Min ₺ 1.600)</Text>
             </View>
           </View>
         </ScrollView>
@@ -168,4 +185,9 @@ const styles = StyleSheet.create({
   },
 
   alignToRight: {},
+
+  totalFee: {
+    fontSize: 18,
+    fontFamily: Fonts.robotoBold,
+  },
 });

@@ -22,7 +22,7 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [selectedCity, setselectedCity] = useState({id: undefined, name: undefined});
   const [selectedTown, setselectedTown] = useState({id: undefined, name: undefined});
   const [selectedDistrict, setselectedDistrict] = useState({id: undefined, name: undefined});
-  const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: undefined});
+  const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: 'Tümü'});
   const [numberOfRooms, setnumberOfRooms] = useState({id: 0, name: 'Tümü'});
   const [numberOfMembers, setnumberOfMembers] = useState({id: 0, name: 'Tümü'});
   const [selectedUzmanlikAlanları, setselectedUzmanlikAlanları] = useState<Array<number>>([]);
@@ -114,7 +114,7 @@ export default function SearchMediationCenter({navigation}: Props) {
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll}>
         <DropDownPicker
-          value={selectedCity?.name}
+          value={selectedCity?.name ? `İl Seçiniz ( ${selectedCity?.name} )` : undefined}
           placeholder="İl Seçiniz"
           items={cities ?? []}
           renderItem={item => item.value}
@@ -122,7 +122,7 @@ export default function SearchMediationCenter({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedTown?.name}
+          value={selectedTown?.name ? `İlçe Seçiniz ( ${selectedTown?.name} )` : undefined}
           placeholder="İlçe Seçiniz"
           items={towns ?? []}
           renderItem={item => item.value}
@@ -130,7 +130,7 @@ export default function SearchMediationCenter({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedDistrict?.name}
+          value={selectedDistrict?.name ? `Semt Seçiniz ( ${selectedDistrict?.name} )` : undefined}
           placeholder="Semt Seçiniz"
           items={districts ?? []}
           renderItem={item => item.value}
@@ -138,8 +138,8 @@ export default function SearchMediationCenter({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={subjectOfDispute?.value}
-          placeholder="Uyuşmazlık Konusu"
+          value={`Uyuşmazlık Konusu ( ${subjectOfDispute?.value} )`}
+          placeholder="Uyuşmazlık Konusu ( Tümü )"
           items={topics ?? []}
           renderItem={item => item.value}
           onPress={setsubjectOfDispute}
@@ -155,7 +155,7 @@ export default function SearchMediationCenter({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={numberOfRooms?.name}
+          value={`Oda Sayısı ( ${numberOfRooms?.name} )`}
           placeholder="Oda Sayısı"
           items={MERKEZ_ODA_SAYISI}
           renderItem={item => item.name}
@@ -163,7 +163,7 @@ export default function SearchMediationCenter({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={numberOfMembers?.name}
+          value={`Üye Sayısı ( ${numberOfMembers?.name} )`}
           placeholder="Üye Sayısı"
           items={MERKEZ_UYE_SAYISI}
           renderItem={item => item.name}

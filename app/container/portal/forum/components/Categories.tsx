@@ -4,6 +4,7 @@ import {Fonts, Metrics} from '@utils';
 
 export interface Category {
   kategoriId: number;
+  category: string;
   kategoriAdi: string;
 }
 

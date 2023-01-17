@@ -13,29 +13,30 @@ export default function NewsShowecase({news, openNew}: Props) {
   return (
     <View>
       <Text style={styles.title}>Arabulucuara'dan Haberler</Text>
-      {news.map((item, index) => (
-        <Pressable key={index} onPress={() => openNew(item.id, item.uri)}>
-          <View style={[styles.new, styles.shadow]}>
-            <View style={styles.date}>
-              {item?.createdOn && (
-                <>
-                  <Text style={Labels.label18BoldWhite}>
-                    {getMonthAndDayName(item?.createdOn)?.day}
-                  </Text>
-                  <Text style={styles.monthLabel}>
-                    {getMonthAndDayName(item?.createdOn)?.month}
-                  </Text>
-                </>
-              )}
+      {news &&
+        news?.map((item, index) => (
+          <Pressable key={index} onPress={() => openNew(item.id, item.uri)}>
+            <View style={[styles.new, styles.shadow]}>
+              <View style={styles.date}>
+                {item?.createdOn && (
+                  <>
+                    <Text style={Labels.label18BoldWhite}>
+                      {getMonthAndDayName(item?.createdOn)?.day}
+                    </Text>
+                    <Text style={styles.monthLabel}>
+                      {getMonthAndDayName(item?.createdOn)?.month}
+                    </Text>
+                  </>
+                )}
+              </View>
+              <View style={styles.labelContainer}>
+                <Text numberOfLines={3} ellipsizeMode="tail" style={styles.newTitle}>
+                  {item.title}
+                </Text>
+              </View>
             </View>
-            <View style={styles.labelContainer}>
-              <Text numberOfLines={3} ellipsizeMode="tail" style={styles.newTitle}>
-                {item.title}
-              </Text>
-            </View>
-          </View>
-        </Pressable>
-      ))}
+          </Pressable>
+        ))}
     </View>
   );
 }

@@ -8,11 +8,13 @@ export default function BannerArea({banners}: {banners: Array<Banner>}) {
   return (
     <View style={styles.container}>
       <Swiper showsButtons={false} paginationStyle={styles.swiperPaginationStyle}>
-        {banners.map((banner, index) => (
-          <View key={index} style={styles.bannerArea}>
-            <Image source={{uri: banner?.image}} style={styles.banner} />
-          </View>
-        ))}
+        {banners &&
+          banners?.length > 0 &&
+          banners?.map((banner, index) => (
+            <View key={index} style={styles.bannerArea}>
+              <Image source={{uri: banner?.image}} style={styles.banner} />
+            </View>
+          ))}
       </Swiper>
     </View>
   );

@@ -42,7 +42,7 @@ function PortalNavigator() {
       <Stack.Screen name="articleDetail" component={ArticleDetail} options={{title: 'Makaleler'}} />
       <Stack.Screen name="dataBank" component={DataBank} options={{title: 'Bilgi Bankası'}} />
 
-      <Stack.Screen name="events" component={Events} options={{title: 'Bilgi Bankası'}} />
+      <Stack.Screen name="events" component={Events} options={{title: 'Etkinlikler'}} />
 
       <Stack.Screen
         name="joinConference"

@@ -20,7 +20,6 @@ export default function Header({navigation, scene, previous}: StackHeaderProps) 
   const blockedStackNames = ['search', 'seekMediator', 'mediationCenter', 'forExpert'];
   const shouldShowMessagesButton = () => {
     const routeName = scene.route.name;
-    console.log('scene.route:', scene.route);
 
     // @ts-ignore
     if (routeName === 'messagesContainer' || routeName === 'messageDetail') return false;

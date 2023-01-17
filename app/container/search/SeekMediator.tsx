@@ -21,13 +21,13 @@ export default function SeekMediator({navigation}: Props) {
   const [selectedCity, setselectedCity] = useState({id: 66, name: undefined});
   const [selectedTown, setselectedTown] = useState({id: 0, name: undefined});
   const [selectedDistrict, setselectedDistrict] = useState({id: 0, name: undefined});
-  const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: undefined});
+  const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: 'Tümü'});
   const [gender, setgender] = useState({id: 0, value: 'Farketmez'});
   const [ageRange, setageRange] = useState({id: undefined, range: 'Tümü'});
-  const [seniorityRange, setseniorityRange] = useState({id: undefined, range: undefined});
+  const [seniorityRange, setseniorityRange] = useState({id: undefined, range: 'Tümü'});
   const [alternativeProffession, setalternativeProffession] = useState({
     id: undefined,
-    value: undefined,
+    value: 'Tümü',
   });
   const [meditationCenter, setmeditationCenter] = useState({id: 0, label: 'Farketmez'});
   const [associationMembership, setassociationMembership] = useState({id: 0, label: 'Farketmez'});
@@ -122,7 +122,7 @@ export default function SeekMediator({navigation}: Props) {
     <View style={CommonStyles.container}>
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll}>
         <DropDownPicker
-          value={selectedCity?.name}
+          value={selectedCity?.name ? `İl Seçiniz ( ${selectedCity?.name} )` : undefined}
           placeholder="İl Seçiniz"
           items={cities ?? []}
           renderItem={item => item.value}
@@ -130,7 +130,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedTown?.name}
+          value={selectedTown?.name ? `İlçe Seçiniz ( ${selectedTown?.name} )` : undefined}
           placeholder="İlçe Seçiniz"
           items={towns ?? []}
           renderItem={item => item.value}
@@ -138,7 +138,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={selectedDistrict?.name}
+          value={selectedDistrict?.name ? `Semt Seçiniz ( ${selectedDistrict?.name} )` : undefined}
           placeholder="Semt Seçiniz"
           items={distrctsResult.data ?? []}
           renderItem={item => item.value}
@@ -146,7 +146,9 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={subjectOfDispute?.value}
+          value={
+            subjectOfDispute?.value ? `Uyuşmazlık Konusu ( ${subjectOfDispute?.value} )` : undefined
+          }
           placeholder="Uyuşmazlık Konusu"
           items={topics ?? []}
           renderItem={item => item.value}
@@ -162,7 +164,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={`Yaş Aralığı (${ageRange?.range})`}
+          value={`Yaş Aralığı ( ${ageRange?.range} )`}
           placeholder="Yaş Aralığı"
           items={AGE_RANGE_ARABULUCU}
           renderItem={item => item.range}
@@ -170,7 +172,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={seniorityRange?.range}
+          value={`Kıdem Aralığı ( ${seniorityRange?.range} )`}
           placeholder="Kıdem Aralığı"
           items={SENIORITY_RANGE_ARABULUCU}
           renderItem={item => item.range}
@@ -178,7 +180,7 @@ export default function SeekMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={alternativeProffession?.value}
+          value={`Alternatif Meslek ( ${alternativeProffession?.value} )`}
           placeholder="Alternatif Meslek"
           items={jobs ?? []}
           renderItem={item => item.value}

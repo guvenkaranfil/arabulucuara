@@ -24,7 +24,7 @@ export interface NewlyJoinedUser {
 
 export interface NewlyOperation {
   time: Date;
-  user: string;
+  user: {name: string};
   operationName: string;
 }
 
