@@ -20,25 +20,30 @@ import ExpertiesArea from '@auth/completions/06_ExpertiesArea';
 import MeditationCenter from '@auth/completions/07_MeditationCenter';
 import Contract from '@auth/Contract';
 
+export const getInitialRoutename = (
+  userLastStep: number,
+  role: string,
+): keyof AuthNavigatorParamList => {
+  console.log('user.userLastStep: ', userLastStep);
+  if (userLastStep === 1) return 'completions/address';
+  if (userLastStep === 2) return 'completions/personal';
+  if (userLastStep === 3) return 'completions/professionType';
+  if (userLastStep === 4) return 'completions/profilePhoto';
+  if (userLastStep === 5) return 'completions/aboutMe';
+  if (userLastStep === 6) return 'completions/expertiesArea';
+  if (userLastStep === 7 && role !== 'merkez') return 'completions/meditationCenter';
+
+  return 'login';
+};
+
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
   const user = useSelector((state: RootState) => state.user);
 
-  const getInitialRoutename = () => {
-    if (user.userLastStep === 1) return 'completions/address';
-    if (user.userLastStep === 2) return 'completions/personal';
-    if (user.userLastStep === 3) return 'completions/professionType';
-    if (user.userLastStep === 4) return 'completions/profilePhoto';
-    if (user.userLastStep === 5) return 'completions/aboutMe';
-    if (user.userLastStep === 6) return 'completions/expertiesArea';
-    if (user.userLastStep === 7 && user.userRole !== 'merkez')
-      return 'completions/meditationCenter';
-
-    return 'login';
-  };
-
   return (
-    <Stack.Navigator headerMode="none" initialRouteName={getInitialRoutename()}>
+    <Stack.Navigator
+      headerMode="none"
+      initialRouteName={getInitialRoutename(user?.userLastStep ?? 0, user?.userRole)}>
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="registerIdentities" component={RegisterIdentities} />

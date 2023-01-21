@@ -1,18 +1,28 @@
-import {UserProfileRoute} from '@routes/stacks/profile/Types';
 import React from 'react';
+import {RootState} from '@store/RootStore';
+
 import {StyleSheet, View} from 'react-native';
 
 import FilledButton from '@components/buttons/FilledButton';
 import {Fonts, Metrics} from '@utils';
 import {ProfilePageLink} from '@profile/ProfileGetApi';
+import {useSelector} from 'react-redux';
 
 interface Props {
   routeButtons: Array<ProfilePageLink>;
   onPressRoute: (stackName: ProfilePageLink) => void;
   onPressSignOut: () => void;
+  goToCompleteProfile: () => void;
 }
 
-export default function ProfileRouteButtons({routeButtons, onPressRoute, onPressSignOut}: Props) {
+export default function ProfileRouteButtons({
+  routeButtons,
+  onPressRoute,
+  onPressSignOut,
+  goToCompleteProfile,
+}: Props) {
+  const user = useSelector((state: RootState) => state.user);
+  console.log('user?.userLastStep:', user?.userLastStep);
   return (
     <View style={styles.routeButtons}>
       {routeButtons.map((routeButton, index) => (
@@ -24,6 +34,16 @@ export default function ProfileRouteButtons({routeButtons, onPressRoute, onPress
           onPress={() => onPressRoute(routeButton)}
         />
       ))}
+
+      {user?.userLastStep <= 7 && (
+        <FilledButton
+          style={styles.routeButton}
+          label={'Profili Tamamla'}
+          labelStyle={styles.routeLabel}
+          onPress={() => goToCompleteProfile()}
+        />
+      )}
+
       <FilledButton
         style={styles.routeButton}
         label={'Çıkış Yap'}

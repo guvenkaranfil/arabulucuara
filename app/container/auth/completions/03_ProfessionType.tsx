@@ -45,7 +45,6 @@ export default function ProfessionType({navigation}) {
   // const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
   const {data: professions} = useGetJobsQuery();
   const [getUzamnlıkAlanlari, result] = useLazyGetProfessionsQuery();
-  console.info('uzmanListesi:', result);
   const {data: jobs} = useGetJobsQuery();
 
   const [saveStepThree, {isLoading}] = useStepThreeMutation();
@@ -98,12 +97,13 @@ export default function ProfessionType({navigation}) {
         merkez: null,
         uzman: {
           meslekler: selectedUzmanMeslekler,
-          meslekBaslangicYili: meslekBaslangicYili,
+          meslekBaslangicYili: meslekBaslangicYili?.year,
           uzmanlikAlani: uzmanlikAlanlari,
         },
       };
     }
 
+    console.log('resuest body: ', response);
     saveStepThree(response)
       .then(res => {
         console.info('response of step 3:', res);
@@ -166,7 +166,7 @@ export default function ProfessionType({navigation}) {
     const isJobAdded = selectedUzmanMeslekler?.includes(job.id);
 
     if (isJobAdded) {
-      const temporaryUzmanMeslekler = selectedUzmanMeslekler?.filter(x => x !== job.id);
+      const temporaryUzmanMeslekler = selectedUzmanMeslekler?.filter(x => x === job.id);
       setselectedUzmanMeslekler(temporaryUzmanMeslekler);
     } else {
       const oldValue = selectedUzmanMeslekler;

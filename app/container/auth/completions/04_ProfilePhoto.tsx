@@ -15,12 +15,15 @@ import axios from 'axios';
 import {logIn} from '@store/user/UserSlice';
 import {USER_INFO_STORAGE_KEY} from '../../../constants';
 import AsyncStorage from '@react-native-community/async-storage';
+import {Constants} from '@utils';
 
 export default function ProfilePhoto({navigation}) {
   const [profilePhoto, setprofilePhoto] = useState('');
   const [image, setimage] = useState<ImageType>();
   const user = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+
+  const [isUploading, setisUploading] = useState(false);
 
   const choseFromLibrary = async () => {
     ImagePicker.openPicker({
@@ -72,6 +75,7 @@ export default function ProfilePhoto({navigation}) {
   };
 
   const uploadPhoto = async (file: ImageType) => {
+    setisUploading(true);
     const data = new FormData();
     data.append('image', {
       name: file.filename,
@@ -79,9 +83,7 @@ export default function ProfilePhoto({navigation}) {
     });
 
     try {
-      // const BASE_URL = 'https://api.arabulucuara.com';
-      const BASE_URL = 'http://192.168.1.141';
-      const response = await axios.post(BASE_URL + '/Account/StepFour', data, {
+      const response = await axios.post(Constants.API_BASE_URL + '/Account/StepFour', data, {
         headers: {
           Authorization: 'Bearer ' + user.token?.token,
           'Content-Type': 'multipart/form-data',
@@ -89,13 +91,17 @@ export default function ProfilePhoto({navigation}) {
         },
       });
 
+      setisUploading(false);
       console.log('response: ', response);
 
       if (response.status === 200 && response.data?.result) {
         updateLastStep(5);
         return navigation.replace('completions/aboutMe');
       }
+
+      Alert.alert('Bir hata oluştu', response?.data?.message ?? 'Daha sonra tekrar deneyiniz');
     } catch (error) {
+      setisUploading(false);
       console.log('error on photo upload: ', error);
       console.log('error on photo upload response: ', error?.response);
       Alert.alert(
@@ -129,7 +135,7 @@ export default function ProfilePhoto({navigation}) {
       </View>
 
       <View style={styles.footer}>
-        <FilledButton label="Devam Et" onPress={() => uploadPhoto(image)} />
+        <FilledButton label="Devam Et" onPress={() => uploadPhoto(image)} isLoading={isUploading} />
 
         <OutlineButton label="Geri" onPress={() => console.log('onPress...')} />
       </View>

@@ -73,8 +73,11 @@ export default function Register({route, navigation}: RegisterProps) {
           kullaniciAdi: username,
           sifre: password,
         },
-      }).then(() => {
-        navigation.replace('completions/address');
+      }).then(res => {
+        console.log('res of uzman: ', res);
+        if (res?.status === 200 || res?.data?.refreshToken) {
+          return navigation.replace('completions/address');
+        }
       });
     } else if (userType === UserType.arabulucuMerkezi) {
       signUpMerkez({
@@ -88,8 +91,11 @@ export default function Register({route, navigation}: RegisterProps) {
           sifre: password,
           ticariUnvan: commercialTitle,
         },
-      }).then(() => {
-        navigation.replace('completions/address');
+      }).then(res => {
+        console.log('res of uzman: ', res);
+        if (res?.status === 200 || res?.data?.refreshToken) {
+          return navigation.replace('completions/address');
+        }
       });
     } else if (userType === UserType.uzman) {
       signUpUzman({
@@ -102,8 +108,15 @@ export default function Register({route, navigation}: RegisterProps) {
           sifre: password,
         },
       }).then(res => {
-        console.log('res');
-        navigation.replace('completions/address');
+        console.log('res of uzman: ', res);
+        if (res?.status === 200 || res?.data?.refreshToken) {
+          return navigation.replace('completions/address');
+        }
+
+        Alert.alert(
+          'Bir sorun oluştu!',
+          res?.error?.data?.message ?? 'Lütfen tekrar daha sonra tekrar deneyiniz',
+        );
       });
     }
   };

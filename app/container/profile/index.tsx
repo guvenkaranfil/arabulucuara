@@ -72,6 +72,7 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
           routeButtons={profile?.linkler}
           onPressRoute={navigateToPage}
           onPressSignOut={handleSignOut}
+          goToCompleteProfile={() => navigation.navigate('auth')}
         />
       </ProfileLayout>
     );
