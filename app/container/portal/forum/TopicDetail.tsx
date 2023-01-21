@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Alert, ScrollView, Text, View} from 'react-native';
 import HTML from 'react-native-render-html';
 
@@ -76,7 +76,9 @@ export default function TopicDetail({route}: Props) {
 
         {data?.konuMesajlar &&
           data?.konuMesajlar.length > 0 &&
-          comments.map((comment, index) => <TopicComment key={index} comment={comment} />)}
+          data?.konuMesajlar.map((comment, index) => (
+            <TopicComment key={index} comment={comment} />
+          ))}
 
         <FilledButton
           label="Yorum Yap"

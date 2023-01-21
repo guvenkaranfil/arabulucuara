@@ -35,12 +35,14 @@ export default function DataBankDetail({route}: Props) {
       title={dataBankDetail?.title}
       body={dataBankDetail?.body}
       path={dataBankDetail?.path ? WEB_URL + dataBankDetail?.path : undefined}>
-      <FilledButton
-        style={{marginTop: 25}}
-        label="İçeriği Görüntüle"
-        bgColor="#7E0736"
-        onPress={openWebPage}
-      />
+      {dataBankDetail?.path && (
+        <FilledButton
+          style={{marginTop: 25}}
+          label="İçeriği Görüntüle"
+          bgColor="#7E0736"
+          onPress={openWebPage}
+        />
+      )}
     </ContentViewer>
   );
 }

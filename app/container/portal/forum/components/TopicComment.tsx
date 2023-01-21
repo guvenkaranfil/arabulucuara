@@ -4,38 +4,44 @@ import {StyleSheet, Text, View, Image, Pressable} from 'react-native';
 import HTML from 'react-native-render-html';
 import {LikeIcon, DislikeIcon} from '@icons';
 import {Fonts, Metrics} from 'utils';
+import moment from 'moment';
+import {Constants} from '@utils';
 
 interface TopicComment {
   comment: {
-    id: number;
-    nameSurname: string;
-    profilePhoto: string;
-    date: string;
-    comment: string;
-    likedCount: number;
+    mesajId: number;
+    adiSoyadi: string;
+    resim: string;
+    duzenlemeTarihi: string;
+    mesaj: string;
+    likeCount: number;
     dislikeCount: number;
   };
 }
 
 export default function TopicComment({comment}: TopicComment) {
-  const [likedCount, setlikedCount] = useState(comment.likedCount);
+  const [likedCount, setlikedCount] = useState(comment.likeCount);
   const [dislikeCount, setdislikeCount] = useState(comment.dislikeCount);
   const [lastEditedType, setlastEditedType] = useState<'plus' | 'minus' | undefined>();
+
+  console.log('COMMENT: ', comment);
 
   const updateCount = (type: 'plus' | 'minus') => {};
 
   return (
     <View style={styles.comment}>
       <View style={styles.commentHeader}>
-        <Image source={{uri: comment.profilePhoto}} style={styles.profilePhoto} />
+        <Image source={{uri: Constants.USER_IMAGE + comment.resim}} style={styles.profilePhoto} />
         <View style={styles.commentByUser}>
-          <Text style={styles.commentTitle}>{comment.nameSurname}</Text>
-          <Text style={styles.commentDate}>{comment.date}</Text>
+          <Text style={styles.commentTitle}>{comment.adiSoyadi}</Text>
+          <Text style={styles.commentDate}>
+            {moment(comment.duzenlemeTarihi).format('DD-MM-YYYY')}
+          </Text>
         </View>
       </View>
 
       <View>
-        <HTML source={{html: comment.comment}} />
+        <HTML source={{html: comment.mesaj}} />
       </View>
 
       <View style={styles.commentFooter}>
