@@ -5,6 +5,7 @@ import {PortalNavigatorParamList} from '@routes/stacks/portal/Types';
 
 import FilledButton from '@components/buttons/FilledButton';
 import ContentViewer from '@components/content/ContentViewer';
+import {Linking} from 'react-native';
 
 export interface Props {
   route: RouteProp<PortalNavigatorParamList, 'dataBankDetail'>;
@@ -21,6 +22,13 @@ export interface DataBankDetail {
 export default function DataBankDetail({route}: Props) {
   const {dataBankDetail} = route.params;
   console.log('dataBankDetail:', dataBankDetail);
+  console.log('dataBankDetail path:', dataBankDetail.path);
+
+  const openWebPage = () => {
+    try {
+      Linking.openURL(WEB_URL + dataBankDetail?.path);
+    } catch (error) {}
+  };
 
   return (
     <ContentViewer
@@ -31,7 +39,7 @@ export default function DataBankDetail({route}: Props) {
         style={{marginTop: 25}}
         label="İçeriği Görüntüle"
         bgColor="#7E0736"
-        onPress={() => console.log('onPress...')}
+        onPress={openWebPage}
       />
     </ContentViewer>
   );

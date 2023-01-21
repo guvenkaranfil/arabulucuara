@@ -167,7 +167,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         <MultiSelectDropDownPicker
           selectedItems={selectedMeslekler}
           value={proffession?.name}
-          placeholder={'Mesleğiniz'}
+          placeholder={'Meslek'}
           items={jobs ?? []}
           renderItem={item => item.value}
           onPress={selectProfession}
@@ -207,7 +207,7 @@ export default function SearchExpertMediator({navigation}: Props) {
         />
 
         <DropDownPicker
-          value={seniorityRange?.range}
+          value={`Kıdem Yılı (${seniorityRange?.range})`}
           placeholder="Kıdem Aralığı"
           items={SENIORITY_RANGE_ARABULUCU}
           renderItem={item => item.range}

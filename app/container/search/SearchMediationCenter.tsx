@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, ScrollView, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {SearchNavigatorParamList} from '@routes/stacks/search/types';
@@ -12,7 +12,7 @@ import {CommonStyles} from '@utils';
 import {useGetCitiesQuery, useLazyGetCitiesQuery} from '@home/HomeApi';
 import {useSearchMerkezMutation, useTopicsQuery} from './searchApi';
 import {useGetProfessionsQuery} from '@store/auth/AuthApi';
-import MultiSelectCategoryDropDownPicker from '@components/picker/MultiSelectCategoryDropDownPicker';
+import AreasOfExpertise, {ExpertiseArea} from './components/AreasOfExpertise';
 
 export interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'mediationCenter'>;
@@ -25,11 +25,6 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [subjectOfDispute, setsubjectOfDispute] = useState({id: undefined, value: 'Tümü'});
   const [numberOfRooms, setnumberOfRooms] = useState({id: 0, name: 'Tümü'});
   const [numberOfMembers, setnumberOfMembers] = useState({id: 0, name: 'Tümü'});
-  const [selectedUzmanlikAlanları, setselectedUzmanlikAlanları] = useState<Array<number>>([]);
-  const [lastPickUzmanlikAlani, setlastPickUzmanlikAlani] = useState({
-    id: undefined,
-    name: undefined,
-  });
 
   const [supportEducations, setsupportEducations] = useState({id: 2, label: 'Tümü'});
   const [isCooparatingWithOtherFirms, setisCooparatingWithOtherFirms] = useState({
@@ -39,17 +34,36 @@ export default function SearchMediationCenter({navigation}: Props) {
   const [isRentingRoom, setisRentingRoom] = useState({id: 2, label: 'Tümü'});
   const [isArbitrationService, setisArbitrationService] = useState({id: 2, label: 'Tümü'});
   const [isExpertPinion, setisExpertPinion] = useState({id: 2, label: 'Tümü'});
+  const [selectedExpertiseAreas, setselectedExpertiseAreas] = useState(new Map());
 
   const {data: cities} = useGetCitiesQuery({type: 'ilce'});
   const [trigger, {data: towns}] = useLazyGetCitiesQuery();
   const [getDistricts, {data: districts}] = useLazyGetCitiesQuery();
   const {data: topics} = useTopicsQuery();
-  const {data: merkezUzmanlıkAlanlari} = useGetProfessionsQuery({userType: 'uzman'});
   const [searchMerkez, {isLoading}] = useSearchMerkezMutation();
+
+  const {data: professions} = useGetProfessionsQuery({userType: 'arabulucu'});
+
+  useEffect(() => {
+    pickExpertiseArea({id: 1, label: 'Genel Arabuluculuk'});
+  }, []);
+
+  const pickExpertiseArea = (expertiseArea: ExpertiseArea) => {
+    var status = !selectedExpertiseAreas.get(expertiseArea.id);
+    setselectedExpertiseAreas(new Map(selectedExpertiseAreas.set(expertiseArea.id, status)));
+    console.log('Pickde uzmanlık alanları: ', Array.from(selectedExpertiseAreas.keys()));
+  };
 
   const handleSearch = () => {
     if (!selectedCity.name) {
       return Alert.alert('Lütfen Dikkat', 'Arama yapabilmek için şehir seçiniz.');
+    }
+
+    let uzmanlıkAlanları = [];
+    for (let [key, value] of selectedExpertiseAreas) {
+      if (value) {
+        uzmanlıkAlanları.push(key);
+      }
     }
 
     searchMerkez({
@@ -57,7 +71,7 @@ export default function SearchMediationCenter({navigation}: Props) {
       ilce: selectedTown.id ?? 0,
       mahalleId: selectedDistrict.id ?? 0,
       uyusmazlikKonusu: subjectOfDispute.id ?? 0,
-      alanlar: selectedUzmanlikAlanları,
+      alanlar: uzmanlıkAlanları,
       odaSayisi: numberOfRooms.id,
       uyeSayisi: numberOfMembers.id,
       egitimVarMi: supportEducations.id,
@@ -97,18 +111,6 @@ export default function SearchMediationCenter({navigation}: Props) {
     alanId: number;
     alanAdi: string;
   }
-  const onPressUzmanlıkAlanları = (profession: Profession) => {
-    const isProfessionAdded = selectedUzmanlikAlanları?.includes(profession.alanId);
-    console.info('isProfessionAdded:', isProfessionAdded);
-
-    if (isProfessionAdded) {
-      const temporaryProfessions = selectedUzmanlikAlanları?.filter(x => x !== profession.alanId);
-      setselectedUzmanlikAlanları(temporaryProfessions);
-    } else {
-      setlastPickUzmanlikAlani({id: profession.alanId, name: profession.alanAdi});
-      setselectedUzmanlikAlanları([...selectedUzmanlikAlanları, profession.alanId]);
-    }
-  };
 
   return (
     <View style={CommonStyles.container}>
@@ -145,15 +147,6 @@ export default function SearchMediationCenter({navigation}: Props) {
           onPress={setsubjectOfDispute}
         />
 
-        <MultiSelectCategoryDropDownPicker
-          selectedItems={selectedUzmanlikAlanları ?? []}
-          value={lastPickUzmanlikAlani.name}
-          placeholder={'Uzmanlık alanı'}
-          items={merkezUzmanlıkAlanlari ?? []}
-          renderItem={item => item.alanAdi}
-          onPress={onPressUzmanlıkAlanları}
-        />
-
         <DropDownPicker
           value={`Oda Sayısı ( ${numberOfRooms?.name} )`}
           placeholder="Oda Sayısı"
@@ -168,6 +161,12 @@ export default function SearchMediationCenter({navigation}: Props) {
           items={MERKEZ_UYE_SAYISI}
           renderItem={item => item.name}
           onPress={setnumberOfMembers}
+        />
+
+        <AreasOfExpertise
+          expertises={professions}
+          onSelect={pickExpertiseArea}
+          selectedExpertiseAreas={selectedExpertiseAreas}
         />
 
         <TripleQuestion

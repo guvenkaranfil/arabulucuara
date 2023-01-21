@@ -10,7 +10,7 @@ export interface ExpertiseArea {
 }
 
 interface ScreenProps {
-  expertises: Array<ExpertiseArea>;
+  expertises?: Array<ExpertiseArea>;
   selectedExpertiseAreas: Map<number, boolean>;
   onSelect: (exptertiseArea: ExpertiseArea) => void;
 }

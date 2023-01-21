@@ -26,7 +26,7 @@ export default StyleSheet.create({
   screenHeader: {
     flexDirection: 'row',
     width: Metrics.DEVICE_WIDTH,
-    height: Metrics.hp(74),
+    height: Metrics.hp(90),
     backgroundColor: 'rgb(123,7,52)',
     justifyContent: 'space-between',
   },

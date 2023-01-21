@@ -27,7 +27,7 @@ export default function SeekMediator({navigation}: Props) {
   const [seniorityRange, setseniorityRange] = useState({id: undefined, range: 'Tümü'});
   const [alternativeProffession, setalternativeProffession] = useState({
     id: undefined,
-    value: 'Tümü',
+    value: 'Farketmez',
   });
   const [meditationCenter, setmeditationCenter] = useState({id: 0, label: 'Farketmez'});
   const [associationMembership, setassociationMembership] = useState({id: 0, label: 'Farketmez'});
@@ -61,20 +61,6 @@ export default function SeekMediator({navigation}: Props) {
         uzmanlıkAlanları.push(key);
       }
     }
-
-    console.table({
-      sehir: selectedCity.id ?? 0,
-      ilce: selectedTown.id ?? 0,
-      mahalleId: selectedDistrict.id ?? 0,
-      uyusmazlikKonusu: subjectOfDispute.id ?? 0,
-      cinsiyet: gender.id,
-      alanlar: uzmanlıkAlanları,
-      yasAraligi: ageRange.id ?? 0,
-      kidemAraligi: seniorityRange.id ?? 0,
-      meslek: alternativeProffession.id ?? 0,
-      merkezUyesiMi: meditationCenter.id,
-      dernekUyesiMi: associationMembership.id,
-    });
     searchArabulucu({
       sehir: selectedCity.id ?? 0,
       ilce: selectedTown.id ?? 0,

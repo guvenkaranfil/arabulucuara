@@ -17,6 +17,8 @@ import {CommonStyles, Fonts, Metrics} from '@utils';
 import {BackIcon} from '@icons';
 import SearchProfile from './components/SearchProfile';
 import {SearchResponse, useSearchGenelMutation} from './searchApi';
+import {isUserLoggedIn} from '@selectors';
+import {useSelector} from 'react-redux';
 
 interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'searchResult'>;
@@ -24,14 +26,19 @@ interface Props {
 }
 
 export default function SearchResult({navigation, route}: Props) {
+  const haveUser = useSelector(isUserLoggedIn);
+
   const [searchInput, setsearchInput] = useState('');
   const [searchResult, setsearchResult] = useState<SearchResponse[]>(route.params?.data ?? []);
+  const [isFirstLoad, setisFirstLoad] = useState(true);
   console.log('searchResult:', searchResult);
 
   const [searchGeneral, {isLoading}] = useSearchGenelMutation();
 
   useLayoutEffect(() => {
-    navigation.setOptions({headerShown: false});
+    if (haveUser) {
+      navigation.setOptions({headerShown: false});
+    }
   }, [navigation]);
 
   const onPressProfile = (profile: SearchResponse) => {
@@ -52,14 +59,19 @@ export default function SearchResult({navigation, route}: Props) {
             setsearchResult(res.data);
           }
         })
-        .catch(err => console.log('general err:', err));
+        .catch(err => console.log('general err:', err))
+        .finally(() => {
+          if (isFirstLoad) {
+            setisFirstLoad(false);
+          }
+        });
     } else {
       Alert.alert('Lütfen Dikkat', 'Aramak istediğiniz arabulucu ismini giriniz');
     }
   };
 
   return (
-    <View style={CommonStyles.container}>
+    <View style={[CommonStyles.container, {marginTop: 0}]}>
       <View style={styles.searchBar}>
         <Pressable style={styles.back} onPress={navigation.goBack}>
           <BackIcon width={17} height={12} stroke="#7E0736" />
@@ -74,7 +86,7 @@ export default function SearchResult({navigation, route}: Props) {
         </View>
       </View>
 
-      {searchResult?.length === 0 && !isLoading && (
+      {searchResult?.length === 0 && !isLoading && !isFirstLoad && (
         <View style={styles.fCenter}>
           <Text>Sonuç bulunamadı</Text>
         </View>

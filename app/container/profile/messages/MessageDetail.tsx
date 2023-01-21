@@ -66,9 +66,9 @@ export default function MessageDetail({navigation, route}: Props) {
   const isMessageOwner = (message: IMessageDetail): Boolean => {
     // @ts-ignore
     const username = user?.name + user?.surname;
-    console.log('Message.name: ', message.name.toLocaleLowerCase().replace(/\s/g, ''));
+    console.log('Message.name: ', message?.name?.toLocaleLowerCase().replace(/\s/g, ''));
     if (
-      message.name.toLocaleLowerCase().replace(/\s/g, '') ===
+      message?.name?.toLocaleLowerCase().replace(/\s/g, '') ===
       username?.toLocaleLowerCase().replace(/\s/g, '')
     )
       return true;

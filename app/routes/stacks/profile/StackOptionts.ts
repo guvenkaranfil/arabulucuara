@@ -9,7 +9,7 @@ export const membership: StackNavigationOptions = {
 };
 
 export const aboutUser: StackNavigationOptions = {
-  title: 'Hakkımzda',
+  title: 'Hakkımda',
 };
 
 export const userCertificates: StackNavigationOptions = {
