@@ -18,6 +18,7 @@ import ProfilePhoto from '@auth/completions/04_ProfilePhoto';
 import AboutMe from '@auth/completions/05_AboutMe';
 import ExpertiesArea from '@auth/completions/06_ExpertiesArea';
 import MeditationCenter from '@auth/completions/07_MeditationCenter';
+import Contract from '@auth/Contract';
 
 const Stack = createStackNavigator<AuthNavigatorParamList>();
 function AuthStack() {
@@ -51,6 +52,8 @@ function AuthStack() {
       <Stack.Screen name="completions/aboutMe" component={AboutMe} />
       <Stack.Screen name="completions/expertiesArea" component={ExpertiesArea} />
       <Stack.Screen name="completions/meditationCenter" component={MeditationCenter} />
+
+      <Stack.Screen name="contract" component={Contract} />
     </Stack.Navigator>
   );
 }

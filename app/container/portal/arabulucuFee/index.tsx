@@ -11,6 +11,7 @@ export default function ArabulucuFee() {
   const [fee, setfee] = useState('');
 
   const [calculateFee, {isLoading, data: fees}] = useCalculateFeeMutation();
+  console.log('Fee: ', fee);
 
   const handleCalculateFee = () => {
     calculateFee({ucret: Number(fee), uyusmalikTuru: uyusmazlikTuru.id})

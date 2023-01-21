@@ -9,11 +9,12 @@ type Props = {
   logoPaddingTop?: number;
 };
 
-export default function Header({screenTitle, dynamicHeight, logoPaddingTop = 37}: Props) {
+export default function Header({screenTitle, dynamicHeight, logoPaddingTop = 57}: Props) {
   return (
     <View style={[styles.container, {height: Metrics.hp(dynamicHeight)}]}>
       <Image source={require('../../assets/images/logo_white.png')} resizeMode="contain" />
-      <Text style={[styles.title, {paddingTop: Metrics.hp(logoPaddingTop)}]}>{screenTitle}</Text>
+      {/* <Text style={[styles.title, {paddingTop: Metrics.hp(logoPaddingTop)}]}>{screenTitle}</Text> */}
+      <Text style={[styles.title, {paddingTop: Metrics.hp(logoPaddingTop)}]} />
     </View>
   );
 }

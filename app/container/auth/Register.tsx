@@ -22,6 +22,13 @@ interface RegisterProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'register'>;
 }
 
+const elektronikIletiMetni =
+  'https://arabulucuara.com/uploaded/Sozlesmeler/ELEKTRONIK-TICARI-ILETISIM-METNI.pdf';
+const arabulucu = 'https://arabulucuara.com/uploaded/Sozlesmeler/ARABULUCU-UZMAN-ARABULUCU.pdf';
+const merkez =
+  'https://arabulucuara.com/uploaded/Sozlesmeler/ARABULUCU-ARABULUCULUK-MERKEZLERI.pdf';
+const uzman = 'https://arabulucuara.com/uploaded/Sozlesmeler/ARABULUCUARA-UZMAN-SOZLESMESI.pdf';
+
 export default function Register({route, navigation}: RegisterProps) {
   const {userType} = route.params;
   const [name, setname] = useState('');
@@ -101,6 +108,14 @@ export default function Register({route, navigation}: RegisterProps) {
     }
   };
 
+  const getContractTypeURL = () => {
+    if (userType === UserType.arabulucu) return arabulucu;
+    if (userType === UserType.arabulucuMerkezi) return merkez;
+    if (userType === UserType.uzman) return uzman;
+
+    return '';
+  };
+
   return (
     <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
@@ -154,12 +169,24 @@ export default function Register({route, navigation}: RegisterProps) {
             label={`Üyelik sözleşmesini ve eklerini${'\n'}kabul ediyorum.`}
             isVisible={membershipContract}
             onPress={() => setmembershipContract(prev => !prev)}
+            openContract={() =>
+              navigation.navigate('contract', {
+                contractName: 'ÜYE HİZMET SÖZLEŞMESİ',
+                contractURL: getContractTypeURL(),
+              })
+            }
           />
 
           <RoundCheckBox
             label={'Elektronik ticari iletişim metnini okudum, anladım ve kabul ediyorum.'}
             isVisible={communicationText}
             onPress={() => setcommunicationText(prev => !prev)}
+            openContract={() =>
+              navigation.navigate('contract', {
+                contractName: 'Elektronik Ticari İletişim Onayı',
+                contractURL: elektronikIletiMetni,
+              })
+            }
           />
 
           <RoundCheckBox

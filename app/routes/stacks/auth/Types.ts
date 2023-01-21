@@ -18,4 +18,6 @@ export type AuthNavigatorParamList = {
   'completions/aboutMe': undefined;
   'completions/expertiesArea': undefined;
   'completions/meditationCenter': undefined;
+
+  contract: {contractName: string; contractURL: string};
 };

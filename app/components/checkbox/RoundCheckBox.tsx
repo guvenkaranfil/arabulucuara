@@ -10,18 +10,24 @@ type Props = {
   label: string;
   labelStyle?: TextStyle;
   onPress: (id: number) => void;
+  openContract?: () => void;
 };
 
+const HIT_SLOP = 50;
 export default function RoundCheckBox({
   id,
   roundStyle,
   isVisible,
   label,
   labelStyle,
+  openContract,
   onPress,
 }: Props) {
   return (
-    <Pressable onPress={() => onPress(id ?? -1)} style={styles.container}>
+    <Pressable
+      hitSlop={{left: HIT_SLOP, right: HIT_SLOP}}
+      onPress={() => onPress(id ?? -1)}
+      style={styles.container}>
       <View
         style={[
           styles.roundBox,
@@ -30,7 +36,9 @@ export default function RoundCheckBox({
         ]}>
         {isVisible && <TickIcon width={10} height={10} />}
       </View>
-      <Text style={[styles.label, labelStyle]}>{label}</Text>
+      <Text onPress={openContract} style={[styles.label, labelStyle]}>
+        {label}
+      </Text>
     </Pressable>
   );
 }
