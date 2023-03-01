@@ -13,6 +13,7 @@ interface Props {
   onPressRoute: (stackName: ProfilePageLink) => void;
   onPressSignOut: () => void;
   goToCompleteProfile: () => void;
+  deleteAccount: () => void;
 }
 
 export default function ProfileRouteButtons({
@@ -20,6 +21,7 @@ export default function ProfileRouteButtons({
   onPressRoute,
   onPressSignOut,
   goToCompleteProfile,
+  deleteAccount,
 }: Props) {
   const user = useSelector((state: RootState) => state.user);
   console.log('user?.userLastStep:', user?.userLastStep);
@@ -43,6 +45,13 @@ export default function ProfileRouteButtons({
           onPress={() => goToCompleteProfile()}
         />
       )}
+
+      <FilledButton
+        style={styles.routeButton}
+        label={'Hesabımı Sil'}
+        labelStyle={styles.routeLabel}
+        onPress={deleteAccount}
+      />
 
       <FilledButton
         style={styles.routeButton}

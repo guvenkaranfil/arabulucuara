@@ -70,13 +70,14 @@ export default function Personal({navigation}: PersonalProps) {
     }
 
     console.log('gender: ', gender);
+    // console.log('date: ', date.toISOString());
     console.log('response: ', response);
     saveStepTwo(response).then(res => {
       console.log('res of personal: ', res);
       if (res?.data?.message?.length === 0) {
         navigation.replace('completions/professionType');
       }
-    });
+    })
   };
 
   return (

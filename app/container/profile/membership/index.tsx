@@ -15,9 +15,5 @@ export default function MemberShipContainer() {
   if (isLoading) return <FullScreenLoader />;
   else if (data && user.userRole === 'arabulucu') return <MembershipArabulucu member={data} />;
 
-  return (
-    <View>
-      <Text>MemberShipContainer</Text>
-    </View>
-  );
+  return null;
 }

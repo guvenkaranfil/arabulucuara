@@ -305,6 +305,7 @@ export default function ProfessionType({navigation}) {
       return _renderUzman();
     }
   };
+  
 
   return (
     <LoginLayout enableKeyboardDismiss={false} showHomeButton={true}>

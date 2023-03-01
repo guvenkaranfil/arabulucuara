@@ -1,6 +1,6 @@
 import {ProfileScreenNavigationProps} from '@routes/stacks/profile/Types';
-import React from 'react';
-import {ActivityIndicator, Alert, Linking, StyleSheet, View} from 'react-native';
+import React, {useState} from 'react';
+import {ActivityIndicator, Alert, Linking, Modal, StyleSheet, View, Text} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/RootStore';
@@ -14,6 +14,9 @@ import {ProfilePageLink, useGetProfileLinksQuery} from './ProfileGetApi';
 import {Fonts, Metrics} from '@utils';
 import FilledButton from '@components/buttons/FilledButton';
 import {useGetMemberQuery} from '@search/searchApi';
+import Input from '@components/input/Input';
+import TransparentModal from '@components/modals/TransparentModal';
+import {useDeleteAccountMutation} from '@store/auth/AuthApi';
 
 const mapPageNameToStackName = {
   Profile: 'profileInformation',
@@ -32,10 +35,12 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const {data: profile, isLoading} = useGetProfileLinksQuery();
-
-  console.log('user.username:', user.username);
   const {data: member, isLoading: isLoadingMember} = useGetMemberQuery({username: user.username!});
-  console.log('member.meslekler: ', member?.meslekler);
+
+  const [removeAccount, {isLoading: accountRemoveLoading}] = useDeleteAccountMutation();
+
+  const [showAccountDeleteModal, setshowAccountDeleteModal] = useState(false);
+  const [confirmPassword, setconfirmPassword] = useState('');
 
   const handleSignOut = () => {
     console.log('Handle sign out');
@@ -66,17 +71,83 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
     }
   };
 
+  const handleAccountRemove = () => {
+    Alert.alert(
+      'Hesabınızı silmek istediğinize emin misiniz?',
+      'Bu işlemi onayladığınız takdirde kullanıcı hesabınız kalıcı olarak silinip geri getirilemeyecektir',
+      [{text: 'Vazgeç'}, {text: 'Onayla', onPress: () => setshowAccountDeleteModal(true)}],
+    );
+  };
+
+  const deleteAccount = () => {
+    removeAccount({username: user.username!, password: confirmPassword})
+      .then(res => {
+        setshowAccountDeleteModal(false);
+
+        if (res?.data?.result) {
+          Alert.alert('Hesap başarılı bir şekilde silindi', 'Uygulamadan çıkılış yapılıyor.');
+          handleSignOut();
+        } else if (res?.error) {
+          Alert.alert(
+            'Hesap silme esnasında bir sorun oluştu',
+            'LÜtfen daha sonra tekrar deneyiniz.',
+          );
+        }
+        console.log('account remove res: ', res);
+      })
+      .catch(error => {
+        setshowAccountDeleteModal(false);
+        Alert.alert(
+          'Hesap silme esnasında bir sorun oluştu',
+          'LÜtfen daha sonra tekrar deneyiniz.',
+        );
+        console.log('Account remove error: ', error);
+      });
+  };
+
+  const _renderAccountRemovementModal = () => {
+    return (
+      <TransparentModal
+        title="Yorum Yap"
+        cancelText="İptal"
+        approveText="Onayla"
+        onPressCancel={() => {
+          setshowAccountDeleteModal(false);
+          setconfirmPassword('');
+        }}
+        onPressApprove={deleteAccount}
+        isLoading={accountRemoveLoading}>
+        <>
+          <Text style={styles.newTopicFormTitle}>Kullanıcı Adı</Text>
+          <Input value={user.username} width={Metrics.wp(278)} height={40} isEditable={false} />
+
+          <Text style={styles.newTopicFormTitle}>Şifre</Text>
+          <Input
+            value={confirmPassword}
+            onChangeText={setconfirmPassword}
+            width={Metrics.wp(278)}
+            height={40}
+            isMultiLine={false}
+            secureTextEntry={true}
+          />
+        </>
+      </TransparentModal>
+    );
+  };
+
   if (profile?.linkler) {
     return (
       <ProfileLayout
         user={profile!}
         jobs={member?.meslekler}
         onPressMessages={() => navigation.navigate('messagesContainer')}>
+        {showAccountDeleteModal && _renderAccountRemovementModal()}
         <ProfileRouteButtons
           routeButtons={profile?.linkler}
           onPressRoute={navigateToPage}
           onPressSignOut={handleSignOut}
           goToCompleteProfile={() => navigation.navigate('auth')}
+          deleteAccount={handleAccountRemove}
         />
       </ProfileLayout>
     );
@@ -87,7 +158,16 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
       user={profile!}
       onPressMessages={() => navigation.navigate('messagesContainer')}
       jobs={member?.meslekler}>
+      {showAccountDeleteModal && _renderAccountRemovementModal()}
+
       <View style={styles.routeButtons}>
+        <FilledButton
+          style={styles.routeButton}
+          label={'Hesabımı Sil'}
+          labelStyle={styles.routeLabel}
+          onPress={deleteAccount}
+        />
+
         <FilledButton
           style={styles.routeButton}
           label={'Çıkış Yap'}
@@ -124,6 +204,18 @@ const styles = StyleSheet.create({
 
   routeLabel: {
     fontSize: 16,
+    fontFamily: Fonts.robotoRegular,
+    color: '#181C32',
+  },
+
+  mContainer: {
+    flex: 1,
+  },
+
+  newTopicFormTitle: {
+    paddingTop: 15,
+    paddingBottom: 10,
+    fontSize: 14,
     fontFamily: Fonts.robotoRegular,
     color: '#181C32',
   },

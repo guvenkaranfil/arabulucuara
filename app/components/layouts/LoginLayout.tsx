@@ -56,7 +56,7 @@ export default function LoginLayout({
         </TouchableWithoutFeedback>
       ) : (
         // <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}>
-        {children}
+        <View style={styles.childContainer}>{children}</View>
         // </ScrollView>
       )}
     </LinearGradient>

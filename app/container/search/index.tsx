@@ -12,6 +12,8 @@ import {useSaveFCMTokenMutation} from '@profile/ProfileGetApi';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/RootStore';
 import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
+import {isUserLoggedIn} from '@selectors';
+import {log} from 'react-native-reanimated';
 
 export interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
@@ -20,6 +22,8 @@ export interface Props {
 export default function Search({navigation}: Props) {
   const user = useSelector((state: RootState) => state.user);
   const [saveFCMToken] = useSaveFCMTokenMutation();
+  const userLoggedIn = useSelector(isUserLoggedIn);
+  console.log('userLoggedIn:userLoggedIn: ', userLoggedIn);
 
   const [] = useSaveFCMTokenMutation();
   useEffect(() => {
@@ -39,7 +43,7 @@ export default function Search({navigation}: Props) {
 
   return (
     <View style={CommonStyles.container}>
-      <NotLoggedHeaderForNavigator />
+      {!userLoggedIn && <NotLoggedHeaderForNavigator navigation={navigation} />}
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>
         <View style={styles.inputArea}>
           <View style={styles.inputLabel}>

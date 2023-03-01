@@ -63,6 +63,14 @@ interface JobsResponse {
 const AuthApi = Client.injectEndpoints({
   overrideExisting: true,
   endpoints: build => ({
+    deleteAccount: build.mutation<{}, {username: string; password: string}>({
+      query: params => ({
+        url: '/Account/Delete',
+        method: 'POST',
+        body: params,
+      }),
+    }),
+
     stepOne: build.mutation<SignInResponse, {mahalleId: number; adres: string}>({
       query: ({mahalleId, adres}) => ({
         url: '/Account/stepOne',
@@ -240,6 +248,7 @@ const AuthApi = Client.injectEndpoints({
 });
 
 export const {
+  useDeleteAccountMutation,
   useStepOneMutation,
   useStepTwoMutation,
   useStepThreeMutation,
