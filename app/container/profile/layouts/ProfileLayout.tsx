@@ -15,9 +15,12 @@ interface ScreenProps {
   children: ReactElement;
   user: ProfileLinks;
   onPressMessages: () => void;
+  jobs?: Array<string>;
 }
 
-export default function ProfileLayout({children, user, onPressMessages}: ScreenProps) {
+export default function ProfileLayout({children, user, onPressMessages, jobs}: ScreenProps) {
+  console.log('profile layout jobs: ', jobs);
+
   const navigation = useNavigation();
 
   const linearColors = ['#790633', '#BA1858'];
@@ -64,7 +67,7 @@ export default function ProfileLayout({children, user, onPressMessages}: ScreenP
             {user?.roleName === 'arabulucu' ? (
               <IndividualMediator {...user} />
             ) : (
-              <MediationCenter {...user} />
+              <MediationCenter {...user} jobs={jobs} />
             )}
           </LinearGradient>
         </View>

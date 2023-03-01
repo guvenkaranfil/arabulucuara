@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {AuthNavigatorParamList, UserType} from '@routes/stacks/auth/Types';
 
@@ -14,34 +14,40 @@ export interface RegisterIdentitiesProps {
 }
 
 export default function RegisterIdentities({navigation}: RegisterIdentitiesProps) {
+  // useEffect(() => {
+  //   navigation.navigate('completions/address');
+  // }, []);
+
   return (
-    <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
-      <Header screenTitle="Üye Ol" dynamicHeight={200} />
+    <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={812}>
+      <LoginLayout showBackButton={true} onPressBack={navigation.goBack}>
+        <Header screenTitle="Üye Ol" dynamicHeight={200} />
 
-      <View style={styles.identities}>
-        <FilledButton
-          label="Arabulucu"
-          bgColor="#790F3E"
-          onPress={() => navigation.navigate('register', {userType: UserType.arabulucu})}
-        />
+        <View style={styles.identities}>
+          <FilledButton
+            label="Arabulucu"
+            bgColor="#790F3E"
+            onPress={() => navigation.navigate('register', {userType: UserType.arabulucu})}
+          />
 
-        <FilledButton
-          label="Arabulucuk Merkezi"
-          bgColor="#790F3E"
-          onPress={() => navigation.navigate('register', {userType: UserType.arabulucuMerkezi})}
-        />
+          <FilledButton
+            label="Arabulucuk Merkezi"
+            bgColor="#790F3E"
+            onPress={() => navigation.navigate('register', {userType: UserType.arabulucuMerkezi})}
+          />
 
-        <FilledButton
-          label="Uzman"
-          bgColor="#790F3E"
-          onPress={() => navigation.navigate('register', {userType: UserType.uzman})}
-        />
-      </View>
+          <FilledButton
+            label="Uzman"
+            bgColor="#790F3E"
+            onPress={() => navigation.navigate('register', {userType: UserType.uzman})}
+          />
+        </View>
 
-      <View style={styles.footer}>
-        <OutlineButton label="Giriş Yap" onPress={navigation.goBack} />
-      </View>
-    </LoginLayout>
+        <View style={styles.footer}>
+          <OutlineButton label="Giriş Yap" onPress={navigation.goBack} />
+        </View>
+      </LoginLayout>
+    </KeyboardAvoidingView>
   );
 }
 

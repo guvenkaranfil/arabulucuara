@@ -39,6 +39,7 @@ export default function ProfileDetail({route, navigation}: ScreenProps) {
   const [showMessageModal, setshowMessageModal] = useState(false);
   const [showContactInformations, setshowContactInformations] = useState(false);
   const {data: member, isLoading} = useGetMemberQuery({username: profile.uri.value});
+  console.log('Member: ', member);
   const [sendMessage, {isLoading: isMessageSending}] = useSendMessageMutation();
 
   console.log('member informations: ', member);

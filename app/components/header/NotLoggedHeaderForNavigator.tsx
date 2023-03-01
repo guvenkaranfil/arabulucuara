@@ -5,8 +5,9 @@ import {StackHeaderProps} from '@react-navigation/stack';
 
 import {Fonts, Metrics} from '@utils';
 import {mustSignDialog} from '@components/alert';
+import {BackIcon} from '@icons';
 
-export default function NotLoggedHeaderForNavigator({navigation}: StackHeaderProps) {
+export default function NotLoggedHeaderForNavigator({navigation, previous}: StackHeaderProps) {
   const linearColors = ['#790633', '#BA1858'];
 
   const showLoginAlert = () => {

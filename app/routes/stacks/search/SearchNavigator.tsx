@@ -26,13 +26,14 @@ import ArticleDetail from '@portal/articles/ArticleDetail';
 import MediatorMembership from '@search/searchedProfileRoutes/MediatorMembership';
 import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
 
+const EmptyHeader = () => <></>;
+
 const Stack = createStackNavigator<SearchNavigatorParamList>();
 function PortalNavigator() {
   const userLoggedIn = useSelector(isUserLoggedIn);
 
   return (
-    <Stack.Navigator
-      screenOptions={{header: userLoggedIn ? LoggedUserHeader : NotLoggedHeaderForNavigator}}>
+    <Stack.Navigator screenOptions={{header: userLoggedIn ? LoggedUserHeader : EmptyHeader}}>
       <Stack.Screen name="search" component={Search} options={{title: 'Arama Yap'}} />
       <Stack.Screen name="searchResult" component={SearchResult} />
       <Stack.Screen

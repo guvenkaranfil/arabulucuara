@@ -12,6 +12,7 @@ import {Fonts, Metrics} from '@utils';
 import FilledButton from '@components/buttons/FilledButton';
 import {useGetCitiesQuery, useLazyGetCitiesQuery} from '@home/HomeApi';
 import {useStepOneMutation} from '@store/auth/AuthApi';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export interface AddressProps {
   navigation: StackNavigationProp<AuthNavigatorParamList, 'completions/address'>;
@@ -53,8 +54,9 @@ export default function Address({navigation}: AddressProps) {
   };
 
   return (
-    <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
-      <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}>
+    <KeyboardAwareScrollView contentContainerStyle={{flex: 1}} bounces={false}>
+      <LoginLayout showHomeButton={true} onPressHouse={() => console.log('onPress..')}>
+        {/* <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}> */}
         <Header screenTitle="Üyelik Tamamlama Adımları" dynamicHeight={170} />
 
         <View style={styles.step}>
@@ -101,8 +103,9 @@ export default function Address({navigation}: AddressProps) {
         <View style={styles.footer}>
           <FilledButton label="Devam Et" onPress={saveAndContinue} isLoading={completeLoading} />
         </View>
-      </ScrollView>
-    </LoginLayout>
+        {/* </ScrollView> */}
+      </LoginLayout>
+    </KeyboardAwareScrollView>
   );
 }
 

@@ -16,6 +16,7 @@ export interface ProfileLinks {
   phone?: string;
   starPoints: number;
   linkler: Array<ProfilePageLink>;
+  jobs?: Array<string>;
 }
 
 export interface Article {

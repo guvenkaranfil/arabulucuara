@@ -84,11 +84,11 @@ const AuthApi = Client.injectEndpoints({
         merkez?: {
           ad: string;
           soyad: string;
-          dogumTarih: Date;
+          dogumTarih: string;
           cinsiyet: number;
         };
         arabulucuUzman?: {
-          dogumTarih: Date;
+          dogumTarih: string;
           cinsiyet: number;
           telefon: string;
         };

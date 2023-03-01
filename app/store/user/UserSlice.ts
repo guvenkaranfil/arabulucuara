@@ -14,6 +14,7 @@ interface UserState {
   userRole?: string;
   name?: string;
   surname?: string;
+  username?: string;
 }
 
 const initialState: UserState = {
@@ -58,6 +59,7 @@ export const userSlice = createSlice({
       state.name = action.payload.adi;
       state.surname = action.payload.soyadi;
       state.userLastStep = action.payload.lastStep;
+      state.username = action.payload.username;
     },
   },
 });

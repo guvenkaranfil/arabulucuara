@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import {Metrics} from '@utils';
 import {BackIcon, HouseIcon} from '@icons';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
   children: React.ReactNode;
@@ -53,9 +55,9 @@ export default function LoginLayout({
           <View style={styles.childContainer}>{children}</View>
         </TouchableWithoutFeedback>
       ) : (
-        <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}>
-          {children}
-        </ScrollView>
+        // <ScrollView contentContainerStyle={styles.contentContainerStyle} bounces={false}>
+        {children}
+        // </ScrollView>
       )}
     </LinearGradient>
   );

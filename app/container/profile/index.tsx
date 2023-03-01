@@ -13,6 +13,7 @@ import {USER_INFO_STORAGE_KEY} from '../../constants';
 import {ProfilePageLink, useGetProfileLinksQuery} from './ProfileGetApi';
 import {Fonts, Metrics} from '@utils';
 import FilledButton from '@components/buttons/FilledButton';
+import {useGetMemberQuery} from '@search/searchApi';
 
 const mapPageNameToStackName = {
   Profile: 'profileInformation',
@@ -30,9 +31,11 @@ const mapPageNameToStackName = {
 export default function Profile({navigation}: ProfileScreenNavigationProps) {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
-  console.log('Profile.user:', user);
   const {data: profile, isLoading} = useGetProfileLinksQuery();
-  console.log('profile links response: ', profile);
+
+  console.log('user.username:', user.username);
+  const {data: member, isLoading: isLoadingMember} = useGetMemberQuery({username: user.username!});
+  console.log('member.meslekler: ', member?.meslekler);
 
   const handleSignOut = () => {
     console.log('Handle sign out');
@@ -67,6 +70,7 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
     return (
       <ProfileLayout
         user={profile!}
+        jobs={member?.meslekler}
         onPressMessages={() => navigation.navigate('messagesContainer')}>
         <ProfileRouteButtons
           routeButtons={profile?.linkler}
@@ -79,7 +83,10 @@ export default function Profile({navigation}: ProfileScreenNavigationProps) {
   }
 
   return (
-    <ProfileLayout user={profile!} onPressMessages={() => navigation.navigate('messagesContainer')}>
+    <ProfileLayout
+      user={profile!}
+      onPressMessages={() => navigation.navigate('messagesContainer')}
+      jobs={member?.meslekler}>
       <View style={styles.routeButtons}>
         <FilledButton
           style={styles.routeButton}

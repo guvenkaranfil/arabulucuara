@@ -43,8 +43,12 @@ export default function Personal({navigation}: PersonalProps) {
     else if (user.userRole !== 'merkez' && phoneNumber?.length <= 0)
       return Alert.alert('Lütfen Dikkat', 'Telefon numaranızı giriniz');
 
+    console.log('doğum tarhi', date.toISOString());
+
     let response = {};
     if (user.userRole === 'merkez') {
+      console.log('merkez...');
+
       response = {
         arabulucuUzman: null,
         merkez: {
@@ -57,7 +61,7 @@ export default function Personal({navigation}: PersonalProps) {
     } else {
       response = {
         arabulucuUzman: {
-          dogumTarih: date,
+          dogumTarih: date.toISOString(),
           cinsiyet: gender.id,
           telefon: phoneNumber,
         },

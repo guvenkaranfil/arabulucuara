@@ -11,6 +11,7 @@ import {SearchPath} from '@icons';
 import {useSaveFCMTokenMutation} from '@profile/ProfileGetApi';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/RootStore';
+import NotLoggedHeaderForNavigator from '@components/header/NotLoggedHeaderForNavigator';
 
 export interface Props {
   navigation: StackNavigationProp<SearchNavigatorParamList, 'search'>;
@@ -38,6 +39,7 @@ export default function Search({navigation}: Props) {
 
   return (
     <View style={CommonStyles.container}>
+      <NotLoggedHeaderForNavigator />
       <ScrollView contentContainerStyle={CommonStyles.paddingForScroll} bounces={false}>
         <View style={styles.inputArea}>
           <View style={styles.inputLabel}>

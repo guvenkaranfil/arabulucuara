@@ -7,8 +7,16 @@ import {AirbnbRating} from 'react-native-ratings';
 
 import styles from '../styles/ProfileLayoutStyle';
 
-export default function MediationCenter({displayName, image, roleName, starPoints}: ProfileLinks) {
+export default function MediationCenter({
+  displayName,
+  image,
+  roleName,
+  starPoints,
+  jobs,
+}: ProfileLinks) {
   console.log('MediationCenter >> starPoints: ', starPoints);
+  console.log('JOBS: ', jobs);
+
   return (
     <View style={styles.infosContainer}>
       <View style={styles.profilePhoto}>
@@ -24,6 +32,10 @@ export default function MediationCenter({displayName, image, roleName, starPoint
       <View style={styles.infos}>
         <Text style={styles.nameLabel}>{displayName}</Text>
         <Text style={styles.userTypeLabel}>{roleName}</Text>
+
+        {jobs &&
+          jobs?.length > 0 &&
+          jobs.map(job => <Text style={styles.userTypeLabel}>{job}</Text>)}
 
         <View style={styles.ratingStyle}>
           <AirbnbRating

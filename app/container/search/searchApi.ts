@@ -68,6 +68,7 @@ export interface MemberResponse {
   email?: string;
   il?: string;
   ilce?: string;
+  meslekler?: Array<string>;
 }
 
 const searchApi = Client.injectEndpoints({
